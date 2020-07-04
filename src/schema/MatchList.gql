@@ -1,0 +1,6 @@
+type MatchList {
+  startIndex: Int!
+  totalGames: Int!
+  endIndex: Int!
+  matches: [MatchReference!]!
+}

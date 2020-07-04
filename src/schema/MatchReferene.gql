@@ -1,0 +1,10 @@
+type MatchReference {
+  gameId: Int!
+  role: String!
+  season: Int!
+  platformId: String!
+  champion: Int!
+  queue: Int!
+  lane: String!
+  timestamp: Int!
+}

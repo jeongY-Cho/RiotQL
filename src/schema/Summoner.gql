@@ -1,0 +1,9 @@
+type Summoner {
+  accountId: String!
+  profileIconId: Int!
+  revisiondate: Int!
+  name: String!
+  id: String!
+  summonerLevel: Int!
+  # matchlist(filter: MatchListInput): MatchList!
+}

@@ -1,0 +1,10 @@
+type Query {
+  info: String!
+  summoner(
+    region: String!
+    encryptedAccountId: String
+    summonerName: String
+    encryptedPUUID: String
+    encryptedSummonerId: String
+  ): Summoner
+}
