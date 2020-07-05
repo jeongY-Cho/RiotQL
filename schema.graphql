@@ -1,0 +1,3913 @@
+"""
+API key credentials for the security protocol 'api_key'
+"""
+input ApiKeyInput {
+  apiKey: String
+}
+
+"""
+This object contains single Champion Mastery information for player and champion combination.
+"""
+type ChampionMasteryV4ChampionMasteryDTO {
+  """
+  Champion ID for this entry.
+  """
+  championId: Float!
+
+  """
+  Champion level for specified player and champion combination.
+  """
+  championLevel: Int!
+
+  """
+  Total number of champion points for this player and champion combination - they are used to determine championLevel.
+  """
+  championPoints: Int!
+
+  """
+  Number of points earned since current level has been achieved.
+  """
+  championPointsSinceLastLevel: Float!
+
+  """
+  Number of points needed to achieve next level. Zero if player reached maximum champion level for this champion.
+  """
+  championPointsUntilNextLevel: Float!
+
+  """
+  Is chest granted for this champion or not in current season.
+  """
+  chestGranted: Boolean!
+
+  """
+  Last time this champion was played by this player - in Unix milliseconds time format.
+  """
+  lastPlayTime: Float!
+
+  """
+  Summoner ID for this entry. (Encrypted)
+  """
+  summonerId: String!
+
+  """
+  The token earned for this champion to levelup.
+  """
+  tokensEarned: Int!
+}
+
+type ChampionV3ChampionInfo {
+  freeChampionIds: [Int]!
+  freeChampionIdsForNewPlayers: [Int]!
+  maxNewPlayerLevel: Int!
+}
+
+type ClashV1PlayerDto {
+  """
+  (Legal values:  UNSELECTED,  FILL,  TOP,  JUNGLE,  MIDDLE,  BOTTOM,  UTILITY)
+  """
+  position: Position!
+
+  """
+  (Legal values:  CAPTAIN,  MEMBER)
+  """
+  role: Role!
+  summonerId: String!
+  teamId: String!
+}
+
+type ClashV1TeamDto {
+  abbreviation: String!
+
+  """
+  Summoner ID of the team captain.
+  """
+  captain: String!
+  iconId: Int!
+  id: String!
+  name: String!
+
+  """
+  Team members.
+  """
+  players: [ClashV1PlayerDto]!
+  tier: Int!
+  tournamentId: Int!
+}
+
+type ClashV1TournamentDto {
+  id: Int!
+  nameKey: String!
+  nameKeySecondary: String!
+
+  """
+  Tournament phase.
+  """
+  schedule: [ClashV1TournamentPhaseDto]!
+  themeId: Int!
+}
+
+type ClashV1TournamentPhaseDto {
+  cancelled: Boolean!
+  id: Int!
+  registrationTime: Float!
+  startTime: Float!
+}
+
+enum Division {
+  I
+  II
+  III
+  IV
+}
+
+enum Division2 {
+  I
+  II
+  III
+  IV
+}
+
+enum GameMode {
+  CLASSIC
+  ODIN
+  ARAM
+  TUTORIAL
+  ONEFORALL
+  ASCENSION
+  FIRSTBLOOD
+  KINGPORO
+}
+
+enum GameType {
+  CUSTOM_GAME
+  MATCHED_GAME
+  TUTORIAL_GAME
+}
+
+enum HighestAchievedSeasonTier {
+  CHALLENGER
+  MASTER
+  DIAMOND
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+  UNRANKED
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+enum Lane {
+  MID
+  MIDDLE
+  TOP
+  JUNGLE
+  BOT
+  BOTTOM
+}
+
+type LeagueExpV4LeagueEntryDTO {
+  freshBlood: Boolean!
+  hotStreak: Boolean!
+  inactive: Boolean!
+  leagueId: String!
+  leaguePoints: Int!
+
+  """
+  Losing team on Summoners Rift. Second through eighth placement in Teamfight Tactics.
+  """
+  losses: Int!
+  miniSeries: LeagueExpV4MiniSeriesDTO
+  queueType: String!
+  rank: String!
+
+  """
+  Player's summonerId (Encrypted)
+  """
+  summonerId: String!
+  summonerName: String!
+  tier: String!
+  veteran: Boolean!
+
+  """
+  Winning team on Summoners Rift. First placement in Teamfight Tactics.
+  """
+  wins: Int!
+}
+
+type LeagueExpV4MiniSeriesDTO {
+  losses: Int!
+  progress: String!
+  target: Int!
+  wins: Int!
+}
+
+type LeagueV4LeagueEntryDTO {
+  freshBlood: Boolean!
+  hotStreak: Boolean!
+  inactive: Boolean!
+  leagueId: String!
+  leaguePoints: Int!
+
+  """
+  Losing team on Summoners Rift.
+  """
+  losses: Int!
+  miniSeries: LeagueV4MiniSeriesDTO
+  queueType: String!
+  rank: String!
+
+  """
+  Player's encrypted summonerId.
+  """
+  summonerId: String!
+  summonerName: String!
+  tier: String!
+  veteran: Boolean!
+
+  """
+  Winning team on Summoners Rift.
+  """
+  wins: Int!
+}
+
+type LeagueV4LeagueItemDTO {
+  freshBlood: Boolean!
+  hotStreak: Boolean!
+  inactive: Boolean!
+  leaguePoints: Int!
+
+  """
+  Losing team on Summoners Rift.
+  """
+  losses: Int!
+  miniSeries: LeagueV4MiniSeriesDTO
+  rank: String!
+
+  """
+  Player's encrypted summonerId.
+  """
+  summonerId: String!
+  summonerName: String!
+  veteran: Boolean!
+
+  """
+  Winning team on Summoners Rift.
+  """
+  wins: Int!
+}
+
+type LeagueV4LeagueListDTO {
+  entries: [LeagueV4LeagueItemDTO]!
+  leagueId: String!
+  name: String!
+  queue: String!
+  tier: String!
+}
+
+type LeagueV4MiniSeriesDTO {
+  losses: Int!
+  progress: String!
+  target: Int!
+  wins: Int!
+}
+
+type LolStatusV3Incident {
+  active: Boolean!
+  createdAt: String!
+  id: Float!
+  updates: [LolStatusV3Message]!
+}
+
+type LolStatusV3Message {
+  author: String!
+  content: String!
+  createdAt: String!
+  id: String!
+  severity: String!
+  translations: [LolStatusV3Translation]!
+  updatedAt: String!
+}
+
+type LolStatusV3Service {
+  incidents: [LolStatusV3Incident]!
+  name: String!
+  slug: String!
+  status: String!
+}
+
+type LolStatusV3ShardStatus {
+  hostname: String!
+  locales: [String]!
+  name: String!
+  regionTag: String!
+  services: [LolStatusV3Service]!
+  slug: String!
+}
+
+type LolStatusV3Translation {
+  content: String!
+  heading: String!
+  locale: String!
+}
+
+type LorRankedV1LeaderboardDto {
+  """
+  A list of players in Master tier.
+  """
+  players: [LorRankedV1PlayerDto]!
+}
+
+type LorRankedV1PlayerDto {
+  """
+  League points.
+  """
+  lp: Int!
+  name: String!
+  rank: Int!
+}
+
+enum MapType {
+  SUMMONERS_RIFT
+  TWISTED_TREELINE
+  HOWLING_ABYSS
+}
+
+enum MapType2 {
+  SUMMONERS_RIFT
+  TWISTED_TREELINE
+  HOWLING_ABYSS
+}
+
+type MatchV4MasteryDto {
+  masteryId: Int!
+  rank: Int!
+}
+
+type MatchV4MatchDto {
+  """
+  Designates the timestamp when champion select ended and the loading screen appeared, NOT when the game timer was at 0:00.
+  """
+  gameCreation: Float!
+
+  """
+  Match duration in seconds.
+  """
+  gameDuration: Float!
+  gameId: Float!
+
+  """
+  Please refer to the Game Constants documentation.
+  """
+  gameMode: String!
+
+  """
+  Please refer to the Game Constants documentation.
+  """
+  gameType: String!
+
+  """
+  The major.minor version typically indicates the patch the match was played on.
+  """
+  gameVersion: String!
+
+  """
+  Please refer to the Game Constants documentation.
+  """
+  mapId: Int!
+
+  """
+  Participant identity information. Participant identity information is purposefully excluded for custom games.
+  """
+  participantIdentities: [MatchV4ParticipantIdentityDto]!
+
+  """
+  Participant information.
+  """
+  participants: [MatchV4ParticipantDto]!
+
+  """
+  Platform where the match was played.
+  """
+  platformId: String!
+
+  """
+  Please refer to the Game Constants documentation.
+  """
+  queueId: Int!
+
+  """
+  Please refer to the Game Constants documentation.
+  """
+  seasonId: Int!
+
+  """
+  Team information.
+  """
+  teams: [MatchV4TeamStatsDto]!
+}
+
+type MatchV4MatchEventDto {
+  afterId: Int
+  ascendedType: String
+  assistingParticipantIds: [Int]
+  beforeId: Int
+  buildingType: String
+  creatorId: Int
+  eventType: String
+  itemId: Int
+  killerId: Int
+  laneType: String
+  levelUpType: String
+  monsterSubType: String
+  monsterType: String
+  participantId: Int
+  pointCaptured: String
+  position: MatchV4MatchPositionDto
+  skillSlot: Int
+  teamId: Int
+  timestamp: Float!
+  towerType: String
+
+  """
+  (Legal values:  CHAMPION_KILL,  WARD_PLACED,  WARD_KILL,  BUILDING_KILL,
+  ELITE_MONSTER_KILL,  ITEM_PURCHASED,  ITEM_SOLD,  ITEM_DESTROYED,  ITEM_UNDO,
+  SKILL_LEVEL_UP,  ASCENDED_EVENT,  CAPTURE_POINT,  PORO_KING_SUMMON)
+  """
+  type: Type!
+  victimId: Int
+  wardType: String
+}
+
+type MatchV4MatchFrameDto {
+  events: [MatchV4MatchEventDto]!
+  participantFrames: JSON!
+  timestamp: Float!
+}
+
+type MatchV4MatchlistDto {
+  endIndex: Int!
+  matches: [MatchV4MatchReferenceDto]!
+  startIndex: Int!
+
+  """
+  There is a known issue that this field doesn't correctly return the total
+  number of games that match the parameters of the request. Please paginate
+  using beginIndex until you reach the end of a player's matchlist.
+  """
+  totalGames: Int!
+}
+
+type MatchV4MatchPositionDto {
+  x: Int!
+  y: Int!
+}
+
+type MatchV4MatchReferenceDto {
+  champion: Int!
+  gameId: Float!
+  lane: String!
+  platformId: String!
+  queue: Int!
+  role: String!
+  season: Int!
+  timestamp: Float!
+}
+
+type MatchV4MatchTimelineDto {
+  frameInterval: Float!
+  frames: [MatchV4MatchFrameDto]!
+}
+
+type MatchV4ParticipantDto {
+  championId: Int!
+
+  """
+  Highest ranked tier achieved for the previous season in a specific subset of
+  queueIds, if any, otherwise null. Used to display border in game loading
+  screen. Please refer to the Ranked Info documentation.
+               (Legal values:  CHALLENGER,  MASTER,  DIAMOND,  PLATINUM,  GOLD,  SILVER,  BRONZE,  UNRANKED)
+  """
+  highestAchievedSeasonTier: HighestAchievedSeasonTier
+
+  """
+  List of legacy Mastery information. Not included for matches played with Runes Reforged.
+  """
+  masteries: [MatchV4MasteryDto]
+  participantId: Int!
+
+  """
+  List of legacy Rune information. Not included for matches played with Runes Reforged.
+  """
+  runes: [MatchV4RuneDto]
+
+  """
+  First Summoner Spell id.
+  """
+  spell1Id: Int!
+
+  """
+  Second Summoner Spell id.
+  """
+  spell2Id: Int!
+  stats: MatchV4ParticipantStatsDto!
+
+  """
+  100 for blue side. 200 for red side.
+  """
+  teamId: Int!
+  timeline: MatchV4ParticipantTimelineDto!
+}
+
+type MatchV4ParticipantIdentityDto {
+  participantId: Int!
+  player: MatchV4PlayerDto!
+}
+
+type MatchV4ParticipantStatsDto {
+  altarsCaptured: Int
+  altarsNeutralized: Int
+  assists: Int!
+  champLevel: Int!
+  combatPlayerScore: Int
+  damageDealtToObjectives: Float!
+  damageDealtToTurrets: Float!
+  damageSelfMitigated: Float!
+  deaths: Int!
+  doubleKills: Int!
+  firstBloodAssist: Boolean
+  firstBloodKill: Boolean
+  firstInhibitorAssist: Boolean
+  firstInhibitorKill: Boolean
+  firstTowerAssist: Boolean
+  firstTowerKill: Boolean
+  goldEarned: Int!
+  goldSpent: Int!
+  inhibitorKills: Int
+  item0: Int!
+  item1: Int!
+  item2: Int!
+  item3: Int!
+  item4: Int!
+  item5: Int!
+  item6: Int!
+  killingSprees: Int!
+  kills: Int!
+  largestCriticalStrike: Int!
+  largestKillingSpree: Int!
+  largestMultiKill: Int!
+  longestTimeSpentLiving: Int!
+  magicDamageDealt: Float!
+  magicDamageDealtToChampions: Float!
+  magicalDamageTaken: Float!
+  neutralMinionsKilled: Int!
+  neutralMinionsKilledEnemyJungle: Int!
+  neutralMinionsKilledTeamJungle: Int!
+  nodeCapture: Int
+  nodeCaptureAssist: Int
+  nodeNeutralize: Int
+  nodeNeutralizeAssist: Int
+  objectivePlayerScore: Int
+  participantId: Int!
+  pentaKills: Int!
+
+  """
+  Primary path keystone rune.
+  """
+  perk0: Int
+
+  """
+  Post game rune stats.
+  """
+  perk0Var1: Int
+
+  """
+  Post game rune stats.
+  """
+  perk0Var2: Int
+
+  """
+  Post game rune stats.
+  """
+  perk0Var3: Int
+
+  """
+  Primary path rune.
+  """
+  perk1: Int
+
+  """
+  Post game rune stats.
+  """
+  perk1Var1: Int
+
+  """
+  Post game rune stats.
+  """
+  perk1Var2: Int
+
+  """
+  Post game rune stats.
+  """
+  perk1Var3: Int
+
+  """
+  Primary path rune.
+  """
+  perk2: Int
+
+  """
+  Post game rune stats.
+  """
+  perk2Var1: Int
+
+  """
+  Post game rune stats.
+  """
+  perk2Var2: Int
+
+  """
+  Post game rune stats.
+  """
+  perk2Var3: Int
+
+  """
+  Primary path rune.
+  """
+  perk3: Int
+
+  """
+  Post game rune stats.
+  """
+  perk3Var1: Int
+
+  """
+  Post game rune stats.
+  """
+  perk3Var2: Int
+
+  """
+  Post game rune stats.
+  """
+  perk3Var3: Int
+
+  """
+  Secondary path rune.
+  """
+  perk4: Int
+
+  """
+  Post game rune stats.
+  """
+  perk4Var1: Int
+
+  """
+  Post game rune stats.
+  """
+  perk4Var2: Int
+
+  """
+  Post game rune stats.
+  """
+  perk4Var3: Int
+
+  """
+  Secondary path rune.
+  """
+  perk5: Int
+
+  """
+  Post game rune stats.
+  """
+  perk5Var1: Int
+
+  """
+  Post game rune stats.
+  """
+  perk5Var2: Int
+
+  """
+  Post game rune stats.
+  """
+  perk5Var3: Int
+
+  """
+  Primary rune path
+  """
+  perkPrimaryStyle: Int
+
+  """
+  Secondary rune path
+  """
+  perkSubStyle: Int
+  physicalDamageDealt: Float!
+  physicalDamageDealtToChampions: Float!
+  physicalDamageTaken: Float!
+  playerScore0: Int
+  playerScore1: Int
+  playerScore2: Int
+  playerScore3: Int
+  playerScore4: Int
+  playerScore5: Int
+  playerScore6: Int
+  playerScore7: Int
+  playerScore8: Int
+  playerScore9: Int
+  quadraKills: Int!
+  sightWardsBoughtInGame: Int
+  teamObjective: Int
+  timeCCingOthers: Float!
+  totalDamageDealt: Float!
+  totalDamageDealtToChampions: Float!
+  totalDamageTaken: Float!
+  totalHeal: Float!
+  totalMinionsKilled: Int!
+  totalPlayerScore: Int
+  totalScoreRank: Int
+  totalTimeCrowdControlDealt: Int!
+  totalUnitsHealed: Int!
+  tripleKills: Int!
+  trueDamageDealt: Float!
+  trueDamageDealtToChampions: Float!
+  trueDamageTaken: Float!
+  turretKills: Int
+  unrealKills: Int!
+  visionScore: Float
+  visionWardsBoughtInGame: Int!
+  wardsKilled: Int!
+  wardsPlaced: Int
+  win: Boolean!
+}
+
+type MatchV4ParticipantTimelineDto {
+  """
+  Creeps for a specified period.
+  """
+  creepsPerMinDeltas: JSON
+
+  """
+  Creep score difference versus the calculated lane opponent(s) for a specified period.
+  """
+  csDiffPerMinDeltas: JSON
+
+  """
+  Damage taken difference versus the calculated lane opponent(s) for a specified period.
+  """
+  damageTakenDiffPerMinDeltas: JSON
+
+  """
+  Damage taken for a specified period.
+  """
+  damageTakenPerMinDeltas: JSON
+
+  """
+  Gold for a specified period.
+  """
+  goldPerMinDeltas: JSON
+
+  """
+  Participant's calculated lane. MID and BOT are legacy values.
+               (Legal values:  MID,  MIDDLE,  TOP,  JUNGLE,  BOT,  BOTTOM)
+  """
+  lane: Lane
+  participantId: Int
+
+  """
+  Participant's calculated role.
+               (Legal values:  DUO,  NONE,  SOLO,  DUO_CARRY,  DUO_SUPPORT)
+  """
+  role: Role2
+
+  """
+  Experience difference versus the calculated lane opponent(s) for a specified period.
+  """
+  xpDiffPerMinDeltas: JSON
+
+  """
+  Experience change for a specified period.
+  """
+  xpPerMinDeltas: JSON
+}
+
+type MatchV4PlayerDto {
+  """
+  Player's original accountId.
+  """
+  accountId: String!
+
+  """
+  Player's current accountId when the match was played.
+  """
+  currentAccountId: String!
+
+  """
+  Player's current platformId when the match was played.
+  """
+  currentPlatformId: String!
+  matchHistoryUri: String!
+
+  """
+  Player's original platformId.
+  """
+  platformId: String!
+  profileIcon: Int!
+
+  """
+  Player's summonerId (Encrypted)
+  """
+  summonerId: String!
+  summonerName: String!
+}
+
+type MatchV4RuneDto {
+  rank: Int!
+  runeId: Int!
+}
+
+type MatchV4TeamBansDto {
+  """
+  Banned championId.
+  """
+  championId: Int!
+
+  """
+  Turn during which the champion was banned.
+  """
+  pickTurn: Int!
+}
+
+type MatchV4TeamStatsDto {
+  """
+  If match queueId has a draft, contains banned champion data, otherwise empty.
+  """
+  bans: [MatchV4TeamBansDto]!
+
+  """
+  Number of times the team killed Baron.
+  """
+  baronKills: Int!
+
+  """
+  For Dominion matches, specifies the points the team had at game end.
+  """
+  dominionVictoryScore: Int!
+
+  """
+  Number of times the team killed Dragon.
+  """
+  dragonKills: Int!
+
+  """
+  Flag indicating whether or not the team scored the first Baron kill.
+  """
+  firstBaron: Boolean!
+
+  """
+  Flag indicating whether or not the team scored the first blood.
+  """
+  firstBlood: Boolean!
+
+  """
+  Flag indicating whether or not the team scored the first Dragon kill.
+  """
+  firstDragon: Boolean!
+
+  """
+  Flag indicating whether or not the team destroyed the first inhibitor.
+  """
+  firstInhibitor: Boolean!
+
+  """
+  Flag indicating whether or not the team scored the first Rift Herald kill.
+  """
+  firstRiftHerald: Boolean!
+
+  """
+  Flag indicating whether or not the team destroyed the first tower.
+  """
+  firstTower: Boolean!
+
+  """
+  Number of inhibitors the team destroyed.
+  """
+  inhibitorKills: Int!
+
+  """
+  Number of times the team killed Rift Herald.
+  """
+  riftHeraldKills: Int!
+
+  """
+  100 for blue side. 200 for red side.
+  """
+  teamId: Int!
+
+  """
+  Number of towers the team destroyed.
+  """
+  towerKills: Int!
+
+  """
+  Number of times the team killed Vilemaw.
+  """
+  vilemawKills: Int!
+
+  """
+  String indicating whether or not the team won. There are only two values visibile in public match history.
+               (Legal values:  Fail,  Win)
+  """
+  win: Win!
+}
+
+type Mutation {
+  """
+  A viewer that wraps all operations authenticated via security scheme 'X-Riot-Token', which is of type 'apiKey'
+  """
+  mutationViewerApiKey(apiKey: String!): MutationViewerApiKey
+
+  """
+  A viewer that wraps all operations authenticated via security scheme 'api_key', which is of type 'apiKey'
+  """
+  mutationViewerApiKey2(apiKey: String!): MutationViewerApiKey2
+
+  """
+  A viewer that wraps operations for all available authentication mechanisms
+  """
+  mutationViewerAnyAuth(
+    apiKey: ApiKeyInput
+    xRiotToken: XRiotTokenInput
+  ): MutationViewerAnyAuth
+}
+
+"""
+Warning: Not every request will work with this viewer type
+"""
+type MutationViewerAnyAuth {
+  """
+  Create a mock tournament code for the given tournament.
+
+  Equivalent to POST /lol/tournament-stub/v4/codes
+  """
+  tournamentStubV4CreateTournamentCode(
+    """
+    The number of codes to create (max 1000)
+    """
+    count: Int
+
+    """
+    The tournament ID
+    """
+    tournamentId: Float!
+    tournamentStubV4TournamentCodeParametersInput: TournamentStubV4TournamentCodeParametersInput!
+  ): [String]
+
+  """
+  Creates a mock tournament provider and returns its ID.
+  ## Implementation Notes
+  Providers will need to call this endpoint first to register their callback URL
+  and their API key with the tournament system before any other tournament
+  provider endpoints will work.
+
+  Equivalent to POST /lol/tournament-stub/v4/providers
+  """
+  tournamentStubV4RegisterProviderData(
+    tournamentStubV4ProviderRegistrationParametersInput: TournamentStubV4ProviderRegistrationParametersInput!
+  ): Int
+
+  """
+  Creates a mock tournament and returns its ID.
+
+  Equivalent to POST /lol/tournament-stub/v4/tournaments
+  """
+  tournamentStubV4RegisterTournament(
+    tournamentStubV4TournamentRegistrationParametersInput: TournamentStubV4TournamentRegistrationParametersInput!
+  ): Int
+
+  """
+  Create a tournament code for the given tournament.
+
+  Equivalent to POST /lol/tournament/v4/codes
+  """
+  tournamentV4CreateTournamentCode(
+    """
+    The number of codes to create (max 1000)
+    """
+    count: Int
+
+    """
+    The tournament ID
+    """
+    tournamentId: Float!
+    tournamentV4TournamentCodeParametersInput: TournamentV4TournamentCodeParametersInput!
+  ): [String]
+
+  """
+  Creates a tournament provider and returns its ID.
+  ## Implementation Notes
+  Providers will need to call this endpoint first to register their callback URL
+  and their API key with the tournament system before any other tournament
+  provider endpoints will work.
+
+  Equivalent to POST /lol/tournament/v4/providers
+  """
+  tournamentV4RegisterProviderData(
+    tournamentV4ProviderRegistrationParametersInput: TournamentV4ProviderRegistrationParametersInput!
+  ): Int
+
+  """
+  Creates a tournament and returns its ID.
+
+  Equivalent to POST /lol/tournament/v4/tournaments
+  """
+  tournamentV4RegisterTournament(
+    tournamentV4TournamentRegistrationParametersInput: TournamentV4TournamentRegistrationParametersInput!
+  ): Int
+
+  """
+  Update the pick type, map, spectator type, or allowed summoners for a code.
+
+  Equivalent to PUT /lol/tournament/v4/codes/{tournamentCode}
+  """
+  tournamentV4UpdateCode(
+    """
+    The tournament code to update
+    """
+    tournamentCode: String!
+    tournamentV4TournamentCodeUpdateParametersInput: TournamentV4TournamentCodeUpdateParametersInput
+  ): JSON
+}
+
+"""
+A viewer for security scheme 'X-Riot-Token'
+"""
+type MutationViewerApiKey {
+  """
+  Create a mock tournament code for the given tournament.
+
+  Equivalent to POST /lol/tournament-stub/v4/codes
+  """
+  tournamentStubV4CreateTournamentCode(
+    """
+    The number of codes to create (max 1000)
+    """
+    count: Int
+
+    """
+    The tournament ID
+    """
+    tournamentId: Float!
+    tournamentStubV4TournamentCodeParametersInput: TournamentStubV4TournamentCodeParametersInput!
+  ): [String]
+
+  """
+  Creates a mock tournament provider and returns its ID.
+  ## Implementation Notes
+  Providers will need to call this endpoint first to register their callback URL
+  and their API key with the tournament system before any other tournament
+  provider endpoints will work.
+
+  Equivalent to POST /lol/tournament-stub/v4/providers
+  """
+  tournamentStubV4RegisterProviderData(
+    tournamentStubV4ProviderRegistrationParametersInput: TournamentStubV4ProviderRegistrationParametersInput!
+  ): Int
+
+  """
+  Creates a mock tournament and returns its ID.
+
+  Equivalent to POST /lol/tournament-stub/v4/tournaments
+  """
+  tournamentStubV4RegisterTournament(
+    tournamentStubV4TournamentRegistrationParametersInput: TournamentStubV4TournamentRegistrationParametersInput!
+  ): Int
+
+  """
+  Create a tournament code for the given tournament.
+
+  Equivalent to POST /lol/tournament/v4/codes
+  """
+  tournamentV4CreateTournamentCode(
+    """
+    The number of codes to create (max 1000)
+    """
+    count: Int
+
+    """
+    The tournament ID
+    """
+    tournamentId: Float!
+    tournamentV4TournamentCodeParametersInput: TournamentV4TournamentCodeParametersInput!
+  ): [String]
+
+  """
+  Creates a tournament provider and returns its ID.
+  ## Implementation Notes
+  Providers will need to call this endpoint first to register their callback URL
+  and their API key with the tournament system before any other tournament
+  provider endpoints will work.
+
+  Equivalent to POST /lol/tournament/v4/providers
+  """
+  tournamentV4RegisterProviderData(
+    tournamentV4ProviderRegistrationParametersInput: TournamentV4ProviderRegistrationParametersInput!
+  ): Int
+
+  """
+  Creates a tournament and returns its ID.
+
+  Equivalent to POST /lol/tournament/v4/tournaments
+  """
+  tournamentV4RegisterTournament(
+    tournamentV4TournamentRegistrationParametersInput: TournamentV4TournamentRegistrationParametersInput!
+  ): Int
+
+  """
+  Update the pick type, map, spectator type, or allowed summoners for a code.
+
+  Equivalent to PUT /lol/tournament/v4/codes/{tournamentCode}
+  """
+  tournamentV4UpdateCode(
+    """
+    The tournament code to update
+    """
+    tournamentCode: String!
+    tournamentV4TournamentCodeUpdateParametersInput: TournamentV4TournamentCodeUpdateParametersInput
+  ): JSON
+}
+
+"""
+A viewer for security scheme 'api_key'
+"""
+type MutationViewerApiKey2 {
+  """
+  Create a mock tournament code for the given tournament.
+
+  Equivalent to POST /lol/tournament-stub/v4/codes
+  """
+  tournamentStubV4CreateTournamentCode(
+    """
+    The number of codes to create (max 1000)
+    """
+    count: Int
+
+    """
+    The tournament ID
+    """
+    tournamentId: Float!
+    tournamentStubV4TournamentCodeParametersInput: TournamentStubV4TournamentCodeParametersInput!
+  ): [String]
+
+  """
+  Creates a mock tournament provider and returns its ID.
+  ## Implementation Notes
+  Providers will need to call this endpoint first to register their callback URL
+  and their API key with the tournament system before any other tournament
+  provider endpoints will work.
+
+  Equivalent to POST /lol/tournament-stub/v4/providers
+  """
+  tournamentStubV4RegisterProviderData(
+    tournamentStubV4ProviderRegistrationParametersInput: TournamentStubV4ProviderRegistrationParametersInput!
+  ): Int
+
+  """
+  Creates a mock tournament and returns its ID.
+
+  Equivalent to POST /lol/tournament-stub/v4/tournaments
+  """
+  tournamentStubV4RegisterTournament(
+    tournamentStubV4TournamentRegistrationParametersInput: TournamentStubV4TournamentRegistrationParametersInput!
+  ): Int
+
+  """
+  Create a tournament code for the given tournament.
+
+  Equivalent to POST /lol/tournament/v4/codes
+  """
+  tournamentV4CreateTournamentCode(
+    """
+    The number of codes to create (max 1000)
+    """
+    count: Int
+
+    """
+    The tournament ID
+    """
+    tournamentId: Float!
+    tournamentV4TournamentCodeParametersInput: TournamentV4TournamentCodeParametersInput!
+  ): [String]
+
+  """
+  Creates a tournament provider and returns its ID.
+  ## Implementation Notes
+  Providers will need to call this endpoint first to register their callback URL
+  and their API key with the tournament system before any other tournament
+  provider endpoints will work.
+
+  Equivalent to POST /lol/tournament/v4/providers
+  """
+  tournamentV4RegisterProviderData(
+    tournamentV4ProviderRegistrationParametersInput: TournamentV4ProviderRegistrationParametersInput!
+  ): Int
+
+  """
+  Creates a tournament and returns its ID.
+
+  Equivalent to POST /lol/tournament/v4/tournaments
+  """
+  tournamentV4RegisterTournament(
+    tournamentV4TournamentRegistrationParametersInput: TournamentV4TournamentRegistrationParametersInput!
+  ): Int
+
+  """
+  Update the pick type, map, spectator type, or allowed summoners for a code.
+
+  Equivalent to PUT /lol/tournament/v4/codes/{tournamentCode}
+  """
+  tournamentV4UpdateCode(
+    """
+    The tournament code to update
+    """
+    tournamentCode: String!
+    tournamentV4TournamentCodeUpdateParametersInput: TournamentV4TournamentCodeUpdateParametersInput
+  ): JSON
+}
+
+enum PickType {
+  BLIND_PICK
+  DRAFT_MODE
+  ALL_RANDOM
+  TOURNAMENT_DRAFT
+}
+
+enum PickType2 {
+  BLIND_PICK
+  DRAFT_MODE
+  ALL_RANDOM
+  TOURNAMENT_DRAFT
+}
+
+enum Position {
+  UNSELECTED
+  FILL
+  TOP
+  JUNGLE
+  MIDDLE
+  BOTTOM
+  UTILITY
+}
+
+type Query {
+  """
+  A viewer that wraps all operations authenticated via security scheme 'X-Riot-Token', which is of type 'apiKey'
+  """
+  viewerApiKey(apiKey: String!): ViewerApiKey
+
+  """
+  A viewer that wraps all operations authenticated via security scheme 'api_key', which is of type 'apiKey'
+  """
+  viewerApiKey2(apiKey: String!): ViewerApiKey2
+
+  """
+  A viewer that wraps operations for all available authentication mechanisms
+  """
+  viewerAnyAuth(apiKey: ApiKeyInput, xRiotToken: XRiotTokenInput): ViewerAnyAuth
+}
+
+enum Queue {
+  RANKED_SOLO_5X5
+  RANKED_TFT
+  RANKED_FLEX_SR
+  RANKED_FLEX_TT
+}
+
+enum Queue2 {
+  RANKED_SOLO_5X5
+  RANKED_FLEX_SR
+  RANKED_FLEX_TT
+}
+
+enum Region {
+  BR
+  EUNE
+  EUW
+  JP
+  LAN
+  LAS
+  NA
+  OCE
+  PBE
+  RU
+  TR
+}
+
+enum Region2 {
+  BR
+  EUNE
+  EUW
+  JP
+  LAN
+  LAS
+  NA
+  OCE
+  PBE
+  RU
+  TR
+}
+
+enum Role {
+  CAPTAIN
+  MEMBER
+}
+
+enum Role2 {
+  DUO
+  NONE
+  SOLO
+  DUO_CARRY
+  DUO_SUPPORT
+}
+
+enum SpectatorType {
+  NONE
+  LOBBYONLY
+  ALL
+}
+
+enum SpectatorType2 {
+  NONE
+  LOBBYONLY
+  ALL
+}
+
+type SpectatorV4BannedChampion {
+  """
+  The ID of the banned champion
+  """
+  championId: Float!
+
+  """
+  The turn during which the champion was banned
+  """
+  pickTurn: Int!
+
+  """
+  The ID of the team that banned the champion
+  """
+  teamId: Float!
+}
+
+type SpectatorV4CurrentGameInfo {
+  """
+  Banned champion information
+  """
+  bannedChampions: [SpectatorV4BannedChampion]!
+
+  """
+  The ID of the game
+  """
+  gameId: Float!
+
+  """
+  The amount of time in seconds that has passed since the game started
+  """
+  gameLength: Float!
+
+  """
+  The game mode
+  """
+  gameMode: String!
+
+  """
+  The queue type (queue types are documented on the Game Constants page)
+  """
+  gameQueueConfigId: Float
+
+  """
+  The game start time represented in epoch milliseconds
+  """
+  gameStartTime: Float!
+
+  """
+  The game type
+  """
+  gameType: String!
+
+  """
+  The ID of the map
+  """
+  mapId: Float!
+  observers: SpectatorV4Observer!
+
+  """
+  The participant information
+  """
+  participants: [SpectatorV4CurrentGameParticipant]!
+
+  """
+  The ID of the platform on which the game is being played
+  """
+  platformId: String!
+}
+
+type SpectatorV4CurrentGameParticipant {
+  """
+  Flag indicating whether or not this participant is a bot
+  """
+  bot: Boolean!
+
+  """
+  The ID of the champion played by this participant
+  """
+  championId: Float!
+
+  """
+  List of Game Customizations
+  """
+  gameCustomizationObjects: [SpectatorV4GameCustomizationObject]!
+  perks: SpectatorV4Perks!
+
+  """
+  The ID of the profile icon used by this participant
+  """
+  profileIconId: Float!
+
+  """
+  The ID of the first summoner spell used by this participant
+  """
+  spell1Id: Float!
+
+  """
+  The ID of the second summoner spell used by this participant
+  """
+  spell2Id: Float!
+
+  """
+  The encrypted summoner ID of this participant
+  """
+  summonerId: String!
+
+  """
+  The summoner name of this participant
+  """
+  summonerName: String!
+
+  """
+  The team ID of this participant, indicating the participant's team
+  """
+  teamId: Float!
+}
+
+type SpectatorV4FeaturedGameInfo {
+  """
+  Banned champion information
+  """
+  bannedChampions: [SpectatorV4BannedChampion]!
+
+  """
+  The ID of the game
+  """
+  gameId: Float!
+
+  """
+  The amount of time in seconds that has passed since the game started
+  """
+  gameLength: Float!
+
+  """
+  The game mode
+               (Legal values:  CLASSIC,  ODIN,  ARAM,  TUTORIAL,  ONEFORALL,  ASCENSION,  FIRSTBLOOD,  KINGPORO)
+  """
+  gameMode: GameMode!
+
+  """
+  The queue type (queue types are documented on the Game Constants page)
+  """
+  gameQueueConfigId: Float!
+
+  """
+  The game start time represented in epoch milliseconds
+  """
+  gameStartTime: Float!
+
+  """
+  The game type
+               (Legal values:  CUSTOM_GAME,  MATCHED_GAME,  TUTORIAL_GAME)
+  """
+  gameType: GameType!
+
+  """
+  The ID of the map
+  """
+  mapId: Float!
+  observers: SpectatorV4Observer!
+
+  """
+  The participant information
+  """
+  participants: [SpectatorV4Participant]!
+
+  """
+  The ID of the platform on which the game is being played
+  """
+  platformId: String!
+}
+
+type SpectatorV4FeaturedGames {
+  """
+  The suggested interval to wait before requesting FeaturedGames again
+  """
+  clientRefreshInterval: Float!
+
+  """
+  The list of featured games
+  """
+  gameList: [SpectatorV4FeaturedGameInfo]!
+}
+
+type SpectatorV4GameCustomizationObject {
+  """
+  Category identifier for Game Customization
+  """
+  category: String!
+
+  """
+  Game Customization content
+  """
+  content: String!
+}
+
+type SpectatorV4Observer {
+  """
+  Key used to decrypt the spectator grid game data for playback
+  """
+  encryptionKey: String!
+}
+
+type SpectatorV4Participant {
+  """
+  Flag indicating whether or not this participant is a bot
+  """
+  bot: Boolean!
+
+  """
+  The ID of the champion played by this participant
+  """
+  championId: Float!
+
+  """
+  The ID of the profile icon used by this participant
+  """
+  profileIconId: Float!
+
+  """
+  The ID of the first summoner spell used by this participant
+  """
+  spell1Id: Float!
+
+  """
+  The ID of the second summoner spell used by this participant
+  """
+  spell2Id: Float!
+
+  """
+  The summoner name of this participant
+  """
+  summonerName: String!
+
+  """
+  The team ID of this participant, indicating the participant's team
+  """
+  teamId: Float!
+}
+
+type SpectatorV4Perks {
+  """
+  IDs of the perks/runes assigned.
+  """
+  perkIds: [Float]!
+
+  """
+  Primary runes path
+  """
+  perkStyle: Float!
+
+  """
+  Secondary runes path
+  """
+  perkSubStyle: Float!
+}
+
+"""
+represents a summoner
+"""
+type SummonerV4SummonerDTO {
+  """
+  Encrypted account ID. Max length 56 characters.
+  """
+  accountId: String!
+
+  """
+  Encrypted summoner ID. Max length 63 characters.
+  """
+  id: String!
+
+  """
+  Summoner name.
+  """
+  name: String!
+
+  """
+  ID of the summoner icon associated with the summoner.
+  """
+  profileIconId: Int!
+
+  """
+  Encrypted PUUID. Exact length of 78 characters.
+  """
+  puuid: String!
+
+  """
+  Date summoner was last modified specified as epoch milliseconds. The following
+  events will update this timestamp: summoner name change, summoner level
+  change, or profile icon change.
+  """
+  revisionDate: Float!
+
+  """
+  Summoner level associated with the summoner.
+  """
+  summonerLevel: Float!
+}
+
+type TftLeagueV1LeagueEntryDTO {
+  freshBlood: Boolean!
+  hotStreak: Boolean!
+  inactive: Boolean!
+  leagueId: String!
+  leaguePoints: Int!
+
+  """
+  Second through eighth placement.
+  """
+  losses: Int!
+  miniSeries: TftLeagueV1MiniSeriesDTO
+  queueType: String!
+  rank: String!
+
+  """
+  Player's encrypted summonerId.
+  """
+  summonerId: String!
+  summonerName: String!
+  tier: String!
+  veteran: Boolean!
+
+  """
+  First placement.
+  """
+  wins: Int!
+}
+
+type TftLeagueV1LeagueItemDTO {
+  freshBlood: Boolean!
+  hotStreak: Boolean!
+  inactive: Boolean!
+  leaguePoints: Int!
+
+  """
+  Second through eighth placement.
+  """
+  losses: Int!
+  miniSeries: TftLeagueV1MiniSeriesDTO
+  rank: String!
+
+  """
+  Player's encrypted summonerId.
+  """
+  summonerId: String!
+  summonerName: String!
+  veteran: Boolean!
+
+  """
+  First placement.
+  """
+  wins: Int!
+}
+
+type TftLeagueV1LeagueListDTO {
+  entries: [TftLeagueV1LeagueItemDTO]!
+  leagueId: String!
+  name: String!
+  queue: String!
+  tier: String!
+}
+
+type TftLeagueV1MiniSeriesDTO {
+  losses: Int!
+  progress: String!
+  target: Int!
+  wins: Int!
+}
+
+type TftMatchV1CompanionDto {
+  contentID: String!
+  skinID: Int!
+  species: String!
+}
+
+type TftMatchV1InfoDto {
+  """
+  Unix timestamp.
+  """
+  gameDatetime: Float!
+
+  """
+  Game length in seconds.
+  """
+  gameLength: Float!
+
+  """
+  Game variation key. Game variations documented in TFT static data.
+  """
+  gameVariation: String
+
+  """
+  Game client version.
+  """
+  gameVersion: String!
+
+  """
+  Participants.
+  """
+  participants: [TftMatchV1ParticipantDto]!
+
+  """
+  Please refer to the League of Legends documentation.
+  """
+  queueId: Int!
+
+  """
+  Teamfight Tactics set number.
+  """
+  tftSetNumber: Int!
+}
+
+type TftMatchV1MatchDto {
+  info: TftMatchV1InfoDto!
+  metadata: TftMatchV1MetadataDto!
+}
+
+type TftMatchV1MetadataDto {
+  """
+  Match data version.
+  """
+  dataVersion: String!
+
+  """
+  Match id.
+  """
+  matchId: String!
+
+  """
+  A list of encrypted participant PUUIDs.
+  """
+  participants: [String]!
+}
+
+type TftMatchV1ParticipantDto {
+  companion: TftMatchV1CompanionDto!
+
+  """
+  Gold left after participant was eliminated.
+  """
+  goldLeft: Int!
+
+  """
+  The round the participant was eliminated in. Note: If the player was eliminated in stage 2-1 their last_round would be 5.
+  """
+  lastRound: Int!
+
+  """
+  Participant Little Legend level. Note: This is not the number of active units.
+  """
+  level: Int!
+
+  """
+  Participant placement upon elimination.
+  """
+  placement: Int!
+
+  """
+  Number of players the participant eliminated.
+  """
+  playersEliminated: Int!
+
+  """
+  Encrypted PUUID.
+  """
+  puuid: String!
+
+  """
+  The number of seconds before the participant was eliminated.
+  """
+  timeEliminated: Float!
+
+  """
+  Damage the participant dealt to other players.
+  """
+  totalDamageToPlayers: Int!
+
+  """
+  A complete list of traits for the participant's active units.
+  """
+  traits: [TftMatchV1TraitDto]!
+
+  """
+  A list of active units for the participant.
+  """
+  units: [TftMatchV1UnitDto]!
+}
+
+type TftMatchV1TraitDto {
+  """
+  Trait name.
+  """
+  name: String!
+
+  """
+  Number of units with this trait.
+  """
+  numUnits: Int!
+
+  """
+  Current active tier for the trait.
+  """
+  tierCurrent: Int!
+
+  """
+  Total tiers for the trait.
+  """
+  tierTotal: Int
+}
+
+type TftMatchV1UnitDto {
+  """
+  This field was introduced in patch 9.22 with data_version 2.
+  """
+  characterId: String!
+
+  """
+  A list of the unit's items. Please refer to the Teamfight Tactics documentation for item ids.
+  """
+  items: [Int]!
+
+  """
+  Unit name.
+  """
+  name: String!
+
+  """
+  Unit rarity. This doesn't equate to the unit cost.
+  """
+  rarity: Int!
+
+  """
+  Unit tier.
+  """
+  tier: Int!
+}
+
+"""
+represents a summoner
+"""
+type TftSummonerV1SummonerDTO {
+  """
+  Encrypted account ID. Max length 56 characters.
+  """
+  accountId: String!
+
+  """
+  Encrypted summoner ID. Max length 63 characters.
+  """
+  id: String!
+
+  """
+  Summoner name.
+  """
+  name: String!
+
+  """
+  ID of the summoner icon associated with the summoner.
+  """
+  profileIconId: Int!
+
+  """
+  Encrypted PUUID. Exact length of 78 characters.
+  """
+  puuid: String!
+
+  """
+  Date summoner was last modified specified as epoch milliseconds. The following
+  events will update this timestamp: summoner name change, summoner level
+  change, or profile icon change.
+  """
+  revisionDate: Float!
+
+  """
+  Summoner level associated with the summoner.
+  """
+  summonerLevel: Float!
+}
+
+enum Tier {
+  CHALLENGER
+  GRANDMASTER
+  MASTER
+  DIAMOND
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+  IRON
+}
+
+enum Tier2 {
+  DIAMOND
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+  IRON
+}
+
+enum Tier3 {
+  DIAMOND
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+  IRON
+}
+
+type TournamentStubV4LobbyEventDTO {
+  """
+  The type of event that was triggered
+  """
+  eventType: String!
+
+  """
+  The summonerId that triggered the event (Encrypted)
+  """
+  summonerId: String!
+
+  """
+  Timestamp from the event
+  """
+  timestamp: String!
+}
+
+type TournamentStubV4LobbyEventDTOWrapper {
+  eventList: [TournamentStubV4LobbyEventDTO]!
+}
+
+input TournamentStubV4ProviderRegistrationParametersInput {
+  """
+  The region in which the provider will be running tournaments.
+               (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR)
+  """
+  region: Region!
+
+  """
+  The provider's callback URL to which tournament game results in this region
+  should be posted. The URL must be well-formed, use the http or https protocol,
+  and use the default port for the protocol (http URLs must use port 80, https
+  URLs must use port 443).
+  """
+  url: String!
+}
+
+input TournamentStubV4TournamentCodeParametersInput {
+  """
+  Optional list of encrypted summonerIds in order to validate the players
+  eligible to join the lobby. NOTE: We currently do not enforce participants at
+  the team level, but rather the aggregate of teamOne and teamTwo. We may add
+  the ability to enforce at the team level in the future.
+  """
+  allowedSummonerIds: [String]
+
+  """
+  The map type of the game.
+               (Legal values:  SUMMONERS_RIFT,  TWISTED_TREELINE,  HOWLING_ABYSS)
+  """
+  mapType: MapType!
+
+  """
+  Optional string that may contain any data in any format, if specified at all.
+  Used to denote any custom information about the game.
+  """
+  metadata: String
+
+  """
+  The pick type of the game.
+               (Legal values:  BLIND_PICK,  DRAFT_MODE,  ALL_RANDOM,  TOURNAMENT_DRAFT)
+  """
+  pickType: PickType!
+
+  """
+  The spectator type of the game.
+               (Legal values:  NONE,  LOBBYONLY,  ALL)
+  """
+  spectatorType: SpectatorType!
+
+  """
+  The team size of the game. Valid values are 1-5.
+  """
+  teamSize: Int!
+}
+
+input TournamentStubV4TournamentRegistrationParametersInput {
+  """
+  The optional name of the tournament.
+  """
+  name: String
+
+  """
+  The provider ID to specify the regional registered provider data to associate this tournament.
+  """
+  providerId: Int!
+}
+
+type TournamentV4LobbyEventDTO {
+  """
+  The type of event that was triggered
+  """
+  eventType: String!
+
+  """
+  The summonerId that triggered the event (Encrypted)
+  """
+  summonerId: String!
+
+  """
+  Timestamp from the event
+  """
+  timestamp: String!
+}
+
+type TournamentV4LobbyEventDTOWrapper {
+  eventList: [TournamentV4LobbyEventDTO]!
+}
+
+input TournamentV4ProviderRegistrationParametersInput {
+  """
+  The region in which the provider will be running tournaments.
+               (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR)
+  """
+  region: Region!
+
+  """
+  The provider's callback URL to which tournament game results in this region
+  should be posted. The URL must be well-formed, use the http or https protocol,
+  and use the default port for the protocol (http URLs must use port 80, https
+  URLs must use port 443).
+  """
+  url: String!
+}
+
+type TournamentV4TournamentCodeDTO {
+  """
+  The tournament code.
+  """
+  code: String!
+
+  """
+  The tournament code's ID.
+  """
+  id: Int!
+
+  """
+  The lobby name for the tournament code game.
+  """
+  lobbyName: String!
+
+  """
+  The game map for the tournament code game
+  """
+  map: String!
+
+  """
+  The metadata for tournament code.
+  """
+  metaData: String!
+
+  """
+  The summonerIds of the participants (Encrypted)
+  """
+  participants: [String]!
+
+  """
+  The password for the tournament code game.
+  """
+  password: String!
+
+  """
+  The pick mode for tournament code game.
+  """
+  pickType: String!
+
+  """
+  The provider's ID.
+  """
+  providerId: Int!
+
+  """
+  The tournament code's region.
+               (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR)
+  """
+  region: Region2!
+
+  """
+  The spectator mode for the tournament code game.
+  """
+  spectators: String!
+
+  """
+  The team size for the tournament code game.
+  """
+  teamSize: Int!
+
+  """
+  The tournament's ID.
+  """
+  tournamentId: Int!
+}
+
+input TournamentV4TournamentCodeParametersInput {
+  """
+  Optional list of encrypted summonerIds in order to validate the players
+  eligible to join the lobby. NOTE: We currently do not enforce participants at
+  the team level, but rather the aggregate of teamOne and teamTwo. We may add
+  the ability to enforce at the team level in the future.
+  """
+  allowedSummonerIds: [String]
+
+  """
+  The map type of the game.
+               (Legal values:  SUMMONERS_RIFT,  TWISTED_TREELINE,  HOWLING_ABYSS)
+  """
+  mapType: MapType!
+
+  """
+  Optional string that may contain any data in any format, if specified at all.
+  Used to denote any custom information about the game.
+  """
+  metadata: String
+
+  """
+  The pick type of the game.
+               (Legal values:  BLIND_PICK,  DRAFT_MODE,  ALL_RANDOM,  TOURNAMENT_DRAFT)
+  """
+  pickType: PickType!
+
+  """
+  The spectator type of the game.
+               (Legal values:  NONE,  LOBBYONLY,  ALL)
+  """
+  spectatorType: SpectatorType!
+
+  """
+  The team size of the game. Valid values are 1-5.
+  """
+  teamSize: Int!
+}
+
+input TournamentV4TournamentCodeUpdateParametersInput {
+  """
+  Optional list of encrypted summonerIds in order to validate the players
+  eligible to join the lobby. NOTE: We currently do not enforce participants at
+  the team level, but rather the aggregate of teamOne and teamTwo. We may add
+  the ability to enforce at the team level in the future.
+  """
+  allowedSummonerIds: [String]
+
+  """
+  The map type
+               (Legal values:  SUMMONERS_RIFT,  TWISTED_TREELINE,  HOWLING_ABYSS)
+  """
+  mapType: MapType2!
+
+  """
+  The pick type
+               (Legal values:  BLIND_PICK,  DRAFT_MODE,  ALL_RANDOM,  TOURNAMENT_DRAFT)
+  """
+  pickType: PickType2!
+
+  """
+  The spectator type
+               (Legal values:  NONE,  LOBBYONLY,  ALL)
+  """
+  spectatorType: SpectatorType2!
+}
+
+input TournamentV4TournamentRegistrationParametersInput {
+  """
+  The optional name of the tournament.
+  """
+  name: String
+
+  """
+  The provider ID to specify the regional registered provider data to associate this tournament.
+  """
+  providerId: Int!
+}
+
+enum Type {
+  CHAMPION_KILL
+  WARD_PLACED
+  WARD_KILL
+  BUILDING_KILL
+  ELITE_MONSTER_KILL
+  ITEM_PURCHASED
+  ITEM_SOLD
+  ITEM_DESTROYED
+  ITEM_UNDO
+  SKILL_LEVEL_UP
+  ASCENDED_EVENT
+  CAPTURE_POINT
+  PORO_KING_SUMMON
+}
+
+"""
+Warning: Not every request will work with this viewer type
+"""
+type ViewerAnyAuth {
+  """
+  Get a champion mastery by player ID and champion ID.
+
+  Equivalent to GET /lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}
+  """
+  championMasteryV4ChampionMasteryDTO(
+    """
+    Champion ID to retrieve Champion Mastery for
+    """
+    championId: Float!
+
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): ChampionMasteryV4ChampionMasteryDTO
+
+  """
+  Returns champion rotations, including free-to-play and low-level free-to-play rotations (REST)
+
+  Equivalent to GET /lol/platform/v3/champion-rotations
+  """
+  championV3ChampionInfo: ChampionV3ChampionInfo
+
+  """
+  Get tournament by ID.
+
+  Equivalent to GET /lol/clash/v1/tournaments/{tournamentId}
+  """
+  clashV1GetTournamentById(tournamentId: Int!): ClashV1TournamentDto
+
+  """
+  Get team by ID.
+
+  Equivalent to GET /lol/clash/v1/teams/{teamId}
+  """
+  clashV1TeamDto(teamId: String!): ClashV1TeamDto
+
+  """
+  Get tournament by team ID.
+
+  Equivalent to GET /lol/clash/v1/tournaments/by-team/{teamId}
+  """
+  clashV1TournamentDto(teamId: String!): ClashV1TournamentDto
+
+  """
+  Get the grandmaster league of a specific queue.
+
+  Equivalent to GET /lol/league/v4/grandmasterleagues/by-queue/{queue}
+  """
+  leagueV4GetGrandmasterLeague(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get league with given ID, including inactive entries.
+
+  Equivalent to GET /lol/league/v4/leagues/{leagueId}
+  """
+  leagueV4GetLeagueById(
+    """
+    The UUID of the league.
+    """
+    leagueId: String!
+  ): LeagueV4LeagueListDTO
+
+  """
+  Get the master league for given queue.
+
+  Equivalent to GET /lol/league/v4/masterleagues/by-queue/{queue}
+  """
+  leagueV4GetMasterLeague(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get the challenger league for given queue.
+
+  Equivalent to GET /lol/league/v4/challengerleagues/by-queue/{queue}
+  """
+  leagueV4LeagueListDTO(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get all champion mastery entries sorted by number of champion points descending,
+
+  Equivalent to GET /lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}
+  """
+  lolChampionMasteryV4ChampionMasteriesBySummoner(
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): [ChampionMasteryV4ChampionMasteryDTO]
+
+  """
+  Get a player's total champion mastery score, which is the sum of individual champion mastery levels.
+
+  Equivalent to GET /lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}
+  """
+  lolChampionMasteryV4ScoresBySummoner(
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): Int
+
+  """
+  Get players by summoner ID.
+  ## Implementation Notes
+  This endpoint returns a list of active Clash players for a given summoner ID.
+  If a summoner registers for multiple tournaments at the same time (e.g.,
+  Saturday and Sunday) then both registrations would appear in this list.
+
+  Equivalent to GET /lol/clash/v1/players/by-summoner/{summonerId}
+  """
+  lolClashV1PlayersBySummoner(summonerId: String!): [ClashV1PlayerDto]
+
+  """
+  Get all active or upcoming tournaments.
+
+  Equivalent to GET /lol/clash/v1/tournaments
+  """
+  lolClashV1Tournaments: [ClashV1TournamentDto]
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /lol/league-exp/v4/entries/{queue}/{tier}/{division}
+  """
+  lolLeagueExpV4Entries(
+    division: Division!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+
+    """
+    Note that the queue value must be a valid ranked queue.
+    """
+    queue: Queue!
+    tier: Tier!
+  ): [LeagueExpV4LeagueEntryDTO]
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /lol/league/v4/entries/{queue}/{tier}/{division}
+  """
+  lolLeagueV4Entries(
+    division: Division!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+
+    """
+    Note that the queue value must be a valid ranked queue.
+    """
+    queue: Queue2!
+    tier: Tier2!
+  ): [LeagueV4LeagueEntryDTO]
+
+  """
+  Get league entries in all queues for a given summoner ID.
+
+  Equivalent to GET /lol/league/v4/entries/by-summoner/{encryptedSummonerId}
+  """
+  lolLeagueV4EntriesBySummoner(
+    encryptedSummonerId: String!
+  ): [LeagueV4LeagueEntryDTO]
+
+  """
+  Get match IDs by tournament code.
+
+  Equivalent to GET /lol/match/v4/matches/by-tournament-code/{tournamentCode}/ids
+  """
+  lolMatchV4MatchesByTournamentCodeIds(
+    """
+    The tournament code.
+    """
+    tournamentCode: String!
+  ): [Float]
+
+  """
+  Get third party code for a given summoner ID.
+
+  Equivalent to GET /lol/platform/v4/third-party-code/by-summoner/{encryptedSummonerId}
+  """
+  lolPlatformV4ThirdPartyCodeBySummoner(encryptedSummonerId: String!): String
+
+  """
+  Get League of Legends status for the given shard.
+  ## Rate Limit Notes
+  Requests to this API are not counted against the application Rate Limits.
+
+  Equivalent to GET /lol/status/v3/shard-data
+  """
+  lolStatusV3ShardStatus: LolStatusV3ShardStatus
+
+  """
+  Get the players in Master tier.
+
+  Equivalent to GET /lor/ranked/v1/leaderboards
+  """
+  lorRankedV1LeaderboardDto: LorRankedV1LeaderboardDto
+
+  """
+  Get match by match ID and tournament code.
+
+  Equivalent to GET /lol/match/v4/matches/{matchId}/by-tournament-code/{tournamentCode}
+  """
+  matchV4GetMatchByTournamentCode(
+    """
+    The match ID.
+    """
+    matchId: Float!
+
+    """
+    The tournament code.
+    """
+    tournamentCode: String!
+  ): MatchV4MatchDto
+
+  """
+  Get match by match ID.
+
+  Equivalent to GET /lol/match/v4/matches/{matchId}
+  """
+  matchV4MatchDto(
+    """
+    The match ID.
+    """
+    matchId: Float!
+  ): MatchV4MatchDto
+
+  """
+  Get match timeline by match ID.
+  ## Implementation Notes
+  Not all matches have timeline data.
+
+  Equivalent to GET /lol/match/v4/timelines/by-match/{matchId}
+  """
+  matchV4MatchTimelineDto(
+    """
+    The match ID.
+    """
+    matchId: Float!
+  ): MatchV4MatchTimelineDto
+
+  """
+  Get matchlist for games played on given account ID and platform ID and filtered using given filter parameters, if any.
+  ## Implementation Notes
+  A number of optional parameters are provided for filtering. It is up to the
+  caller to ensure that the combination of filter parameters provided is valid
+  for the requested account, otherwise, no matches may be returned.
+
+  If beginIndex is specified, but not endIndex, then endIndex defaults to
+  beginIndex+100. If endIndex is specified, but not beginIndex, then beginIndex
+  defaults to 0. If both are specified, then endIndex must be greater than
+  beginIndex. The maximum range allowed is 100, otherwise a 400 error code is returned.
+
+  If beginTime is specified, but not endTime, then endTime defaults to the the
+  current unix timestamp in milliseconds (the maximum time range limitation is
+  not observed in this specific case). If endTime is specified, but not
+  beginTime, then beginTime defaults to the start of the account's match history
+  returning a 400 due to the maximum time range limitation. If both are
+  specified, then endTime should be greater than beginTime. The maximum time
+  range allowed is one week, otherwise a 400 error code is returned.
+
+  Equivalent to GET /lol/match/v4/matchlists/by-account/{encryptedAccountId}
+  """
+  matchV4MatchlistDto(
+    """
+    The begin index to use for filtering matchlist.  If beginIndex is specified,
+    but not endIndex, then endIndex defaults to beginIndex+100. If endIndex is
+    specified, but not beginIndex, then beginIndex defaults to 0. If both are
+    specified, then endIndex must be greater than beginIndex. The maximum range
+    allowed is 100, otherwise a 400 error code is returned.
+    """
+    beginIndex: Int
+
+    """
+    The begin time to use for filtering matchlist specified as epoch
+    milliseconds. If beginTime is specified, but not endTime, then endTime
+    defaults to the the current unix timestamp in milliseconds (the maximum time
+    range limitation is not observed in this specific case). If endTime is
+    specified, but not beginTime, then beginTime defaults to the start of the
+    account's match history returning a 400 due to the maximum time range
+    limitation. If both are specified, then endTime should be greater than
+    beginTime. The maximum time range allowed is one week, otherwise a 400 error
+    code is returned.
+    """
+    beginTime: Float
+
+    """
+    Set of champion IDs for filtering the matchlist.
+    """
+    champion: [Int]
+
+    """
+    The account ID.
+    """
+    encryptedAccountId: String!
+
+    """
+    The end index to use for filtering matchlist. If beginIndex is specified,
+    but not endIndex, then endIndex defaults to beginIndex+100. If endIndex is
+    specified, but not beginIndex, then beginIndex defaults to 0. If both are
+    specified, then endIndex must be greater than beginIndex. The maximum range
+    allowed is 100, otherwise a 400 error code is returned.
+    """
+    endIndex: Int
+
+    """
+    The end time to use for filtering matchlist specified as epoch milliseconds.
+    If beginTime is specified, but not endTime, then endTime defaults to the the
+    current unix timestamp in milliseconds (the maximum time range limitation is
+    not observed in this specific case). If endTime is specified, but not
+    beginTime, then beginTime defaults to the start of the account's match
+    history returning a 400 due to the maximum time range limitation. If both
+    are specified, then endTime should be greater than beginTime. The maximum
+    time range allowed is one week, otherwise a 400 error code is returned.
+    """
+    endTime: Float
+
+    """
+    Set of queue IDs for filtering the matchlist.
+    """
+    queue: [Int]
+
+    """
+    [DEPRECATED] This field should not be considered reliable for the purposes of filtering matches by season.
+    """
+    season: [Int]
+  ): MatchV4MatchlistDto
+
+  """
+  Get current game information for the given summoner ID.
+
+  Equivalent to GET /lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}
+  """
+  spectatorV4CurrentGameInfo(
+    """
+    The ID of the summoner.
+    """
+    encryptedSummonerId: String!
+  ): SpectatorV4CurrentGameInfo
+
+  """
+  Get list of featured games.
+
+  Equivalent to GET /lol/spectator/v4/featured-games
+  """
+  spectatorV4FeaturedGames: SpectatorV4FeaturedGames
+
+  """
+  Get a summoner by PUUID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}
+  """
+  summonerV4GetByPUUID(
+    """
+    Summoner ID
+    """
+    encryptedPUUID: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by summoner ID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/{encryptedSummonerId}
+  """
+  summonerV4GetBySummonerId(
+    """
+    Summoner ID
+    """
+    encryptedSummonerId: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by summoner name.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-name/{summonerName}
+  """
+  summonerV4GetBySummonerName(
+    """
+    Summoner Name
+    """
+    summonerName: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by account ID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-account/{encryptedAccountId}
+  """
+  summonerV4SummonerDTO(encryptedAccountId: String!): SummonerV4SummonerDTO
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /tft/league/v1/entries/{tier}/{division}
+  """
+  tftLeagueV1Entries(
+    division: Division2!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+    tier: Tier3!
+  ): [TftLeagueV1LeagueEntryDTO]
+
+  """
+  Get league entries for a given summoner ID.
+
+  Equivalent to GET /tft/league/v1/entries/by-summoner/{encryptedSummonerId}
+  """
+  tftLeagueV1EntriesBySummoner(
+    encryptedSummonerId: String!
+  ): [TftLeagueV1LeagueEntryDTO]
+
+  """
+  Get the grandmaster league.
+
+  Equivalent to GET /tft/league/v1/grandmaster
+  """
+  tftLeagueV1GetGrandmasterLeague: TftLeagueV1LeagueListDTO
+
+  """
+  Get league with given ID, including inactive entries.
+
+  Equivalent to GET /tft/league/v1/leagues/{leagueId}
+  """
+  tftLeagueV1GetLeagueById(
+    """
+    The UUID of the league.
+    """
+    leagueId: String!
+  ): TftLeagueV1LeagueListDTO
+
+  """
+  Get the master league.
+
+  Equivalent to GET /tft/league/v1/master
+  """
+  tftLeagueV1GetMasterLeague: TftLeagueV1LeagueListDTO
+
+  """
+  Get the challenger league.
+
+  Equivalent to GET /tft/league/v1/challenger
+  """
+  tftLeagueV1LeagueListDTO: TftLeagueV1LeagueListDTO
+
+  """
+  Get a match by match id.
+
+  Equivalent to GET /tft/match/v1/matches/{matchId}
+  """
+  tftMatchV1MatchDto(matchId: String!): TftMatchV1MatchDto
+
+  """
+  Get a list of match ids by PUUID.
+
+  Equivalent to GET /tft/match/v1/matches/by-puuid/{puuid}/ids
+  """
+  tftMatchV1MatchesByPuuidIds(count: Int, puuid: String!): [String]
+
+  """
+  Get a summoner by PUUID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-puuid/{encryptedPUUID}
+  """
+  tftSummonerV1GetByPUUID(
+    """
+    Summoner ID
+    """
+    encryptedPUUID: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by summoner ID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/{encryptedSummonerId}
+  """
+  tftSummonerV1GetBySummonerId(
+    """
+    Summoner ID
+    """
+    encryptedSummonerId: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by summoner name.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-name/{summonerName}
+  """
+  tftSummonerV1GetBySummonerName(
+    """
+    Summoner Name
+    """
+    summonerName: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by account ID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-account/{encryptedAccountId}
+  """
+  tftSummonerV1SummonerDTO(
+    encryptedAccountId: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Gets a mock list of lobby events by tournament code.
+
+  Equivalent to GET /lol/tournament-stub/v4/lobby-events/by-code/{tournamentCode}
+  """
+  tournamentStubV4LobbyEventDTOWrapper(
+    """
+    The short code to look up lobby events for
+    """
+    tournamentCode: String!
+  ): TournamentStubV4LobbyEventDTOWrapper
+
+  """
+  Gets a list of lobby events by tournament code.
+
+  Equivalent to GET /lol/tournament/v4/lobby-events/by-code/{tournamentCode}
+  """
+  tournamentV4LobbyEventDTOWrapper(
+    """
+    The short code to look up lobby events for
+    """
+    tournamentCode: String!
+  ): TournamentV4LobbyEventDTOWrapper
+
+  """
+  Returns the tournament code DTO associated with a tournament code string.
+
+  Equivalent to GET /lol/tournament/v4/codes/{tournamentCode}
+  """
+  tournamentV4TournamentCodeDTO(
+    """
+    The tournament code string.
+    """
+    tournamentCode: String!
+  ): TournamentV4TournamentCodeDTO
+}
+
+"""
+A viewer for security scheme 'X-Riot-Token'
+"""
+type ViewerApiKey {
+  """
+  Get a champion mastery by player ID and champion ID.
+
+  Equivalent to GET /lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}
+  """
+  championMasteryV4ChampionMasteryDTO(
+    """
+    Champion ID to retrieve Champion Mastery for
+    """
+    championId: Float!
+
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): ChampionMasteryV4ChampionMasteryDTO
+
+  """
+  Returns champion rotations, including free-to-play and low-level free-to-play rotations (REST)
+
+  Equivalent to GET /lol/platform/v3/champion-rotations
+  """
+  championV3ChampionInfo: ChampionV3ChampionInfo
+
+  """
+  Get tournament by ID.
+
+  Equivalent to GET /lol/clash/v1/tournaments/{tournamentId}
+  """
+  clashV1GetTournamentById(tournamentId: Int!): ClashV1TournamentDto
+
+  """
+  Get team by ID.
+
+  Equivalent to GET /lol/clash/v1/teams/{teamId}
+  """
+  clashV1TeamDto(teamId: String!): ClashV1TeamDto
+
+  """
+  Get tournament by team ID.
+
+  Equivalent to GET /lol/clash/v1/tournaments/by-team/{teamId}
+  """
+  clashV1TournamentDto(teamId: String!): ClashV1TournamentDto
+
+  """
+  Get the grandmaster league of a specific queue.
+
+  Equivalent to GET /lol/league/v4/grandmasterleagues/by-queue/{queue}
+  """
+  leagueV4GetGrandmasterLeague(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get league with given ID, including inactive entries.
+
+  Equivalent to GET /lol/league/v4/leagues/{leagueId}
+  """
+  leagueV4GetLeagueById(
+    """
+    The UUID of the league.
+    """
+    leagueId: String!
+  ): LeagueV4LeagueListDTO
+
+  """
+  Get the master league for given queue.
+
+  Equivalent to GET /lol/league/v4/masterleagues/by-queue/{queue}
+  """
+  leagueV4GetMasterLeague(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get the challenger league for given queue.
+
+  Equivalent to GET /lol/league/v4/challengerleagues/by-queue/{queue}
+  """
+  leagueV4LeagueListDTO(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get all champion mastery entries sorted by number of champion points descending,
+
+  Equivalent to GET /lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}
+  """
+  lolChampionMasteryV4ChampionMasteriesBySummoner(
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): [ChampionMasteryV4ChampionMasteryDTO]
+
+  """
+  Get a player's total champion mastery score, which is the sum of individual champion mastery levels.
+
+  Equivalent to GET /lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}
+  """
+  lolChampionMasteryV4ScoresBySummoner(
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): Int
+
+  """
+  Get players by summoner ID.
+  ## Implementation Notes
+  This endpoint returns a list of active Clash players for a given summoner ID.
+  If a summoner registers for multiple tournaments at the same time (e.g.,
+  Saturday and Sunday) then both registrations would appear in this list.
+
+  Equivalent to GET /lol/clash/v1/players/by-summoner/{summonerId}
+  """
+  lolClashV1PlayersBySummoner(summonerId: String!): [ClashV1PlayerDto]
+
+  """
+  Get all active or upcoming tournaments.
+
+  Equivalent to GET /lol/clash/v1/tournaments
+  """
+  lolClashV1Tournaments: [ClashV1TournamentDto]
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /lol/league-exp/v4/entries/{queue}/{tier}/{division}
+  """
+  lolLeagueExpV4Entries(
+    division: Division!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+
+    """
+    Note that the queue value must be a valid ranked queue.
+    """
+    queue: Queue!
+    tier: Tier!
+  ): [LeagueExpV4LeagueEntryDTO]
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /lol/league/v4/entries/{queue}/{tier}/{division}
+  """
+  lolLeagueV4Entries(
+    division: Division!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+
+    """
+    Note that the queue value must be a valid ranked queue.
+    """
+    queue: Queue2!
+    tier: Tier2!
+  ): [LeagueV4LeagueEntryDTO]
+
+  """
+  Get league entries in all queues for a given summoner ID.
+
+  Equivalent to GET /lol/league/v4/entries/by-summoner/{encryptedSummonerId}
+  """
+  lolLeagueV4EntriesBySummoner(
+    encryptedSummonerId: String!
+  ): [LeagueV4LeagueEntryDTO]
+
+  """
+  Get match IDs by tournament code.
+
+  Equivalent to GET /lol/match/v4/matches/by-tournament-code/{tournamentCode}/ids
+  """
+  lolMatchV4MatchesByTournamentCodeIds(
+    """
+    The tournament code.
+    """
+    tournamentCode: String!
+  ): [Float]
+
+  """
+  Get third party code for a given summoner ID.
+
+  Equivalent to GET /lol/platform/v4/third-party-code/by-summoner/{encryptedSummonerId}
+  """
+  lolPlatformV4ThirdPartyCodeBySummoner(encryptedSummonerId: String!): String
+
+  """
+  Get League of Legends status for the given shard.
+  ## Rate Limit Notes
+  Requests to this API are not counted against the application Rate Limits.
+
+  Equivalent to GET /lol/status/v3/shard-data
+  """
+  lolStatusV3ShardStatus: LolStatusV3ShardStatus
+
+  """
+  Get the players in Master tier.
+
+  Equivalent to GET /lor/ranked/v1/leaderboards
+  """
+  lorRankedV1LeaderboardDto: LorRankedV1LeaderboardDto
+
+  """
+  Get match by match ID and tournament code.
+
+  Equivalent to GET /lol/match/v4/matches/{matchId}/by-tournament-code/{tournamentCode}
+  """
+  matchV4GetMatchByTournamentCode(
+    """
+    The match ID.
+    """
+    matchId: Float!
+
+    """
+    The tournament code.
+    """
+    tournamentCode: String!
+  ): MatchV4MatchDto
+
+  """
+  Get match by match ID.
+
+  Equivalent to GET /lol/match/v4/matches/{matchId}
+  """
+  matchV4MatchDto(
+    """
+    The match ID.
+    """
+    matchId: Float!
+  ): MatchV4MatchDto
+
+  """
+  Get match timeline by match ID.
+  ## Implementation Notes
+  Not all matches have timeline data.
+
+  Equivalent to GET /lol/match/v4/timelines/by-match/{matchId}
+  """
+  matchV4MatchTimelineDto(
+    """
+    The match ID.
+    """
+    matchId: Float!
+  ): MatchV4MatchTimelineDto
+
+  """
+  Get matchlist for games played on given account ID and platform ID and filtered using given filter parameters, if any.
+  ## Implementation Notes
+  A number of optional parameters are provided for filtering. It is up to the
+  caller to ensure that the combination of filter parameters provided is valid
+  for the requested account, otherwise, no matches may be returned.
+
+  If beginIndex is specified, but not endIndex, then endIndex defaults to
+  beginIndex+100. If endIndex is specified, but not beginIndex, then beginIndex
+  defaults to 0. If both are specified, then endIndex must be greater than
+  beginIndex. The maximum range allowed is 100, otherwise a 400 error code is returned.
+
+  If beginTime is specified, but not endTime, then endTime defaults to the the
+  current unix timestamp in milliseconds (the maximum time range limitation is
+  not observed in this specific case). If endTime is specified, but not
+  beginTime, then beginTime defaults to the start of the account's match history
+  returning a 400 due to the maximum time range limitation. If both are
+  specified, then endTime should be greater than beginTime. The maximum time
+  range allowed is one week, otherwise a 400 error code is returned.
+
+  Equivalent to GET /lol/match/v4/matchlists/by-account/{encryptedAccountId}
+  """
+  matchV4MatchlistDto(
+    """
+    The begin index to use for filtering matchlist.  If beginIndex is specified,
+    but not endIndex, then endIndex defaults to beginIndex+100. If endIndex is
+    specified, but not beginIndex, then beginIndex defaults to 0. If both are
+    specified, then endIndex must be greater than beginIndex. The maximum range
+    allowed is 100, otherwise a 400 error code is returned.
+    """
+    beginIndex: Int
+
+    """
+    The begin time to use for filtering matchlist specified as epoch
+    milliseconds. If beginTime is specified, but not endTime, then endTime
+    defaults to the the current unix timestamp in milliseconds (the maximum time
+    range limitation is not observed in this specific case). If endTime is
+    specified, but not beginTime, then beginTime defaults to the start of the
+    account's match history returning a 400 due to the maximum time range
+    limitation. If both are specified, then endTime should be greater than
+    beginTime. The maximum time range allowed is one week, otherwise a 400 error
+    code is returned.
+    """
+    beginTime: Float
+
+    """
+    Set of champion IDs for filtering the matchlist.
+    """
+    champion: [Int]
+
+    """
+    The account ID.
+    """
+    encryptedAccountId: String!
+
+    """
+    The end index to use for filtering matchlist. If beginIndex is specified,
+    but not endIndex, then endIndex defaults to beginIndex+100. If endIndex is
+    specified, but not beginIndex, then beginIndex defaults to 0. If both are
+    specified, then endIndex must be greater than beginIndex. The maximum range
+    allowed is 100, otherwise a 400 error code is returned.
+    """
+    endIndex: Int
+
+    """
+    The end time to use for filtering matchlist specified as epoch milliseconds.
+    If beginTime is specified, but not endTime, then endTime defaults to the the
+    current unix timestamp in milliseconds (the maximum time range limitation is
+    not observed in this specific case). If endTime is specified, but not
+    beginTime, then beginTime defaults to the start of the account's match
+    history returning a 400 due to the maximum time range limitation. If both
+    are specified, then endTime should be greater than beginTime. The maximum
+    time range allowed is one week, otherwise a 400 error code is returned.
+    """
+    endTime: Float
+
+    """
+    Set of queue IDs for filtering the matchlist.
+    """
+    queue: [Int]
+
+    """
+    [DEPRECATED] This field should not be considered reliable for the purposes of filtering matches by season.
+    """
+    season: [Int]
+  ): MatchV4MatchlistDto
+
+  """
+  Get current game information for the given summoner ID.
+
+  Equivalent to GET /lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}
+  """
+  spectatorV4CurrentGameInfo(
+    """
+    The ID of the summoner.
+    """
+    encryptedSummonerId: String!
+  ): SpectatorV4CurrentGameInfo
+
+  """
+  Get list of featured games.
+
+  Equivalent to GET /lol/spectator/v4/featured-games
+  """
+  spectatorV4FeaturedGames: SpectatorV4FeaturedGames
+
+  """
+  Get a summoner by PUUID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}
+  """
+  summonerV4GetByPUUID(
+    """
+    Summoner ID
+    """
+    encryptedPUUID: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by summoner ID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/{encryptedSummonerId}
+  """
+  summonerV4GetBySummonerId(
+    """
+    Summoner ID
+    """
+    encryptedSummonerId: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by summoner name.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-name/{summonerName}
+  """
+  summonerV4GetBySummonerName(
+    """
+    Summoner Name
+    """
+    summonerName: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by account ID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-account/{encryptedAccountId}
+  """
+  summonerV4SummonerDTO(encryptedAccountId: String!): SummonerV4SummonerDTO
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /tft/league/v1/entries/{tier}/{division}
+  """
+  tftLeagueV1Entries(
+    division: Division2!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+    tier: Tier3!
+  ): [TftLeagueV1LeagueEntryDTO]
+
+  """
+  Get league entries for a given summoner ID.
+
+  Equivalent to GET /tft/league/v1/entries/by-summoner/{encryptedSummonerId}
+  """
+  tftLeagueV1EntriesBySummoner(
+    encryptedSummonerId: String!
+  ): [TftLeagueV1LeagueEntryDTO]
+
+  """
+  Get the grandmaster league.
+
+  Equivalent to GET /tft/league/v1/grandmaster
+  """
+  tftLeagueV1GetGrandmasterLeague: TftLeagueV1LeagueListDTO
+
+  """
+  Get league with given ID, including inactive entries.
+
+  Equivalent to GET /tft/league/v1/leagues/{leagueId}
+  """
+  tftLeagueV1GetLeagueById(
+    """
+    The UUID of the league.
+    """
+    leagueId: String!
+  ): TftLeagueV1LeagueListDTO
+
+  """
+  Get the master league.
+
+  Equivalent to GET /tft/league/v1/master
+  """
+  tftLeagueV1GetMasterLeague: TftLeagueV1LeagueListDTO
+
+  """
+  Get the challenger league.
+
+  Equivalent to GET /tft/league/v1/challenger
+  """
+  tftLeagueV1LeagueListDTO: TftLeagueV1LeagueListDTO
+
+  """
+  Get a match by match id.
+
+  Equivalent to GET /tft/match/v1/matches/{matchId}
+  """
+  tftMatchV1MatchDto(matchId: String!): TftMatchV1MatchDto
+
+  """
+  Get a list of match ids by PUUID.
+
+  Equivalent to GET /tft/match/v1/matches/by-puuid/{puuid}/ids
+  """
+  tftMatchV1MatchesByPuuidIds(count: Int, puuid: String!): [String]
+
+  """
+  Get a summoner by PUUID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-puuid/{encryptedPUUID}
+  """
+  tftSummonerV1GetByPUUID(
+    """
+    Summoner ID
+    """
+    encryptedPUUID: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by summoner ID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/{encryptedSummonerId}
+  """
+  tftSummonerV1GetBySummonerId(
+    """
+    Summoner ID
+    """
+    encryptedSummonerId: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by summoner name.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-name/{summonerName}
+  """
+  tftSummonerV1GetBySummonerName(
+    """
+    Summoner Name
+    """
+    summonerName: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by account ID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-account/{encryptedAccountId}
+  """
+  tftSummonerV1SummonerDTO(
+    encryptedAccountId: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Gets a mock list of lobby events by tournament code.
+
+  Equivalent to GET /lol/tournament-stub/v4/lobby-events/by-code/{tournamentCode}
+  """
+  tournamentStubV4LobbyEventDTOWrapper(
+    """
+    The short code to look up lobby events for
+    """
+    tournamentCode: String!
+  ): TournamentStubV4LobbyEventDTOWrapper
+
+  """
+  Gets a list of lobby events by tournament code.
+
+  Equivalent to GET /lol/tournament/v4/lobby-events/by-code/{tournamentCode}
+  """
+  tournamentV4LobbyEventDTOWrapper(
+    """
+    The short code to look up lobby events for
+    """
+    tournamentCode: String!
+  ): TournamentV4LobbyEventDTOWrapper
+
+  """
+  Returns the tournament code DTO associated with a tournament code string.
+
+  Equivalent to GET /lol/tournament/v4/codes/{tournamentCode}
+  """
+  tournamentV4TournamentCodeDTO(
+    """
+    The tournament code string.
+    """
+    tournamentCode: String!
+  ): TournamentV4TournamentCodeDTO
+}
+
+"""
+A viewer for security scheme 'api_key'
+"""
+type ViewerApiKey2 {
+  """
+  Get a champion mastery by player ID and champion ID.
+
+  Equivalent to GET /lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}
+  """
+  championMasteryV4ChampionMasteryDTO(
+    """
+    Champion ID to retrieve Champion Mastery for
+    """
+    championId: Float!
+
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): ChampionMasteryV4ChampionMasteryDTO
+
+  """
+  Returns champion rotations, including free-to-play and low-level free-to-play rotations (REST)
+
+  Equivalent to GET /lol/platform/v3/champion-rotations
+  """
+  championV3ChampionInfo: ChampionV3ChampionInfo
+
+  """
+  Get tournament by ID.
+
+  Equivalent to GET /lol/clash/v1/tournaments/{tournamentId}
+  """
+  clashV1GetTournamentById(tournamentId: Int!): ClashV1TournamentDto
+
+  """
+  Get team by ID.
+
+  Equivalent to GET /lol/clash/v1/teams/{teamId}
+  """
+  clashV1TeamDto(teamId: String!): ClashV1TeamDto
+
+  """
+  Get tournament by team ID.
+
+  Equivalent to GET /lol/clash/v1/tournaments/by-team/{teamId}
+  """
+  clashV1TournamentDto(teamId: String!): ClashV1TournamentDto
+
+  """
+  Get the grandmaster league of a specific queue.
+
+  Equivalent to GET /lol/league/v4/grandmasterleagues/by-queue/{queue}
+  """
+  leagueV4GetGrandmasterLeague(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get league with given ID, including inactive entries.
+
+  Equivalent to GET /lol/league/v4/leagues/{leagueId}
+  """
+  leagueV4GetLeagueById(
+    """
+    The UUID of the league.
+    """
+    leagueId: String!
+  ): LeagueV4LeagueListDTO
+
+  """
+  Get the master league for given queue.
+
+  Equivalent to GET /lol/league/v4/masterleagues/by-queue/{queue}
+  """
+  leagueV4GetMasterLeague(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get the challenger league for given queue.
+
+  Equivalent to GET /lol/league/v4/challengerleagues/by-queue/{queue}
+  """
+  leagueV4LeagueListDTO(queue: Queue2!): LeagueV4LeagueListDTO
+
+  """
+  Get all champion mastery entries sorted by number of champion points descending,
+
+  Equivalent to GET /lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}
+  """
+  lolChampionMasteryV4ChampionMasteriesBySummoner(
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): [ChampionMasteryV4ChampionMasteryDTO]
+
+  """
+  Get a player's total champion mastery score, which is the sum of individual champion mastery levels.
+
+  Equivalent to GET /lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}
+  """
+  lolChampionMasteryV4ScoresBySummoner(
+    """
+    Summoner ID associated with the player
+    """
+    encryptedSummonerId: String!
+  ): Int
+
+  """
+  Get players by summoner ID.
+  ## Implementation Notes
+  This endpoint returns a list of active Clash players for a given summoner ID.
+  If a summoner registers for multiple tournaments at the same time (e.g.,
+  Saturday and Sunday) then both registrations would appear in this list.
+
+  Equivalent to GET /lol/clash/v1/players/by-summoner/{summonerId}
+  """
+  lolClashV1PlayersBySummoner(summonerId: String!): [ClashV1PlayerDto]
+
+  """
+  Get all active or upcoming tournaments.
+
+  Equivalent to GET /lol/clash/v1/tournaments
+  """
+  lolClashV1Tournaments: [ClashV1TournamentDto]
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /lol/league-exp/v4/entries/{queue}/{tier}/{division}
+  """
+  lolLeagueExpV4Entries(
+    division: Division!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+
+    """
+    Note that the queue value must be a valid ranked queue.
+    """
+    queue: Queue!
+    tier: Tier!
+  ): [LeagueExpV4LeagueEntryDTO]
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /lol/league/v4/entries/{queue}/{tier}/{division}
+  """
+  lolLeagueV4Entries(
+    division: Division!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+
+    """
+    Note that the queue value must be a valid ranked queue.
+    """
+    queue: Queue2!
+    tier: Tier2!
+  ): [LeagueV4LeagueEntryDTO]
+
+  """
+  Get league entries in all queues for a given summoner ID.
+
+  Equivalent to GET /lol/league/v4/entries/by-summoner/{encryptedSummonerId}
+  """
+  lolLeagueV4EntriesBySummoner(
+    encryptedSummonerId: String!
+  ): [LeagueV4LeagueEntryDTO]
+
+  """
+  Get match IDs by tournament code.
+
+  Equivalent to GET /lol/match/v4/matches/by-tournament-code/{tournamentCode}/ids
+  """
+  lolMatchV4MatchesByTournamentCodeIds(
+    """
+    The tournament code.
+    """
+    tournamentCode: String!
+  ): [Float]
+
+  """
+  Get third party code for a given summoner ID.
+
+  Equivalent to GET /lol/platform/v4/third-party-code/by-summoner/{encryptedSummonerId}
+  """
+  lolPlatformV4ThirdPartyCodeBySummoner(encryptedSummonerId: String!): String
+
+  """
+  Get League of Legends status for the given shard.
+  ## Rate Limit Notes
+  Requests to this API are not counted against the application Rate Limits.
+
+  Equivalent to GET /lol/status/v3/shard-data
+  """
+  lolStatusV3ShardStatus: LolStatusV3ShardStatus
+
+  """
+  Get the players in Master tier.
+
+  Equivalent to GET /lor/ranked/v1/leaderboards
+  """
+  lorRankedV1LeaderboardDto: LorRankedV1LeaderboardDto
+
+  """
+  Get match by match ID and tournament code.
+
+  Equivalent to GET /lol/match/v4/matches/{matchId}/by-tournament-code/{tournamentCode}
+  """
+  matchV4GetMatchByTournamentCode(
+    """
+    The match ID.
+    """
+    matchId: Float!
+
+    """
+    The tournament code.
+    """
+    tournamentCode: String!
+  ): MatchV4MatchDto
+
+  """
+  Get match by match ID.
+
+  Equivalent to GET /lol/match/v4/matches/{matchId}
+  """
+  matchV4MatchDto(
+    """
+    The match ID.
+    """
+    matchId: Float!
+  ): MatchV4MatchDto
+
+  """
+  Get match timeline by match ID.
+  ## Implementation Notes
+  Not all matches have timeline data.
+
+  Equivalent to GET /lol/match/v4/timelines/by-match/{matchId}
+  """
+  matchV4MatchTimelineDto(
+    """
+    The match ID.
+    """
+    matchId: Float!
+  ): MatchV4MatchTimelineDto
+
+  """
+  Get matchlist for games played on given account ID and platform ID and filtered using given filter parameters, if any.
+  ## Implementation Notes
+  A number of optional parameters are provided for filtering. It is up to the
+  caller to ensure that the combination of filter parameters provided is valid
+  for the requested account, otherwise, no matches may be returned.
+
+  If beginIndex is specified, but not endIndex, then endIndex defaults to
+  beginIndex+100. If endIndex is specified, but not beginIndex, then beginIndex
+  defaults to 0. If both are specified, then endIndex must be greater than
+  beginIndex. The maximum range allowed is 100, otherwise a 400 error code is returned.
+
+  If beginTime is specified, but not endTime, then endTime defaults to the the
+  current unix timestamp in milliseconds (the maximum time range limitation is
+  not observed in this specific case). If endTime is specified, but not
+  beginTime, then beginTime defaults to the start of the account's match history
+  returning a 400 due to the maximum time range limitation. If both are
+  specified, then endTime should be greater than beginTime. The maximum time
+  range allowed is one week, otherwise a 400 error code is returned.
+
+  Equivalent to GET /lol/match/v4/matchlists/by-account/{encryptedAccountId}
+  """
+  matchV4MatchlistDto(
+    """
+    The begin index to use for filtering matchlist.  If beginIndex is specified,
+    but not endIndex, then endIndex defaults to beginIndex+100. If endIndex is
+    specified, but not beginIndex, then beginIndex defaults to 0. If both are
+    specified, then endIndex must be greater than beginIndex. The maximum range
+    allowed is 100, otherwise a 400 error code is returned.
+    """
+    beginIndex: Int
+
+    """
+    The begin time to use for filtering matchlist specified as epoch
+    milliseconds. If beginTime is specified, but not endTime, then endTime
+    defaults to the the current unix timestamp in milliseconds (the maximum time
+    range limitation is not observed in this specific case). If endTime is
+    specified, but not beginTime, then beginTime defaults to the start of the
+    account's match history returning a 400 due to the maximum time range
+    limitation. If both are specified, then endTime should be greater than
+    beginTime. The maximum time range allowed is one week, otherwise a 400 error
+    code is returned.
+    """
+    beginTime: Float
+
+    """
+    Set of champion IDs for filtering the matchlist.
+    """
+    champion: [Int]
+
+    """
+    The account ID.
+    """
+    encryptedAccountId: String!
+
+    """
+    The end index to use for filtering matchlist. If beginIndex is specified,
+    but not endIndex, then endIndex defaults to beginIndex+100. If endIndex is
+    specified, but not beginIndex, then beginIndex defaults to 0. If both are
+    specified, then endIndex must be greater than beginIndex. The maximum range
+    allowed is 100, otherwise a 400 error code is returned.
+    """
+    endIndex: Int
+
+    """
+    The end time to use for filtering matchlist specified as epoch milliseconds.
+    If beginTime is specified, but not endTime, then endTime defaults to the the
+    current unix timestamp in milliseconds (the maximum time range limitation is
+    not observed in this specific case). If endTime is specified, but not
+    beginTime, then beginTime defaults to the start of the account's match
+    history returning a 400 due to the maximum time range limitation. If both
+    are specified, then endTime should be greater than beginTime. The maximum
+    time range allowed is one week, otherwise a 400 error code is returned.
+    """
+    endTime: Float
+
+    """
+    Set of queue IDs for filtering the matchlist.
+    """
+    queue: [Int]
+
+    """
+    [DEPRECATED] This field should not be considered reliable for the purposes of filtering matches by season.
+    """
+    season: [Int]
+  ): MatchV4MatchlistDto
+
+  """
+  Get current game information for the given summoner ID.
+
+  Equivalent to GET /lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}
+  """
+  spectatorV4CurrentGameInfo(
+    """
+    The ID of the summoner.
+    """
+    encryptedSummonerId: String!
+  ): SpectatorV4CurrentGameInfo
+
+  """
+  Get list of featured games.
+
+  Equivalent to GET /lol/spectator/v4/featured-games
+  """
+  spectatorV4FeaturedGames: SpectatorV4FeaturedGames
+
+  """
+  Get a summoner by PUUID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}
+  """
+  summonerV4GetByPUUID(
+    """
+    Summoner ID
+    """
+    encryptedPUUID: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by summoner ID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/{encryptedSummonerId}
+  """
+  summonerV4GetBySummonerId(
+    """
+    Summoner ID
+    """
+    encryptedSummonerId: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by summoner name.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-name/{summonerName}
+  """
+  summonerV4GetBySummonerName(
+    """
+    Summoner Name
+    """
+    summonerName: String!
+  ): SummonerV4SummonerDTO
+
+  """
+  Get a summoner by account ID.
+
+  Equivalent to GET /lol/summoner/v4/summoners/by-account/{encryptedAccountId}
+  """
+  summonerV4SummonerDTO(encryptedAccountId: String!): SummonerV4SummonerDTO
+
+  """
+  Get all the league entries.
+
+  Equivalent to GET /tft/league/v1/entries/{tier}/{division}
+  """
+  tftLeagueV1Entries(
+    division: Division2!
+
+    """
+    Starts with page 1.
+    """
+    page: Int
+    tier: Tier3!
+  ): [TftLeagueV1LeagueEntryDTO]
+
+  """
+  Get league entries for a given summoner ID.
+
+  Equivalent to GET /tft/league/v1/entries/by-summoner/{encryptedSummonerId}
+  """
+  tftLeagueV1EntriesBySummoner(
+    encryptedSummonerId: String!
+  ): [TftLeagueV1LeagueEntryDTO]
+
+  """
+  Get the grandmaster league.
+
+  Equivalent to GET /tft/league/v1/grandmaster
+  """
+  tftLeagueV1GetGrandmasterLeague: TftLeagueV1LeagueListDTO
+
+  """
+  Get league with given ID, including inactive entries.
+
+  Equivalent to GET /tft/league/v1/leagues/{leagueId}
+  """
+  tftLeagueV1GetLeagueById(
+    """
+    The UUID of the league.
+    """
+    leagueId: String!
+  ): TftLeagueV1LeagueListDTO
+
+  """
+  Get the master league.
+
+  Equivalent to GET /tft/league/v1/master
+  """
+  tftLeagueV1GetMasterLeague: TftLeagueV1LeagueListDTO
+
+  """
+  Get the challenger league.
+
+  Equivalent to GET /tft/league/v1/challenger
+  """
+  tftLeagueV1LeagueListDTO: TftLeagueV1LeagueListDTO
+
+  """
+  Get a match by match id.
+
+  Equivalent to GET /tft/match/v1/matches/{matchId}
+  """
+  tftMatchV1MatchDto(matchId: String!): TftMatchV1MatchDto
+
+  """
+  Get a list of match ids by PUUID.
+
+  Equivalent to GET /tft/match/v1/matches/by-puuid/{puuid}/ids
+  """
+  tftMatchV1MatchesByPuuidIds(count: Int, puuid: String!): [String]
+
+  """
+  Get a summoner by PUUID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-puuid/{encryptedPUUID}
+  """
+  tftSummonerV1GetByPUUID(
+    """
+    Summoner ID
+    """
+    encryptedPUUID: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by summoner ID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/{encryptedSummonerId}
+  """
+  tftSummonerV1GetBySummonerId(
+    """
+    Summoner ID
+    """
+    encryptedSummonerId: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by summoner name.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-name/{summonerName}
+  """
+  tftSummonerV1GetBySummonerName(
+    """
+    Summoner Name
+    """
+    summonerName: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Get a summoner by account ID.
+
+  Equivalent to GET /tft/summoner/v1/summoners/by-account/{encryptedAccountId}
+  """
+  tftSummonerV1SummonerDTO(
+    encryptedAccountId: String!
+  ): TftSummonerV1SummonerDTO
+
+  """
+  Gets a mock list of lobby events by tournament code.
+
+  Equivalent to GET /lol/tournament-stub/v4/lobby-events/by-code/{tournamentCode}
+  """
+  tournamentStubV4LobbyEventDTOWrapper(
+    """
+    The short code to look up lobby events for
+    """
+    tournamentCode: String!
+  ): TournamentStubV4LobbyEventDTOWrapper
+
+  """
+  Gets a list of lobby events by tournament code.
+
+  Equivalent to GET /lol/tournament/v4/lobby-events/by-code/{tournamentCode}
+  """
+  tournamentV4LobbyEventDTOWrapper(
+    """
+    The short code to look up lobby events for
+    """
+    tournamentCode: String!
+  ): TournamentV4LobbyEventDTOWrapper
+
+  """
+  Returns the tournament code DTO associated with a tournament code string.
+
+  Equivalent to GET /lol/tournament/v4/codes/{tournamentCode}
+  """
+  tournamentV4TournamentCodeDTO(
+    """
+    The tournament code string.
+    """
+    tournamentCode: String!
+  ): TournamentV4TournamentCodeDTO
+}
+
+enum Win {
+  FAIL
+  WIN
+}
+
+"""
+API key credentials for the security protocol 'X-Riot-Token'
+"""
+input XRiotTokenInput {
+  apiKey: String
+}
