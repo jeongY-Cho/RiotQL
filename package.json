@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "test": "jest",
-    "graphql-types": "graphql-codegen --config codegen.yml"
+    "graphql-types": "graphql-codegen --config codegen.yml",
+    "graphql-types-watch": "graphql-codegen --config codegen.yml --watch"
   },
   "keywords": [
     "graphql",
@@ -16,8 +17,10 @@
   "author": "Jeong Yeon Cho",
   "license": "MIT",
   "dependencies": {
+    "@playlyfe/gql": "^2.6.2",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
+    "graphql-scalars": "^1.2.1",
     "graphql-tag": "^2.10.3",
     "graphql-tools": "^6.0.12",
     "graphql-yoga": "^1.18.3",

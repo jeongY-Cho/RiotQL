@@ -1,0 +1,45 @@
+{
+  schema: {
+    files: "src/schema/**/*.gql",
+  },
+  query: {
+    files: [
+      // query gql files
+      {
+        match: "src/schema/**/*.gql",
+        parser: "QueryParser",
+      },
+      // [Embedded queries] relay files
+      {
+        match: { include: "src/schema/**/*.js", ignore: "**/tests/**/*.js" },
+        parser: [
+          "EmbeddedQueryParser",
+          { startTag: "Relay\\.QL`", endTag: "`" },
+        ],
+        isRelay: true,
+      },
+      // [Embedded queries] gql tag files
+      {
+        match: { include: "src/schema/**/*.js", ignore: "**/tests/**/*.js" },
+        parser: ["EmbeddedQueryParser", { startTag: "gql`", endTag: "`" }],
+      },
+      // [Embedded queries] some other tags
+      {
+        match: "src/schema/**/*.xyz",
+        parser: ["EmbeddedQueryParser", { startTag: '"""', endTag: '"""' }],
+      },
+      // [Embedded queries] some other tags and modify validation rules
+      {
+        match: "src/schema/**/*.xyz",
+        parser: ["EmbeddedQueryParser", { startTag: '"""', endTag: '"""' }],
+        validate: {
+          extends: "gql-rules-query",
+          rules: {
+            LoneAnonymousOperation: "off",
+            NoUnusedVariables: "warn",
+          },
+        },
+      },
+    ],
+  },
+}
