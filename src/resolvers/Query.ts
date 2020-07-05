@@ -61,8 +61,6 @@ const summoner: QueryResolvers["summoner"] = async function (
       throw new Error("no id given");
     }
   } else {
-    console.log("no call");
-
     res = {
       data: {
         accountId: args.encryptedAccountId,
