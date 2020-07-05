@@ -1,0 +1,62 @@
+type MatchTimeline {
+  frames: [MatchFrame!]!
+  frameInterval: Int!
+}
+
+type MatchFrame {
+  participantFrames: [MatchParticipantFrame!]!
+  events: [MatchEvent!]!
+  timestamp: Int!
+}
+
+type MatchParticipantFrame {
+  participantId: Int!
+  minionsKilled: Int!
+  teamScore: Int!
+  dominionScore: Int!
+  totalGold: Int!
+  level: Int!
+  xp: Int!
+  currentGold: Int!
+  position: MatchPosition!
+  jungleMinionsKilled: Int!
+}
+
+type MatchPosition {
+  x: Int!
+  y: Int!
+}
+
+type MatchEvent {
+  laneType: String
+  skillShot: Int
+  ascendedType: String
+  creatorId: Int
+  afterId: Int
+  eventType: String
+  type: MatchEventTypeEnum
+  levelUpType: String
+  wardType: String
+  participantId: Int
+  towerType: String
+  itemId: Int
+  beforeId: Int
+  pointCaptured: String
+  monsterType: String
+}
+
+enum MatchEventTypeEnum {
+  CHAMPION_KILL
+  WARD_PLACED
+  WARD_KILL
+  BUILDING_KILL
+  ELITE_MONSTER_KILL
+  ITEM_PURCHASED
+  ITEM_SOLD
+  ITEM_DESTROYED
+  ITEM_UNDO
+  SKILL_LEVEL_UP
+  ASCENDED_EVENT
+  CAPTURE_POINT
+  PORO_KING_SUMMON
+}

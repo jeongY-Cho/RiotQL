@@ -1,4 +1,5 @@
 type Summoner {
+  region: Region!
   accountId: String!
   profileIconId: Int!
   revisiondate: Int!
@@ -6,5 +7,5 @@ type Summoner {
   id: String!
   puuid: String!
   summonerLevel: Int!
-  # matchlist(filter: MatchListInput): MatchList!
+  matchlist(filter: MatchListInput): MatchList!
 }

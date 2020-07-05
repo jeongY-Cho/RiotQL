@@ -1,0 +1,236 @@
+type Match {
+  gameId: Long!
+  participantIdentities: [ParticipantIdentities!]!
+  queueId: Int!
+  gameType: String!
+  gameDuration: Int!
+  teams: [TeamStats!]!
+  platformId: String!
+  gameCreation: Long!
+  seasonId: Int!
+  gameVersion: String!
+  mapId: Int!
+  gameMode: String!
+  participants: [Participant!]!
+}
+
+type ParticipantIdentities {
+  participantId: Int!
+  player: [Player!]!
+}
+
+type Player {
+  profileIcon: Int!
+  accountId: String!
+  matchHistoryUri: String!
+  currentAccountId: String!
+  currentPlatformId: String!
+  summonerName: String!
+  summonerId: String!
+  platformId: String!
+}
+
+type TeamStats {
+  towerKills: Int!
+  riftHeraldKills: Int!
+  firstBlood: Boolean!
+  inhibitorKills: Int!
+  bans: [TeamBans!]!
+  firstBaron: Boolean!
+  firstDragon: Boolean!
+  dominionVictoryScore: Int!
+  dragonKills: Int!
+  baronKills: Int!
+  firstInhibitor: Boolean!
+  firstTower: Boolean!
+  vilemawKills: Int!
+  firstRiftHerald: Boolean!
+  teamId: Int!
+  win: Win
+}
+
+enum Win {
+  Fail
+  Win
+}
+
+type TeamBans {
+  championId: Int!
+  pickTurn: Int!
+}
+
+type Participant {
+  participantId: Int!
+  championId: Int!
+  runes: [Rune] @deprecated
+  stats: ParticipantStats
+  timeline: ParticipantTimeline
+  spell1Id: Int!
+  spell2Id: Int!
+  highestAchievedSeasonTier: Tier!
+  masteries: [Mastery] @deprecated
+}
+
+enum Tier {
+  CHALLENGER
+  MASTER
+  DIAMOND
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+  UNRANKED
+}
+
+type Rune {
+  runeId: Int!
+  rank: Int!
+}
+
+type Mastery {
+  rank: Int!
+  masteryId: Int!
+}
+
+type ParticipantStats {
+  altarsCaptured: Int
+  altarsNeutralized: Int
+  assists: Int!
+  champLevel: Int!
+  combatPlayerScore: Int
+  damageDealtToObjectives: Float!
+  damageDealtToTurrets: Float!
+  damageSelfMitigated: Float!
+  deaths: Int!
+  doubleKills: Int!
+  firstBloodAssist: Boolean
+  firstBloodKill: Boolean
+  firstInhibitorAssist: Boolean
+  firstInhibitorKill: Boolean
+  firstTowerAssist: Boolean
+  firstTowerKill: Boolean
+  goldEarned: Int!
+  goldSpent: Int!
+  inhibitorKills: Int
+  item0: Int!
+  item1: Int!
+  item2: Int!
+  item3: Int!
+  item4: Int!
+  item5: Int!
+  item6: Int!
+  killingSprees: Int!
+  kills: Int!
+  largestCriticalStrike: Int!
+  largestKillingSpree: Int!
+  largestMultiKill: Int!
+  longestTimeSpentLiving: Int!
+  magicDamageDealt: Float!
+  magicDamageDealtToChampions: Float!
+  magicalDamageTaken: Float!
+  neutralMinionsKilled: Int!
+  neutralMinionsKilledEnemyJungle: Int!
+  neutralMinionsKilledTeamJungle: Int!
+  nodeCapture: Int
+  nodeCaptureAssist: Int
+  nodeNeutralize: Int
+  nodeNeutralizeAssist: Int
+  objectivePlayerScore: Int
+  participantId: Int!
+  pentaKills: Int!
+  perk0: Int
+  perk0Var1: Int
+  perk0Var2: Int
+  perk0Var3: Int
+  perk1: Int
+  perk1Var1: Int
+  perk1Var2: Int
+  perk1Var3: Int
+  perk2: Int
+  perk2Var1: Int
+  perk2Var2: Int
+  perk2Var3: Int
+  perk3: Int
+  perk3Var1: Int
+  perk3Var2: Int
+  perk3Var3: Int
+  perk4: Int
+  perk4Var1: Int
+  perk4Var2: Int
+  perk4Var3: Int
+  perk5: Int
+  perk5Var1: Int
+  perk5Var2: Int
+  perk5Var3: Int
+  perkPrimaryStyle: Int
+  perkSubStyle: Int
+  physicalDamageDealt: Float!
+  physicalDamageDealtToChampions: Float!
+  physicalDamageTaken: Float!
+  playerScore0: Int
+  playerScore1: Int
+  playerScore2: Int
+  playerScore3: Int
+  playerScore4: Int
+  playerScore5: Int
+  playerScore6: Int
+  playerScore7: Int
+  playerScore8: Int
+  playerScore9: Int
+  quadraKills: Int!
+  sightWardsBoughtInGame: Int
+  teamObjective: Int
+  timeCCingOthers: Float!
+  totalDamageDealt: Float!
+  totalDamageDealtToChampions: Float!
+  totalDamageTaken: Float!
+  totalHeal: Float!
+  totalMinionsKilled: Int!
+  totalPlayerScore: Int
+  totalScoreRank: Int
+  totalTimeCrowdControlDealt: Int!
+  totalUnitsHealed: Int!
+  tripleKills: Int!
+  trueDamageDealt: Float!
+  trueDamageDealtToChampions: Float!
+  trueDamageTaken: Float!
+  turretKills: Int
+  unrealKills: Int!
+  visionScore: Float
+  visionWardsBoughtInGame: Int!
+  wardsKilled: Int!
+  wardsPlaced: Int
+  win: Boolean!
+}
+
+type ParticipantTimeline {
+  creepsPerMinDeltas: JSON
+  csDiffPerMinDeltas: JSON
+  damageTakenDiffPerMinDeltas: JSON
+  damageTakenPerMinDeltas: JSON
+  goldPerMinDeltas: JSON
+  lane: Lane
+  participantId: Int
+  role: Role
+  xpDiffPerMinDeltas: JSON
+  xpPerMinDeltas: JSON
+}
+
+enum Lane {
+  MID
+  MIDDLE
+  TOP
+  JUNGLE
+  BOT
+  BOTTOM
+}
+
+enum Role {
+  DUO
+  NONE
+  SOLO
+  DUO_CARRY
+  DUO_SUPPORT
+}
+
+scalar JSON

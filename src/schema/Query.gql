@@ -25,3 +25,5 @@ enum Region {
   ASIA
   EUROPE
 }
+
+scalar Long
