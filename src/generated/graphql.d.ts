@@ -49,12 +49,29 @@ export type Query = {
 
 
 export type QuerySummonerArgs = {
-  region: Scalars['String'];
+  region: Region;
   encryptedAccountId?: Maybe<Scalars['String']>;
   summonerName?: Maybe<Scalars['String']>;
   encryptedPUUID?: Maybe<Scalars['String']>;
   encryptedSummonerId?: Maybe<Scalars['String']>;
 };
+
+export enum Region {
+  Br1 = 'BR1',
+  Eun1 = 'EUN1',
+  Euw1 = 'EUW1',
+  Jp1 = 'JP1',
+  Kr = 'KR',
+  La1 = 'LA1',
+  La2 = 'LA2',
+  Na1 = 'NA1',
+  Oc1 = 'OC1',
+  Tr1 = 'TR1',
+  Ru = 'RU',
+  Americas = 'AMERICAS',
+  Asia = 'ASIA',
+  Europe = 'EUROPE'
+}
 
 export type Summoner = {
   __typename?: 'Summoner';
@@ -63,7 +80,14 @@ export type Summoner = {
   revisiondate: Scalars['Int'];
   name: Scalars['String'];
   id: Scalars['String'];
+  puuid: Scalars['String'];
   summonerLevel: Scalars['Int'];
+  matchlist: MatchList;
+};
+
+
+export type SummonerMatchlistArgs = {
+  filter?: Maybe<MatchListInput>;
 };
 
 
@@ -144,25 +168,26 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  MatchList: ResolverTypeWrapper<MatchList>;
+  Query: ResolverTypeWrapper<{}>;
+  String: ResolverTypeWrapper<Scalars['String']>;
+  Region: Region;
+  Summoner: ResolverTypeWrapper<Summoner>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   MatchListInput: MatchListInput;
+  MatchList: ResolverTypeWrapper<MatchList>;
   MatchReference: ResolverTypeWrapper<MatchReference>;
-  String: ResolverTypeWrapper<Scalars['String']>;
-  Query: ResolverTypeWrapper<{}>;
-  Summoner: ResolverTypeWrapper<Summoner>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  MatchList: MatchList;
+  Query: {};
+  String: Scalars['String'];
+  Summoner: Summoner;
   Int: Scalars['Int'];
   MatchListInput: MatchListInput;
+  MatchList: MatchList;
   MatchReference: MatchReference;
-  String: Scalars['String'];
-  Query: {};
-  Summoner: Summoner;
   Boolean: Scalars['Boolean'];
 };
 
@@ -197,7 +222,9 @@ export type SummonerResolvers<ContextType = any, ParentType extends ResolversPar
   revisiondate?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  puuid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerLevel?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  matchlist?: Resolver<ResolversTypes['MatchList'], ParentType, ContextType, RequireFields<SummonerMatchlistArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 

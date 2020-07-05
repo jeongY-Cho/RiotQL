@@ -4,6 +4,7 @@ type Summoner {
   revisiondate: Int!
   name: String!
   id: String!
+  puuid: String!
   summonerLevel: Int!
   # matchlist(filter: MatchListInput): MatchList!
 }

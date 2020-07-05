@@ -1,14 +1,20 @@
 import { GraphQLServer } from "graphql-yoga";
 
-import * as Query from "./resolvers/Query";
+import resolvers from "./resolvers";
+import typeDefs from "./schema";
 
-const resolvers = {
-  Query,
-};
+import * as dotenv from "dotenv";
+dotenv.config();
+
+const RIOT_KEY = process.env.RIOT_KEY;
 
 const server = new GraphQLServer({
-  typeDefs: "./src/schema.graphql",
+  typeDefs,
+  // @ts-ignore
   resolvers,
+  context: {
+    RIOT_KEY,
+  },
 });
 
 server.start(({ port }) => {

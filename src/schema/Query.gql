@@ -1,10 +1,27 @@
 type Query {
   info: String!
   summoner(
-    region: String!
+    region: Region!
     encryptedAccountId: String
     summonerName: String
     encryptedPUUID: String
     encryptedSummonerId: String
   ): Summoner
+}
+
+enum Region {
+  BR1
+  EUN1
+  EUW1
+  JP1
+  KR
+  LA1
+  LA2
+  NA1
+  OC1
+  TR1
+  RU
+  AMERICAS
+  ASIA
+  EUROPE
 }
