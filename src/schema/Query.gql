@@ -19,6 +19,7 @@ type Query {
   rankedLeague(tier: Tier, leagueId: String, game: Game!): LeagueV4LeagueEntry!
   tournament(code: String!): TournamentV4TournamentCode
   featured_games(game: Game): SpectatorV4FeaturedGames
+  clash: String
 }
 
 union Match = MatchV4Match | TftMatchV1Match

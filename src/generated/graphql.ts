@@ -789,6 +789,7 @@ export type Query = {
   rankedLeague: LeagueV4LeagueEntry;
   tournament?: Maybe<TournamentV4TournamentCode>;
   featured_games?: Maybe<SpectatorV4FeaturedGames>;
+  clash?: Maybe<Scalars['String']>;
 };
 
 
@@ -2334,6 +2335,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   rankedLeague?: Resolver<ResolversTypes['LeagueV4LeagueEntry'], ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'game'>>;
   tournament?: Resolver<Maybe<ResolversTypes['TournamentV4TournamentCode']>, ParentType, ContextType, RequireFields<QueryTournamentArgs, 'code'>>;
   featured_games?: Resolver<Maybe<ResolversTypes['SpectatorV4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeatured_GamesArgs, never>>;
+  clash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
 export type SpectatorV4BannedChampionResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4BannedChampion'] = ResolversParentTypes['SpectatorV4BannedChampion']> = {

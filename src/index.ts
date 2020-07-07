@@ -85,9 +85,11 @@ async function main() {
     }),
   });
 
-  server.start({ port: 4001 }, ({ port }) => {
+  server.start({ port: process.env.PORT || 4000 }, ({ port }) => {
     console.log(`Starting on port: ${port}`);
   });
 }
 
-main();
+if (require.main === module) {
+  main();
+}
