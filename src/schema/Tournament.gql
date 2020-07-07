@@ -1,0 +1,4 @@
+extend type TournamentV4TournamentCode {
+  matchDetails(matchId: Float!): MatchV4Match
+  lobbyEvents: TournamentV4LobbyEvent
+}

@@ -1,29 +1,85 @@
 type Query {
-  info: String!
+  info: Info!
   summoner(
-    region: Region!
+    region: RegionInput!
     encryptedAccountId: String
     summonerName: String
     encryptedPUUID: String
     encryptedSummonerId: String
-  ): Summoner
+  ): SummonerV4Summoner
+  match(region: RegionInput!, matchId: Long!, game: Game!): Match
+  rankedList(
+    region: RegionInput!
+    queue: Queue!
+    tier: LowerTier!
+    division: Division
+    page: Int
+    game: Game!
+  ): [LeagueV4LeagueList!]!
+  rankedLeague(tier: Tier, leagueId: String, game: Game!): LeagueV4LeagueEntry!
+  tournament(code: String!): TournamentV4TournamentCode
+  featured_games(game: Game): SpectatorV4FeaturedGames
 }
 
-enum Region {
-  BR1
-  EUN1
-  EUW1
-  JP1
-  KR
-  LA1
-  LA2
-  NA1
-  OC1
-  TR1
-  RU
-  AMERICAS
-  ASIA
-  EUROPE
+union Match = MatchV4Match | TftMatchV1Match
+
+enum RegionInput {
+  br1
+  eun1
+  euw1
+  jp1
+  kr
+  la1
+  la2
+  na1
+  oc1
+  tr1
+  ru
+  americas
+  asia
+  europe
 }
 
+enum Game {
+  League
+  TFT
+  LOR
+}
+
+enum UpperTier {
+  CHALLENGER
+  GRANDMASTER
+  MASTER
+}
+
+enum LowerTier {
+  DIAMOND
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+  IRON
+  UNRANKED
+}
+
+enum AllRankedQueues {
+  RANKED_SOLO_5X5
+  RANKED_TFT
+  RANKED_FLEX_SR
+  RANKED_FLEX_TT
+}
+
+enum Division {
+  I
+  II
+  III
+  IV
+}
 scalar Long
+
+type Info {
+  description: String!
+  version: String
+  constants: String
+  repo: String
+}

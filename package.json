@@ -5,8 +5,11 @@
   "main": "build/index.js",
   "scripts": {
     "test": "jest",
+    "run-server": "nodemon",
     "graphql-types": "graphql-codegen --config codegen.yml",
-    "graphql-types-watch": "graphql-codegen --config codegen.yml --watch"
+    "graphql-types-watch": "graphql-codegen --config codegen.yml --watch",
+    "riot-api-types": "ts-node scripts\\RiotAPICodegen.ts http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.min.json",
+    "openapi-schema-schema": "ts-node .\\scripts\\RiotApiComponentsGraphqlSchemaCodegen.ts http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json .\\src\\schema\\generated\\riot-api-components-schema.gql"
   },
   "keywords": [
     "graphql",
@@ -18,21 +21,29 @@
   "license": "MIT",
   "dependencies": {
     "@playlyfe/gql": "^2.6.2",
+    "@types/qs": "^6.9.3",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
+    "graphql-parse-resolve-info": "^4.7.0",
     "graphql-scalars": "^1.2.1",
     "graphql-tag": "^2.10.3",
     "graphql-tools": "^6.0.12",
     "graphql-yoga": "^1.18.3",
-    "loglevel": "^1.6.8"
+    "loglevel": "^1.6.8",
+    "openapi-client-axios": "^3.6.1",
+    "qs": "^6.9.4",
+    "rfdc": "^1.1.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.16.0",
-    "graphql-schema-typescript": "^1.3.2",
-    "nodemon": "^2.0.4",
-    "typescript": "^3.9.6",
+    "@graphql-codegen/introspection": "1.16.0",
     "@graphql-codegen/typescript": "1.16.0",
     "@graphql-codegen/typescript-resolvers": "1.16.0",
-    "@graphql-codegen/introspection": "1.16.0"
+    "dtsgenerator": "^3.1.1",
+    "graphql-schema-typescript": "^1.3.2",
+    "nodemon": "^2.0.4",
+    "openapi-to-graphql": "^2.2.3",
+    "swagger-parser": "^9.0.1",
+    "typescript": "^3.9.6"
   }
 }

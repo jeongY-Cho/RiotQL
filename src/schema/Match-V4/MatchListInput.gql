@@ -1,9 +1,0 @@
-input MatchListInput {
-  champion: [Int!]
-  queue: [Int!]
-  season: [Int!]
-  endTime: Int
-  beginTime: Int
-  endIndex: Int
-  beginIndex: Int
-}

@@ -1,32 +1,31 @@
-export interface Regions {
-  BR1: "https://br1.api.riotgames.com";
-  EUN1: "https://eun1.api.riotgames.com";
-  EUW1: "https://euw1.api.riotgames.com";
-  JP1: "https://jp1.api.riotgames.com";
-  KR: "https://kr.api.riotgames.com";
-  LA1: "https://la1.api.riotgames.com";
-  LA2: "https://la2.api.riotgames.com";
-  NA1: "https://na1.api.riotgames.com";
-  OC1: "https://oc1.api.riotgames.com";
-  TR1: "https://tr1.api.riotgames.com";
-  RU: "https://ru.api.riotgames.com";
-  AMERICAS: "https://americas.api.riotgames.com";
-  ASIA: "https://asia.api.riotgames.com";
-  EUROPE: "https://europe.api.riotgames.com";
-}
-export const Regions: Regions = {
-  BR1: "https://br1.api.riotgames.com",
-  EUN1: "https://eun1.api.riotgames.com",
-  EUW1: "https://euw1.api.riotgames.com",
-  JP1: "https://jp1.api.riotgames.com",
-  KR: "https://kr.api.riotgames.com",
-  LA1: "https://la1.api.riotgames.com",
-  LA2: "https://la2.api.riotgames.com",
-  NA1: "https://na1.api.riotgames.com",
-  OC1: "https://oc1.api.riotgames.com",
-  TR1: "https://tr1.api.riotgames.com",
-  RU: "https://ru.api.riotgames.com",
-  AMERICAS: "https://americas.api.riotgames.com",
-  ASIA: "https://asia.api.riotgames.com",
-  EUROPE: "https://europe.api.riotgames.com",
-};
+// export enum Region {
+//   Br1 = "br1",
+//   Eun1 = "eun1",
+//   Euw1 = "euw1",
+//   Jp1 = "jp1",
+//   Kr = "kr",
+//   La1 = "la1",
+//   La2 = "la2",
+//   Na1 = "na1",
+//   Oc1 = "oc1",
+//   Tr1 = "tr1",
+//   Ru = "ru",
+//   Americas = "americas",
+//   Asia = "asia",
+//   Europe = "europe",
+// }
+export type Region =
+  | "br1"
+  | "eun1"
+  | "euw1"
+  | "jp1"
+  | "kr"
+  | "la1"
+  | "la2"
+  | "na1"
+  | "oc1"
+  | "tr1"
+  | "ru"
+  | "americas"
+  | "asia"
+  | "europe";

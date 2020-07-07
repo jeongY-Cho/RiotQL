@@ -2,3 +2,6 @@ node_modules
 build
 .env
 .vscode
+outline.txt
+graphql.schema.json
+testing.ts
