@@ -62,7 +62,8 @@ import RiotQL from "./build/index.js";
 - [ ] Subscription resolvers for:
 - - [ ] featured games
 - - [ ] free champion rotation
-- [ ] documentation: endpoint mapping from Riot API to Riotql
+- [ ] documentation: endpoint mapping from Riot API to RiotQL
+- [ ] testing!
 - [ ] riot api updates for tft, lor, valorant
 
 ## Known Issues:
