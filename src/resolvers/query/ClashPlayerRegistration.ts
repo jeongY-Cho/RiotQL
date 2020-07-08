@@ -1,8 +1,8 @@
 import {
   Clashv1PlayerRegistrationResolvers,
   Clashv1Team,
-} from "../generated/graphql";
-import { Context } from "..";
+} from "../../generated/graphql";
+import { Context } from "./../..";
 
 const resolvers: Clashv1PlayerRegistrationResolvers<Context> = {
   team: async (parent, args, context, info) => {

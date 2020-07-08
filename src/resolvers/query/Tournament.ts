@@ -1,8 +1,8 @@
 import {
   Tournamentv4TournamentCodeResolvers,
   Matchv4Match,
-} from "../generated/graphql";
-import { Context } from "..";
+} from "../../generated/graphql";
+import { Context } from "../..";
 
 const matchList: Tournamentv4TournamentCodeResolvers<
   Context

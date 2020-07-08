@@ -1,5 +1,5 @@
-import { Resolvers } from "../../generated/graphql";
-import { Context } from "../..";
+import { Resolvers } from "../../../generated/graphql";
+import { Context } from "../../..";
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 
 const resolvers: Resolvers<Context>["ChampionMastery"] = {

@@ -6,7 +6,7 @@ import OpenAPIClientAxios, {
 import { setupCache, setup } from "axios-cache-adapter";
 import qs from "qs";
 
-import resolvers from "./resolvers";
+import resolvers from "./resolvers/";
 import typeDefs from "./schema";
 
 import * as dotenv from "dotenv";

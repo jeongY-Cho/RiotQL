@@ -1,10 +1,10 @@
 import { Resolvers, Game } from "../generated/graphql";
 import Query from "./Query";
-import Summonerv4Summoner from "./Summoner";
-import Tournamentv4TournamentCode from "./Tournament";
+import Summonerv4Summoner from "./query/Summoner";
+import Tournamentv4TournamentCode from "./query/Tournament";
 import { JSONObjectResolver } from "graphql-scalars";
-import ChampionMastery from "./summoner/ChampionMastery";
-import Clashv1PlayerRegistration from "./ClashPlayerRegistration";
+import ChampionMastery from "./query/summoner/ChampionMastery";
+import Clashv1PlayerRegistration from "./query/ClashPlayerRegistration";
 
 const resolvers: Resolvers = {
   Query,

@@ -7,9 +7,9 @@ import {
   AllRankedQueues,
   Clashv1Player,
   Clashv1PlayerRegistration,
-} from "../generated/graphql";
-import { Context } from "..";
-import { removeNulls, groupRegions } from "../utils";
+} from "../../generated/graphql";
+import { Context } from "../..";
+import { removeNulls, groupRegions } from "../../utils";
 import { AxiosResponse } from "openapi-client-axios";
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 
