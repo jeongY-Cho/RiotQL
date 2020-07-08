@@ -1,9 +1,9 @@
 import { Resolvers, Game } from "../generated/graphql";
 import Query from "./Query";
-import SummonerV4Summoner from "./Summoner";
+import Summonerv4Summoner from "./Summoner";
 import { JSONObjectResolver } from "graphql-scalars";
 import ChampionMastery from "./summoner/ChampionMastery";
-import ClashV1PlayerRegistration from "./ClashPlayerRegistration";
+import Clashv1PlayerRegistration from "./ClashPlayerRegistration";
 
 const resolvers: Resolvers = {
   Query,
@@ -15,7 +15,7 @@ const resolvers: Resolvers = {
         if (node.name.value === "game" && node.value.kind === "EnumValue") {
           switch (node.value.value) {
             case "League":
-              return "MatchV4Matchlist";
+              return "Matchv4Matchlist";
             case "TFT":
               return "TFTMatchIdList";
             case "LOR":
@@ -27,6 +27,6 @@ const resolvers: Resolvers = {
     },
   },
   ChampionMastery,
-  ClashV1PlayerRegistration,
+  Clashv1PlayerRegistration,
 };
 export default resolvers;
