@@ -42,7 +42,7 @@ npm run build
 #### or import into your project:
 
 ```typescript
-import RiotQL form
+import RiotQL from "./build/index.js";
 ```
 
 ## Todo
