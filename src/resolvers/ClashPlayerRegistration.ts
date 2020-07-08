@@ -4,7 +4,6 @@ import {
   Clashv1Player,
 } from "../generated/graphql";
 import { Context } from "..";
-import { AxiosResponse } from "openapi-client-axios";
 
 const resolvers: Clashv1PlayerRegistrationResolvers<Context> = {
   team: async (parent, args, context, info) => {
@@ -16,6 +15,7 @@ const resolvers: Clashv1PlayerRegistrationResolvers<Context> = {
     if (!res) throw new Error("Team not found");
 
     res.data.players = res.data.players.map((player) => {
+      // add teamId because its in spec but not in api return
       return {
         ...player,
         teamId: parent.teamId,
