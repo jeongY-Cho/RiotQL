@@ -22,7 +22,7 @@ type Query {
   Get featured league games.
   note! game parameter is ignored atm
   """
-  featured_games(
+  featuredGames(
     region: RegionInput!
     game: Game = League
   ): Spectatorv4FeaturedGames

@@ -796,7 +796,7 @@ export type Query = {
    * Get featured league games.
    * note! game parameter is ignored atm
    */
-  featured_games?: Maybe<Spectatorv4FeaturedGames>;
+  featuredGames?: Maybe<Spectatorv4FeaturedGames>;
   championRotation: Championv3ChampionInfo;
   clash?: Maybe<Scalars['String']>;
 };
@@ -840,7 +840,7 @@ export type QueryTournamentArgs = {
 };
 
 
-export type QueryFeatured_GamesArgs = {
+export type QueryFeaturedGamesArgs = {
   region: RegionInput;
   game?: Maybe<Game>;
 };
@@ -2351,7 +2351,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   rankedList?: Resolver<Array<ResolversTypes['Leaguev4LeagueList']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier' | 'game'>>;
   rankedLeague?: Resolver<ResolversTypes['Leaguev4LeagueEntry'], ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'game'>>;
   tournament?: Resolver<Maybe<ResolversTypes['Tournamentv4TournamentCode']>, ParentType, ContextType, RequireFields<QueryTournamentArgs, 'code'>>;
-  featured_games?: Resolver<Maybe<ResolversTypes['Spectatorv4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeatured_GamesArgs, 'region' | 'game'>>;
+  featuredGames?: Resolver<Maybe<ResolversTypes['Spectatorv4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeaturedGamesArgs, 'region' | 'game'>>;
   championRotation?: Resolver<ResolversTypes['Championv3ChampionInfo'], ParentType, ContextType>;
   clash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };

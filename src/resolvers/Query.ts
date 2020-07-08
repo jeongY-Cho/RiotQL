@@ -135,25 +135,40 @@ const match: QueryResolvers<Context>["match"] = async (
 //   info
 // ) => {};
 
-// const featured_games: QueryResolvers["featured_games"] = (
-//   parent,
-//   args,
-//   context,
-//   info
-// ) => {};
+const featuredGames: QueryResolvers<Context>["featuredGames"] = async (
+  parent,
+  args,
+  context,
+  info
+) => {
+  let res: AxiosResponse | null;
+  switch (args.game) {
+    case Game.League:
+      res = await context.api(
+        args.region,
+        "spectator-v4.getFeaturedGames",
+        undefined,
+        undefined,
+        {
+          // @ts-expect-error
+          cache: {
+            maxAge: 5 * 60 * 1000,
+          },
+        }
+      );
+      break;
+    case Game.Tft:
+      // TODO featured games for tft when implemented by riot
+      res = null;
+      break;
+    case Game.Lor:
+      // TODO featured games for lor when implemented by riot
+      res = null;
+  }
+  // TODO featured games for valorant when implemented by riot
 
-// const summoner: QueryResolvers["summoner"] = async function (
-//   parent,
-//   { region, ...args },
-//   context,
-//   info
-// ) {
-//   let selectionSetNames = info.fieldNodes[0].selectionSet?.selections.filter(
-//     (item) => {
-//       // @ts-ignore
-//       return item.name.value !== "matchList";
-//     }
-//   );
+  return res ? res.data : null;
+};
 
 const championRotation: QueryResolvers<Context>["championRotation"] = async (
   parent,
@@ -181,5 +196,6 @@ const QueryResolvers: QueryResolvers = {
   summoner,
   match,
   championRotation,
+  featuredGames,
 };
 export default QueryResolvers;

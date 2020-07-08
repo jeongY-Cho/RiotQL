@@ -55,8 +55,8 @@ import RiotQL from "./build/index.js";
 - - [ ] rankedLeague
 - - [ ] tournament
 - - [ ] clash
-- - [ ] featured games
-- - [ ] free champion rotation
+- - [x] featured games
+- - [x] free champion rotation
 - [ ] Mutation resolvers for:
 - - [ ] tournament
 - [ ] Subscription resolvers for:
