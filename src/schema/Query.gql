@@ -18,10 +18,19 @@ type Query {
   ): [Leaguev4LeagueList!]!
   rankedLeague(tier: Tier, leagueId: String, game: Game!): Leaguev4LeagueEntry!
   tournament(code: String!): Tournamentv4TournamentCode
-  featured_games(game: Game): Spectatorv4FeaturedGames
+  """
+  Get featured league games.
+  note! game parameter is ignored atm
+  """
+  featured_games(
+    region: RegionInput!
+    game: Game = League
+  ): Spectatorv4FeaturedGames
+  championRotation: Championv3ChampionInfo!
   clash: String
 }
 
+# TODO: valorant match, lor match
 union Match = Matchv4Match | Tftmatchv1Match
 
 scalar MatchId
@@ -48,6 +57,8 @@ enum Game {
   TFT
   "LOR is not fully implemented"
   LOR
+  # TODO valorant endponts?
+  # Valorant
 }
 
 enum UpperTier {

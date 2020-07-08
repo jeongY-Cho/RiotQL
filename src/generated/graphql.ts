@@ -792,7 +792,12 @@ export type Query = {
   rankedList: Array<Leaguev4LeagueList>;
   rankedLeague: Leaguev4LeagueEntry;
   tournament?: Maybe<Tournamentv4TournamentCode>;
+  /**
+   * Get featured league games.
+   * note! game parameter is ignored atm
+   */
   featured_games?: Maybe<Spectatorv4FeaturedGames>;
+  championRotation: Championv3ChampionInfo;
   clash?: Maybe<Scalars['String']>;
 };
 
@@ -836,6 +841,7 @@ export type QueryTournamentArgs = {
 
 
 export type QueryFeatured_GamesArgs = {
+  region: RegionInput;
   game?: Maybe<Game>;
 };
 
@@ -1698,8 +1704,8 @@ export type ResolversTypes = {
   GameMode: GameMode;
   GameType: GameType;
   Spectatorv4Participant: ResolverTypeWrapper<Spectatorv4Participant>;
-  UpperTier: UpperTier;
   Championv3ChampionInfo: ResolverTypeWrapper<Championv3ChampionInfo>;
+  UpperTier: UpperTier;
   Clashv1Tournament: ResolverTypeWrapper<Clashv1Tournament>;
   Clashv1TournamentPhase: ResolverTypeWrapper<Clashv1TournamentPhase>;
   Division2: Division2;
@@ -2345,7 +2351,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   rankedList?: Resolver<Array<ResolversTypes['Leaguev4LeagueList']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier' | 'game'>>;
   rankedLeague?: Resolver<ResolversTypes['Leaguev4LeagueEntry'], ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'game'>>;
   tournament?: Resolver<Maybe<ResolversTypes['Tournamentv4TournamentCode']>, ParentType, ContextType, RequireFields<QueryTournamentArgs, 'code'>>;
-  featured_games?: Resolver<Maybe<ResolversTypes['Spectatorv4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeatured_GamesArgs, never>>;
+  featured_games?: Resolver<Maybe<ResolversTypes['Spectatorv4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeatured_GamesArgs, 'region' | 'game'>>;
+  championRotation?: Resolver<ResolversTypes['Championv3ChampionInfo'], ParentType, ContextType>;
   clash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
