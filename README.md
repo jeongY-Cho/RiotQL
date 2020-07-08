@@ -41,6 +41,7 @@ npm run build
 
 ## Todo
 
+- [ ] Caching for requests that go multiple times
 - [ ] Rate limiting / request counting / how many requests left / 'retry-after' on error
 - [ ] Query resolvers for:
 - - [x] match
