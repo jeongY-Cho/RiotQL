@@ -17,7 +17,7 @@ export type Scalars = {
 };
 
 export enum AllRankedQueues {
-  RankedSolo_5X5 = 'RANKED_SOLO_5X5',
+  RankedSolo_5x5 = 'RANKED_SOLO_5x5',
   RankedTft = 'RANKED_TFT',
   RankedFlexSr = 'RANKED_FLEX_SR',
   RankedFlexTt = 'RANKED_FLEX_TT'
@@ -139,7 +139,7 @@ export enum Division2 {
 export enum Game {
   League = 'League',
   Tft = 'TFT',
-  /** LOR is not fully implemented */
+  /** LOR is not implemented */
   Lor = 'LOR'
 }
 
@@ -789,8 +789,21 @@ export type Query = {
   info: Info;
   summoner?: Maybe<Summonerv4Summoner>;
   match?: Maybe<Match>;
-  rankedList: Array<Leaguev4LeagueList>;
-  rankedLeague: Leaguev4LeagueEntry;
+  rankedList: Array<Leaguev4LeagueEntry>;
+  /**
+   * #### Implementation Notes:
+   * 
+   * use the following arg combinations to get league lists
+   * 
+   * ##### param combinations:
+   * 
+   * tier & queue -> for ranks master and above
+   * 
+   * leagueId & game -> for all ranks
+   * 
+   * leagueId & queue -> for all ranks
+   */
+  rankedLeague?: Maybe<Leaguev4LeagueList>;
   tournament?: Maybe<Tournamentv4TournamentCode>;
   tournamentStub: TournamentStub;
   /**
@@ -821,18 +834,19 @@ export type QueryMatchArgs = {
 
 export type QueryRankedListArgs = {
   region: RegionInput;
-  queue: Queue;
+  queue: AllRankedQueues;
   tier: LowerTier;
   division?: Maybe<Division>;
   page?: Maybe<Scalars['Int']>;
-  game: Game;
 };
 
 
 export type QueryRankedLeagueArgs = {
+  region: RegionInput;
   tier?: Maybe<Tier>;
+  queue?: Maybe<AllRankedQueues>;
   leagueId?: Maybe<Scalars['String']>;
-  game: Game;
+  game?: Maybe<Game>;
 };
 
 
@@ -1702,12 +1716,11 @@ export type ResolversTypes = {
   Tftmatchv1Trait: ResolverTypeWrapper<Tftmatchv1Trait>;
   Tftmatchv1Unit: ResolverTypeWrapper<Tftmatchv1Unit>;
   Tftmatchv1Metadata: ResolverTypeWrapper<Tftmatchv1Metadata>;
-  Queue: Queue;
   LowerTier: LowerTier;
   Division: Division;
+  Tier: Tier;
   Leaguev4LeagueList: ResolverTypeWrapper<Leaguev4LeagueList>;
   Leaguev4LeagueItem: ResolverTypeWrapper<Leaguev4LeagueItem>;
-  Tier: Tier;
   Tournamentv4TournamentCode: ResolverTypeWrapper<Tournamentv4TournamentCode>;
   Tournamentv4LobbyEvent: ResolverTypeWrapper<Tournamentv4LobbyEvent>;
   Region2: Region2;
@@ -1738,6 +1751,7 @@ export type ResolversTypes = {
   Matchv4MatchFrame: ResolverTypeWrapper<Matchv4MatchFrame>;
   Matchv4MatchTimeline: ResolverTypeWrapper<Matchv4MatchTimeline>;
   PickType: PickType;
+  Queue: Queue;
   Queue2: Queue2;
   Region: Region;
   SpectatorType: SpectatorType;
@@ -2362,8 +2376,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   info?: Resolver<ResolversTypes['Info'], ParentType, ContextType>;
   summoner?: Resolver<Maybe<ResolversTypes['Summonerv4Summoner']>, ParentType, ContextType, RequireFields<QuerySummonerArgs, 'region'>>;
   match?: Resolver<Maybe<ResolversTypes['Match']>, ParentType, ContextType, RequireFields<QueryMatchArgs, 'region' | 'matchId' | 'game'>>;
-  rankedList?: Resolver<Array<ResolversTypes['Leaguev4LeagueList']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier' | 'game'>>;
-  rankedLeague?: Resolver<ResolversTypes['Leaguev4LeagueEntry'], ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'game'>>;
+  rankedList?: Resolver<Array<ResolversTypes['Leaguev4LeagueEntry']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier'>>;
+  rankedLeague?: Resolver<Maybe<ResolversTypes['Leaguev4LeagueList']>, ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'region'>>;
   tournament?: Resolver<Maybe<ResolversTypes['Tournamentv4TournamentCode']>, ParentType, ContextType, RequireFields<QueryTournamentArgs, 'code'>>;
   tournamentStub?: Resolver<ResolversTypes['TournamentStub'], ParentType, ContextType, RequireFields<QueryTournamentStubArgs, 'code'>>;
   featuredGames?: Resolver<Maybe<ResolversTypes['Spectatorv4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeaturedGamesArgs, 'region' | 'game'>>;

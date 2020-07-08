@@ -74,7 +74,7 @@ const rank: Summonerv4SummonerResolvers<Context>["rank"] = async (
       search = search || /ranked_flex_sr/i;
     case AllRankedQueues.RankedFlexTt:
       search = search || /ranked_flex_tt/i;
-    case AllRankedQueues.RankedSolo_5X5:
+    case AllRankedQueues.RankedSolo_5x5:
       search = search || /ranked_solo_5x5/i;
       let res = await context.api(
         parent.region,

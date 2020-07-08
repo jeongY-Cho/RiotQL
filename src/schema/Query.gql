@@ -10,13 +10,31 @@ type Query {
   match(region: RegionInput!, matchId: MatchId!, game: Game!): Match
   rankedList(
     region: RegionInput!
-    queue: Queue!
+    queue: AllRankedQueues!
     tier: LowerTier!
     division: Division
     page: Int
-    game: Game!
-  ): [Leaguev4LeagueList!]!
-  rankedLeague(tier: Tier, leagueId: String, game: Game!): Leaguev4LeagueEntry!
+  ): [Leaguev4LeagueEntry!]!
+  """
+  #### Implementation Notes:
+
+  use the following arg combinations to get league lists
+
+  ##### param combinations:
+
+  tier & queue -> for ranks master and above
+
+  leagueId & game -> for all ranks
+
+  leagueId & queue -> for all ranks
+  """
+  rankedLeague(
+    region: RegionInput!
+    tier: Tier
+    queue: AllRankedQueues
+    leagueId: String
+    game: Game
+  ): Leaguev4LeagueList
   tournament(code: String!): Tournamentv4TournamentCode
   tournamentStub(code: String!): TournamentStub!
   """
@@ -56,7 +74,7 @@ enum RegionInput {
 enum Game {
   League
   TFT
-  "LOR is not fully implemented"
+  "LOR is not implemented"
   LOR
   # TODO valorant endponts?
   # Valorant
@@ -79,7 +97,7 @@ enum LowerTier {
 }
 
 enum AllRankedQueues {
-  RANKED_SOLO_5X5
+  RANKED_SOLO_5x5
   RANKED_TFT
   RANKED_FLEX_SR
   RANKED_FLEX_TT

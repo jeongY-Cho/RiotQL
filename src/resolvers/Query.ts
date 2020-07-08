@@ -3,9 +3,10 @@ import {
   Summonerv4Summoner,
   Game,
   Tftmatchv1Match,
-  Matchv4Mastery,
   Matchv4Match,
   Tournamentv4TournamentCode,
+  Tier,
+  AllRankedQueues,
 } from "../generated/graphql";
 import { Context } from "..";
 import { AxiosResponse } from "openapi-client-axios";
@@ -122,12 +123,96 @@ const match: QueryResolvers<Context>["match"] = async (
 //   info
 // ) => {};
 
-// const rankedLeague: QueryResolvers["rankedLeague"] = (
-//   parent,
-//   args,
-//   context,
-//   info
-// ) => {};
+// @ts-ignore
+const rankedLeague: QueryResolvers<Context>["rankedLeague"] = async (
+  parent,
+  args,
+  context,
+  info
+) => {
+  let res: AxiosResponse | null;
+  if (args.leagueId && args.game) {
+    if (args.game === Game.League) {
+      res = await context.api(args.region, "league-v4.getLeagueById", {
+        leagueId: args.leagueId,
+      });
+    } else if (args.game === Game.Tft) {
+      res = await context.api(args.region, "tft-league-v1.getLeagueById", {
+        leagueId: args.leagueId,
+      });
+    } else {
+      return null;
+    }
+    return res ? res.data : null;
+  }
+
+  switch (args.queue) {
+    case AllRankedQueues.RankedFlexSr:
+    case AllRankedQueues.RankedFlexTt:
+    case AllRankedQueues.RankedSolo_5x5:
+      switch (args.tier) {
+        case Tier.Challenger:
+          try {
+            res = await context.api(
+              args.region,
+              "league-v4.getChallengerLeague",
+              { queue: args.queue }
+            );
+          } catch (err) {
+            console.error(err);
+            return null;
+          }
+          break;
+        case Tier.Grandmaster:
+          res = await context.api(
+            args.region,
+            "league-v4.getGrandmasterLeague",
+            { queue: args.queue }
+          );
+          break;
+        case Tier.Master:
+          res = await context.api(args.region, "league-v4.getMasterLeague", {
+            queue: args.queue,
+          });
+          break;
+        default:
+          if (!args.leagueId) return null;
+          res = await context.api(args.region, "league-v4.getLeagueById", {
+            leagueId: args.leagueId,
+          });
+      }
+
+      break;
+    case AllRankedQueues.RankedTft:
+      switch (args.tier) {
+        case Tier.Challenger:
+          res = await context.api(
+            args.region,
+            "tft-league-v1.getChallengerLeague"
+          );
+          break;
+        case Tier.Grandmaster:
+          res = await context.api(
+            args.region,
+            "tft-league-v1.getGrandmasterLeague"
+          );
+          break;
+        case Tier.Master:
+          res = await context.api(args.region, "tft-league-v1.getMasterLeague");
+          break;
+        default:
+          if (!args.leagueId) return null;
+          res = await context.api(args.region, "tft-league-v1.getLeagueById", {
+            leagueId: args.leagueId,
+          });
+      }
+      break;
+    // TODO valorant ranked, lor ranked
+    default:
+      return null;
+  }
+  return res ? res.data : null;
+};
 
 const tournament: QueryResolvers<Context>["tournament"] = async (
   parent,
@@ -233,5 +318,6 @@ const QueryResolvers: QueryResolvers = {
   match,
   championRotation,
   featuredGames,
+  rankedLeague,
 };
 export default QueryResolvers;

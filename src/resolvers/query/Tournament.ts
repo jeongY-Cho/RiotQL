@@ -20,6 +20,7 @@ const matchList: Tournamentv4TournamentCodeResolvers<
 const matchDetails: Tournamentv4TournamentCodeResolvers<
   Context
 >["matchDetails"] = async (parent, args, context, info) => {
+  // TODO make a utility function to convert from region to platfrom region
   let res = await context.api("na1", "match-v4.getMatchByTournamentCode", {
     matchId: args.matchId,
     tournamentCode: parent.code,
@@ -32,9 +33,13 @@ const matchDetails: Tournamentv4TournamentCodeResolvers<
 const lobbyEvents: Tournamentv4TournamentCodeResolvers<
   Context
 >["lobbyEvents"] = async (parent, args, context, info) => {
-  let res = await context.api("na1", "tournament-v4.getLobbyEventsByCode", {
-    tournamentCode: parent.code,
-  });
+  let res = await context.api(
+    "americas",
+    "tournament-v4.getLobbyEventsByCode",
+    {
+      tournamentCode: parent.code,
+    }
+  );
   return res ? res.data.eventList : [];
 };
 

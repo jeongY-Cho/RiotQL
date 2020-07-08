@@ -28,10 +28,12 @@ npm run build
 
 - RIOT_KEY
   - riot api key
-  - get a developer key from: https://developer.riotgames.com/
+  - get a key (developer or otherwise) from: https://developer.riotgames.com/
 - PORT
   - default: 4000
   - port to run server
+
+### Note: Tournament related calls can only be done if you use a tournament api key.
 
 #### 3. Start server:
 
@@ -43,6 +45,10 @@ npm run build
 
 ```typescript
 import RiotQL from "./build/index.js";
+
+RiotQL.start(({ port }) => {
+  console.log("RiotQL running on port: " + port);
+});
 ```
 
 ## Todo
@@ -52,8 +58,8 @@ import RiotQL from "./build/index.js";
 - [ ] Query resolvers for:
 - - [x] match
 - - [ ] rankedList
-- - [ ] rankedLeague
-- - [x] tournament / tournament stub
+- - [x] rankedLeague
+- - [x] tournament / tournament stub (remove?)
 - - [ ] clash
 - - [x] featured games
 - - [x] free champion rotation
@@ -69,5 +75,5 @@ import RiotQL from "./build/index.js";
 ## Known Issues:
 
 - graphql schema names don't completely follow PascalCase/camelCase conventions because of name sanitizer of the graphql schema codegen breaks some names.
-  - I could find the name sanitizer in the openapi-to-graphql depenency and enforce naming conventions but I can't be bothered to atm.
+  - I could find the name sanitizer in the openapi-to-graphql dependency and enforce naming conventions but I can't be bothered to atm.
 - tournament implementation cannot be tested since I'm not a tournament provider
