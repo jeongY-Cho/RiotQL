@@ -1,7 +1,6 @@
 import {
   Clashv1PlayerRegistrationResolvers,
   Clashv1Team,
-  Clashv1Player,
 } from "../generated/graphql";
 import { Context } from "..";
 

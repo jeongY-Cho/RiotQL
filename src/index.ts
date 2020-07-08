@@ -93,6 +93,9 @@ async function main(options?: AxiosRequestConfig) {
 }
 
 if (require.main === module) {
+  // TODO: set up exclude paths. ie. don't cache
+  //       for tournament, clash, active game,
+  //       short cache time for matchlist (like one minute or something)
   let cache = setupCache({
     maxAge: 15 * 60 * 1000,
     // @ts-ignore || conservative caching
