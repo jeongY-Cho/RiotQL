@@ -1,4 +1,4 @@
-extend type TournamentV4TournamentCode {
-  matchDetails(matchId: Float!): MatchV4Match
-  lobbyEvents: TournamentV4LobbyEvent
+extend type Tournamentv4TournamentCode {
+  matchDetails(matchId: Float!): Matchv4Match
+  lobbyEvents: Tournamentv4LobbyEvent
 }

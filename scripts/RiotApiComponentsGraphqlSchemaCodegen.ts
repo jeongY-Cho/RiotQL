@@ -12,6 +12,7 @@ swaggerParser.bundle(args[0]).then(async (schemaBundle) => {
   // @ts-ignore
   let { schema, report } = await createGraphQLSchema(schemaBundle, {
     viewer: false,
+    simpleNames: true,
   });
   let schemaStr = printSchema(schema);
   let queryRegex = /type Query \{.*?\n\}/gs;

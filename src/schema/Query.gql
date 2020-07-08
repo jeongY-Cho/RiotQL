@@ -6,8 +6,8 @@ type Query {
     summonerName: String
     encryptedPUUID: String
     encryptedSummonerId: String
-  ): SummonerV4Summoner
-  match(region: RegionInput!, matchId: Long!, game: Game!): Match
+  ): Summonerv4Summoner
+  match(region: RegionInput!, matchId: MatchId!, game: Game!): Match
   rankedList(
     region: RegionInput!
     queue: Queue!
@@ -15,14 +15,16 @@ type Query {
     division: Division
     page: Int
     game: Game!
-  ): [LeagueV4LeagueList!]!
-  rankedLeague(tier: Tier, leagueId: String, game: Game!): LeagueV4LeagueEntry!
-  tournament(code: String!): TournamentV4TournamentCode
-  featured_games(game: Game): SpectatorV4FeaturedGames
+  ): [Leaguev4LeagueList!]!
+  rankedLeague(tier: Tier, leagueId: String, game: Game!): Leaguev4LeagueEntry!
+  tournament(code: String!): Tournamentv4TournamentCode
+  featured_games(game: Game): Spectatorv4FeaturedGames
   clash: String
 }
 
-union Match = MatchV4Match | TftMatchV1Match
+union Match = Matchv4Match | Tftmatchv1Match
+
+scalar MatchId
 
 enum RegionInput {
   br1
@@ -44,6 +46,7 @@ enum RegionInput {
 enum Game {
   League
   TFT
+  "LOR is not fully implemented"
   LOR
 }
 

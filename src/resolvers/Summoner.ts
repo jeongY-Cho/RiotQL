@@ -1,19 +1,19 @@
 import {
-  SummonerV4SummonerResolvers,
+  Summonerv4SummonerResolvers,
   Game,
   Region,
   RegionInput,
   Queue,
   AllRankedQueues,
-  ClashV1Player,
-  ClashV1PlayerRegistration,
+  Clashv1Player,
+  Clashv1PlayerRegistration,
 } from "../generated/graphql";
 import { Context } from "..";
 import { removeNulls, groupRegions } from "../utils";
 import { AxiosResponse } from "openapi-client-axios";
 import { parseResolveInfo } from "graphql-parse-resolve-info";
 
-const matchList: SummonerV4SummonerResolvers<Context>["matchList"] = async (
+const matchList: Summonerv4SummonerResolvers<Context>["matchList"] = async (
   parent,
   { filter, game },
   context,
@@ -38,7 +38,7 @@ const matchList: SummonerV4SummonerResolvers<Context>["matchList"] = async (
       if (!res2) return null;
 
       return {
-        matchIds: res2.data,
+        matches: res2.data,
       };
 
     default:
@@ -46,7 +46,7 @@ const matchList: SummonerV4SummonerResolvers<Context>["matchList"] = async (
   }
 };
 
-const activeMatch: SummonerV4SummonerResolvers<Context>["activeMatch"] = async (
+const activeMatch: Summonerv4SummonerResolvers<Context>["activeMatch"] = async (
   parent,
   args,
   context,
@@ -60,7 +60,7 @@ const activeMatch: SummonerV4SummonerResolvers<Context>["activeMatch"] = async (
   return res ? res.data : res;
 };
 
-const rank: SummonerV4SummonerResolvers<Context>["rank"] = async (
+const rank: Summonerv4SummonerResolvers<Context>["rank"] = async (
   parent,
   { queue },
   context,
@@ -101,7 +101,7 @@ const rank: SummonerV4SummonerResolvers<Context>["rank"] = async (
   }
 };
 
-const championMastery: SummonerV4SummonerResolvers<
+const championMastery: Summonerv4SummonerResolvers<
   Context
 >["championMastery"] = async (parent, args, context, info) => {
   let parsedTree = parseResolveInfo(info);
@@ -132,7 +132,7 @@ const championMastery: SummonerV4SummonerResolvers<
   }
 };
 
-const clash: SummonerV4SummonerResolvers<Context>["clash"] = async (
+const clash: Summonerv4SummonerResolvers<Context>["clash"] = async (
   parent,
   args,
   context,
@@ -148,10 +148,10 @@ const clash: SummonerV4SummonerResolvers<Context>["clash"] = async (
   return (res.data.map((item) => ({
     ...item,
     region: parent.region,
-  })) as unknown) as ClashV1PlayerRegistration[];
+  })) as unknown) as Clashv1PlayerRegistration[];
 };
 
-const resolvers: SummonerV4SummonerResolvers = {
+const resolvers: Summonerv4SummonerResolvers = {
   matchList,
   activeMatch,
   rank,

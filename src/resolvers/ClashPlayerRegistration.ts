@@ -1,12 +1,12 @@
 import {
-  ClashV1PlayerRegistrationResolvers,
-  ClashV1Team,
-  ClashV1Player,
+  Clashv1PlayerRegistrationResolvers,
+  Clashv1Team,
+  Clashv1Player,
 } from "../generated/graphql";
 import { Context } from "..";
 import { AxiosResponse } from "openapi-client-axios";
 
-const resolvers: ClashV1PlayerRegistrationResolvers<Context> = {
+const resolvers: Clashv1PlayerRegistrationResolvers<Context> = {
   team: async (parent, args, context, info) => {
     // @ts-ignore || region passed in from parent
     let res = await context.api(parent.region, "clash-v1.getTeamById", {
@@ -14,7 +14,15 @@ const resolvers: ClashV1PlayerRegistrationResolvers<Context> = {
     });
 
     if (!res) throw new Error("Team not found");
-    return res.data as ClashV1Team;
+
+    res.data.players = res.data.players.map((player) => {
+      return {
+        ...player,
+        teamId: parent.teamId,
+      };
+    });
+
+    return res.data as Clashv1Team;
   },
 };
 

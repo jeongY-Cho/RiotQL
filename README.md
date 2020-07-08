@@ -43,14 +43,22 @@ npm run build
 
 - [ ] Rate limiting / request counting / how many requests left / 'retry-after' on error
 - [ ] Query resolvers for:
-- - [ ] match
+- - [x] match
 - - [ ] rankedList
 - - [ ] rankedLeague
 - - [ ] tournament
 - - [ ] clash
+- - [ ] featured games
+- - [ ] free champion rotation
 - [ ] Mutation resolvers for:
 - - [ ] tournament
 - [ ] Subscription resolvers for:
 - - [ ] featured games
+- - [ ] free champion rotation
 - [ ] documentation: endpoint mapping from Riot API to Riotql
 - [ ] riot api updates for tft, lor, valorant
+
+## Known Issues:
+
+- graphql schema names don't follow PascalCase/camelCase conventions because of name sanitizer of the graphql schema codegen breaks some names.
+  - I could find the name sanitizer in the openapi-to-graphql depenency and enforce naming conventions but I can't be bothered to atm.

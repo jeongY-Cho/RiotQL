@@ -11,6 +11,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   Long: any;
+  MatchId: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
@@ -28,7 +29,7 @@ export type ChampionMastery = {
   /** Get a player's total champion mastery score, which is the sum of individual champion mastery levels. */
   score: Scalars['Int'];
   /** Get all champion mastery entries sorted by number of champion points descending filtered by champion Ids if specified. */
-  byChampion?: Maybe<Array<ChampionMasteryV4ChampionMastery>>;
+  byChampion?: Maybe<Array<Championmasteryv4ChampionMastery>>;
 };
 
 
@@ -38,8 +39,8 @@ export type ChampionMasteryByChampionArgs = {
 };
 
 /** This object contains single Champion Mastery information for player and champion combination. */
-export type ChampionMasteryV4ChampionMastery = {
-  __typename?: 'ChampionMasteryV4ChampionMastery';
+export type Championmasteryv4ChampionMastery = {
+  __typename?: 'Championmasteryv4ChampionMastery';
   /** Champion ID for this entry. */
   championId: Scalars['Float'];
   /** Champion level for specified player and champion combination. */
@@ -60,24 +61,25 @@ export type ChampionMasteryV4ChampionMastery = {
   tokensEarned: Scalars['Int'];
 };
 
-export type ChampionV3ChampionInfo = {
-  __typename?: 'ChampionV3ChampionInfo';
+export type Championv3ChampionInfo = {
+  __typename?: 'Championv3ChampionInfo';
   freeChampionIds: Array<Maybe<Scalars['Int']>>;
   freeChampionIdsForNewPlayers: Array<Maybe<Scalars['Int']>>;
   maxNewPlayerLevel: Scalars['Int'];
 };
 
-export type ClashV1Player = {
-  __typename?: 'ClashV1Player';
+export type Clashv1Player = {
+  __typename?: 'Clashv1Player';
   /** (Legal values:  UNSELECTED,  FILL,  TOP,  JUNGLE,  MIDDLE,  BOTTOM,  UTILITY) */
   position: Position;
   /** (Legal values:  CAPTAIN,  MEMBER) */
   role: Role;
   summonerId: Scalars['String'];
+  teamId: Scalars['String'];
 };
 
-export type ClashV1PlayerRegistration = {
-  __typename?: 'ClashV1PlayerRegistration';
+export type Clashv1PlayerRegistration = {
+  __typename?: 'Clashv1PlayerRegistration';
   /** Clash lane assignment */
   position: Position;
   /** Clash team role assignment */
@@ -85,11 +87,11 @@ export type ClashV1PlayerRegistration = {
   summonerId: Scalars['String'];
   teamId: Scalars['String'];
   /** Clash team details */
-  team: ClashV1Team;
+  team: Clashv1Team;
 };
 
-export type ClashV1Team = {
-  __typename?: 'ClashV1Team';
+export type Clashv1Team = {
+  __typename?: 'Clashv1Team';
   abbreviation: Scalars['String'];
   /** Summoner ID of the team captain. */
   captain: Scalars['String'];
@@ -97,23 +99,23 @@ export type ClashV1Team = {
   id: Scalars['String'];
   name: Scalars['String'];
   /** Team members. */
-  players: Array<Maybe<ClashV1Player>>;
+  players: Array<Maybe<Clashv1Player>>;
   tier: Scalars['Int'];
   tournamentId: Scalars['Int'];
 };
 
-export type ClashV1Tournament = {
-  __typename?: 'ClashV1Tournament';
+export type Clashv1Tournament = {
+  __typename?: 'Clashv1Tournament';
   id: Scalars['Int'];
   nameKey: Scalars['String'];
   nameKeySecondary: Scalars['String'];
   /** Tournament phase. */
-  schedule: Array<Maybe<ClashV1TournamentPhase>>;
+  schedule: Array<Maybe<Clashv1TournamentPhase>>;
   themeId: Scalars['Int'];
 };
 
-export type ClashV1TournamentPhase = {
-  __typename?: 'ClashV1TournamentPhase';
+export type Clashv1TournamentPhase = {
+  __typename?: 'Clashv1TournamentPhase';
   cancelled: Scalars['Boolean'];
   id: Scalars['Int'];
   registrationTime: Scalars['Float'];
@@ -137,6 +139,7 @@ export enum Division2 {
 export enum Game {
   League = 'League',
   Tft = 'TFT',
+  /** LOR is not fully implemented */
   Lor = 'LOR'
 }
 
@@ -186,8 +189,8 @@ export enum Lane {
   Bottom = 'BOTTOM'
 }
 
-export type LeagueExpV4LeagueEntry = {
-  __typename?: 'LeagueExpV4LeagueEntry';
+export type Leagueexpv4LeagueEntry = {
+  __typename?: 'Leagueexpv4LeagueEntry';
   freshBlood: Scalars['Boolean'];
   hotStreak: Scalars['Boolean'];
   inactive: Scalars['Boolean'];
@@ -195,7 +198,7 @@ export type LeagueExpV4LeagueEntry = {
   leaguePoints: Scalars['Int'];
   /** Losing team on Summoners Rift. Second through eighth placement in Teamfight Tactics. */
   losses: Scalars['Int'];
-  miniSeries?: Maybe<LeagueExpV4MiniSeries>;
+  miniSeries?: Maybe<Leagueexpv4MiniSeries>;
   queueType: Scalars['String'];
   rank: Scalars['String'];
   /** Player's summonerId (Encrypted) */
@@ -207,16 +210,16 @@ export type LeagueExpV4LeagueEntry = {
   wins: Scalars['Int'];
 };
 
-export type LeagueExpV4MiniSeries = {
-  __typename?: 'LeagueExpV4MiniSeries';
+export type Leagueexpv4MiniSeries = {
+  __typename?: 'Leagueexpv4MiniSeries';
   losses: Scalars['Int'];
   progress: Scalars['String'];
   target: Scalars['Int'];
   wins: Scalars['Int'];
 };
 
-export type LeagueV4LeagueEntry = {
-  __typename?: 'LeagueV4LeagueEntry';
+export type Leaguev4LeagueEntry = {
+  __typename?: 'Leaguev4LeagueEntry';
   freshBlood: Scalars['Boolean'];
   hotStreak: Scalars['Boolean'];
   inactive: Scalars['Boolean'];
@@ -224,7 +227,7 @@ export type LeagueV4LeagueEntry = {
   leaguePoints: Scalars['Int'];
   /** Losing team on Summoners Rift. */
   losses: Scalars['Int'];
-  miniSeries?: Maybe<LeagueV4MiniSeries>;
+  miniSeries?: Maybe<Leaguev4MiniSeries>;
   queueType: Scalars['String'];
   rank: Scalars['String'];
   /** Player's encrypted summonerId. */
@@ -236,15 +239,15 @@ export type LeagueV4LeagueEntry = {
   wins: Scalars['Int'];
 };
 
-export type LeagueV4LeagueItem = {
-  __typename?: 'LeagueV4LeagueItem';
+export type Leaguev4LeagueItem = {
+  __typename?: 'Leaguev4LeagueItem';
   freshBlood: Scalars['Boolean'];
   hotStreak: Scalars['Boolean'];
   inactive: Scalars['Boolean'];
   leaguePoints: Scalars['Int'];
   /** Losing team on Summoners Rift. */
   losses: Scalars['Int'];
-  miniSeries?: Maybe<LeagueV4MiniSeries>;
+  miniSeries?: Maybe<Leaguev4MiniSeries>;
   rank: Scalars['String'];
   /** Player's encrypted summonerId. */
   summonerId: Scalars['String'];
@@ -254,76 +257,76 @@ export type LeagueV4LeagueItem = {
   wins: Scalars['Int'];
 };
 
-export type LeagueV4LeagueList = {
-  __typename?: 'LeagueV4LeagueList';
-  entries: Array<Maybe<LeagueV4LeagueItem>>;
+export type Leaguev4LeagueList = {
+  __typename?: 'Leaguev4LeagueList';
+  entries: Array<Maybe<Leaguev4LeagueItem>>;
   leagueId: Scalars['String'];
   name: Scalars['String'];
   queue: Scalars['String'];
   tier: Scalars['String'];
 };
 
-export type LeagueV4MiniSeries = {
-  __typename?: 'LeagueV4MiniSeries';
+export type Leaguev4MiniSeries = {
+  __typename?: 'Leaguev4MiniSeries';
   losses: Scalars['Int'];
   progress: Scalars['String'];
   target: Scalars['Int'];
   wins: Scalars['Int'];
 };
 
-export type LolStatusV3Incident = {
-  __typename?: 'LolStatusV3Incident';
+export type Lolstatusv3Incident = {
+  __typename?: 'Lolstatusv3Incident';
   active: Scalars['Boolean'];
-  createdAt: Scalars['String'];
+  created_at: Scalars['String'];
   id: Scalars['Float'];
-  updates: Array<Maybe<LolStatusV3Message>>;
+  updates: Array<Maybe<Lolstatusv3Message>>;
 };
 
-export type LolStatusV3Message = {
-  __typename?: 'LolStatusV3Message';
+export type Lolstatusv3Message = {
+  __typename?: 'Lolstatusv3Message';
   author: Scalars['String'];
   content: Scalars['String'];
-  createdAt: Scalars['String'];
+  created_at: Scalars['String'];
   id: Scalars['String'];
   severity: Scalars['String'];
-  translations: Array<Maybe<LolStatusV3Translation>>;
-  updatedAt: Scalars['String'];
+  translations: Array<Maybe<Lolstatusv3Translation>>;
+  updated_at: Scalars['String'];
 };
 
-export type LolStatusV3Service = {
-  __typename?: 'LolStatusV3Service';
-  incidents: Array<Maybe<LolStatusV3Incident>>;
+export type Lolstatusv3Service = {
+  __typename?: 'Lolstatusv3Service';
+  incidents: Array<Maybe<Lolstatusv3Incident>>;
   name: Scalars['String'];
   slug: Scalars['String'];
   status: Scalars['String'];
 };
 
-export type LolStatusV3ShardStatus = {
-  __typename?: 'LolStatusV3ShardStatus';
+export type Lolstatusv3ShardStatus = {
+  __typename?: 'Lolstatusv3ShardStatus';
   hostname: Scalars['String'];
   locales: Array<Maybe<Scalars['String']>>;
   name: Scalars['String'];
-  regionTag: Scalars['String'];
-  services: Array<Maybe<LolStatusV3Service>>;
+  region_tag: Scalars['String'];
+  services: Array<Maybe<Lolstatusv3Service>>;
   slug: Scalars['String'];
 };
 
-export type LolStatusV3Translation = {
-  __typename?: 'LolStatusV3Translation';
+export type Lolstatusv3Translation = {
+  __typename?: 'Lolstatusv3Translation';
   content: Scalars['String'];
   heading: Scalars['String'];
   locale: Scalars['String'];
 };
 
 
-export type LorRankedV1Leaderboard = {
-  __typename?: 'LorRankedV1Leaderboard';
+export type Lorrankedv1Leaderboard = {
+  __typename?: 'Lorrankedv1Leaderboard';
   /** A list of players in Master tier. */
-  players: Array<Maybe<LorRankedV1Player>>;
+  players: Array<Maybe<Lorrankedv1Player>>;
 };
 
-export type LorRankedV1Player = {
-  __typename?: 'LorRankedV1Player';
+export type Lorrankedv1Player = {
+  __typename?: 'Lorrankedv1Player';
   /** League points. */
   lp: Scalars['Int'];
   name: Scalars['String'];
@@ -346,10 +349,11 @@ export enum MapType {
   HowlingAbyss = 'HOWLING_ABYSS'
 }
 
-export type Match = MatchV4Match | TftMatchV1Match;
+export type Match = Matchv4Match | Tftmatchv1Match;
+
 
 /** Matchlist return types. TFT matchlist returns only a list of ids */
-export type MatchList = MatchV4Matchlist | TftMatchIdList;
+export type MatchList = Matchv4Matchlist | TftMatchIdList;
 
 export type MatchListFilterInput = {
   /** Champion Ids */
@@ -384,14 +388,14 @@ export type MatchListFilterInput = {
   count?: Maybe<Scalars['Int']>;
 };
 
-export type MatchV4Mastery = {
-  __typename?: 'MatchV4Mastery';
+export type Matchv4Mastery = {
+  __typename?: 'Matchv4Mastery';
   masteryId: Scalars['Int'];
   rank: Scalars['Int'];
 };
 
-export type MatchV4Match = {
-  __typename?: 'MatchV4Match';
+export type Matchv4Match = {
+  __typename?: 'Matchv4Match';
   /** Designates the timestamp when champion select ended and the loading screen appeared, NOT when the game timer was at 0:00. */
   gameCreation: Scalars['Float'];
   /** Match duration in seconds. */
@@ -406,9 +410,9 @@ export type MatchV4Match = {
   /** Please refer to the Game Constants documentation. */
   mapId: Scalars['Int'];
   /** Participant identity information. Participant identity information is purposefully excluded for custom games. */
-  participantIdentities: Array<Maybe<MatchV4ParticipantIdentity>>;
+  participantIdentities: Array<Maybe<Matchv4ParticipantIdentity>>;
   /** Participant information. */
-  participants: Array<Maybe<MatchV4Participant>>;
+  participants: Array<Maybe<Matchv4Participant>>;
   /** Platform where the match was played. */
   platformId: Scalars['String'];
   /** Please refer to the Game Constants documentation. */
@@ -416,11 +420,11 @@ export type MatchV4Match = {
   /** Please refer to the Game Constants documentation. */
   seasonId: Scalars['Int'];
   /** Team information. */
-  teams: Array<Maybe<MatchV4TeamStats>>;
+  teams: Array<Maybe<Matchv4TeamStats>>;
 };
 
-export type MatchV4MatchEvent = {
-  __typename?: 'MatchV4MatchEvent';
+export type Matchv4MatchEvent = {
+  __typename?: 'Matchv4MatchEvent';
   afterId?: Maybe<Scalars['Int']>;
   ascendedType?: Maybe<Scalars['String']>;
   assistingParticipantIds?: Maybe<Array<Maybe<Scalars['Int']>>>;
@@ -436,14 +440,14 @@ export type MatchV4MatchEvent = {
   monsterType?: Maybe<Scalars['String']>;
   participantId?: Maybe<Scalars['Int']>;
   pointCaptured?: Maybe<Scalars['String']>;
-  position?: Maybe<MatchV4MatchPosition>;
+  position?: Maybe<Matchv4MatchPosition>;
   skillSlot?: Maybe<Scalars['Int']>;
   teamId?: Maybe<Scalars['Int']>;
   timestamp: Scalars['Float'];
   towerType?: Maybe<Scalars['String']>;
   /**
-   * (Legal values:  CHAMPION_KILL,  WARD_PLACED,  WARD_KILL,  BUILDING_KILL,
-   * ELITE_MONSTER_KILL,  ITEM_PURCHASED,  ITEM_SOLD,  ITEM_DESTROYED,  ITEM_UNDO,
+   * (Legal values:  CHAMPION_KILL,  WARD_PLACED,  WARD_KILL,  BUILDING_KILL, 
+   * ELITE_MONSTER_KILL,  ITEM_PURCHASED,  ITEM_SOLD,  ITEM_DESTROYED,  ITEM_UNDO, 
    * SKILL_LEVEL_UP,  ASCENDED_EVENT,  CAPTURE_POINT,  PORO_KING_SUMMON)
    */
   type: Type;
@@ -451,17 +455,17 @@ export type MatchV4MatchEvent = {
   wardType?: Maybe<Scalars['String']>;
 };
 
-export type MatchV4MatchFrame = {
-  __typename?: 'MatchV4MatchFrame';
-  events: Array<Maybe<MatchV4MatchEvent>>;
+export type Matchv4MatchFrame = {
+  __typename?: 'Matchv4MatchFrame';
+  events: Array<Maybe<Matchv4MatchEvent>>;
   participantFrames: Scalars['JSON'];
   timestamp: Scalars['Float'];
 };
 
-export type MatchV4Matchlist = {
-  __typename?: 'MatchV4Matchlist';
+export type Matchv4Matchlist = {
+  __typename?: 'Matchv4Matchlist';
   endIndex: Scalars['Int'];
-  matches: Array<Maybe<MatchV4MatchReference>>;
+  matches: Array<Maybe<Matchv4MatchReference>>;
   startIndex: Scalars['Int'];
   /**
    * There is a known issue that this field doesn't correctly return the total
@@ -471,14 +475,14 @@ export type MatchV4Matchlist = {
   totalGames: Scalars['Int'];
 };
 
-export type MatchV4MatchPosition = {
-  __typename?: 'MatchV4MatchPosition';
+export type Matchv4MatchPosition = {
+  __typename?: 'Matchv4MatchPosition';
   x: Scalars['Int'];
   y: Scalars['Int'];
 };
 
-export type MatchV4MatchReference = {
-  __typename?: 'MatchV4MatchReference';
+export type Matchv4MatchReference = {
+  __typename?: 'Matchv4MatchReference';
   champion: Scalars['Int'];
   gameId: Scalars['Float'];
   lane: Scalars['String'];
@@ -489,14 +493,14 @@ export type MatchV4MatchReference = {
   timestamp: Scalars['Float'];
 };
 
-export type MatchV4MatchTimeline = {
-  __typename?: 'MatchV4MatchTimeline';
+export type Matchv4MatchTimeline = {
+  __typename?: 'Matchv4MatchTimeline';
   frameInterval: Scalars['Float'];
-  frames: Array<Maybe<MatchV4MatchFrame>>;
+  frames: Array<Maybe<Matchv4MatchFrame>>;
 };
 
-export type MatchV4Participant = {
-  __typename?: 'MatchV4Participant';
+export type Matchv4Participant = {
+  __typename?: 'Matchv4Participant';
   championId: Scalars['Int'];
   /**
    * Highest ranked tier achieved for the previous season in a specific subset of
@@ -506,28 +510,28 @@ export type MatchV4Participant = {
    */
   highestAchievedSeasonTier?: Maybe<HighestAchievedSeasonTier>;
   /** List of legacy Mastery information. Not included for matches played with Runes Reforged. */
-  masteries?: Maybe<Array<Maybe<MatchV4Mastery>>>;
+  masteries?: Maybe<Array<Maybe<Matchv4Mastery>>>;
   participantId: Scalars['Int'];
   /** List of legacy Rune information. Not included for matches played with Runes Reforged. */
-  runes?: Maybe<Array<Maybe<MatchV4Rune>>>;
+  runes?: Maybe<Array<Maybe<Matchv4Rune>>>;
   /** First Summoner Spell id. */
   spell1Id: Scalars['Int'];
   /** Second Summoner Spell id. */
   spell2Id: Scalars['Int'];
-  stats: MatchV4ParticipantStats;
+  stats: Matchv4ParticipantStats;
   /** 100 for blue side. 200 for red side. */
   teamId: Scalars['Int'];
-  timeline: MatchV4ParticipantTimeline;
+  timeline: Matchv4ParticipantTimeline;
 };
 
-export type MatchV4ParticipantIdentity = {
-  __typename?: 'MatchV4ParticipantIdentity';
+export type Matchv4ParticipantIdentity = {
+  __typename?: 'Matchv4ParticipantIdentity';
   participantId: Scalars['Int'];
-  player: MatchV4Player;
+  player: Matchv4Player;
 };
 
-export type MatchV4ParticipantStats = {
-  __typename?: 'MatchV4ParticipantStats';
+export type Matchv4ParticipantStats = {
+  __typename?: 'Matchv4ParticipantStats';
   altarsCaptured?: Maybe<Scalars['Int']>;
   altarsNeutralized?: Maybe<Scalars['Int']>;
   assists: Scalars['Int'];
@@ -664,8 +668,8 @@ export type MatchV4ParticipantStats = {
   win: Scalars['Boolean'];
 };
 
-export type MatchV4ParticipantTimeline = {
-  __typename?: 'MatchV4ParticipantTimeline';
+export type Matchv4ParticipantTimeline = {
+  __typename?: 'Matchv4ParticipantTimeline';
   /** Creeps for a specified period. */
   creepsPerMinDeltas?: Maybe<Scalars['JSON']>;
   /** Creep score difference versus the calculated lane opponent(s) for a specified period. */
@@ -693,8 +697,8 @@ export type MatchV4ParticipantTimeline = {
   xpPerMinDeltas?: Maybe<Scalars['JSON']>;
 };
 
-export type MatchV4Player = {
-  __typename?: 'MatchV4Player';
+export type Matchv4Player = {
+  __typename?: 'Matchv4Player';
   /** Player's original accountId. */
   accountId: Scalars['String'];
   /** Player's current accountId when the match was played. */
@@ -710,24 +714,24 @@ export type MatchV4Player = {
   summonerName: Scalars['String'];
 };
 
-export type MatchV4Rune = {
-  __typename?: 'MatchV4Rune';
+export type Matchv4Rune = {
+  __typename?: 'Matchv4Rune';
   rank: Scalars['Int'];
   runeId: Scalars['Int'];
 };
 
-export type MatchV4TeamBans = {
-  __typename?: 'MatchV4TeamBans';
+export type Matchv4TeamBans = {
+  __typename?: 'Matchv4TeamBans';
   /** Banned championId. */
   championId: Scalars['Int'];
   /** Turn during which the champion was banned. */
   pickTurn: Scalars['Int'];
 };
 
-export type MatchV4TeamStats = {
-  __typename?: 'MatchV4TeamStats';
+export type Matchv4TeamStats = {
+  __typename?: 'Matchv4TeamStats';
   /** If match queueId has a draft, contains banned champion data, otherwise empty. */
-  bans: Array<Maybe<MatchV4TeamBans>>;
+  bans: Array<Maybe<Matchv4TeamBans>>;
   /** Number of times the team killed Baron. */
   baronKills: Scalars['Int'];
   /** For Dominion matches, specifies the points the team had at game end. */
@@ -783,12 +787,12 @@ export enum Position {
 export type Query = {
   __typename?: 'Query';
   info: Info;
-  summoner?: Maybe<SummonerV4Summoner>;
+  summoner?: Maybe<Summonerv4Summoner>;
   match?: Maybe<Match>;
-  rankedList: Array<LeagueV4LeagueList>;
-  rankedLeague: LeagueV4LeagueEntry;
-  tournament?: Maybe<TournamentV4TournamentCode>;
-  featured_games?: Maybe<SpectatorV4FeaturedGames>;
+  rankedList: Array<Leaguev4LeagueList>;
+  rankedLeague: Leaguev4LeagueEntry;
+  tournament?: Maybe<Tournamentv4TournamentCode>;
+  featured_games?: Maybe<Spectatorv4FeaturedGames>;
   clash?: Maybe<Scalars['String']>;
 };
 
@@ -804,7 +808,7 @@ export type QuerySummonerArgs = {
 
 export type QueryMatchArgs = {
   region: RegionInput;
-  matchId: Scalars['Long'];
+  matchId: Scalars['MatchId'];
   game: Game;
 };
 
@@ -918,8 +922,8 @@ export enum SpectatorType {
   All = 'ALL'
 }
 
-export type SpectatorV4BannedChampion = {
-  __typename?: 'SpectatorV4BannedChampion';
+export type Spectatorv4BannedChampion = {
+  __typename?: 'Spectatorv4BannedChampion';
   /** The ID of the banned champion */
   championId: Scalars['Float'];
   /** The turn during which the champion was banned */
@@ -928,10 +932,10 @@ export type SpectatorV4BannedChampion = {
   teamId: Scalars['Float'];
 };
 
-export type SpectatorV4CurrentGameInfo = {
-  __typename?: 'SpectatorV4CurrentGameInfo';
+export type Spectatorv4CurrentGameInfo = {
+  __typename?: 'Spectatorv4CurrentGameInfo';
   /** Banned champion information */
-  bannedChampions: Array<Maybe<SpectatorV4BannedChampion>>;
+  bannedChampions: Array<Maybe<Spectatorv4BannedChampion>>;
   /** The ID of the game */
   gameId: Scalars['Float'];
   /** The amount of time in seconds that has passed since the game started */
@@ -946,22 +950,22 @@ export type SpectatorV4CurrentGameInfo = {
   gameType: Scalars['String'];
   /** The ID of the map */
   mapId: Scalars['Float'];
-  observers: SpectatorV4Observer;
+  observers: Spectatorv4Observer;
   /** The participant information */
-  participants: Array<Maybe<SpectatorV4CurrentGameParticipant>>;
+  participants: Array<Maybe<Spectatorv4CurrentGameParticipant>>;
   /** The ID of the platform on which the game is being played */
   platformId: Scalars['String'];
 };
 
-export type SpectatorV4CurrentGameParticipant = {
-  __typename?: 'SpectatorV4CurrentGameParticipant';
+export type Spectatorv4CurrentGameParticipant = {
+  __typename?: 'Spectatorv4CurrentGameParticipant';
   /** Flag indicating whether or not this participant is a bot */
   bot: Scalars['Boolean'];
   /** The ID of the champion played by this participant */
   championId: Scalars['Float'];
   /** List of Game Customizations */
-  gameCustomizationObjects: Array<Maybe<SpectatorV4GameCustomizationObject>>;
-  perks: SpectatorV4Perks;
+  gameCustomizationObjects: Array<Maybe<Spectatorv4GameCustomizationObject>>;
+  perks: Spectatorv4Perks;
   /** The ID of the profile icon used by this participant */
   profileIconId: Scalars['Float'];
   /** The ID of the first summoner spell used by this participant */
@@ -976,10 +980,10 @@ export type SpectatorV4CurrentGameParticipant = {
   teamId: Scalars['Float'];
 };
 
-export type SpectatorV4FeaturedGameInfo = {
-  __typename?: 'SpectatorV4FeaturedGameInfo';
+export type Spectatorv4FeaturedGameInfo = {
+  __typename?: 'Spectatorv4FeaturedGameInfo';
   /** Banned champion information */
-  bannedChampions: Array<Maybe<SpectatorV4BannedChampion>>;
+  bannedChampions: Array<Maybe<Spectatorv4BannedChampion>>;
   /** The ID of the game */
   gameId: Scalars['Float'];
   /** The amount of time in seconds that has passed since the game started */
@@ -1000,37 +1004,37 @@ export type SpectatorV4FeaturedGameInfo = {
   gameType: GameType;
   /** The ID of the map */
   mapId: Scalars['Float'];
-  observers: SpectatorV4Observer;
+  observers: Spectatorv4Observer;
   /** The participant information */
-  participants: Array<Maybe<SpectatorV4Participant>>;
+  participants: Array<Maybe<Spectatorv4Participant>>;
   /** The ID of the platform on which the game is being played */
   platformId: Scalars['String'];
 };
 
-export type SpectatorV4FeaturedGames = {
-  __typename?: 'SpectatorV4FeaturedGames';
+export type Spectatorv4FeaturedGames = {
+  __typename?: 'Spectatorv4FeaturedGames';
   /** The suggested interval to wait before requesting FeaturedGames again */
   clientRefreshInterval: Scalars['Float'];
   /** The list of featured games */
-  gameList: Array<Maybe<SpectatorV4FeaturedGameInfo>>;
+  gameList: Array<Maybe<Spectatorv4FeaturedGameInfo>>;
 };
 
-export type SpectatorV4GameCustomizationObject = {
-  __typename?: 'SpectatorV4GameCustomizationObject';
+export type Spectatorv4GameCustomizationObject = {
+  __typename?: 'Spectatorv4GameCustomizationObject';
   /** Category identifier for Game Customization */
   category: Scalars['String'];
   /** Game Customization content */
   content: Scalars['String'];
 };
 
-export type SpectatorV4Observer = {
-  __typename?: 'SpectatorV4Observer';
+export type Spectatorv4Observer = {
+  __typename?: 'Spectatorv4Observer';
   /** Key used to decrypt the spectator grid game data for playback */
   encryptionKey: Scalars['String'];
 };
 
-export type SpectatorV4Participant = {
-  __typename?: 'SpectatorV4Participant';
+export type Spectatorv4Participant = {
+  __typename?: 'Spectatorv4Participant';
   /** Flag indicating whether or not this participant is a bot */
   bot: Scalars['Boolean'];
   /** The ID of the champion played by this participant */
@@ -1047,8 +1051,8 @@ export type SpectatorV4Participant = {
   teamId: Scalars['Float'];
 };
 
-export type SpectatorV4Perks = {
-  __typename?: 'SpectatorV4Perks';
+export type Spectatorv4Perks = {
+  __typename?: 'Spectatorv4Perks';
   /** IDs of the perks/runes assigned. */
   perkIds: Array<Maybe<Scalars['Float']>>;
   /** Primary runes path */
@@ -1058,16 +1062,16 @@ export type SpectatorV4Perks = {
 };
 
 /** represents a summoner */
-export type SummonerV4Summoner = {
-  __typename?: 'SummonerV4Summoner';
+export type Summonerv4Summoner = {
+  __typename?: 'Summonerv4Summoner';
   /** Encrypted account ID. Max length 56 characters. */
   accountId: Scalars['String'];
   /** Get current game information for the given summoner. */
-  activeMatch?: Maybe<SpectatorV4CurrentGameInfo>;
+  activeMatch?: Maybe<Spectatorv4CurrentGameInfo>;
   /** Get champion mastery information of this summoner */
   championMastery: ChampionMastery;
   /** Get an array of clash registrations for this summoner. */
-  clash: Array<ClashV1PlayerRegistration>;
+  clash: Array<Clashv1PlayerRegistration>;
   /** Encrypted summoner ID. Max length 63 characters. */
   id: Scalars['String'];
   /**
@@ -1103,7 +1107,7 @@ export type SummonerV4Summoner = {
   /** Encrypted PUUID. Exact length of 78 characters. */
   puuid: Scalars['String'];
   /** Get ranked details of this summoner by queue. */
-  rank?: Maybe<LeagueV4LeagueEntry>;
+  rank?: Maybe<Leaguev4LeagueEntry>;
   region: RegionInput;
   /**
    * Date summoner was last modified specified as epoch milliseconds. The following
@@ -1117,25 +1121,25 @@ export type SummonerV4Summoner = {
 
 
 /** represents a summoner */
-export type SummonerV4SummonerActiveMatchArgs = {
+export type Summonerv4SummonerActiveMatchArgs = {
   game: Game;
 };
 
 
 /** represents a summoner */
-export type SummonerV4SummonerMatchListArgs = {
+export type Summonerv4SummonerMatchListArgs = {
   game: Game;
   filter?: Maybe<MatchListFilterInput>;
 };
 
 
 /** represents a summoner */
-export type SummonerV4SummonerRankArgs = {
+export type Summonerv4SummonerRankArgs = {
   queue: AllRankedQueues;
 };
 
-export type TftLeagueV1LeagueEntry = {
-  __typename?: 'TftLeagueV1LeagueEntry';
+export type Tftleaguev1LeagueEntry = {
+  __typename?: 'Tftleaguev1LeagueEntry';
   freshBlood: Scalars['Boolean'];
   hotStreak: Scalars['Boolean'];
   inactive: Scalars['Boolean'];
@@ -1143,7 +1147,7 @@ export type TftLeagueV1LeagueEntry = {
   leaguePoints: Scalars['Int'];
   /** Second through eighth placement. */
   losses: Scalars['Int'];
-  miniSeries?: Maybe<TftLeagueV1MiniSeries>;
+  miniSeries?: Maybe<Tftleaguev1MiniSeries>;
   queueType: Scalars['String'];
   rank: Scalars['String'];
   /** Player's encrypted summonerId. */
@@ -1155,15 +1159,15 @@ export type TftLeagueV1LeagueEntry = {
   wins: Scalars['Int'];
 };
 
-export type TftLeagueV1LeagueItem = {
-  __typename?: 'TftLeagueV1LeagueItem';
+export type Tftleaguev1LeagueItem = {
+  __typename?: 'Tftleaguev1LeagueItem';
   freshBlood: Scalars['Boolean'];
   hotStreak: Scalars['Boolean'];
   inactive: Scalars['Boolean'];
   leaguePoints: Scalars['Int'];
   /** Second through eighth placement. */
   losses: Scalars['Int'];
-  miniSeries?: Maybe<TftLeagueV1MiniSeries>;
+  miniSeries?: Maybe<Tftleaguev1MiniSeries>;
   rank: Scalars['String'];
   /** Player's encrypted summonerId. */
   summonerId: Scalars['String'];
@@ -1173,17 +1177,17 @@ export type TftLeagueV1LeagueItem = {
   wins: Scalars['Int'];
 };
 
-export type TftLeagueV1LeagueList = {
-  __typename?: 'TftLeagueV1LeagueList';
-  entries: Array<Maybe<TftLeagueV1LeagueItem>>;
+export type Tftleaguev1LeagueList = {
+  __typename?: 'Tftleaguev1LeagueList';
+  entries: Array<Maybe<Tftleaguev1LeagueItem>>;
   leagueId: Scalars['String'];
   name: Scalars['String'];
   queue: Scalars['String'];
   tier: Scalars['String'];
 };
 
-export type TftLeagueV1MiniSeries = {
-  __typename?: 'TftLeagueV1MiniSeries';
+export type Tftleaguev1MiniSeries = {
+  __typename?: 'Tftleaguev1MiniSeries';
   losses: Scalars['Int'];
   progress: Scalars['String'];
   target: Scalars['Int'];
@@ -1193,91 +1197,91 @@ export type TftLeagueV1MiniSeries = {
 /** TFT matchlist return type. Returns a list of match ids */
 export type TftMatchIdList = {
   __typename?: 'TFTMatchIdList';
-  matchIds: Array<Scalars['String']>;
+  matches: Array<Scalars['String']>;
 };
 
-export type TftMatchV1Companion = {
-  __typename?: 'TftMatchV1Companion';
-  contentID: Scalars['String'];
-  skinID: Scalars['Int'];
+export type Tftmatchv1Companion = {
+  __typename?: 'Tftmatchv1Companion';
+  content_ID: Scalars['String'];
+  skin_ID: Scalars['Int'];
   species: Scalars['String'];
 };
 
-export type TftMatchV1Info = {
-  __typename?: 'TftMatchV1Info';
+export type Tftmatchv1Info = {
+  __typename?: 'Tftmatchv1Info';
   /** Unix timestamp. */
-  gameDatetime: Scalars['Float'];
+  game_datetime: Scalars['Float'];
   /** Game length in seconds. */
-  gameLength: Scalars['Float'];
+  game_length: Scalars['Float'];
   /** Game variation key. Game variations documented in TFT static data. */
-  gameVariation?: Maybe<Scalars['String']>;
+  game_variation?: Maybe<Scalars['String']>;
   /** Game client version. */
-  gameVersion: Scalars['String'];
+  game_version: Scalars['String'];
   /** Participants. */
-  participants: Array<Maybe<TftMatchV1Participant>>;
+  participants: Array<Maybe<Tftmatchv1Participant>>;
   /** Please refer to the League of Legends documentation. */
-  queueId: Scalars['Int'];
+  queue_id: Scalars['Int'];
   /** Teamfight Tactics set number. */
-  tftSetNumber: Scalars['Int'];
+  tft_set_number: Scalars['Int'];
 };
 
-export type TftMatchV1Match = {
-  __typename?: 'TftMatchV1Match';
-  info: TftMatchV1Info;
-  metadata: TftMatchV1Metadata;
+export type Tftmatchv1Match = {
+  __typename?: 'Tftmatchv1Match';
+  info: Tftmatchv1Info;
+  metadata: Tftmatchv1Metadata;
 };
 
-export type TftMatchV1Metadata = {
-  __typename?: 'TftMatchV1Metadata';
+export type Tftmatchv1Metadata = {
+  __typename?: 'Tftmatchv1Metadata';
   /** Match data version. */
-  dataVersion: Scalars['String'];
+  data_version: Scalars['String'];
   /** Match id. */
-  matchId: Scalars['String'];
+  match_id: Scalars['String'];
   /** A list of encrypted participant PUUIDs. */
   participants: Array<Maybe<Scalars['String']>>;
 };
 
-export type TftMatchV1Participant = {
-  __typename?: 'TftMatchV1Participant';
-  companion: TftMatchV1Companion;
+export type Tftmatchv1Participant = {
+  __typename?: 'Tftmatchv1Participant';
+  companion: Tftmatchv1Companion;
   /** Gold left after participant was eliminated. */
-  goldLeft: Scalars['Int'];
+  gold_left: Scalars['Int'];
   /** The round the participant was eliminated in. Note: If the player was eliminated in stage 2-1 their last_round would be 5. */
-  lastRound: Scalars['Int'];
+  last_round: Scalars['Int'];
   /** Participant Little Legend level. Note: This is not the number of active units. */
   level: Scalars['Int'];
   /** Participant placement upon elimination. */
   placement: Scalars['Int'];
   /** Number of players the participant eliminated. */
-  playersEliminated: Scalars['Int'];
+  players_eliminated: Scalars['Int'];
   /** Encrypted PUUID. */
   puuid: Scalars['String'];
   /** The number of seconds before the participant was eliminated. */
-  timeEliminated: Scalars['Float'];
+  time_eliminated: Scalars['Float'];
   /** Damage the participant dealt to other players. */
-  totalDamageToPlayers: Scalars['Int'];
+  total_damage_to_players: Scalars['Int'];
   /** A complete list of traits for the participant's active units. */
-  traits: Array<Maybe<TftMatchV1Trait>>;
+  traits: Array<Maybe<Tftmatchv1Trait>>;
   /** A list of active units for the participant. */
-  units: Array<Maybe<TftMatchV1Unit>>;
+  units: Array<Maybe<Tftmatchv1Unit>>;
 };
 
-export type TftMatchV1Trait = {
-  __typename?: 'TftMatchV1Trait';
+export type Tftmatchv1Trait = {
+  __typename?: 'Tftmatchv1Trait';
   /** Trait name. */
   name: Scalars['String'];
   /** Number of units with this trait. */
-  numUnits: Scalars['Int'];
+  num_units: Scalars['Int'];
   /** Current active tier for the trait. */
-  tierCurrent: Scalars['Int'];
+  tier_current: Scalars['Int'];
   /** Total tiers for the trait. */
-  tierTotal?: Maybe<Scalars['Int']>;
+  tier_total?: Maybe<Scalars['Int']>;
 };
 
-export type TftMatchV1Unit = {
-  __typename?: 'TftMatchV1Unit';
+export type Tftmatchv1Unit = {
+  __typename?: 'Tftmatchv1Unit';
   /** This field was introduced in patch 9.22 with data_version 2. */
-  characterId: Scalars['String'];
+  character_id: Scalars['String'];
   /** A list of the unit's items. Please refer to the Teamfight Tactics documentation for item ids. */
   items: Array<Maybe<Scalars['Int']>>;
   /** Unit name. */
@@ -1289,8 +1293,8 @@ export type TftMatchV1Unit = {
 };
 
 /** represents a summoner */
-export type TftSummonerV1Summoner = {
-  __typename?: 'TftSummonerV1Summoner';
+export type Tftsummonerv1Summoner = {
+  __typename?: 'Tftsummonerv1Summoner';
   /** Encrypted account ID. Max length 56 characters. */
   accountId: Scalars['String'];
   /** Encrypted summoner ID. Max length 63 characters. */
@@ -1341,8 +1345,8 @@ export enum Tier3 {
   Iron = 'IRON'
 }
 
-export type TournamentStubV4LobbyEvent = {
-  __typename?: 'TournamentStubV4LobbyEvent';
+export type Tournamentstubv4LobbyEvent = {
+  __typename?: 'Tournamentstubv4LobbyEvent';
   /** The type of event that was triggered */
   eventType: Scalars['String'];
   /** The summonerId that triggered the event (Encrypted) */
@@ -1351,12 +1355,12 @@ export type TournamentStubV4LobbyEvent = {
   timestamp: Scalars['String'];
 };
 
-export type TournamentStubV4LobbyEventDtoWrapper = {
-  __typename?: 'TournamentStubV4LobbyEventDTOWrapper';
-  eventList: Array<Maybe<TournamentStubV4LobbyEvent>>;
+export type Tournamentstubv4LobbyEventDtoWrapper = {
+  __typename?: 'Tournamentstubv4LobbyEventDTOWrapper';
+  eventList: Array<Maybe<Tournamentstubv4LobbyEvent>>;
 };
 
-export type TournamentStubV4ProviderRegistrationParametersInput = {
+export type Tournamentstubv4ProviderRegistrationParametersInput = {
   /**
    * The region in which the provider will be running tournaments.
    *              (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR)
@@ -1371,7 +1375,7 @@ export type TournamentStubV4ProviderRegistrationParametersInput = {
   url: Scalars['String'];
 };
 
-export type TournamentStubV4TournamentCodeParametersInput = {
+export type Tournamentstubv4TournamentCodeParametersInput = {
   /**
    * Optional list of encrypted summonerIds in order to validate the players
    * eligible to join the lobby. NOTE: We currently do not enforce participants at
@@ -1403,15 +1407,15 @@ export type TournamentStubV4TournamentCodeParametersInput = {
   teamSize: Scalars['Int'];
 };
 
-export type TournamentStubV4TournamentRegistrationParametersInput = {
+export type Tournamentstubv4TournamentRegistrationParametersInput = {
   /** The optional name of the tournament. */
   name?: Maybe<Scalars['String']>;
   /** The provider ID to specify the regional registered provider data to associate this tournament. */
   providerId: Scalars['Int'];
 };
 
-export type TournamentV4LobbyEvent = {
-  __typename?: 'TournamentV4LobbyEvent';
+export type Tournamentv4LobbyEvent = {
+  __typename?: 'Tournamentv4LobbyEvent';
   /** The type of event that was triggered */
   eventType: Scalars['String'];
   /** The summonerId that triggered the event (Encrypted) */
@@ -1420,12 +1424,12 @@ export type TournamentV4LobbyEvent = {
   timestamp: Scalars['String'];
 };
 
-export type TournamentV4LobbyEventDtoWrapper = {
-  __typename?: 'TournamentV4LobbyEventDTOWrapper';
-  eventList: Array<Maybe<TournamentV4LobbyEvent>>;
+export type Tournamentv4LobbyEventDtoWrapper = {
+  __typename?: 'Tournamentv4LobbyEventDTOWrapper';
+  eventList: Array<Maybe<Tournamentv4LobbyEvent>>;
 };
 
-export type TournamentV4ProviderRegistrationParametersInput = {
+export type Tournamentv4ProviderRegistrationParametersInput = {
   /**
    * The region in which the provider will be running tournaments.
    *              (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR)
@@ -1440,18 +1444,18 @@ export type TournamentV4ProviderRegistrationParametersInput = {
   url: Scalars['String'];
 };
 
-export type TournamentV4TournamentCode = {
-  __typename?: 'TournamentV4TournamentCode';
+export type Tournamentv4TournamentCode = {
+  __typename?: 'Tournamentv4TournamentCode';
   /** The tournament code. */
   code: Scalars['String'];
   /** The tournament code's ID. */
   id: Scalars['Int'];
-  lobbyEvents?: Maybe<TournamentV4LobbyEvent>;
+  lobbyEvents?: Maybe<Tournamentv4LobbyEvent>;
   /** The lobby name for the tournament code game. */
   lobbyName: Scalars['String'];
   /** The game map for the tournament code game */
   map: Scalars['String'];
-  matchDetails?: Maybe<MatchV4Match>;
+  matchDetails?: Maybe<Matchv4Match>;
   /** The metadata for tournament code. */
   metaData: Scalars['String'];
   /** The summonerIds of the participants (Encrypted) */
@@ -1476,11 +1480,11 @@ export type TournamentV4TournamentCode = {
 };
 
 
-export type TournamentV4TournamentCodeMatchDetailsArgs = {
+export type Tournamentv4TournamentCodeMatchDetailsArgs = {
   matchId: Scalars['Float'];
 };
 
-export type TournamentV4TournamentCodeParametersInput = {
+export type Tournamentv4TournamentCodeParametersInput = {
   /**
    * Optional list of encrypted summonerIds in order to validate the players
    * eligible to join the lobby. NOTE: We currently do not enforce participants at
@@ -1512,7 +1516,7 @@ export type TournamentV4TournamentCodeParametersInput = {
   teamSize: Scalars['Int'];
 };
 
-export type TournamentV4TournamentRegistrationParametersInput = {
+export type Tournamentv4TournamentRegistrationParametersInput = {
   /** The optional name of the tournament. */
   name?: Maybe<Scalars['String']>;
   /** The provider ID to specify the regional registered provider data to associate this tournament. */
@@ -1628,111 +1632,112 @@ export type ResolversTypes = {
   Info: ResolverTypeWrapper<Info>;
   String: ResolverTypeWrapper<Scalars['String']>;
   RegionInput: RegionInput;
-  SummonerV4Summoner: ResolverTypeWrapper<Omit<SummonerV4Summoner, 'matchList'> & { matchList?: Maybe<ResolversTypes['MatchList']> }>;
+  Summonerv4Summoner: ResolverTypeWrapper<Omit<Summonerv4Summoner, 'matchList'> & { matchList?: Maybe<ResolversTypes['MatchList']> }>;
   Game: Game;
-  SpectatorV4CurrentGameInfo: ResolverTypeWrapper<SpectatorV4CurrentGameInfo>;
-  SpectatorV4BannedChampion: ResolverTypeWrapper<SpectatorV4BannedChampion>;
+  Spectatorv4CurrentGameInfo: ResolverTypeWrapper<Spectatorv4CurrentGameInfo>;
+  Spectatorv4BannedChampion: ResolverTypeWrapper<Spectatorv4BannedChampion>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  SpectatorV4Observer: ResolverTypeWrapper<SpectatorV4Observer>;
-  SpectatorV4CurrentGameParticipant: ResolverTypeWrapper<SpectatorV4CurrentGameParticipant>;
+  Spectatorv4Observer: ResolverTypeWrapper<Spectatorv4Observer>;
+  Spectatorv4CurrentGameParticipant: ResolverTypeWrapper<Spectatorv4CurrentGameParticipant>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  SpectatorV4GameCustomizationObject: ResolverTypeWrapper<SpectatorV4GameCustomizationObject>;
-  SpectatorV4Perks: ResolverTypeWrapper<SpectatorV4Perks>;
+  Spectatorv4GameCustomizationObject: ResolverTypeWrapper<Spectatorv4GameCustomizationObject>;
+  Spectatorv4Perks: ResolverTypeWrapper<Spectatorv4Perks>;
   ChampionMastery: ResolverTypeWrapper<ChampionMastery>;
-  ChampionMasteryV4ChampionMastery: ResolverTypeWrapper<ChampionMasteryV4ChampionMastery>;
-  ClashV1PlayerRegistration: ResolverTypeWrapper<ClashV1PlayerRegistration>;
+  Championmasteryv4ChampionMastery: ResolverTypeWrapper<Championmasteryv4ChampionMastery>;
+  Clashv1PlayerRegistration: ResolverTypeWrapper<Clashv1PlayerRegistration>;
   Position: Position;
   Role: Role;
-  ClashV1Team: ResolverTypeWrapper<ClashV1Team>;
-  ClashV1Player: ResolverTypeWrapper<ClashV1Player>;
+  Clashv1Team: ResolverTypeWrapper<Clashv1Team>;
+  Clashv1Player: ResolverTypeWrapper<Clashv1Player>;
   MatchListFilterInput: MatchListFilterInput;
   QueueId: QueueId;
   Long: ResolverTypeWrapper<Scalars['Long']>;
-  MatchList: ResolversTypes['MatchV4Matchlist'] | ResolversTypes['TFTMatchIdList'];
-  MatchV4Matchlist: ResolverTypeWrapper<MatchV4Matchlist>;
-  MatchV4MatchReference: ResolverTypeWrapper<MatchV4MatchReference>;
+  MatchList: ResolversTypes['Matchv4Matchlist'] | ResolversTypes['TFTMatchIdList'];
+  Matchv4Matchlist: ResolverTypeWrapper<Matchv4Matchlist>;
+  Matchv4MatchReference: ResolverTypeWrapper<Matchv4MatchReference>;
   TFTMatchIdList: ResolverTypeWrapper<TftMatchIdList>;
   AllRankedQueues: AllRankedQueues;
-  LeagueV4LeagueEntry: ResolverTypeWrapper<LeagueV4LeagueEntry>;
-  LeagueV4MiniSeries: ResolverTypeWrapper<LeagueV4MiniSeries>;
-  Match: ResolversTypes['MatchV4Match'] | ResolversTypes['TftMatchV1Match'];
-  MatchV4Match: ResolverTypeWrapper<MatchV4Match>;
-  MatchV4ParticipantIdentity: ResolverTypeWrapper<MatchV4ParticipantIdentity>;
-  MatchV4Player: ResolverTypeWrapper<MatchV4Player>;
-  MatchV4Participant: ResolverTypeWrapper<MatchV4Participant>;
+  Leaguev4LeagueEntry: ResolverTypeWrapper<Leaguev4LeagueEntry>;
+  Leaguev4MiniSeries: ResolverTypeWrapper<Leaguev4MiniSeries>;
+  MatchId: ResolverTypeWrapper<Scalars['MatchId']>;
+  Match: ResolversTypes['Matchv4Match'] | ResolversTypes['Tftmatchv1Match'];
+  Matchv4Match: ResolverTypeWrapper<Matchv4Match>;
+  Matchv4ParticipantIdentity: ResolverTypeWrapper<Matchv4ParticipantIdentity>;
+  Matchv4Player: ResolverTypeWrapper<Matchv4Player>;
+  Matchv4Participant: ResolverTypeWrapper<Matchv4Participant>;
   HighestAchievedSeasonTier: HighestAchievedSeasonTier;
-  MatchV4Mastery: ResolverTypeWrapper<MatchV4Mastery>;
-  MatchV4Rune: ResolverTypeWrapper<MatchV4Rune>;
-  MatchV4ParticipantStats: ResolverTypeWrapper<MatchV4ParticipantStats>;
-  MatchV4ParticipantTimeline: ResolverTypeWrapper<MatchV4ParticipantTimeline>;
+  Matchv4Mastery: ResolverTypeWrapper<Matchv4Mastery>;
+  Matchv4Rune: ResolverTypeWrapper<Matchv4Rune>;
+  Matchv4ParticipantStats: ResolverTypeWrapper<Matchv4ParticipantStats>;
+  Matchv4ParticipantTimeline: ResolverTypeWrapper<Matchv4ParticipantTimeline>;
   JSON: ResolverTypeWrapper<Scalars['JSON']>;
   Lane: Lane;
   Role2: Role2;
-  MatchV4TeamStats: ResolverTypeWrapper<MatchV4TeamStats>;
-  MatchV4TeamBans: ResolverTypeWrapper<MatchV4TeamBans>;
+  Matchv4TeamStats: ResolverTypeWrapper<Matchv4TeamStats>;
+  Matchv4TeamBans: ResolverTypeWrapper<Matchv4TeamBans>;
   Win: Win;
-  TftMatchV1Match: ResolverTypeWrapper<TftMatchV1Match>;
-  TftMatchV1Info: ResolverTypeWrapper<TftMatchV1Info>;
-  TftMatchV1Participant: ResolverTypeWrapper<TftMatchV1Participant>;
-  TftMatchV1Companion: ResolverTypeWrapper<TftMatchV1Companion>;
-  TftMatchV1Trait: ResolverTypeWrapper<TftMatchV1Trait>;
-  TftMatchV1Unit: ResolverTypeWrapper<TftMatchV1Unit>;
-  TftMatchV1Metadata: ResolverTypeWrapper<TftMatchV1Metadata>;
+  Tftmatchv1Match: ResolverTypeWrapper<Tftmatchv1Match>;
+  Tftmatchv1Info: ResolverTypeWrapper<Tftmatchv1Info>;
+  Tftmatchv1Participant: ResolverTypeWrapper<Tftmatchv1Participant>;
+  Tftmatchv1Companion: ResolverTypeWrapper<Tftmatchv1Companion>;
+  Tftmatchv1Trait: ResolverTypeWrapper<Tftmatchv1Trait>;
+  Tftmatchv1Unit: ResolverTypeWrapper<Tftmatchv1Unit>;
+  Tftmatchv1Metadata: ResolverTypeWrapper<Tftmatchv1Metadata>;
   Queue: Queue;
   LowerTier: LowerTier;
   Division: Division;
-  LeagueV4LeagueList: ResolverTypeWrapper<LeagueV4LeagueList>;
-  LeagueV4LeagueItem: ResolverTypeWrapper<LeagueV4LeagueItem>;
+  Leaguev4LeagueList: ResolverTypeWrapper<Leaguev4LeagueList>;
+  Leaguev4LeagueItem: ResolverTypeWrapper<Leaguev4LeagueItem>;
   Tier: Tier;
-  TournamentV4TournamentCode: ResolverTypeWrapper<TournamentV4TournamentCode>;
-  TournamentV4LobbyEvent: ResolverTypeWrapper<TournamentV4LobbyEvent>;
+  Tournamentv4TournamentCode: ResolverTypeWrapper<Tournamentv4TournamentCode>;
+  Tournamentv4LobbyEvent: ResolverTypeWrapper<Tournamentv4LobbyEvent>;
   Region2: Region2;
-  SpectatorV4FeaturedGames: ResolverTypeWrapper<SpectatorV4FeaturedGames>;
-  SpectatorV4FeaturedGameInfo: ResolverTypeWrapper<SpectatorV4FeaturedGameInfo>;
+  Spectatorv4FeaturedGames: ResolverTypeWrapper<Spectatorv4FeaturedGames>;
+  Spectatorv4FeaturedGameInfo: ResolverTypeWrapper<Spectatorv4FeaturedGameInfo>;
   GameMode: GameMode;
   GameType: GameType;
-  SpectatorV4Participant: ResolverTypeWrapper<SpectatorV4Participant>;
+  Spectatorv4Participant: ResolverTypeWrapper<Spectatorv4Participant>;
   UpperTier: UpperTier;
-  ChampionV3ChampionInfo: ResolverTypeWrapper<ChampionV3ChampionInfo>;
-  ClashV1Tournament: ResolverTypeWrapper<ClashV1Tournament>;
-  ClashV1TournamentPhase: ResolverTypeWrapper<ClashV1TournamentPhase>;
+  Championv3ChampionInfo: ResolverTypeWrapper<Championv3ChampionInfo>;
+  Clashv1Tournament: ResolverTypeWrapper<Clashv1Tournament>;
+  Clashv1TournamentPhase: ResolverTypeWrapper<Clashv1TournamentPhase>;
   Division2: Division2;
-  LeagueExpV4LeagueEntry: ResolverTypeWrapper<LeagueExpV4LeagueEntry>;
-  LeagueExpV4MiniSeries: ResolverTypeWrapper<LeagueExpV4MiniSeries>;
-  LolStatusV3Incident: ResolverTypeWrapper<LolStatusV3Incident>;
-  LolStatusV3Message: ResolverTypeWrapper<LolStatusV3Message>;
-  LolStatusV3Translation: ResolverTypeWrapper<LolStatusV3Translation>;
-  LolStatusV3Service: ResolverTypeWrapper<LolStatusV3Service>;
-  LolStatusV3ShardStatus: ResolverTypeWrapper<LolStatusV3ShardStatus>;
-  LorRankedV1Leaderboard: ResolverTypeWrapper<LorRankedV1Leaderboard>;
-  LorRankedV1Player: ResolverTypeWrapper<LorRankedV1Player>;
+  Leagueexpv4LeagueEntry: ResolverTypeWrapper<Leagueexpv4LeagueEntry>;
+  Leagueexpv4MiniSeries: ResolverTypeWrapper<Leagueexpv4MiniSeries>;
+  Lolstatusv3Incident: ResolverTypeWrapper<Lolstatusv3Incident>;
+  Lolstatusv3Message: ResolverTypeWrapper<Lolstatusv3Message>;
+  Lolstatusv3Translation: ResolverTypeWrapper<Lolstatusv3Translation>;
+  Lolstatusv3Service: ResolverTypeWrapper<Lolstatusv3Service>;
+  Lolstatusv3ShardStatus: ResolverTypeWrapper<Lolstatusv3ShardStatus>;
+  Lorrankedv1Leaderboard: ResolverTypeWrapper<Lorrankedv1Leaderboard>;
+  Lorrankedv1Player: ResolverTypeWrapper<Lorrankedv1Player>;
   MapType: MapType;
-  MatchV4MatchEvent: ResolverTypeWrapper<MatchV4MatchEvent>;
-  MatchV4MatchPosition: ResolverTypeWrapper<MatchV4MatchPosition>;
+  Matchv4MatchEvent: ResolverTypeWrapper<Matchv4MatchEvent>;
+  Matchv4MatchPosition: ResolverTypeWrapper<Matchv4MatchPosition>;
   Type: Type;
-  MatchV4MatchFrame: ResolverTypeWrapper<MatchV4MatchFrame>;
-  MatchV4MatchTimeline: ResolverTypeWrapper<MatchV4MatchTimeline>;
+  Matchv4MatchFrame: ResolverTypeWrapper<Matchv4MatchFrame>;
+  Matchv4MatchTimeline: ResolverTypeWrapper<Matchv4MatchTimeline>;
   PickType: PickType;
   Queue2: Queue2;
   Region: Region;
   SpectatorType: SpectatorType;
-  TftLeagueV1LeagueEntry: ResolverTypeWrapper<TftLeagueV1LeagueEntry>;
-  TftLeagueV1MiniSeries: ResolverTypeWrapper<TftLeagueV1MiniSeries>;
-  TftLeagueV1LeagueItem: ResolverTypeWrapper<TftLeagueV1LeagueItem>;
-  TftLeagueV1LeagueList: ResolverTypeWrapper<TftLeagueV1LeagueList>;
-  TftSummonerV1Summoner: ResolverTypeWrapper<TftSummonerV1Summoner>;
+  Tftleaguev1LeagueEntry: ResolverTypeWrapper<Tftleaguev1LeagueEntry>;
+  Tftleaguev1MiniSeries: ResolverTypeWrapper<Tftleaguev1MiniSeries>;
+  Tftleaguev1LeagueItem: ResolverTypeWrapper<Tftleaguev1LeagueItem>;
+  Tftleaguev1LeagueList: ResolverTypeWrapper<Tftleaguev1LeagueList>;
+  Tftsummonerv1Summoner: ResolverTypeWrapper<Tftsummonerv1Summoner>;
   Tier2: Tier2;
   Tier3: Tier3;
-  TournamentStubV4LobbyEvent: ResolverTypeWrapper<TournamentStubV4LobbyEvent>;
-  TournamentStubV4LobbyEventDTOWrapper: ResolverTypeWrapper<TournamentStubV4LobbyEventDtoWrapper>;
-  TournamentStubV4ProviderRegistrationParametersInput: TournamentStubV4ProviderRegistrationParametersInput;
-  TournamentStubV4TournamentCodeParametersInput: TournamentStubV4TournamentCodeParametersInput;
-  TournamentStubV4TournamentRegistrationParametersInput: TournamentStubV4TournamentRegistrationParametersInput;
-  TournamentV4LobbyEventDTOWrapper: ResolverTypeWrapper<TournamentV4LobbyEventDtoWrapper>;
-  TournamentV4ProviderRegistrationParametersInput: TournamentV4ProviderRegistrationParametersInput;
-  TournamentV4TournamentCodeParametersInput: TournamentV4TournamentCodeParametersInput;
-  TournamentV4TournamentRegistrationParametersInput: TournamentV4TournamentRegistrationParametersInput;
+  Tournamentstubv4LobbyEvent: ResolverTypeWrapper<Tournamentstubv4LobbyEvent>;
+  Tournamentstubv4LobbyEventDTOWrapper: ResolverTypeWrapper<Tournamentstubv4LobbyEventDtoWrapper>;
+  Tournamentstubv4ProviderRegistrationParametersInput: Tournamentstubv4ProviderRegistrationParametersInput;
+  Tournamentstubv4TournamentCodeParametersInput: Tournamentstubv4TournamentCodeParametersInput;
+  Tournamentstubv4TournamentRegistrationParametersInput: Tournamentstubv4TournamentRegistrationParametersInput;
+  Tournamentv4LobbyEventDTOWrapper: ResolverTypeWrapper<Tournamentv4LobbyEventDtoWrapper>;
+  Tournamentv4ProviderRegistrationParametersInput: Tournamentv4ProviderRegistrationParametersInput;
+  Tournamentv4TournamentCodeParametersInput: Tournamentv4TournamentCodeParametersInput;
+  Tournamentv4TournamentRegistrationParametersInput: Tournamentv4TournamentRegistrationParametersInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -1740,94 +1745,95 @@ export type ResolversParentTypes = {
   Query: {};
   Info: Info;
   String: Scalars['String'];
-  SummonerV4Summoner: Omit<SummonerV4Summoner, 'matchList'> & { matchList?: Maybe<ResolversParentTypes['MatchList']> };
-  SpectatorV4CurrentGameInfo: SpectatorV4CurrentGameInfo;
-  SpectatorV4BannedChampion: SpectatorV4BannedChampion;
+  Summonerv4Summoner: Omit<Summonerv4Summoner, 'matchList'> & { matchList?: Maybe<ResolversParentTypes['MatchList']> };
+  Spectatorv4CurrentGameInfo: Spectatorv4CurrentGameInfo;
+  Spectatorv4BannedChampion: Spectatorv4BannedChampion;
   Float: Scalars['Float'];
   Int: Scalars['Int'];
-  SpectatorV4Observer: SpectatorV4Observer;
-  SpectatorV4CurrentGameParticipant: SpectatorV4CurrentGameParticipant;
+  Spectatorv4Observer: Spectatorv4Observer;
+  Spectatorv4CurrentGameParticipant: Spectatorv4CurrentGameParticipant;
   Boolean: Scalars['Boolean'];
-  SpectatorV4GameCustomizationObject: SpectatorV4GameCustomizationObject;
-  SpectatorV4Perks: SpectatorV4Perks;
+  Spectatorv4GameCustomizationObject: Spectatorv4GameCustomizationObject;
+  Spectatorv4Perks: Spectatorv4Perks;
   ChampionMastery: ChampionMastery;
-  ChampionMasteryV4ChampionMastery: ChampionMasteryV4ChampionMastery;
-  ClashV1PlayerRegistration: ClashV1PlayerRegistration;
-  ClashV1Team: ClashV1Team;
-  ClashV1Player: ClashV1Player;
+  Championmasteryv4ChampionMastery: Championmasteryv4ChampionMastery;
+  Clashv1PlayerRegistration: Clashv1PlayerRegistration;
+  Clashv1Team: Clashv1Team;
+  Clashv1Player: Clashv1Player;
   MatchListFilterInput: MatchListFilterInput;
   Long: Scalars['Long'];
-  MatchList: ResolversParentTypes['MatchV4Matchlist'] | ResolversParentTypes['TFTMatchIdList'];
-  MatchV4Matchlist: MatchV4Matchlist;
-  MatchV4MatchReference: MatchV4MatchReference;
+  MatchList: ResolversParentTypes['Matchv4Matchlist'] | ResolversParentTypes['TFTMatchIdList'];
+  Matchv4Matchlist: Matchv4Matchlist;
+  Matchv4MatchReference: Matchv4MatchReference;
   TFTMatchIdList: TftMatchIdList;
-  LeagueV4LeagueEntry: LeagueV4LeagueEntry;
-  LeagueV4MiniSeries: LeagueV4MiniSeries;
-  Match: ResolversParentTypes['MatchV4Match'] | ResolversParentTypes['TftMatchV1Match'];
-  MatchV4Match: MatchV4Match;
-  MatchV4ParticipantIdentity: MatchV4ParticipantIdentity;
-  MatchV4Player: MatchV4Player;
-  MatchV4Participant: MatchV4Participant;
-  MatchV4Mastery: MatchV4Mastery;
-  MatchV4Rune: MatchV4Rune;
-  MatchV4ParticipantStats: MatchV4ParticipantStats;
-  MatchV4ParticipantTimeline: MatchV4ParticipantTimeline;
+  Leaguev4LeagueEntry: Leaguev4LeagueEntry;
+  Leaguev4MiniSeries: Leaguev4MiniSeries;
+  MatchId: Scalars['MatchId'];
+  Match: ResolversParentTypes['Matchv4Match'] | ResolversParentTypes['Tftmatchv1Match'];
+  Matchv4Match: Matchv4Match;
+  Matchv4ParticipantIdentity: Matchv4ParticipantIdentity;
+  Matchv4Player: Matchv4Player;
+  Matchv4Participant: Matchv4Participant;
+  Matchv4Mastery: Matchv4Mastery;
+  Matchv4Rune: Matchv4Rune;
+  Matchv4ParticipantStats: Matchv4ParticipantStats;
+  Matchv4ParticipantTimeline: Matchv4ParticipantTimeline;
   JSON: Scalars['JSON'];
-  MatchV4TeamStats: MatchV4TeamStats;
-  MatchV4TeamBans: MatchV4TeamBans;
-  TftMatchV1Match: TftMatchV1Match;
-  TftMatchV1Info: TftMatchV1Info;
-  TftMatchV1Participant: TftMatchV1Participant;
-  TftMatchV1Companion: TftMatchV1Companion;
-  TftMatchV1Trait: TftMatchV1Trait;
-  TftMatchV1Unit: TftMatchV1Unit;
-  TftMatchV1Metadata: TftMatchV1Metadata;
-  LeagueV4LeagueList: LeagueV4LeagueList;
-  LeagueV4LeagueItem: LeagueV4LeagueItem;
-  TournamentV4TournamentCode: TournamentV4TournamentCode;
-  TournamentV4LobbyEvent: TournamentV4LobbyEvent;
-  SpectatorV4FeaturedGames: SpectatorV4FeaturedGames;
-  SpectatorV4FeaturedGameInfo: SpectatorV4FeaturedGameInfo;
-  SpectatorV4Participant: SpectatorV4Participant;
-  ChampionV3ChampionInfo: ChampionV3ChampionInfo;
-  ClashV1Tournament: ClashV1Tournament;
-  ClashV1TournamentPhase: ClashV1TournamentPhase;
-  LeagueExpV4LeagueEntry: LeagueExpV4LeagueEntry;
-  LeagueExpV4MiniSeries: LeagueExpV4MiniSeries;
-  LolStatusV3Incident: LolStatusV3Incident;
-  LolStatusV3Message: LolStatusV3Message;
-  LolStatusV3Translation: LolStatusV3Translation;
-  LolStatusV3Service: LolStatusV3Service;
-  LolStatusV3ShardStatus: LolStatusV3ShardStatus;
-  LorRankedV1Leaderboard: LorRankedV1Leaderboard;
-  LorRankedV1Player: LorRankedV1Player;
-  MatchV4MatchEvent: MatchV4MatchEvent;
-  MatchV4MatchPosition: MatchV4MatchPosition;
-  MatchV4MatchFrame: MatchV4MatchFrame;
-  MatchV4MatchTimeline: MatchV4MatchTimeline;
-  TftLeagueV1LeagueEntry: TftLeagueV1LeagueEntry;
-  TftLeagueV1MiniSeries: TftLeagueV1MiniSeries;
-  TftLeagueV1LeagueItem: TftLeagueV1LeagueItem;
-  TftLeagueV1LeagueList: TftLeagueV1LeagueList;
-  TftSummonerV1Summoner: TftSummonerV1Summoner;
-  TournamentStubV4LobbyEvent: TournamentStubV4LobbyEvent;
-  TournamentStubV4LobbyEventDTOWrapper: TournamentStubV4LobbyEventDtoWrapper;
-  TournamentStubV4ProviderRegistrationParametersInput: TournamentStubV4ProviderRegistrationParametersInput;
-  TournamentStubV4TournamentCodeParametersInput: TournamentStubV4TournamentCodeParametersInput;
-  TournamentStubV4TournamentRegistrationParametersInput: TournamentStubV4TournamentRegistrationParametersInput;
-  TournamentV4LobbyEventDTOWrapper: TournamentV4LobbyEventDtoWrapper;
-  TournamentV4ProviderRegistrationParametersInput: TournamentV4ProviderRegistrationParametersInput;
-  TournamentV4TournamentCodeParametersInput: TournamentV4TournamentCodeParametersInput;
-  TournamentV4TournamentRegistrationParametersInput: TournamentV4TournamentRegistrationParametersInput;
+  Matchv4TeamStats: Matchv4TeamStats;
+  Matchv4TeamBans: Matchv4TeamBans;
+  Tftmatchv1Match: Tftmatchv1Match;
+  Tftmatchv1Info: Tftmatchv1Info;
+  Tftmatchv1Participant: Tftmatchv1Participant;
+  Tftmatchv1Companion: Tftmatchv1Companion;
+  Tftmatchv1Trait: Tftmatchv1Trait;
+  Tftmatchv1Unit: Tftmatchv1Unit;
+  Tftmatchv1Metadata: Tftmatchv1Metadata;
+  Leaguev4LeagueList: Leaguev4LeagueList;
+  Leaguev4LeagueItem: Leaguev4LeagueItem;
+  Tournamentv4TournamentCode: Tournamentv4TournamentCode;
+  Tournamentv4LobbyEvent: Tournamentv4LobbyEvent;
+  Spectatorv4FeaturedGames: Spectatorv4FeaturedGames;
+  Spectatorv4FeaturedGameInfo: Spectatorv4FeaturedGameInfo;
+  Spectatorv4Participant: Spectatorv4Participant;
+  Championv3ChampionInfo: Championv3ChampionInfo;
+  Clashv1Tournament: Clashv1Tournament;
+  Clashv1TournamentPhase: Clashv1TournamentPhase;
+  Leagueexpv4LeagueEntry: Leagueexpv4LeagueEntry;
+  Leagueexpv4MiniSeries: Leagueexpv4MiniSeries;
+  Lolstatusv3Incident: Lolstatusv3Incident;
+  Lolstatusv3Message: Lolstatusv3Message;
+  Lolstatusv3Translation: Lolstatusv3Translation;
+  Lolstatusv3Service: Lolstatusv3Service;
+  Lolstatusv3ShardStatus: Lolstatusv3ShardStatus;
+  Lorrankedv1Leaderboard: Lorrankedv1Leaderboard;
+  Lorrankedv1Player: Lorrankedv1Player;
+  Matchv4MatchEvent: Matchv4MatchEvent;
+  Matchv4MatchPosition: Matchv4MatchPosition;
+  Matchv4MatchFrame: Matchv4MatchFrame;
+  Matchv4MatchTimeline: Matchv4MatchTimeline;
+  Tftleaguev1LeagueEntry: Tftleaguev1LeagueEntry;
+  Tftleaguev1MiniSeries: Tftleaguev1MiniSeries;
+  Tftleaguev1LeagueItem: Tftleaguev1LeagueItem;
+  Tftleaguev1LeagueList: Tftleaguev1LeagueList;
+  Tftsummonerv1Summoner: Tftsummonerv1Summoner;
+  Tournamentstubv4LobbyEvent: Tournamentstubv4LobbyEvent;
+  Tournamentstubv4LobbyEventDTOWrapper: Tournamentstubv4LobbyEventDtoWrapper;
+  Tournamentstubv4ProviderRegistrationParametersInput: Tournamentstubv4ProviderRegistrationParametersInput;
+  Tournamentstubv4TournamentCodeParametersInput: Tournamentstubv4TournamentCodeParametersInput;
+  Tournamentstubv4TournamentRegistrationParametersInput: Tournamentstubv4TournamentRegistrationParametersInput;
+  Tournamentv4LobbyEventDTOWrapper: Tournamentv4LobbyEventDtoWrapper;
+  Tournamentv4ProviderRegistrationParametersInput: Tournamentv4ProviderRegistrationParametersInput;
+  Tournamentv4TournamentCodeParametersInput: Tournamentv4TournamentCodeParametersInput;
+  Tournamentv4TournamentRegistrationParametersInput: Tournamentv4TournamentRegistrationParametersInput;
 };
 
 export type ChampionMasteryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChampionMastery'] = ResolversParentTypes['ChampionMastery']> = {
   score?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  byChampion?: Resolver<Maybe<Array<ResolversTypes['ChampionMasteryV4ChampionMastery']>>, ParentType, ContextType, RequireFields<ChampionMasteryByChampionArgs, never>>;
+  byChampion?: Resolver<Maybe<Array<ResolversTypes['Championmasteryv4ChampionMastery']>>, ParentType, ContextType, RequireFields<ChampionMasteryByChampionArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type ChampionMasteryV4ChampionMasteryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChampionMasteryV4ChampionMastery'] = ResolversParentTypes['ChampionMasteryV4ChampionMastery']> = {
+export type Championmasteryv4ChampionMasteryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Championmasteryv4ChampionMastery'] = ResolversParentTypes['Championmasteryv4ChampionMastery']> = {
   championId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   championLevel?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   championPoints?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -1840,51 +1846,52 @@ export type ChampionMasteryV4ChampionMasteryResolvers<ContextType = any, ParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type ChampionV3ChampionInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChampionV3ChampionInfo'] = ResolversParentTypes['ChampionV3ChampionInfo']> = {
+export type Championv3ChampionInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Championv3ChampionInfo'] = ResolversParentTypes['Championv3ChampionInfo']> = {
   freeChampionIds?: Resolver<Array<Maybe<ResolversTypes['Int']>>, ParentType, ContextType>;
   freeChampionIdsForNewPlayers?: Resolver<Array<Maybe<ResolversTypes['Int']>>, ParentType, ContextType>;
   maxNewPlayerLevel?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type ClashV1PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['ClashV1Player'] = ResolversParentTypes['ClashV1Player']> = {
-  position?: Resolver<ResolversTypes['Position'], ParentType, ContextType>;
-  role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
-  summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
-};
-
-export type ClashV1PlayerRegistrationResolvers<ContextType = any, ParentType extends ResolversParentTypes['ClashV1PlayerRegistration'] = ResolversParentTypes['ClashV1PlayerRegistration']> = {
+export type Clashv1PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Clashv1Player'] = ResolversParentTypes['Clashv1Player']> = {
   position?: Resolver<ResolversTypes['Position'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   teamId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  team?: Resolver<ResolversTypes['ClashV1Team'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type ClashV1TeamResolvers<ContextType = any, ParentType extends ResolversParentTypes['ClashV1Team'] = ResolversParentTypes['ClashV1Team']> = {
+export type Clashv1PlayerRegistrationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Clashv1PlayerRegistration'] = ResolversParentTypes['Clashv1PlayerRegistration']> = {
+  position?: Resolver<ResolversTypes['Position'], ParentType, ContextType>;
+  role?: Resolver<ResolversTypes['Role'], ParentType, ContextType>;
+  summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  teamId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  team?: Resolver<ResolversTypes['Clashv1Team'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
+export type Clashv1TeamResolvers<ContextType = any, ParentType extends ResolversParentTypes['Clashv1Team'] = ResolversParentTypes['Clashv1Team']> = {
   abbreviation?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   captain?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   iconId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  players?: Resolver<Array<Maybe<ResolversTypes['ClashV1Player']>>, ParentType, ContextType>;
+  players?: Resolver<Array<Maybe<ResolversTypes['Clashv1Player']>>, ParentType, ContextType>;
   tier?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   tournamentId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type ClashV1TournamentResolvers<ContextType = any, ParentType extends ResolversParentTypes['ClashV1Tournament'] = ResolversParentTypes['ClashV1Tournament']> = {
+export type Clashv1TournamentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Clashv1Tournament'] = ResolversParentTypes['Clashv1Tournament']> = {
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   nameKey?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   nameKeySecondary?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  schedule?: Resolver<Array<Maybe<ResolversTypes['ClashV1TournamentPhase']>>, ParentType, ContextType>;
+  schedule?: Resolver<Array<Maybe<ResolversTypes['Clashv1TournamentPhase']>>, ParentType, ContextType>;
   themeId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type ClashV1TournamentPhaseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ClashV1TournamentPhase'] = ResolversParentTypes['ClashV1TournamentPhase']> = {
+export type Clashv1TournamentPhaseResolvers<ContextType = any, ParentType extends ResolversParentTypes['Clashv1TournamentPhase'] = ResolversParentTypes['Clashv1TournamentPhase']> = {
   cancelled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   registrationTime?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -1904,14 +1911,14 @@ export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'JSON';
 }
 
-export type LeagueExpV4LeagueEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['LeagueExpV4LeagueEntry'] = ResolversParentTypes['LeagueExpV4LeagueEntry']> = {
+export type Leagueexpv4LeagueEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Leagueexpv4LeagueEntry'] = ResolversParentTypes['Leagueexpv4LeagueEntry']> = {
   freshBlood?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   hotStreak?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   inactive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   leagueId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   leaguePoints?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  miniSeries?: Resolver<Maybe<ResolversTypes['LeagueExpV4MiniSeries']>, ParentType, ContextType>;
+  miniSeries?: Resolver<Maybe<ResolversTypes['Leagueexpv4MiniSeries']>, ParentType, ContextType>;
   queueType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rank?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1922,7 +1929,7 @@ export type LeagueExpV4LeagueEntryResolvers<ContextType = any, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LeagueExpV4MiniSeriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['LeagueExpV4MiniSeries'] = ResolversParentTypes['LeagueExpV4MiniSeries']> = {
+export type Leagueexpv4MiniSeriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Leagueexpv4MiniSeries'] = ResolversParentTypes['Leagueexpv4MiniSeries']> = {
   losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   progress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   target?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -1930,14 +1937,14 @@ export type LeagueExpV4MiniSeriesResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LeagueV4LeagueEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['LeagueV4LeagueEntry'] = ResolversParentTypes['LeagueV4LeagueEntry']> = {
+export type Leaguev4LeagueEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Leaguev4LeagueEntry'] = ResolversParentTypes['Leaguev4LeagueEntry']> = {
   freshBlood?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   hotStreak?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   inactive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   leagueId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   leaguePoints?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  miniSeries?: Resolver<Maybe<ResolversTypes['LeagueV4MiniSeries']>, ParentType, ContextType>;
+  miniSeries?: Resolver<Maybe<ResolversTypes['Leaguev4MiniSeries']>, ParentType, ContextType>;
   queueType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rank?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1948,13 +1955,13 @@ export type LeagueV4LeagueEntryResolvers<ContextType = any, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LeagueV4LeagueItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['LeagueV4LeagueItem'] = ResolversParentTypes['LeagueV4LeagueItem']> = {
+export type Leaguev4LeagueItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['Leaguev4LeagueItem'] = ResolversParentTypes['Leaguev4LeagueItem']> = {
   freshBlood?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   hotStreak?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   inactive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   leaguePoints?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  miniSeries?: Resolver<Maybe<ResolversTypes['LeagueV4MiniSeries']>, ParentType, ContextType>;
+  miniSeries?: Resolver<Maybe<ResolversTypes['Leaguev4MiniSeries']>, ParentType, ContextType>;
   rank?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1963,8 +1970,8 @@ export type LeagueV4LeagueItemResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LeagueV4LeagueListResolvers<ContextType = any, ParentType extends ResolversParentTypes['LeagueV4LeagueList'] = ResolversParentTypes['LeagueV4LeagueList']> = {
-  entries?: Resolver<Array<Maybe<ResolversTypes['LeagueV4LeagueItem']>>, ParentType, ContextType>;
+export type Leaguev4LeagueListResolvers<ContextType = any, ParentType extends ResolversParentTypes['Leaguev4LeagueList'] = ResolversParentTypes['Leaguev4LeagueList']> = {
+  entries?: Resolver<Array<Maybe<ResolversTypes['Leaguev4LeagueItem']>>, ParentType, ContextType>;
   leagueId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   queue?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1972,7 +1979,7 @@ export type LeagueV4LeagueListResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LeagueV4MiniSeriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['LeagueV4MiniSeries'] = ResolversParentTypes['LeagueV4MiniSeries']> = {
+export type Leaguev4MiniSeriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Leaguev4MiniSeries'] = ResolversParentTypes['Leaguev4MiniSeries']> = {
   losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   progress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   target?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -1980,44 +1987,44 @@ export type LeagueV4MiniSeriesResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LolStatusV3IncidentResolvers<ContextType = any, ParentType extends ResolversParentTypes['LolStatusV3Incident'] = ResolversParentTypes['LolStatusV3Incident']> = {
+export type Lolstatusv3IncidentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lolstatusv3Incident'] = ResolversParentTypes['Lolstatusv3Incident']> = {
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  updates?: Resolver<Array<Maybe<ResolversTypes['LolStatusV3Message']>>, ParentType, ContextType>;
+  updates?: Resolver<Array<Maybe<ResolversTypes['Lolstatusv3Message']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LolStatusV3MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['LolStatusV3Message'] = ResolversParentTypes['LolStatusV3Message']> = {
+export type Lolstatusv3MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lolstatusv3Message'] = ResolversParentTypes['Lolstatusv3Message']> = {
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   severity?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<Maybe<ResolversTypes['LolStatusV3Translation']>>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  translations?: Resolver<Array<Maybe<ResolversTypes['Lolstatusv3Translation']>>, ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LolStatusV3ServiceResolvers<ContextType = any, ParentType extends ResolversParentTypes['LolStatusV3Service'] = ResolversParentTypes['LolStatusV3Service']> = {
-  incidents?: Resolver<Array<Maybe<ResolversTypes['LolStatusV3Incident']>>, ParentType, ContextType>;
+export type Lolstatusv3ServiceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lolstatusv3Service'] = ResolversParentTypes['Lolstatusv3Service']> = {
+  incidents?: Resolver<Array<Maybe<ResolversTypes['Lolstatusv3Incident']>>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LolStatusV3ShardStatusResolvers<ContextType = any, ParentType extends ResolversParentTypes['LolStatusV3ShardStatus'] = ResolversParentTypes['LolStatusV3ShardStatus']> = {
+export type Lolstatusv3ShardStatusResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lolstatusv3ShardStatus'] = ResolversParentTypes['Lolstatusv3ShardStatus']> = {
   hostname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   locales?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  regionTag?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  services?: Resolver<Array<Maybe<ResolversTypes['LolStatusV3Service']>>, ParentType, ContextType>;
+  region_tag?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  services?: Resolver<Array<Maybe<ResolversTypes['Lolstatusv3Service']>>, ParentType, ContextType>;
   slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LolStatusV3TranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['LolStatusV3Translation'] = ResolversParentTypes['LolStatusV3Translation']> = {
+export type Lolstatusv3TranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lolstatusv3Translation'] = ResolversParentTypes['Lolstatusv3Translation']> = {
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   heading?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   locale?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2028,12 +2035,12 @@ export interface LongScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'Long';
 }
 
-export type LorRankedV1LeaderboardResolvers<ContextType = any, ParentType extends ResolversParentTypes['LorRankedV1Leaderboard'] = ResolversParentTypes['LorRankedV1Leaderboard']> = {
-  players?: Resolver<Array<Maybe<ResolversTypes['LorRankedV1Player']>>, ParentType, ContextType>;
+export type Lorrankedv1LeaderboardResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lorrankedv1Leaderboard'] = ResolversParentTypes['Lorrankedv1Leaderboard']> = {
+  players?: Resolver<Array<Maybe<ResolversTypes['Lorrankedv1Player']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type LorRankedV1PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['LorRankedV1Player'] = ResolversParentTypes['LorRankedV1Player']> = {
+export type Lorrankedv1PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lorrankedv1Player'] = ResolversParentTypes['Lorrankedv1Player']> = {
   lp?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rank?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -2041,20 +2048,24 @@ export type LorRankedV1PlayerResolvers<ContextType = any, ParentType extends Res
 };
 
 export type MatchResolvers<ContextType = any, ParentType extends ResolversParentTypes['Match'] = ResolversParentTypes['Match']> = {
-  __resolveType: TypeResolveFn<'MatchV4Match' | 'TftMatchV1Match', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Matchv4Match' | 'Tftmatchv1Match', ParentType, ContextType>;
 };
+
+export interface MatchIdScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['MatchId'], any> {
+  name: 'MatchId';
+}
 
 export type MatchListResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchList'] = ResolversParentTypes['MatchList']> = {
-  __resolveType: TypeResolveFn<'MatchV4Matchlist' | 'TFTMatchIdList', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Matchv4Matchlist' | 'TFTMatchIdList', ParentType, ContextType>;
 };
 
-export type MatchV4MasteryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4Mastery'] = ResolversParentTypes['MatchV4Mastery']> = {
+export type Matchv4MasteryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4Mastery'] = ResolversParentTypes['Matchv4Mastery']> = {
   masteryId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   rank?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4MatchResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4Match'] = ResolversParentTypes['MatchV4Match']> = {
+export type Matchv4MatchResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4Match'] = ResolversParentTypes['Matchv4Match']> = {
   gameCreation?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   gameDuration?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   gameId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -2062,16 +2073,16 @@ export type MatchV4MatchResolvers<ContextType = any, ParentType extends Resolver
   gameType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   gameVersion?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   mapId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  participantIdentities?: Resolver<Array<Maybe<ResolversTypes['MatchV4ParticipantIdentity']>>, ParentType, ContextType>;
-  participants?: Resolver<Array<Maybe<ResolversTypes['MatchV4Participant']>>, ParentType, ContextType>;
+  participantIdentities?: Resolver<Array<Maybe<ResolversTypes['Matchv4ParticipantIdentity']>>, ParentType, ContextType>;
+  participants?: Resolver<Array<Maybe<ResolversTypes['Matchv4Participant']>>, ParentType, ContextType>;
   platformId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   queueId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   seasonId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  teams?: Resolver<Array<Maybe<ResolversTypes['MatchV4TeamStats']>>, ParentType, ContextType>;
+  teams?: Resolver<Array<Maybe<ResolversTypes['Matchv4TeamStats']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4MatchEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4MatchEvent'] = ResolversParentTypes['MatchV4MatchEvent']> = {
+export type Matchv4MatchEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4MatchEvent'] = ResolversParentTypes['Matchv4MatchEvent']> = {
   afterId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   ascendedType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   assistingParticipantIds?: Resolver<Maybe<Array<Maybe<ResolversTypes['Int']>>>, ParentType, ContextType>;
@@ -2087,7 +2098,7 @@ export type MatchV4MatchEventResolvers<ContextType = any, ParentType extends Res
   monsterType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   participantId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   pointCaptured?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  position?: Resolver<Maybe<ResolversTypes['MatchV4MatchPosition']>, ParentType, ContextType>;
+  position?: Resolver<Maybe<ResolversTypes['Matchv4MatchPosition']>, ParentType, ContextType>;
   skillSlot?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   teamId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -2098,28 +2109,28 @@ export type MatchV4MatchEventResolvers<ContextType = any, ParentType extends Res
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4MatchFrameResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4MatchFrame'] = ResolversParentTypes['MatchV4MatchFrame']> = {
-  events?: Resolver<Array<Maybe<ResolversTypes['MatchV4MatchEvent']>>, ParentType, ContextType>;
+export type Matchv4MatchFrameResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4MatchFrame'] = ResolversParentTypes['Matchv4MatchFrame']> = {
+  events?: Resolver<Array<Maybe<ResolversTypes['Matchv4MatchEvent']>>, ParentType, ContextType>;
   participantFrames?: Resolver<ResolversTypes['JSON'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4MatchlistResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4Matchlist'] = ResolversParentTypes['MatchV4Matchlist']> = {
+export type Matchv4MatchlistResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4Matchlist'] = ResolversParentTypes['Matchv4Matchlist']> = {
   endIndex?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  matches?: Resolver<Array<Maybe<ResolversTypes['MatchV4MatchReference']>>, ParentType, ContextType>;
+  matches?: Resolver<Array<Maybe<ResolversTypes['Matchv4MatchReference']>>, ParentType, ContextType>;
   startIndex?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   totalGames?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4MatchPositionResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4MatchPosition'] = ResolversParentTypes['MatchV4MatchPosition']> = {
+export type Matchv4MatchPositionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4MatchPosition'] = ResolversParentTypes['Matchv4MatchPosition']> = {
   x?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   y?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4MatchReferenceResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4MatchReference'] = ResolversParentTypes['MatchV4MatchReference']> = {
+export type Matchv4MatchReferenceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4MatchReference'] = ResolversParentTypes['Matchv4MatchReference']> = {
   champion?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   gameId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   lane?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2131,33 +2142,33 @@ export type MatchV4MatchReferenceResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4MatchTimelineResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4MatchTimeline'] = ResolversParentTypes['MatchV4MatchTimeline']> = {
+export type Matchv4MatchTimelineResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4MatchTimeline'] = ResolversParentTypes['Matchv4MatchTimeline']> = {
   frameInterval?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  frames?: Resolver<Array<Maybe<ResolversTypes['MatchV4MatchFrame']>>, ParentType, ContextType>;
+  frames?: Resolver<Array<Maybe<ResolversTypes['Matchv4MatchFrame']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4ParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4Participant'] = ResolversParentTypes['MatchV4Participant']> = {
+export type Matchv4ParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4Participant'] = ResolversParentTypes['Matchv4Participant']> = {
   championId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   highestAchievedSeasonTier?: Resolver<Maybe<ResolversTypes['HighestAchievedSeasonTier']>, ParentType, ContextType>;
-  masteries?: Resolver<Maybe<Array<Maybe<ResolversTypes['MatchV4Mastery']>>>, ParentType, ContextType>;
+  masteries?: Resolver<Maybe<Array<Maybe<ResolversTypes['Matchv4Mastery']>>>, ParentType, ContextType>;
   participantId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  runes?: Resolver<Maybe<Array<Maybe<ResolversTypes['MatchV4Rune']>>>, ParentType, ContextType>;
+  runes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Matchv4Rune']>>>, ParentType, ContextType>;
   spell1Id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   spell2Id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  stats?: Resolver<ResolversTypes['MatchV4ParticipantStats'], ParentType, ContextType>;
+  stats?: Resolver<ResolversTypes['Matchv4ParticipantStats'], ParentType, ContextType>;
   teamId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  timeline?: Resolver<ResolversTypes['MatchV4ParticipantTimeline'], ParentType, ContextType>;
+  timeline?: Resolver<ResolversTypes['Matchv4ParticipantTimeline'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4ParticipantIdentityResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4ParticipantIdentity'] = ResolversParentTypes['MatchV4ParticipantIdentity']> = {
+export type Matchv4ParticipantIdentityResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4ParticipantIdentity'] = ResolversParentTypes['Matchv4ParticipantIdentity']> = {
   participantId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  player?: Resolver<ResolversTypes['MatchV4Player'], ParentType, ContextType>;
+  player?: Resolver<ResolversTypes['Matchv4Player'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4ParticipantStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4ParticipantStats'] = ResolversParentTypes['MatchV4ParticipantStats']> = {
+export type Matchv4ParticipantStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4ParticipantStats'] = ResolversParentTypes['Matchv4ParticipantStats']> = {
   altarsCaptured?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   altarsNeutralized?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   assists?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -2269,7 +2280,7 @@ export type MatchV4ParticipantStatsResolvers<ContextType = any, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4ParticipantTimelineResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4ParticipantTimeline'] = ResolversParentTypes['MatchV4ParticipantTimeline']> = {
+export type Matchv4ParticipantTimelineResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4ParticipantTimeline'] = ResolversParentTypes['Matchv4ParticipantTimeline']> = {
   creepsPerMinDeltas?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   csDiffPerMinDeltas?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   damageTakenDiffPerMinDeltas?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
@@ -2283,7 +2294,7 @@ export type MatchV4ParticipantTimelineResolvers<ContextType = any, ParentType ex
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4Player'] = ResolversParentTypes['MatchV4Player']> = {
+export type Matchv4PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4Player'] = ResolversParentTypes['Matchv4Player']> = {
   accountId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   currentAccountId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   currentPlatformId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2295,20 +2306,20 @@ export type MatchV4PlayerResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4RuneResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4Rune'] = ResolversParentTypes['MatchV4Rune']> = {
+export type Matchv4RuneResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4Rune'] = ResolversParentTypes['Matchv4Rune']> = {
   rank?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   runeId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4TeamBansResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4TeamBans'] = ResolversParentTypes['MatchV4TeamBans']> = {
+export type Matchv4TeamBansResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4TeamBans'] = ResolversParentTypes['Matchv4TeamBans']> = {
   championId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   pickTurn?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type MatchV4TeamStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['MatchV4TeamStats'] = ResolversParentTypes['MatchV4TeamStats']> = {
-  bans?: Resolver<Array<Maybe<ResolversTypes['MatchV4TeamBans']>>, ParentType, ContextType>;
+export type Matchv4TeamStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Matchv4TeamStats'] = ResolversParentTypes['Matchv4TeamStats']> = {
+  bans?: Resolver<Array<Maybe<ResolversTypes['Matchv4TeamBans']>>, ParentType, ContextType>;
   baronKills?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   dominionVictoryScore?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   dragonKills?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -2329,24 +2340,24 @@ export type MatchV4TeamStatsResolvers<ContextType = any, ParentType extends Reso
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   info?: Resolver<ResolversTypes['Info'], ParentType, ContextType>;
-  summoner?: Resolver<Maybe<ResolversTypes['SummonerV4Summoner']>, ParentType, ContextType, RequireFields<QuerySummonerArgs, 'region'>>;
+  summoner?: Resolver<Maybe<ResolversTypes['Summonerv4Summoner']>, ParentType, ContextType, RequireFields<QuerySummonerArgs, 'region'>>;
   match?: Resolver<Maybe<ResolversTypes['Match']>, ParentType, ContextType, RequireFields<QueryMatchArgs, 'region' | 'matchId' | 'game'>>;
-  rankedList?: Resolver<Array<ResolversTypes['LeagueV4LeagueList']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier' | 'game'>>;
-  rankedLeague?: Resolver<ResolversTypes['LeagueV4LeagueEntry'], ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'game'>>;
-  tournament?: Resolver<Maybe<ResolversTypes['TournamentV4TournamentCode']>, ParentType, ContextType, RequireFields<QueryTournamentArgs, 'code'>>;
-  featured_games?: Resolver<Maybe<ResolversTypes['SpectatorV4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeatured_GamesArgs, never>>;
+  rankedList?: Resolver<Array<ResolversTypes['Leaguev4LeagueList']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier' | 'game'>>;
+  rankedLeague?: Resolver<ResolversTypes['Leaguev4LeagueEntry'], ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'game'>>;
+  tournament?: Resolver<Maybe<ResolversTypes['Tournamentv4TournamentCode']>, ParentType, ContextType, RequireFields<QueryTournamentArgs, 'code'>>;
+  featured_games?: Resolver<Maybe<ResolversTypes['Spectatorv4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeatured_GamesArgs, never>>;
   clash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
-export type SpectatorV4BannedChampionResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4BannedChampion'] = ResolversParentTypes['SpectatorV4BannedChampion']> = {
+export type Spectatorv4BannedChampionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4BannedChampion'] = ResolversParentTypes['Spectatorv4BannedChampion']> = {
   championId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   pickTurn?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   teamId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SpectatorV4CurrentGameInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4CurrentGameInfo'] = ResolversParentTypes['SpectatorV4CurrentGameInfo']> = {
-  bannedChampions?: Resolver<Array<Maybe<ResolversTypes['SpectatorV4BannedChampion']>>, ParentType, ContextType>;
+export type Spectatorv4CurrentGameInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4CurrentGameInfo'] = ResolversParentTypes['Spectatorv4CurrentGameInfo']> = {
+  bannedChampions?: Resolver<Array<Maybe<ResolversTypes['Spectatorv4BannedChampion']>>, ParentType, ContextType>;
   gameId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   gameLength?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   gameMode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2354,17 +2365,17 @@ export type SpectatorV4CurrentGameInfoResolvers<ContextType = any, ParentType ex
   gameStartTime?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   gameType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   mapId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  observers?: Resolver<ResolversTypes['SpectatorV4Observer'], ParentType, ContextType>;
-  participants?: Resolver<Array<Maybe<ResolversTypes['SpectatorV4CurrentGameParticipant']>>, ParentType, ContextType>;
+  observers?: Resolver<ResolversTypes['Spectatorv4Observer'], ParentType, ContextType>;
+  participants?: Resolver<Array<Maybe<ResolversTypes['Spectatorv4CurrentGameParticipant']>>, ParentType, ContextType>;
   platformId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SpectatorV4CurrentGameParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4CurrentGameParticipant'] = ResolversParentTypes['SpectatorV4CurrentGameParticipant']> = {
+export type Spectatorv4CurrentGameParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4CurrentGameParticipant'] = ResolversParentTypes['Spectatorv4CurrentGameParticipant']> = {
   bot?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   championId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  gameCustomizationObjects?: Resolver<Array<Maybe<ResolversTypes['SpectatorV4GameCustomizationObject']>>, ParentType, ContextType>;
-  perks?: Resolver<ResolversTypes['SpectatorV4Perks'], ParentType, ContextType>;
+  gameCustomizationObjects?: Resolver<Array<Maybe<ResolversTypes['Spectatorv4GameCustomizationObject']>>, ParentType, ContextType>;
+  perks?: Resolver<ResolversTypes['Spectatorv4Perks'], ParentType, ContextType>;
   profileIconId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   spell1Id?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   spell2Id?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -2374,8 +2385,8 @@ export type SpectatorV4CurrentGameParticipantResolvers<ContextType = any, Parent
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SpectatorV4FeaturedGameInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4FeaturedGameInfo'] = ResolversParentTypes['SpectatorV4FeaturedGameInfo']> = {
-  bannedChampions?: Resolver<Array<Maybe<ResolversTypes['SpectatorV4BannedChampion']>>, ParentType, ContextType>;
+export type Spectatorv4FeaturedGameInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4FeaturedGameInfo'] = ResolversParentTypes['Spectatorv4FeaturedGameInfo']> = {
+  bannedChampions?: Resolver<Array<Maybe<ResolversTypes['Spectatorv4BannedChampion']>>, ParentType, ContextType>;
   gameId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   gameLength?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   gameMode?: Resolver<ResolversTypes['GameMode'], ParentType, ContextType>;
@@ -2383,30 +2394,30 @@ export type SpectatorV4FeaturedGameInfoResolvers<ContextType = any, ParentType e
   gameStartTime?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   gameType?: Resolver<ResolversTypes['GameType'], ParentType, ContextType>;
   mapId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  observers?: Resolver<ResolversTypes['SpectatorV4Observer'], ParentType, ContextType>;
-  participants?: Resolver<Array<Maybe<ResolversTypes['SpectatorV4Participant']>>, ParentType, ContextType>;
+  observers?: Resolver<ResolversTypes['Spectatorv4Observer'], ParentType, ContextType>;
+  participants?: Resolver<Array<Maybe<ResolversTypes['Spectatorv4Participant']>>, ParentType, ContextType>;
   platformId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SpectatorV4FeaturedGamesResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4FeaturedGames'] = ResolversParentTypes['SpectatorV4FeaturedGames']> = {
+export type Spectatorv4FeaturedGamesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4FeaturedGames'] = ResolversParentTypes['Spectatorv4FeaturedGames']> = {
   clientRefreshInterval?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  gameList?: Resolver<Array<Maybe<ResolversTypes['SpectatorV4FeaturedGameInfo']>>, ParentType, ContextType>;
+  gameList?: Resolver<Array<Maybe<ResolversTypes['Spectatorv4FeaturedGameInfo']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SpectatorV4GameCustomizationObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4GameCustomizationObject'] = ResolversParentTypes['SpectatorV4GameCustomizationObject']> = {
+export type Spectatorv4GameCustomizationObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4GameCustomizationObject'] = ResolversParentTypes['Spectatorv4GameCustomizationObject']> = {
   category?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SpectatorV4ObserverResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4Observer'] = ResolversParentTypes['SpectatorV4Observer']> = {
+export type Spectatorv4ObserverResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4Observer'] = ResolversParentTypes['Spectatorv4Observer']> = {
   encryptionKey?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SpectatorV4ParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4Participant'] = ResolversParentTypes['SpectatorV4Participant']> = {
+export type Spectatorv4ParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4Participant'] = ResolversParentTypes['Spectatorv4Participant']> = {
   bot?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   championId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   profileIconId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -2417,38 +2428,38 @@ export type SpectatorV4ParticipantResolvers<ContextType = any, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SpectatorV4PerksResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpectatorV4Perks'] = ResolversParentTypes['SpectatorV4Perks']> = {
+export type Spectatorv4PerksResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4Perks'] = ResolversParentTypes['Spectatorv4Perks']> = {
   perkIds?: Resolver<Array<Maybe<ResolversTypes['Float']>>, ParentType, ContextType>;
   perkStyle?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   perkSubStyle?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type SummonerV4SummonerResolvers<ContextType = any, ParentType extends ResolversParentTypes['SummonerV4Summoner'] = ResolversParentTypes['SummonerV4Summoner']> = {
+export type Summonerv4SummonerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Summonerv4Summoner'] = ResolversParentTypes['Summonerv4Summoner']> = {
   accountId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  activeMatch?: Resolver<Maybe<ResolversTypes['SpectatorV4CurrentGameInfo']>, ParentType, ContextType, RequireFields<SummonerV4SummonerActiveMatchArgs, 'game'>>;
+  activeMatch?: Resolver<Maybe<ResolversTypes['Spectatorv4CurrentGameInfo']>, ParentType, ContextType, RequireFields<Summonerv4SummonerActiveMatchArgs, 'game'>>;
   championMastery?: Resolver<ResolversTypes['ChampionMastery'], ParentType, ContextType>;
-  clash?: Resolver<Array<ResolversTypes['ClashV1PlayerRegistration']>, ParentType, ContextType>;
+  clash?: Resolver<Array<ResolversTypes['Clashv1PlayerRegistration']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  matchList?: Resolver<Maybe<ResolversTypes['MatchList']>, ParentType, ContextType, RequireFields<SummonerV4SummonerMatchListArgs, 'game'>>;
+  matchList?: Resolver<Maybe<ResolversTypes['MatchList']>, ParentType, ContextType, RequireFields<Summonerv4SummonerMatchListArgs, 'game'>>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   profileIconId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   puuid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  rank?: Resolver<Maybe<ResolversTypes['LeagueV4LeagueEntry']>, ParentType, ContextType, RequireFields<SummonerV4SummonerRankArgs, 'queue'>>;
+  rank?: Resolver<Maybe<ResolversTypes['Leaguev4LeagueEntry']>, ParentType, ContextType, RequireFields<Summonerv4SummonerRankArgs, 'queue'>>;
   region?: Resolver<ResolversTypes['RegionInput'], ParentType, ContextType>;
   revisionDate?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   summonerLevel?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftLeagueV1LeagueEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftLeagueV1LeagueEntry'] = ResolversParentTypes['TftLeagueV1LeagueEntry']> = {
+export type Tftleaguev1LeagueEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftleaguev1LeagueEntry'] = ResolversParentTypes['Tftleaguev1LeagueEntry']> = {
   freshBlood?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   hotStreak?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   inactive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   leagueId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   leaguePoints?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  miniSeries?: Resolver<Maybe<ResolversTypes['TftLeagueV1MiniSeries']>, ParentType, ContextType>;
+  miniSeries?: Resolver<Maybe<ResolversTypes['Tftleaguev1MiniSeries']>, ParentType, ContextType>;
   queueType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rank?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2459,13 +2470,13 @@ export type TftLeagueV1LeagueEntryResolvers<ContextType = any, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftLeagueV1LeagueItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftLeagueV1LeagueItem'] = ResolversParentTypes['TftLeagueV1LeagueItem']> = {
+export type Tftleaguev1LeagueItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftleaguev1LeagueItem'] = ResolversParentTypes['Tftleaguev1LeagueItem']> = {
   freshBlood?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   hotStreak?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   inactive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   leaguePoints?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  miniSeries?: Resolver<Maybe<ResolversTypes['TftLeagueV1MiniSeries']>, ParentType, ContextType>;
+  miniSeries?: Resolver<Maybe<ResolversTypes['Tftleaguev1MiniSeries']>, ParentType, ContextType>;
   rank?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2474,8 +2485,8 @@ export type TftLeagueV1LeagueItemResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftLeagueV1LeagueListResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftLeagueV1LeagueList'] = ResolversParentTypes['TftLeagueV1LeagueList']> = {
-  entries?: Resolver<Array<Maybe<ResolversTypes['TftLeagueV1LeagueItem']>>, ParentType, ContextType>;
+export type Tftleaguev1LeagueListResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftleaguev1LeagueList'] = ResolversParentTypes['Tftleaguev1LeagueList']> = {
+  entries?: Resolver<Array<Maybe<ResolversTypes['Tftleaguev1LeagueItem']>>, ParentType, ContextType>;
   leagueId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   queue?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2483,7 +2494,7 @@ export type TftLeagueV1LeagueListResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftLeagueV1MiniSeriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftLeagueV1MiniSeries'] = ResolversParentTypes['TftLeagueV1MiniSeries']> = {
+export type Tftleaguev1MiniSeriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftleaguev1MiniSeries'] = ResolversParentTypes['Tftleaguev1MiniSeries']> = {
   losses?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   progress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   target?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -2492,66 +2503,66 @@ export type TftLeagueV1MiniSeriesResolvers<ContextType = any, ParentType extends
 };
 
 export type TftMatchIdListResolvers<ContextType = any, ParentType extends ResolversParentTypes['TFTMatchIdList'] = ResolversParentTypes['TFTMatchIdList']> = {
-  matchIds?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  matches?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftMatchV1CompanionResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftMatchV1Companion'] = ResolversParentTypes['TftMatchV1Companion']> = {
-  contentID?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  skinID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type Tftmatchv1CompanionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftmatchv1Companion'] = ResolversParentTypes['Tftmatchv1Companion']> = {
+  content_ID?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  skin_ID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   species?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftMatchV1InfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftMatchV1Info'] = ResolversParentTypes['TftMatchV1Info']> = {
-  gameDatetime?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  gameLength?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  gameVariation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  gameVersion?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  participants?: Resolver<Array<Maybe<ResolversTypes['TftMatchV1Participant']>>, ParentType, ContextType>;
-  queueId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  tftSetNumber?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type Tftmatchv1InfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftmatchv1Info'] = ResolversParentTypes['Tftmatchv1Info']> = {
+  game_datetime?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  game_length?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  game_variation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  game_version?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  participants?: Resolver<Array<Maybe<ResolversTypes['Tftmatchv1Participant']>>, ParentType, ContextType>;
+  queue_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  tft_set_number?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftMatchV1MatchResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftMatchV1Match'] = ResolversParentTypes['TftMatchV1Match']> = {
-  info?: Resolver<ResolversTypes['TftMatchV1Info'], ParentType, ContextType>;
-  metadata?: Resolver<ResolversTypes['TftMatchV1Metadata'], ParentType, ContextType>;
+export type Tftmatchv1MatchResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftmatchv1Match'] = ResolversParentTypes['Tftmatchv1Match']> = {
+  info?: Resolver<ResolversTypes['Tftmatchv1Info'], ParentType, ContextType>;
+  metadata?: Resolver<ResolversTypes['Tftmatchv1Metadata'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftMatchV1MetadataResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftMatchV1Metadata'] = ResolversParentTypes['TftMatchV1Metadata']> = {
-  dataVersion?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  matchId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type Tftmatchv1MetadataResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftmatchv1Metadata'] = ResolversParentTypes['Tftmatchv1Metadata']> = {
+  data_version?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  match_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   participants?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftMatchV1ParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftMatchV1Participant'] = ResolversParentTypes['TftMatchV1Participant']> = {
-  companion?: Resolver<ResolversTypes['TftMatchV1Companion'], ParentType, ContextType>;
-  goldLeft?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  lastRound?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type Tftmatchv1ParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftmatchv1Participant'] = ResolversParentTypes['Tftmatchv1Participant']> = {
+  companion?: Resolver<ResolversTypes['Tftmatchv1Companion'], ParentType, ContextType>;
+  gold_left?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  last_round?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   level?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   placement?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  playersEliminated?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  players_eliminated?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   puuid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  timeEliminated?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  totalDamageToPlayers?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  traits?: Resolver<Array<Maybe<ResolversTypes['TftMatchV1Trait']>>, ParentType, ContextType>;
-  units?: Resolver<Array<Maybe<ResolversTypes['TftMatchV1Unit']>>, ParentType, ContextType>;
+  time_eliminated?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  total_damage_to_players?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  traits?: Resolver<Array<Maybe<ResolversTypes['Tftmatchv1Trait']>>, ParentType, ContextType>;
+  units?: Resolver<Array<Maybe<ResolversTypes['Tftmatchv1Unit']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftMatchV1TraitResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftMatchV1Trait'] = ResolversParentTypes['TftMatchV1Trait']> = {
+export type Tftmatchv1TraitResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftmatchv1Trait'] = ResolversParentTypes['Tftmatchv1Trait']> = {
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  numUnits?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  tierCurrent?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  tierTotal?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  num_units?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  tier_current?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  tier_total?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftMatchV1UnitResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftMatchV1Unit'] = ResolversParentTypes['TftMatchV1Unit']> = {
-  characterId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type Tftmatchv1UnitResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftmatchv1Unit'] = ResolversParentTypes['Tftmatchv1Unit']> = {
+  character_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   items?: Resolver<Array<Maybe<ResolversTypes['Int']>>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rarity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -2559,7 +2570,7 @@ export type TftMatchV1UnitResolvers<ContextType = any, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TftSummonerV1SummonerResolvers<ContextType = any, ParentType extends ResolversParentTypes['TftSummonerV1Summoner'] = ResolversParentTypes['TftSummonerV1Summoner']> = {
+export type Tftsummonerv1SummonerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tftsummonerv1Summoner'] = ResolversParentTypes['Tftsummonerv1Summoner']> = {
   accountId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2570,37 +2581,37 @@ export type TftSummonerV1SummonerResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TournamentStubV4LobbyEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['TournamentStubV4LobbyEvent'] = ResolversParentTypes['TournamentStubV4LobbyEvent']> = {
+export type Tournamentstubv4LobbyEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tournamentstubv4LobbyEvent'] = ResolversParentTypes['Tournamentstubv4LobbyEvent']> = {
   eventType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TournamentStubV4LobbyEventDtoWrapperResolvers<ContextType = any, ParentType extends ResolversParentTypes['TournamentStubV4LobbyEventDTOWrapper'] = ResolversParentTypes['TournamentStubV4LobbyEventDTOWrapper']> = {
-  eventList?: Resolver<Array<Maybe<ResolversTypes['TournamentStubV4LobbyEvent']>>, ParentType, ContextType>;
+export type Tournamentstubv4LobbyEventDtoWrapperResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tournamentstubv4LobbyEventDTOWrapper'] = ResolversParentTypes['Tournamentstubv4LobbyEventDTOWrapper']> = {
+  eventList?: Resolver<Array<Maybe<ResolversTypes['Tournamentstubv4LobbyEvent']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TournamentV4LobbyEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['TournamentV4LobbyEvent'] = ResolversParentTypes['TournamentV4LobbyEvent']> = {
+export type Tournamentv4LobbyEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tournamentv4LobbyEvent'] = ResolversParentTypes['Tournamentv4LobbyEvent']> = {
   eventType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TournamentV4LobbyEventDtoWrapperResolvers<ContextType = any, ParentType extends ResolversParentTypes['TournamentV4LobbyEventDTOWrapper'] = ResolversParentTypes['TournamentV4LobbyEventDTOWrapper']> = {
-  eventList?: Resolver<Array<Maybe<ResolversTypes['TournamentV4LobbyEvent']>>, ParentType, ContextType>;
+export type Tournamentv4LobbyEventDtoWrapperResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tournamentv4LobbyEventDTOWrapper'] = ResolversParentTypes['Tournamentv4LobbyEventDTOWrapper']> = {
+  eventList?: Resolver<Array<Maybe<ResolversTypes['Tournamentv4LobbyEvent']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
-export type TournamentV4TournamentCodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['TournamentV4TournamentCode'] = ResolversParentTypes['TournamentV4TournamentCode']> = {
+export type Tournamentv4TournamentCodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tournamentv4TournamentCode'] = ResolversParentTypes['Tournamentv4TournamentCode']> = {
   code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  lobbyEvents?: Resolver<Maybe<ResolversTypes['TournamentV4LobbyEvent']>, ParentType, ContextType>;
+  lobbyEvents?: Resolver<Maybe<ResolversTypes['Tournamentv4LobbyEvent']>, ParentType, ContextType>;
   lobbyName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   map?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  matchDetails?: Resolver<Maybe<ResolversTypes['MatchV4Match']>, ParentType, ContextType, RequireFields<TournamentV4TournamentCodeMatchDetailsArgs, 'matchId'>>;
+  matchDetails?: Resolver<Maybe<ResolversTypes['Matchv4Match']>, ParentType, ContextType, RequireFields<Tournamentv4TournamentCodeMatchDetailsArgs, 'matchId'>>;
   metaData?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   participants?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2615,76 +2626,77 @@ export type TournamentV4TournamentCodeResolvers<ContextType = any, ParentType ex
 
 export type Resolvers<ContextType = any> = {
   ChampionMastery?: ChampionMasteryResolvers<ContextType>;
-  ChampionMasteryV4ChampionMastery?: ChampionMasteryV4ChampionMasteryResolvers<ContextType>;
-  ChampionV3ChampionInfo?: ChampionV3ChampionInfoResolvers<ContextType>;
-  ClashV1Player?: ClashV1PlayerResolvers<ContextType>;
-  ClashV1PlayerRegistration?: ClashV1PlayerRegistrationResolvers<ContextType>;
-  ClashV1Team?: ClashV1TeamResolvers<ContextType>;
-  ClashV1Tournament?: ClashV1TournamentResolvers<ContextType>;
-  ClashV1TournamentPhase?: ClashV1TournamentPhaseResolvers<ContextType>;
+  Championmasteryv4ChampionMastery?: Championmasteryv4ChampionMasteryResolvers<ContextType>;
+  Championv3ChampionInfo?: Championv3ChampionInfoResolvers<ContextType>;
+  Clashv1Player?: Clashv1PlayerResolvers<ContextType>;
+  Clashv1PlayerRegistration?: Clashv1PlayerRegistrationResolvers<ContextType>;
+  Clashv1Team?: Clashv1TeamResolvers<ContextType>;
+  Clashv1Tournament?: Clashv1TournamentResolvers<ContextType>;
+  Clashv1TournamentPhase?: Clashv1TournamentPhaseResolvers<ContextType>;
   Info?: InfoResolvers<ContextType>;
   JSON?: GraphQLScalarType;
-  LeagueExpV4LeagueEntry?: LeagueExpV4LeagueEntryResolvers<ContextType>;
-  LeagueExpV4MiniSeries?: LeagueExpV4MiniSeriesResolvers<ContextType>;
-  LeagueV4LeagueEntry?: LeagueV4LeagueEntryResolvers<ContextType>;
-  LeagueV4LeagueItem?: LeagueV4LeagueItemResolvers<ContextType>;
-  LeagueV4LeagueList?: LeagueV4LeagueListResolvers<ContextType>;
-  LeagueV4MiniSeries?: LeagueV4MiniSeriesResolvers<ContextType>;
-  LolStatusV3Incident?: LolStatusV3IncidentResolvers<ContextType>;
-  LolStatusV3Message?: LolStatusV3MessageResolvers<ContextType>;
-  LolStatusV3Service?: LolStatusV3ServiceResolvers<ContextType>;
-  LolStatusV3ShardStatus?: LolStatusV3ShardStatusResolvers<ContextType>;
-  LolStatusV3Translation?: LolStatusV3TranslationResolvers<ContextType>;
+  Leagueexpv4LeagueEntry?: Leagueexpv4LeagueEntryResolvers<ContextType>;
+  Leagueexpv4MiniSeries?: Leagueexpv4MiniSeriesResolvers<ContextType>;
+  Leaguev4LeagueEntry?: Leaguev4LeagueEntryResolvers<ContextType>;
+  Leaguev4LeagueItem?: Leaguev4LeagueItemResolvers<ContextType>;
+  Leaguev4LeagueList?: Leaguev4LeagueListResolvers<ContextType>;
+  Leaguev4MiniSeries?: Leaguev4MiniSeriesResolvers<ContextType>;
+  Lolstatusv3Incident?: Lolstatusv3IncidentResolvers<ContextType>;
+  Lolstatusv3Message?: Lolstatusv3MessageResolvers<ContextType>;
+  Lolstatusv3Service?: Lolstatusv3ServiceResolvers<ContextType>;
+  Lolstatusv3ShardStatus?: Lolstatusv3ShardStatusResolvers<ContextType>;
+  Lolstatusv3Translation?: Lolstatusv3TranslationResolvers<ContextType>;
   Long?: GraphQLScalarType;
-  LorRankedV1Leaderboard?: LorRankedV1LeaderboardResolvers<ContextType>;
-  LorRankedV1Player?: LorRankedV1PlayerResolvers<ContextType>;
+  Lorrankedv1Leaderboard?: Lorrankedv1LeaderboardResolvers<ContextType>;
+  Lorrankedv1Player?: Lorrankedv1PlayerResolvers<ContextType>;
   Match?: MatchResolvers;
+  MatchId?: GraphQLScalarType;
   MatchList?: MatchListResolvers;
-  MatchV4Mastery?: MatchV4MasteryResolvers<ContextType>;
-  MatchV4Match?: MatchV4MatchResolvers<ContextType>;
-  MatchV4MatchEvent?: MatchV4MatchEventResolvers<ContextType>;
-  MatchV4MatchFrame?: MatchV4MatchFrameResolvers<ContextType>;
-  MatchV4Matchlist?: MatchV4MatchlistResolvers<ContextType>;
-  MatchV4MatchPosition?: MatchV4MatchPositionResolvers<ContextType>;
-  MatchV4MatchReference?: MatchV4MatchReferenceResolvers<ContextType>;
-  MatchV4MatchTimeline?: MatchV4MatchTimelineResolvers<ContextType>;
-  MatchV4Participant?: MatchV4ParticipantResolvers<ContextType>;
-  MatchV4ParticipantIdentity?: MatchV4ParticipantIdentityResolvers<ContextType>;
-  MatchV4ParticipantStats?: MatchV4ParticipantStatsResolvers<ContextType>;
-  MatchV4ParticipantTimeline?: MatchV4ParticipantTimelineResolvers<ContextType>;
-  MatchV4Player?: MatchV4PlayerResolvers<ContextType>;
-  MatchV4Rune?: MatchV4RuneResolvers<ContextType>;
-  MatchV4TeamBans?: MatchV4TeamBansResolvers<ContextType>;
-  MatchV4TeamStats?: MatchV4TeamStatsResolvers<ContextType>;
+  Matchv4Mastery?: Matchv4MasteryResolvers<ContextType>;
+  Matchv4Match?: Matchv4MatchResolvers<ContextType>;
+  Matchv4MatchEvent?: Matchv4MatchEventResolvers<ContextType>;
+  Matchv4MatchFrame?: Matchv4MatchFrameResolvers<ContextType>;
+  Matchv4Matchlist?: Matchv4MatchlistResolvers<ContextType>;
+  Matchv4MatchPosition?: Matchv4MatchPositionResolvers<ContextType>;
+  Matchv4MatchReference?: Matchv4MatchReferenceResolvers<ContextType>;
+  Matchv4MatchTimeline?: Matchv4MatchTimelineResolvers<ContextType>;
+  Matchv4Participant?: Matchv4ParticipantResolvers<ContextType>;
+  Matchv4ParticipantIdentity?: Matchv4ParticipantIdentityResolvers<ContextType>;
+  Matchv4ParticipantStats?: Matchv4ParticipantStatsResolvers<ContextType>;
+  Matchv4ParticipantTimeline?: Matchv4ParticipantTimelineResolvers<ContextType>;
+  Matchv4Player?: Matchv4PlayerResolvers<ContextType>;
+  Matchv4Rune?: Matchv4RuneResolvers<ContextType>;
+  Matchv4TeamBans?: Matchv4TeamBansResolvers<ContextType>;
+  Matchv4TeamStats?: Matchv4TeamStatsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  SpectatorV4BannedChampion?: SpectatorV4BannedChampionResolvers<ContextType>;
-  SpectatorV4CurrentGameInfo?: SpectatorV4CurrentGameInfoResolvers<ContextType>;
-  SpectatorV4CurrentGameParticipant?: SpectatorV4CurrentGameParticipantResolvers<ContextType>;
-  SpectatorV4FeaturedGameInfo?: SpectatorV4FeaturedGameInfoResolvers<ContextType>;
-  SpectatorV4FeaturedGames?: SpectatorV4FeaturedGamesResolvers<ContextType>;
-  SpectatorV4GameCustomizationObject?: SpectatorV4GameCustomizationObjectResolvers<ContextType>;
-  SpectatorV4Observer?: SpectatorV4ObserverResolvers<ContextType>;
-  SpectatorV4Participant?: SpectatorV4ParticipantResolvers<ContextType>;
-  SpectatorV4Perks?: SpectatorV4PerksResolvers<ContextType>;
-  SummonerV4Summoner?: SummonerV4SummonerResolvers<ContextType>;
-  TftLeagueV1LeagueEntry?: TftLeagueV1LeagueEntryResolvers<ContextType>;
-  TftLeagueV1LeagueItem?: TftLeagueV1LeagueItemResolvers<ContextType>;
-  TftLeagueV1LeagueList?: TftLeagueV1LeagueListResolvers<ContextType>;
-  TftLeagueV1MiniSeries?: TftLeagueV1MiniSeriesResolvers<ContextType>;
+  Spectatorv4BannedChampion?: Spectatorv4BannedChampionResolvers<ContextType>;
+  Spectatorv4CurrentGameInfo?: Spectatorv4CurrentGameInfoResolvers<ContextType>;
+  Spectatorv4CurrentGameParticipant?: Spectatorv4CurrentGameParticipantResolvers<ContextType>;
+  Spectatorv4FeaturedGameInfo?: Spectatorv4FeaturedGameInfoResolvers<ContextType>;
+  Spectatorv4FeaturedGames?: Spectatorv4FeaturedGamesResolvers<ContextType>;
+  Spectatorv4GameCustomizationObject?: Spectatorv4GameCustomizationObjectResolvers<ContextType>;
+  Spectatorv4Observer?: Spectatorv4ObserverResolvers<ContextType>;
+  Spectatorv4Participant?: Spectatorv4ParticipantResolvers<ContextType>;
+  Spectatorv4Perks?: Spectatorv4PerksResolvers<ContextType>;
+  Summonerv4Summoner?: Summonerv4SummonerResolvers<ContextType>;
+  Tftleaguev1LeagueEntry?: Tftleaguev1LeagueEntryResolvers<ContextType>;
+  Tftleaguev1LeagueItem?: Tftleaguev1LeagueItemResolvers<ContextType>;
+  Tftleaguev1LeagueList?: Tftleaguev1LeagueListResolvers<ContextType>;
+  Tftleaguev1MiniSeries?: Tftleaguev1MiniSeriesResolvers<ContextType>;
   TFTMatchIdList?: TftMatchIdListResolvers<ContextType>;
-  TftMatchV1Companion?: TftMatchV1CompanionResolvers<ContextType>;
-  TftMatchV1Info?: TftMatchV1InfoResolvers<ContextType>;
-  TftMatchV1Match?: TftMatchV1MatchResolvers<ContextType>;
-  TftMatchV1Metadata?: TftMatchV1MetadataResolvers<ContextType>;
-  TftMatchV1Participant?: TftMatchV1ParticipantResolvers<ContextType>;
-  TftMatchV1Trait?: TftMatchV1TraitResolvers<ContextType>;
-  TftMatchV1Unit?: TftMatchV1UnitResolvers<ContextType>;
-  TftSummonerV1Summoner?: TftSummonerV1SummonerResolvers<ContextType>;
-  TournamentStubV4LobbyEvent?: TournamentStubV4LobbyEventResolvers<ContextType>;
-  TournamentStubV4LobbyEventDTOWrapper?: TournamentStubV4LobbyEventDtoWrapperResolvers<ContextType>;
-  TournamentV4LobbyEvent?: TournamentV4LobbyEventResolvers<ContextType>;
-  TournamentV4LobbyEventDTOWrapper?: TournamentV4LobbyEventDtoWrapperResolvers<ContextType>;
-  TournamentV4TournamentCode?: TournamentV4TournamentCodeResolvers<ContextType>;
+  Tftmatchv1Companion?: Tftmatchv1CompanionResolvers<ContextType>;
+  Tftmatchv1Info?: Tftmatchv1InfoResolvers<ContextType>;
+  Tftmatchv1Match?: Tftmatchv1MatchResolvers<ContextType>;
+  Tftmatchv1Metadata?: Tftmatchv1MetadataResolvers<ContextType>;
+  Tftmatchv1Participant?: Tftmatchv1ParticipantResolvers<ContextType>;
+  Tftmatchv1Trait?: Tftmatchv1TraitResolvers<ContextType>;
+  Tftmatchv1Unit?: Tftmatchv1UnitResolvers<ContextType>;
+  Tftsummonerv1Summoner?: Tftsummonerv1SummonerResolvers<ContextType>;
+  Tournamentstubv4LobbyEvent?: Tournamentstubv4LobbyEventResolvers<ContextType>;
+  Tournamentstubv4LobbyEventDTOWrapper?: Tournamentstubv4LobbyEventDtoWrapperResolvers<ContextType>;
+  Tournamentv4LobbyEvent?: Tournamentv4LobbyEventResolvers<ContextType>;
+  Tournamentv4LobbyEventDTOWrapper?: Tournamentv4LobbyEventDtoWrapperResolvers<ContextType>;
+  Tournamentv4TournamentCode?: Tournamentv4TournamentCodeResolvers<ContextType>;
 };
 
 

@@ -1,4 +1,4 @@
-extend type SummonerV4Summoner {
+extend type Summonerv4Summoner {
   """
   Get matchlist for games played by this summoner and game title and filtered using given filter parameters, if any.
 
@@ -17,11 +17,11 @@ extend type SummonerV4Summoner {
   """
   Get current game information for the given summoner.
   """
-  activeMatch(game: Game!): SpectatorV4CurrentGameInfo
+  activeMatch(game: Game!): Spectatorv4CurrentGameInfo
   """
   Get ranked details of this summoner by queue.
   """
-  rank(queue: AllRankedQueues!): LeagueV4LeagueEntry
+  rank(queue: AllRankedQueues!): Leaguev4LeagueEntry
   """
   Get champion mastery information of this summoner
   """
@@ -29,11 +29,11 @@ extend type SummonerV4Summoner {
   """
   Get an array of clash registrations for this summoner.
   """
-  clash: [ClashV1PlayerRegistration!]!
+  clash: [Clashv1PlayerRegistration!]!
   region: RegionInput!
 }
 
-type ClashV1PlayerRegistration {
+type Clashv1PlayerRegistration {
   "Clash lane assignment"
   position: Position!
   "Clash team role assignment"
@@ -41,7 +41,7 @@ type ClashV1PlayerRegistration {
   summonerId: String!
   teamId: String!
   "Clash team details"
-  team: ClashV1Team!
+  team: Clashv1Team!
 }
 
 input MatchListFilterInput {
@@ -83,13 +83,13 @@ input MatchListFilterInput {
 """
 Matchlist return types. TFT matchlist returns only a list of ids
 """
-union MatchList = MatchV4Matchlist | TFTMatchIdList
+union MatchList = Matchv4Matchlist | TFTMatchIdList
 
 """
 TFT matchlist return type. Returns a list of match ids
 """
 type TFTMatchIdList {
-  matchIds: [String!]!
+  matches: [String!]!
 }
 
 "League Game Queue Ids"
@@ -103,5 +103,5 @@ type ChampionMastery {
   "Get a player's total champion mastery score, which is the sum of individual champion mastery levels."
   score: Int!
   "Get all champion mastery entries sorted by number of champion points descending filtered by champion Ids if specified."
-  byChampion(champIds: [Int!]): [ChampionMasteryV4ChampionMastery!]
+  byChampion(champIds: [Int!]): [Championmasteryv4ChampionMastery!]
 }

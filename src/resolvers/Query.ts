@@ -1,4 +1,7 @@
-import { QueryResolvers, SummonerV4Summoner } from "../generated/graphql";
+import {
+  QueryResolvers,
+  Summonerv4Summoner,
+} from "../generated/graphql";
 import { Context } from "..";
 import { AxiosResponse } from "openapi-client-axios";
 import { Components } from "../generated/riot-types";
@@ -9,7 +12,7 @@ const info: QueryResolvers["info"] = function (parent, args, context, info) {
     version: process.env.npm_package_version,
     constants:
       "https://developer.riotgames.com/docs/lol#general_game-constants",
-    repo: "",
+    repo: "https://github.com/jeongY-Cho/riotql",
   };
 };
 
@@ -65,7 +68,7 @@ const summoner: QueryResolvers<Context>["summoner"] = async (
     ? ({
         ...res.data,
         region,
-      } as SummonerV4Summoner)
+      } as Summonerv4Summoner)
     : null;
 };
 
