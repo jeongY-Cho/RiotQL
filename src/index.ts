@@ -3,6 +3,7 @@ import OpenAPIClientAxios, {
   Operation,
   AxiosRequestConfig,
 } from "openapi-client-axios";
+import { setupCache, setup } from "axios-cache-adapter";
 import qs from "qs";
 
 import resolvers from "./resolvers";
@@ -92,7 +93,18 @@ async function main(options?: AxiosRequestConfig) {
 }
 
 if (require.main === module) {
-  main().then((server) => {
+  let cache = setupCache({
+    maxAge: 15 * 60 * 1000,
+    // @ts-ignore || conservative caching
+    limit: 100,
+    exclude: {
+      query: false,
+    },
+  });
+  main({
+    // @ts-ignore
+    adapter: cache.adapter,
+  }).then((server) => {
     server.start({ port: process.env.PORT || 4000 }, ({ port }) => {
       console.log(`Starting on port: ${port}`);
     });

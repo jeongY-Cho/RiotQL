@@ -1,4 +1,4 @@
-# Riotql
+# RiotQL
 
 ### A graphql wrapper for Riot API
 
@@ -39,9 +39,15 @@ npm run build
   npm start
 ```
 
+#### or import into your project:
+
+```typescript
+import RiotQL form
+```
+
 ## Todo
 
-- [ ] Caching for requests that go multiple times
+- [x] ~~Caching for requests that go multiple times~~ exposed axios options to export so can use any adapter for caching
 - [ ] Rate limiting / request counting / how many requests left / 'retry-after' on error
 - [ ] Query resolvers for:
 - - [x] match
