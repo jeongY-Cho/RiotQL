@@ -1,5 +1,8 @@
 import { GraphQLServer } from "graphql-yoga";
-import OpenAPIClientAxios, { Operation } from "openapi-client-axios";
+import OpenAPIClientAxios, {
+  Operation,
+  AxiosRequestConfig,
+} from "openapi-client-axios";
 import qs from "qs";
 
 import resolvers from "./resolvers";
@@ -23,7 +26,7 @@ export type Context = {
   api: Api;
 } & ContextParameters;
 
-async function main() {
+async function main(options?: AxiosRequestConfig) {
   dotenv.config();
 
   const RIOT_KEY = process.env.RIOT_KEY;
@@ -34,6 +37,7 @@ async function main() {
   const OpenAPI = new OpenAPIClientAxios({
     definition: process.env.RIOT_OPENAPI_SCHEMA,
     validate: false,
+    // @ts-ignore || axios dependency for openapi-client-axios is behind so types aren't exactly the same
     axiosConfigDefaults: {
       headers: {
         "X-Riot-Token": process.env.RIOT_KEY,
@@ -41,6 +45,7 @@ async function main() {
       paramsSerializer: function (params) {
         return qs.stringify(params, { arrayFormat: "repeat" });
       },
+      ...options,
     },
   });
 
@@ -68,14 +73,14 @@ async function main() {
         OperationMethods[T]
       >;
     } catch (err) {
-      if (err.status?.code == 404) {
+      if (err.response?.status == 404) {
         return null;
       }
       throw err;
     }
   };
 
-  const server = new GraphQLServer({
+  return new GraphQLServer({
     typeDefs,
     // @ts-ignore
     resolvers,
@@ -84,12 +89,12 @@ async function main() {
       api,
     }),
   });
-
-  server.start({ port: process.env.PORT || 4000 }, ({ port }) => {
-    console.log(`Starting on port: ${port}`);
-  });
 }
 
 if (require.main === module) {
-  main();
+  main().then((server) => {
+    server.start({ port: process.env.PORT || 4000 }, ({ port }) => {
+      console.log(`Starting on port: ${port}`);
+    });
+  });
 }
