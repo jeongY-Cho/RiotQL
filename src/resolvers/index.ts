@@ -7,7 +7,7 @@ import Clashv1PlayerRegistration from "./ClashPlayerRegistration";
 
 const resolvers: Resolvers = {
   Query,
-  SummonerV4Summoner,
+  Summonerv4Summoner,
   JSON: JSONObjectResolver,
   MatchList: {
     __resolveType(obj, context, info) {
@@ -28,5 +28,22 @@ const resolvers: Resolvers = {
   },
   ChampionMastery,
   Clashv1PlayerRegistration,
+  Match: {
+    __resolveType(obj, context, info) {
+      for (const node of info.fieldNodes[0].arguments!) {
+        if (node.name.value === "game" && node.value.kind === "EnumValue") {
+          switch (node.value.value) {
+            case "League":
+              return "Matchv4Match";
+            case "TFT":
+              return "Tftmatchv1Match";
+            case "LOR":
+              return null;
+          }
+        }
+      }
+      return null;
+    },
+  },
 };
 export default resolvers;

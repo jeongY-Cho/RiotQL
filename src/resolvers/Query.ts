@@ -1,10 +1,15 @@
 import {
   QueryResolvers,
   Summonerv4Summoner,
+  Game,
+  Tftmatchv1Match,
+  Matchv4Mastery,
+  Matchv4Match,
 } from "../generated/graphql";
 import { Context } from "..";
 import { AxiosResponse } from "openapi-client-axios";
 import { Components } from "../generated/riot-types";
+import { groupRegions } from "../utils";
 
 const info: QueryResolvers["info"] = function (parent, args, context, info) {
   return {
@@ -72,7 +77,42 @@ const summoner: QueryResolvers<Context>["summoner"] = async (
     : null;
 };
 
-// const match: QueryResolvers["match"] = (parent, args, context, info) => {};
+const match: QueryResolvers<Context>["match"] = async (
+  parent,
+  args,
+  context,
+  info
+) => {
+  switch (args.game) {
+    case Game.League:
+      let res = await context.api(args.region, "match-v4.getMatch", {
+        matchId: args.matchId,
+      });
+      // typecast because stupid enum incompatibility
+      return res ? ((res.data as unknown) as Matchv4Match) : res;
+    case Game.Tft:
+      try {
+        let res2 = await context.api(
+          groupRegions(args.region),
+          "tft-match-v1.getMatch",
+          {
+            matchId: args.matchId,
+          }
+        );
+        if (!res2) return null;
+
+        // typecast because stupid enum incompatibility
+        return (res2.data as unknown) as Tftmatchv1Match;
+      } catch (err) {
+        console.log(err);
+        return null;
+      }
+
+    case Game.Lor:
+      // TODO lor match
+      return null;
+  }
+};
 
 // const rankedList: QueryResolvers["rankedList"] = (
 //   parent,
@@ -181,5 +221,6 @@ const summoner: QueryResolvers<Context>["summoner"] = async (
 const QueryResolvers: QueryResolvers = {
   info,
   summoner,
+  match,
 };
 export default QueryResolvers;
