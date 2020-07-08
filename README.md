@@ -68,6 +68,6 @@ import RiotQL from "./build/index.js";
 
 ## Known Issues:
 
-- graphql schema names don't follow PascalCase/camelCase conventions because of name sanitizer of the graphql schema codegen breaks some names.
+- graphql schema names don't completely follow PascalCase/camelCase conventions because of name sanitizer of the graphql schema codegen breaks some names.
   - I could find the name sanitizer in the openapi-to-graphql depenency and enforce naming conventions but I can't be bothered to atm.
 - tournament implementation cannot be tested since I'm not a tournament provider
