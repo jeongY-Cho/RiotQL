@@ -792,6 +792,7 @@ export type Query = {
   rankedList: Array<Leaguev4LeagueList>;
   rankedLeague: Leaguev4LeagueEntry;
   tournament?: Maybe<Tournamentv4TournamentCode>;
+  tournamentStub: TournamentStub;
   /**
    * Get featured league games.
    * note! game parameter is ignored atm
@@ -836,6 +837,11 @@ export type QueryRankedLeagueArgs = {
 
 
 export type QueryTournamentArgs = {
+  code: Scalars['String'];
+};
+
+
+export type QueryTournamentStubArgs = {
   code: Scalars['String'];
 };
 
@@ -1351,6 +1357,11 @@ export enum Tier3 {
   Iron = 'IRON'
 }
 
+export type TournamentStub = {
+  __typename?: 'TournamentStub';
+  lobbyEvents: Array<Tournamentv4LobbyEvent>;
+};
+
 export type Tournamentstubv4LobbyEvent = {
   __typename?: 'Tournamentstubv4LobbyEvent';
   /** The type of event that was triggered */
@@ -1456,12 +1467,13 @@ export type Tournamentv4TournamentCode = {
   code: Scalars['String'];
   /** The tournament code's ID. */
   id: Scalars['Int'];
-  lobbyEvents?: Maybe<Tournamentv4LobbyEvent>;
+  lobbyEvents: Array<Tournamentv4LobbyEvent>;
   /** The lobby name for the tournament code game. */
   lobbyName: Scalars['String'];
   /** The game map for the tournament code game */
   map: Scalars['String'];
   matchDetails?: Maybe<Matchv4Match>;
+  matchList: Array<Scalars['Long']>;
   /** The metadata for tournament code. */
   metaData: Scalars['String'];
   /** The summonerIds of the participants (Encrypted) */
@@ -1699,6 +1711,7 @@ export type ResolversTypes = {
   Tournamentv4TournamentCode: ResolverTypeWrapper<Tournamentv4TournamentCode>;
   Tournamentv4LobbyEvent: ResolverTypeWrapper<Tournamentv4LobbyEvent>;
   Region2: Region2;
+  TournamentStub: ResolverTypeWrapper<TournamentStub>;
   Spectatorv4FeaturedGames: ResolverTypeWrapper<Spectatorv4FeaturedGames>;
   Spectatorv4FeaturedGameInfo: ResolverTypeWrapper<Spectatorv4FeaturedGameInfo>;
   GameMode: GameMode;
@@ -1798,6 +1811,7 @@ export type ResolversParentTypes = {
   Leaguev4LeagueItem: Leaguev4LeagueItem;
   Tournamentv4TournamentCode: Tournamentv4TournamentCode;
   Tournamentv4LobbyEvent: Tournamentv4LobbyEvent;
+  TournamentStub: TournamentStub;
   Spectatorv4FeaturedGames: Spectatorv4FeaturedGames;
   Spectatorv4FeaturedGameInfo: Spectatorv4FeaturedGameInfo;
   Spectatorv4Participant: Spectatorv4Participant;
@@ -2351,6 +2365,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   rankedList?: Resolver<Array<ResolversTypes['Leaguev4LeagueList']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier' | 'game'>>;
   rankedLeague?: Resolver<ResolversTypes['Leaguev4LeagueEntry'], ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'game'>>;
   tournament?: Resolver<Maybe<ResolversTypes['Tournamentv4TournamentCode']>, ParentType, ContextType, RequireFields<QueryTournamentArgs, 'code'>>;
+  tournamentStub?: Resolver<ResolversTypes['TournamentStub'], ParentType, ContextType, RequireFields<QueryTournamentStubArgs, 'code'>>;
   featuredGames?: Resolver<Maybe<ResolversTypes['Spectatorv4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeaturedGamesArgs, 'region' | 'game'>>;
   championRotation?: Resolver<ResolversTypes['Championv3ChampionInfo'], ParentType, ContextType>;
   clash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2588,6 +2603,11 @@ export type Tftsummonerv1SummonerResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
+export type TournamentStubResolvers<ContextType = any, ParentType extends ResolversParentTypes['TournamentStub'] = ResolversParentTypes['TournamentStub']> = {
+  lobbyEvents?: Resolver<Array<ResolversTypes['Tournamentv4LobbyEvent']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
 export type Tournamentstubv4LobbyEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tournamentstubv4LobbyEvent'] = ResolversParentTypes['Tournamentstubv4LobbyEvent']> = {
   eventType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   summonerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2615,10 +2635,11 @@ export type Tournamentv4LobbyEventDtoWrapperResolvers<ContextType = any, ParentT
 export type Tournamentv4TournamentCodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tournamentv4TournamentCode'] = ResolversParentTypes['Tournamentv4TournamentCode']> = {
   code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  lobbyEvents?: Resolver<Maybe<ResolversTypes['Tournamentv4LobbyEvent']>, ParentType, ContextType>;
+  lobbyEvents?: Resolver<Array<ResolversTypes['Tournamentv4LobbyEvent']>, ParentType, ContextType>;
   lobbyName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   map?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   matchDetails?: Resolver<Maybe<ResolversTypes['Matchv4Match']>, ParentType, ContextType, RequireFields<Tournamentv4TournamentCodeMatchDetailsArgs, 'matchId'>>;
+  matchList?: Resolver<Array<ResolversTypes['Long']>, ParentType, ContextType>;
   metaData?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   participants?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2699,6 +2720,7 @@ export type Resolvers<ContextType = any> = {
   Tftmatchv1Trait?: Tftmatchv1TraitResolvers<ContextType>;
   Tftmatchv1Unit?: Tftmatchv1UnitResolvers<ContextType>;
   Tftsummonerv1Summoner?: Tftsummonerv1SummonerResolvers<ContextType>;
+  TournamentStub?: TournamentStubResolvers<ContextType>;
   Tournamentstubv4LobbyEvent?: Tournamentstubv4LobbyEventResolvers<ContextType>;
   Tournamentstubv4LobbyEventDTOWrapper?: Tournamentstubv4LobbyEventDtoWrapperResolvers<ContextType>;
   Tournamentv4LobbyEvent?: Tournamentv4LobbyEventResolvers<ContextType>;

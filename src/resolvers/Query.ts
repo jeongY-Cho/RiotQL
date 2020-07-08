@@ -5,6 +5,7 @@ import {
   Tftmatchv1Match,
   Matchv4Mastery,
   Matchv4Match,
+  Tournamentv4TournamentCode,
 } from "../generated/graphql";
 import { Context } from "..";
 import { AxiosResponse } from "openapi-client-axios";
@@ -128,12 +129,47 @@ const match: QueryResolvers<Context>["match"] = async (
 //   info
 // ) => {};
 
-// const tournament: QueryResolvers["tournament"] = (
-//   parent,
-//   args,
-//   context,
-//   info
-// ) => {};
+const tournament: QueryResolvers<Context>["tournament"] = async (
+  parent,
+  args,
+  context,
+  info
+) => {
+  let res = await context.api(
+    "americas",
+    "tournament-v4.getTournamentCode",
+    {
+      tournamentCode: args.code,
+    },
+    undefined,
+    {
+      // @ts-expect-error
+      cache: {
+        ignoreCache: true,
+      },
+    }
+  );
+  // typecast because stupid enum incompatabiilty
+  return res ? (res.data as Tournamentv4TournamentCode) : null;
+};
+
+const tournamentStub: QueryResolvers<Context>["tournamentStub"] = async (
+  parent,
+  args,
+  context,
+  info
+) => {
+  const res = await context.api(
+    "americas",
+    "tournament-stub-v4.getLobbyEventsByCode",
+    { tournamentCode: args.code }
+  );
+  const lobbyEvents = res ? res.data.eventList : [];
+
+  return {
+    lobbyEvents,
+  };
+};
 
 const featuredGames: QueryResolvers<Context>["featuredGames"] = async (
   parent,

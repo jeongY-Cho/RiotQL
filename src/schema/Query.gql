@@ -18,6 +18,7 @@ type Query {
   ): [Leaguev4LeagueList!]!
   rankedLeague(tier: Tier, leagueId: String, game: Game!): Leaguev4LeagueEntry!
   tournament(code: String!): Tournamentv4TournamentCode
+  tournamentStub(code: String!): TournamentStub!
   """
   Get featured league games.
   note! game parameter is ignored atm
@@ -97,4 +98,8 @@ type Info {
   version: String
   constants: String
   repo: String
+}
+
+type TournamentStub {
+  lobbyEvents: [Tournamentv4LobbyEvent!]!
 }

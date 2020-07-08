@@ -1,4 +1,5 @@
 extend type Tournamentv4TournamentCode {
+  matchList: [Long!]!
   matchDetails(matchId: Float!): Matchv4Match
-  lobbyEvents: Tournamentv4LobbyEvent
+  lobbyEvents: [Tournamentv4LobbyEvent!]!
 }

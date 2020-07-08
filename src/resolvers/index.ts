@@ -1,6 +1,7 @@
 import { Resolvers, Game } from "../generated/graphql";
 import Query from "./Query";
 import Summonerv4Summoner from "./Summoner";
+import Tournamentv4TournamentCode from "./Tournament";
 import { JSONObjectResolver } from "graphql-scalars";
 import ChampionMastery from "./summoner/ChampionMastery";
 import Clashv1PlayerRegistration from "./ClashPlayerRegistration";
@@ -9,6 +10,9 @@ const resolvers: Resolvers = {
   Query,
   Summonerv4Summoner,
   JSON: JSONObjectResolver,
+  ChampionMastery,
+  Clashv1PlayerRegistration,
+  Tournamentv4TournamentCode,
   MatchList: {
     __resolveType(obj, context, info) {
       for (const node of info.fieldNodes[0].arguments!) {
@@ -26,8 +30,6 @@ const resolvers: Resolvers = {
       return null;
     },
   },
-  ChampionMastery,
-  Clashv1PlayerRegistration,
   Match: {
     __resolveType(obj, context, info) {
       for (const node of info.fieldNodes[0].arguments!) {

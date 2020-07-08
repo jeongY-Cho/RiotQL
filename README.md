@@ -53,7 +53,7 @@ import RiotQL from "./build/index.js";
 - - [x] match
 - - [ ] rankedList
 - - [ ] rankedLeague
-- - [ ] tournament
+- - [x] tournament / tournament stub
 - - [ ] clash
 - - [x] featured games
 - - [x] free champion rotation
@@ -70,3 +70,4 @@ import RiotQL from "./build/index.js";
 
 - graphql schema names don't follow PascalCase/camelCase conventions because of name sanitizer of the graphql schema codegen breaks some names.
   - I could find the name sanitizer in the openapi-to-graphql depenency and enforce naming conventions but I can't be bothered to atm.
+- tournament implementation cannot be tested since I'm not a tournament provider
