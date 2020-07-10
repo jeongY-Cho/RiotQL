@@ -252,7 +252,7 @@ const tournament: QueryResolvers<Context>["tournament"] = async (
     },
     undefined,
     {
-      // @ts-expect-error
+      // @ts-ignore
       cache: {
         ignoreCache: true,
       },
@@ -295,7 +295,7 @@ const featuredGames: QueryResolvers<Context>["featuredGames"] = async (
         undefined,
         undefined,
         {
-          // @ts-expect-error
+          // @ts-ignore
           cache: {
             maxAge: 5 * 60 * 1000,
           },
