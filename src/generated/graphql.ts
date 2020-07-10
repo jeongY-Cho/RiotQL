@@ -836,7 +836,7 @@ export type QueryRankedListArgs = {
   region: RegionInput;
   queue: AllRankedQueues;
   tier: LowerTier;
-  division?: Maybe<Division>;
+  division: Division;
   page?: Maybe<Scalars['Int']>;
 };
 
@@ -2376,7 +2376,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   info?: Resolver<ResolversTypes['Info'], ParentType, ContextType>;
   summoner?: Resolver<Maybe<ResolversTypes['Summonerv4Summoner']>, ParentType, ContextType, RequireFields<QuerySummonerArgs, 'region'>>;
   match?: Resolver<Maybe<ResolversTypes['Match']>, ParentType, ContextType, RequireFields<QueryMatchArgs, 'region' | 'matchId' | 'game'>>;
-  rankedList?: Resolver<Array<ResolversTypes['Leaguev4LeagueEntry']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier'>>;
+  rankedList?: Resolver<Array<ResolversTypes['Leaguev4LeagueEntry']>, ParentType, ContextType, RequireFields<QueryRankedListArgs, 'region' | 'queue' | 'tier' | 'division'>>;
   rankedLeague?: Resolver<Maybe<ResolversTypes['Leaguev4LeagueList']>, ParentType, ContextType, RequireFields<QueryRankedLeagueArgs, 'region'>>;
   tournament?: Resolver<Maybe<ResolversTypes['Tournamentv4TournamentCode']>, ParentType, ContextType, RequireFields<QueryTournamentArgs, 'code'>>;
   tournamentStub?: Resolver<ResolversTypes['TournamentStub'], ParentType, ContextType, RequireFields<QueryTournamentStubArgs, 'code'>>;

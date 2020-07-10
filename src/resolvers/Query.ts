@@ -11,7 +11,7 @@ import {
 import { Context } from "..";
 import { AxiosResponse } from "openapi-client-axios";
 import { Components } from "../generated/riot-types";
-import { groupRegions } from "../utils";
+import { groupRegions, removeNulls } from "../utils";
 
 const info: QueryResolvers["info"] = function (parent, args, context, info) {
   return {
@@ -116,12 +116,36 @@ const match: QueryResolvers<Context>["match"] = async (
   }
 };
 
-// const rankedList: QueryResolvers["rankedList"] = (
-//   parent,
-//   args,
-//   context,
-//   info
-// ) => {};
+const rankedList: QueryResolvers<Context>["rankedList"] = async (
+  parent,
+  { queue, region, tier, division, page },
+  context,
+  info
+) => {
+  switch (queue) {
+    case AllRankedQueues.RankedFlexSr:
+    case AllRankedQueues.RankedFlexTt:
+    case AllRankedQueues.RankedSolo_5x5:
+      // @ts-expect-error || enum stuff
+      let res = await context.api(region, "league-v4.getLeagueEntries", {
+        division,
+        tier,
+        queue,
+        page,
+      });
+      if (!res) throw new Error("something not right w/ rankedList");
+      return res.data;
+    case AllRankedQueues.RankedTft:
+      // @ts-expect-error || enum stuff
+      let res2 = await context.api(region, "tft-league-v1.getLeagueEntries", {
+        division,
+        tier,
+        page,
+      });
+      if (!res2) throw new Error("something not right w/ rankedList");
+      return res2.data;
+  }
+};
 
 // @ts-ignore
 const rankedLeague: QueryResolvers<Context>["rankedLeague"] = async (
@@ -319,5 +343,6 @@ const QueryResolvers: QueryResolvers = {
   championRotation,
   featuredGames,
   rankedLeague,
+  rankedList,
 };
 export default QueryResolvers;

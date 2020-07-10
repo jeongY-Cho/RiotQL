@@ -12,7 +12,7 @@ type Query {
     region: RegionInput!
     queue: AllRankedQueues!
     tier: LowerTier!
-    division: Division
+    division: Division!
     page: Int
   ): [Leaguev4LeagueEntry!]!
   """
