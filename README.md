@@ -2,6 +2,10 @@
 
 ### A graphql wrapper for Riot API
 
+Explore the schema and test it out here: https://riotql.herokuapp.com/
+
+#### Note: graphql calls may or may not return data.
+
 ## Usage
 
 #### 1. Installation:
