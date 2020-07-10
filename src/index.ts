@@ -1,9 +1,6 @@
 import { GraphQLServer } from "graphql-yoga";
-import OpenAPIClientAxios, {
-  Operation,
-  AxiosRequestConfig,
-} from "openapi-client-axios";
-import { setupCache, setup } from "axios-cache-adapter";
+import OpenAPIClientAxios, { AxiosRequestConfig } from "openapi-client-axios";
+import { setupCache } from "axios-cache-adapter";
 import qs from "qs";
 
 import resolvers from "./resolvers/";
@@ -38,7 +35,6 @@ async function main(options?: AxiosRequestConfig) {
   const OpenAPI = new OpenAPIClientAxios({
     definition: process.env.RIOT_OPENAPI_SCHEMA,
     validate: false,
-    // @ts-ignore || axios dependency for openapi-client-axios is behind so types aren't exactly the same
     axiosConfigDefaults: {
       headers: {
         "X-Riot-Token": process.env.RIOT_KEY,
@@ -52,6 +48,14 @@ async function main(options?: AxiosRequestConfig) {
 
   await OpenAPI.init<Client>();
   const client = await OpenAPI.getClient<Client>();
+
+  if (process.env.NODE_ENV === "testing") {
+    client.interceptors.request.use((config) => {
+      console.log(config);
+      config.baseURL = "http://localhost:4010";
+      return config;
+    });
+  }
 
   const api: Api = <T extends keyof OperationMethods>(
     region: Region,
@@ -74,6 +78,7 @@ async function main(options?: AxiosRequestConfig) {
         OperationMethods[T]
       >;
     } catch (err) {
+      console.log(err);
       if (err.response?.status == 404) {
         return null;
       }
