@@ -43,6 +43,7 @@ async function main(options?: AxiosRequestConfig) {
       headers: {
         "X-Riot-Token": process.env.RIOT_KEY,
       },
+      // @ts-ignore
       paramsSerializer: function (params) {
         return qs.stringify(params, { arrayFormat: "repeat" });
       },
