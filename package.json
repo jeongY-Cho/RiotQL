@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
+    "postinstall": "npm run build",
     "start": "node build/index.js",
     "run-dev-server": "nodemon",
     "graphql-types": "graphql-codegen --config codegen.yml",
