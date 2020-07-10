@@ -55,12 +55,12 @@ RiotQL.start(({ port }) => {
 
 - [x] ~~Caching for requests that go multiple times~~ exposed axios options to export so can use any adapter for caching
 - [ ] Rate limiting / request counting / how many requests left / 'retry-after' on error
-- [ ] Query resolvers for:
+- [x] Query resolvers for:
 - - [x] match
-- - [ ] rankedList
+- - [x] rankedList
 - - [x] rankedLeague
 - - [x] tournament / tournament stub (remove?)
-- - [ ] clash
+- - [x] clash
 - - [x] featured games
 - - [x] free champion rotation
 - [ ] Mutation resolvers for:

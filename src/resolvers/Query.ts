@@ -336,6 +336,19 @@ const championRotation: QueryResolvers<Context>["championRotation"] = async (
   if (!res) throw new Error("champion info fetch error");
   return res.data;
 };
+
+// @ts-expect-error
+const clash: QueryResolvers<Context>["clash"] = async (
+  parent,
+  args,
+  context,
+  info
+) => {
+  return {
+    region: args.region,
+  };
+};
+
 const QueryResolvers: QueryResolvers = {
   info,
   summoner,
@@ -344,5 +357,6 @@ const QueryResolvers: QueryResolvers = {
   featuredGames,
   rankedLeague,
   rankedList,
+  clash,
 };
 export default QueryResolvers;

@@ -68,6 +68,23 @@ export type Championv3ChampionInfo = {
   maxNewPlayerLevel: Scalars['Int'];
 };
 
+export type Clash = {
+  __typename?: 'Clash';
+  upcoming: Array<Clashv1Tournament>;
+  team?: Maybe<Clashv1Team>;
+  tournament?: Maybe<Clashv1Tournament>;
+};
+
+
+export type ClashTeamArgs = {
+  id: Scalars['String'];
+};
+
+
+export type ClashTournamentArgs = {
+  id: Scalars['Int'];
+};
+
 export type Clashv1Player = {
   __typename?: 'Clashv1Player';
   /** (Legal values:  UNSELECTED,  FILL,  TOP,  JUNGLE,  MIDDLE,  BOTTOM,  UTILITY) */
@@ -812,7 +829,7 @@ export type Query = {
    */
   featuredGames?: Maybe<Spectatorv4FeaturedGames>;
   championRotation: Championv3ChampionInfo;
-  clash?: Maybe<Scalars['String']>;
+  clash?: Maybe<Clash>;
 };
 
 
@@ -863,6 +880,11 @@ export type QueryTournamentStubArgs = {
 export type QueryFeaturedGamesArgs = {
   region: RegionInput;
   game?: Maybe<Game>;
+};
+
+
+export type QueryClashArgs = {
+  region: RegionInput;
 };
 
 export enum Queue {
@@ -1731,9 +1753,10 @@ export type ResolversTypes = {
   GameType: GameType;
   Spectatorv4Participant: ResolverTypeWrapper<Spectatorv4Participant>;
   Championv3ChampionInfo: ResolverTypeWrapper<Championv3ChampionInfo>;
-  UpperTier: UpperTier;
+  Clash: ResolverTypeWrapper<Clash>;
   Clashv1Tournament: ResolverTypeWrapper<Clashv1Tournament>;
   Clashv1TournamentPhase: ResolverTypeWrapper<Clashv1TournamentPhase>;
+  UpperTier: UpperTier;
   Division2: Division2;
   Leagueexpv4LeagueEntry: ResolverTypeWrapper<Leagueexpv4LeagueEntry>;
   Leagueexpv4MiniSeries: ResolverTypeWrapper<Leagueexpv4MiniSeries>;
@@ -1830,6 +1853,7 @@ export type ResolversParentTypes = {
   Spectatorv4FeaturedGameInfo: Spectatorv4FeaturedGameInfo;
   Spectatorv4Participant: Spectatorv4Participant;
   Championv3ChampionInfo: Championv3ChampionInfo;
+  Clash: Clash;
   Clashv1Tournament: Clashv1Tournament;
   Clashv1TournamentPhase: Clashv1TournamentPhase;
   Leagueexpv4LeagueEntry: Leagueexpv4LeagueEntry;
@@ -1884,6 +1908,13 @@ export type Championv3ChampionInfoResolvers<ContextType = any, ParentType extend
   freeChampionIds?: Resolver<Array<Maybe<ResolversTypes['Int']>>, ParentType, ContextType>;
   freeChampionIdsForNewPlayers?: Resolver<Array<Maybe<ResolversTypes['Int']>>, ParentType, ContextType>;
   maxNewPlayerLevel?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
+export type ClashResolvers<ContextType = any, ParentType extends ResolversParentTypes['Clash'] = ResolversParentTypes['Clash']> = {
+  upcoming?: Resolver<Array<ResolversTypes['Clashv1Tournament']>, ParentType, ContextType>;
+  team?: Resolver<Maybe<ResolversTypes['Clashv1Team']>, ParentType, ContextType, RequireFields<ClashTeamArgs, 'id'>>;
+  tournament?: Resolver<Maybe<ResolversTypes['Clashv1Tournament']>, ParentType, ContextType, RequireFields<ClashTournamentArgs, 'id'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
@@ -2382,7 +2413,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   tournamentStub?: Resolver<ResolversTypes['TournamentStub'], ParentType, ContextType, RequireFields<QueryTournamentStubArgs, 'code'>>;
   featuredGames?: Resolver<Maybe<ResolversTypes['Spectatorv4FeaturedGames']>, ParentType, ContextType, RequireFields<QueryFeaturedGamesArgs, 'region' | 'game'>>;
   championRotation?: Resolver<ResolversTypes['Championv3ChampionInfo'], ParentType, ContextType>;
-  clash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  clash?: Resolver<Maybe<ResolversTypes['Clash']>, ParentType, ContextType, RequireFields<QueryClashArgs, 'region'>>;
 };
 
 export type Spectatorv4BannedChampionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Spectatorv4BannedChampion'] = ResolversParentTypes['Spectatorv4BannedChampion']> = {
@@ -2670,6 +2701,7 @@ export type Resolvers<ContextType = any> = {
   ChampionMastery?: ChampionMasteryResolvers<ContextType>;
   Championmasteryv4ChampionMastery?: Championmasteryv4ChampionMasteryResolvers<ContextType>;
   Championv3ChampionInfo?: Championv3ChampionInfoResolvers<ContextType>;
+  Clash?: ClashResolvers<ContextType>;
   Clashv1Player?: Clashv1PlayerResolvers<ContextType>;
   Clashv1PlayerRegistration?: Clashv1PlayerRegistrationResolvers<ContextType>;
   Clashv1Team?: Clashv1TeamResolvers<ContextType>;

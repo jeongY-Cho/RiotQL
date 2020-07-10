@@ -5,6 +5,7 @@ import Tournamentv4TournamentCode from "./query/Tournament";
 import { JSONObjectResolver } from "graphql-scalars";
 import ChampionMastery from "./query/summoner/ChampionMastery";
 import Clashv1PlayerRegistration from "./query/ClashPlayerRegistration";
+import Clash from "./query/Clash";
 
 const resolvers: Resolvers = {
   Query,
@@ -13,6 +14,7 @@ const resolvers: Resolvers = {
   ChampionMastery,
   Clashv1PlayerRegistration,
   Tournamentv4TournamentCode,
+  Clash,
   MatchList: {
     __resolveType(obj, context, info) {
       for (const node of info.fieldNodes[0].arguments!) {

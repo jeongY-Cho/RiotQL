@@ -46,7 +46,7 @@ type Query {
     game: Game = League
   ): Spectatorv4FeaturedGames
   championRotation: Championv3ChampionInfo!
-  clash: String
+  clash(region: RegionInput!): Clash
 }
 
 # TODO: valorant match, lor match
@@ -120,4 +120,10 @@ type Info {
 
 type TournamentStub {
   lobbyEvents: [Tournamentv4LobbyEvent!]!
+}
+
+type Clash {
+  upcoming: [Clashv1Tournament!]!
+  team(id: String!): Clashv1Team
+  tournament(id: Int!): Clashv1Tournament
 }
