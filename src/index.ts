@@ -2,7 +2,7 @@ import { GraphQLServer } from "graphql-yoga";
 import OpenAPIClientAxios, {
   Operation,
   AxiosRequestConfig,
-} from "openapi-client-axios";
+} from "./openapi-client-axios";
 import { setupCache, setup } from "axios-cache-adapter";
 import qs from "qs";
 
