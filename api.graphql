@@ -367,6 +367,8 @@ enum MapType2 {
   TWISTED_TREELINE
 }
 
+union Match = Matchv4Match | Tftmatchv1Match
+
 scalar MatchId
 
 """Matchlist return types. TFT matchlist returns only a list of ids"""
@@ -894,6 +896,7 @@ enum Position {
 
 type Query {
   info: Info!
+  match(game: Game!, matchId: MatchId!, region: RegionInput!): Match
   summoner(encryptedAccountId: String, encryptedPUUID: String, encryptedSummonerId: String, region: RegionInput!, summonerName: String): Summonerv4Summoner!
 }
 
