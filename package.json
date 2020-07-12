@@ -6,13 +6,12 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "postinstall": "npm run build",
     "start": "node build/index.js",
-    "run-dev-server": "nodemon",
+    "dev": "nexus dev",
     "graphql-types": "graphql-codegen --config codegen.yml",
     "graphql-types-watch": "graphql-codegen --config codegen.yml --watch",
     "riot-api-types": "ts-node .\\src\\scripts\\RiotAPICodegen.ts http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.min.json",
-    "openapi-schema-schema": "ts-node .\\src\\scripts\\RiotApiComponentsGraphqlSchemaCodegen.ts http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json .\\src\\schema\\generated\\riot-api-components-schema.gql"
+    "openapi-to-nexus-schema": "ts-node .\\src\\scripts\\RiotAPIToNexusSchema.ts .\\src\\schema\\riot-api-schema.ts"
   },
   "keywords": [
     "graphql",
@@ -34,6 +33,7 @@
     "graphql-tools": "^6.0.12",
     "graphql-yoga": "^1.18.3",
     "loglevel": "^1.6.8",
+    "nexus": "^0.25.0",
     "openapi-client-axios": "^3.6.1",
     "qs": "^6.9.4",
     "rfdc": "^1.1.4"
