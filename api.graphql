@@ -355,6 +355,15 @@ type Lorrankedv1Player {
   rank: Int!
 }
 
+enum LowerTier {
+  BRONZE
+  DIAMOND
+  GOLD
+  IRON
+  PLATINUM
+  SILVER
+}
+
 enum MapType {
   HOWLING_ABYSS
   SUMMONERS_RIFT
@@ -897,7 +906,25 @@ enum Position {
 type Query {
   info: Info!
   match(game: Game!, matchId: MatchId!, region: RegionInput!): Match
+
+  """
+  #### Implementation Notes:
+  
+  use the following arg combinations to get league lists
+  
+  ##### param combinations:
+  
+  	ier & queue -> for ranks master and above
+  
+  leagueId & game -> for all ranks
+  
+  leagueId & queue -> for all ranks
+  """
+  rankedList(game: Game, leagueId: String, queue: AllRankedQueues, region: RegionInput!, tier: Tier): Leaguev4LeagueList
+  rankedListabc(division: Division!, page: Int, queue: AllRankedQueues!, region: RegionInput!, tier: LowerTier!): [Leaguev4LeagueEntry!]!
   summoner(encryptedAccountId: String, encryptedPUUID: String, encryptedSummonerId: String, region: RegionInput!, summonerName: String): Summonerv4Summoner!
+  tournament(code: String!): Tournamentv4TournamentCode
+  tournamentStub(code: String!): TournamentStub!
 }
 
 enum Queue {
@@ -1428,6 +1455,10 @@ enum Tier3 {
   SILVER
 }
 
+type TournamentStub {
+  lobbyEvents: [Tournamentstubv4LobbyEvent!]!
+}
+
 type Tournamentstubv4LobbyEvent {
   """The type of event that was triggered"""
   eventType: String!
@@ -1543,6 +1574,7 @@ type Tournamentv4TournamentCode {
 
   """The tournament code's ID."""
   id: Int!
+  lobbyEvents: [Tournamentv4LobbyEvent!]!
 
   """The lobby name for the tournament code game."""
   lobbyName: String!
