@@ -1,6 +1,5 @@
 import { schema } from "nexus";
 import { AxiosResponse } from "openapi-client-axios";
-import { Region } from "../../types/Regions";
 
 schema.extendType({
   type: "Query",

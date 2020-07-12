@@ -15,14 +15,13 @@ let swaggerParser = new SwaggerParser();
 swaggerParser
   .bundle(process.env.RIOT_OPENAPI_SCHEMA)
   .then(async (schemaBundle) => {
-          // @ts-ignore
+    // @ts-ignore
     let { schema, report } = await createGraphQLSchema(schemaBundle, {
       viewer: false,
       simpleNames: true,
       fillEmptyResponses: true,
     });
     let schemaStr = printSchema(schema);
-    console.log(schemaStr);
     let queryRegex = /type Query \{.*?\n\}/gs;
     let mutationRegex = /type Mutation \{.*?\n\}/gs;
     let replacedSchemaStr = schemaStr
@@ -30,7 +29,6 @@ swaggerParser
       .replace(mutationRegex, "")
       .replace(/dto\b/gim, "");
     console.log(report);
-    // TODO: replacers to use nexus not just schema
     const nexusSchema = convertSDL(replacedSchemaStr);
     const replacedNexusSchema = nexusSchema.replace(
       /=\s(.*?Type)\(/gm,

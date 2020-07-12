@@ -2,6 +2,27 @@
 ### Do not make changes to this file directly
 
 
+enum AllRankedQueues {
+  RANKED_FLEX_SR
+  RANKED_FLEX_TT
+  RANKED_SOLO_5x5
+  RANKED_TFT
+}
+
+type ChampionMastery {
+  byChampion(
+    """
+    Get all champion mastery entries sorted by number of champion points descending filtered by champion Ids if specified.
+    """
+    champIds: [Int!]
+  ): [Championmasteryv4ChampionMastery!]
+
+  """
+  Get a player's total champion mastery score, which is the sum of individual champion mastery levels.
+  """
+  score: Int!
+}
+
 """
 This object contains single Champion Mastery information for player and champion combination.
 """
@@ -55,6 +76,19 @@ type Clashv1Player {
   """(Legal values:  CAPTAIN,  MEMBER)"""
   role: Role!
   summonerId: String!
+  teamId: String!
+}
+
+type Clashv1PlayerRegistration {
+  """Clash lane assignment"""
+  position: Position!
+
+  """Clash team role assignment"""
+  role: Role!
+  summonerId: String!
+
+  """Clash team details"""
+  team: Clashv1Team!
   teamId: String!
 }
 
@@ -1124,6 +1158,9 @@ type Spectatorv4Perks {
 type Summonerv4Summoner {
   """Encrypted account ID. Max length 56 characters."""
   accountId: String!
+  activeMatch(game: Game!): Spectatorv4CurrentGameInfo
+  championMastery: ChampionMastery!
+  clash: Clashv1PlayerRegistration!
 
   """Encrypted summoner ID. Max length 63 characters."""
   id: String!
@@ -1137,6 +1174,7 @@ type Summonerv4Summoner {
 
   """Encrypted PUUID. Exact length of 78 characters."""
   puuid: String!
+  rank(queue: AllRankedQueues!): Leaguev4LeagueEntry
   region: RegionInput!
 
   """
