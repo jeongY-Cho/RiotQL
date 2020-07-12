@@ -14,14 +14,19 @@ schema.scalarType({
 
 schema.scalarType({
   name: "MatchId",
-  serialize() {
-    /* Todo */
+  serialize(v) {
+    return v;
+    /* TODO */
   },
-  parseValue() {
-    /* Todo */
+  parseValue(v) {
+    return v + "";
+    /* TODO */
   },
-  parseLiteral() {
-    /* Todo */
+  parseLiteral(ast) {
+    // HACK don't know but it works
+    // @ts-expect-error
+    return ast.value;
+    /* TODO */
   },
 });
 schema.scalarType({
