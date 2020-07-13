@@ -6,13 +6,12 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "postinstall": "npm run build",
     "start": "node build/index.js",
-    "run-dev-server": "nodemon",
+    "dev": "nexus dev",
     "graphql-types": "graphql-codegen --config codegen.yml",
     "graphql-types-watch": "graphql-codegen --config codegen.yml --watch",
     "riot-api-types": "ts-node .\\src\\scripts\\RiotAPICodegen.ts http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.min.json",
-    "openapi-schema-schema": "ts-node .\\src\\scripts\\RiotApiComponentsGraphqlSchemaCodegen.ts http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json .\\src\\schema\\generated\\riot-api-components-schema.gql"
+    "openapi-to-nexus-schema": "ts-node .\\src\\scripts\\RiotAPIToNexusSchema.ts .\\src\\schema\\riot-api-v4-schema.ts"
   },
   "keywords": [
     "graphql",
@@ -23,20 +22,25 @@
   "author": "Jeong Yeon Cho",
   "license": "MIT",
   "dependencies": {
-    "@playlyfe/gql": "^2.6.2",
     "@types/qs": "^6.9.3",
     "axios": "^0.19.2",
     "axios-cache-adapter": "^2.5.0",
+    "bath-es5": "^3.0.3",
+    "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "graphql-parse-resolve-info": "^4.7.0",
     "graphql-scalars": "^1.2.1",
     "graphql-tag": "^2.10.3",
     "graphql-tools": "^6.0.12",
-    "graphql-yoga": "^1.18.3",
+    "json-schema-deref-sync": "^0.13.0",
+    "lodash": "^4.17.19",
     "loglevel": "^1.6.8",
-    "openapi-client-axios": "^3.6.1",
+    "nexus": "^0.25.0",
+    "openapi-schema-validation": "^0.4.2",
     "qs": "^6.9.4",
-    "rfdc": "^1.1.4"
+    "query-string": "^6.13.1",
+    "rfdc": "^1.1.4",
+    "swagger-parser": "^9.0.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.16.0",
@@ -49,7 +53,6 @@
     "graphql-schema-typescript": "^1.3.2",
     "nodemon": "^2.0.4",
     "openapi-to-graphql": "^2.2.3",
-    "swagger-parser": "^9.0.1",
     "typescript": "^3.9.6"
   }
 }

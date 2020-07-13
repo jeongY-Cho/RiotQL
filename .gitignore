@@ -5,3 +5,4 @@ build
 outline.txt
 graphql.schema.json
 testing.ts
+.tmp_build
