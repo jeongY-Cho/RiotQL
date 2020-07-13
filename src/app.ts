@@ -1,4 +1,4 @@
-import { schema, settings } from "nexus";
+import { schema, settings, server } from "nexus";
 import { Client, OperationMethods } from "./generated/riot-types";
 import * as dotenv from "dotenv";
 import { Region } from "./types/Regions";
@@ -6,10 +6,13 @@ import { Region } from "./types/Regions";
 import OpenAPIClientAxios, {
   Operation,
   AxiosRequestConfig,
-} from "openapi-client-axios";
+} from "../openapi-client-axios";
 import qs from "qs";
 
 settings.change({
+  server: {
+    playground: { path: "/playground" },
+  },
   schema: {
     nullable: {
       outputs: false,
@@ -92,3 +95,7 @@ async function apiContext(options?: AxiosRequestConfig) {
   };
   return api as ApiClient;
 }
+
+server.express.get("/", (req, res) => {
+  res.send("test");
+});

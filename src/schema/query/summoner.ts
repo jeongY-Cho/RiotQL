@@ -1,5 +1,5 @@
 import { schema } from "nexus";
-import { AxiosResponse } from "openapi-client-axios";
+import { AxiosResponse } from "axios";
 
 schema.extendType({
   type: "Query",

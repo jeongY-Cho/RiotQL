@@ -1,5 +1,4 @@
 import { schema } from "nexus";
-import { arg } from "@nexus/schema";
 
 schema.extendType({
   type: "Summonerv4Summoner",
