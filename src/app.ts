@@ -86,13 +86,15 @@ try {
     },
   });
 
-  apiContext().then((api) => {
-    schema.addToContext(() => {
-      return {
-        api,
-      };
-    });
-  });
+  apiContext()
+    .then((api) => {
+      schema.addToContext(() => {
+        return {
+          api,
+        };
+      });
+    })
+    .catch((err) => console.log(err));
 
   server.express.get("/", (req, res) => {
     res.send("test");
