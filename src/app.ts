@@ -1,21 +1,37 @@
-import { GraphQLServer } from "graphql-yoga";
+import { schema, settings, server } from "nexus";
+import { Client, OperationMethods } from "./generated/riot-types";
+import * as dotenv from "dotenv";
+import { Region } from "./types/Regions";
+
 import OpenAPIClientAxios, {
   Operation,
   AxiosRequestConfig,
-} from "./openapi-client-axios";
-import { setupCache, setup } from "axios-cache-adapter";
+} from "../openapi-client-axios";
 import qs from "qs";
 
-import resolvers from "./resolvers/";
-import typeDefs from "./schema";
+settings.change({
+  server: {
+    playground: { path: "/playground" },
+  },
+  schema: {
+    nullable: {
+      outputs: false,
+      inputs: true,
+    },
+  },
+});
 
-import * as dotenv from "dotenv";
-import { ContextParameters } from "graphql-yoga/dist/types";
-import { Region } from "./types/Regions";
-import { Client, OperationMethods } from "./generated/riot-types";
+apiContext().then((api) => {
+  schema.addToContext(() => {
+    return {
+      api,
+    };
+  });
+});
 
 type OpMethodKeys = keyof OperationMethods;
-type Api = <T extends OpMethodKeys>(
+
+export type ApiClient = <T extends OpMethodKeys>(
   region: Region,
   endpoint: T,
   parameters?: Parameters<OperationMethods[T]>[0],
@@ -23,11 +39,7 @@ type Api = <T extends OpMethodKeys>(
   config?: Parameters<OperationMethods[T]>[2]
 ) => ReturnType<OperationMethods[T]> | Promise<null> | null;
 
-export type Context = {
-  api: Api;
-} & ContextParameters;
-
-async function main(options?: AxiosRequestConfig) {
+async function apiContext(options?: AxiosRequestConfig) {
   dotenv.config();
 
   const RIOT_KEY = process.env.RIOT_KEY;
@@ -36,9 +48,8 @@ async function main(options?: AxiosRequestConfig) {
   }
 
   const OpenAPI = new OpenAPIClientAxios({
-    definition: process.env.RIOT_OPENAPI_SCHEMA,
+    definition: "./riot-openapi-schema.json",
     validate: false,
-    // @ts-ignore || axios dependency for openapi-client-axios is behind so types aren't exactly the same
     axiosConfigDefaults: {
       headers: {
         "X-Riot-Token": process.env.RIOT_KEY,
@@ -54,7 +65,7 @@ async function main(options?: AxiosRequestConfig) {
   await OpenAPI.init<Client>();
   const client = await OpenAPI.getClient<Client>();
 
-  const api: Api = <T extends keyof OperationMethods>(
+  let api = <T extends keyof OperationMethods>(
     region: Region,
     endpoint: T,
     parameters?: Parameters<OperationMethods[T]>[0],
@@ -75,42 +86,16 @@ async function main(options?: AxiosRequestConfig) {
         OperationMethods[T]
       >;
     } catch (err) {
+      console.log(err);
       if (err.response?.status == 404) {
         return null;
       }
       throw err;
     }
   };
-
-  return new GraphQLServer({
-    typeDefs,
-    // @ts-ignore
-    resolvers,
-    context: (request): Context => ({
-      ...request,
-      api,
-    }),
-  });
+  return api as ApiClient;
 }
 
-if (require.main === module) {
-  // TODO: set up exclude paths. ie. don't cache
-  //       for tournament, clash, active game,
-  //       short cache time for matchlist (like one minute or something)
-  let cache = setupCache({
-    maxAge: 15 * 60 * 1000,
-    // @ts-ignore || conservative caching
-    limit: 100,
-    exclude: {
-      query: false,
-    },
-  });
-  main({
-    // @ts-ignore
-    adapter: cache.adapter,
-  }).then((server) => {
-    server.start({ port: process.env.PORT || 4000 }, ({ port }) => {
-      console.log(`Starting on port: ${port}`);
-    });
-  });
-}
+server.express.get("/", (req, res) => {
+  res.send("test");
+});
