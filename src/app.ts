@@ -102,3 +102,12 @@ try {
 } catch (err) {
   console.error(err);
 }
+
+process.on("unhandledRejection", (reason: any, promise) => {
+  promise.then((...rets) => {
+    console.log(rets);
+  });
+  console.log("Unhandled Rejection at:", reason.stack || reason);
+  // Recommended: send the information to sentry.io
+  // or whatever crash reporting service you use
+});
