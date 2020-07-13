@@ -30,10 +30,9 @@ swaggerParser
       .replace(/dto\b/gim, "");
     console.log(report);
     const nexusSchema = convertSDL(replacedSchemaStr);
-    const replacedNexusSchema = nexusSchema.replace(
-      /=\s(.*?Type)\(/gm,
-      "= schema.$1("
-    );
+    const replacedNexusSchema = nexusSchema
+      .replace(/=\s(.*?Type)\(/gm, "= schema.$1(")
+      .replace(/import {.*?} from '@nexus\/schema';?/gm, "");
 
     fs.writeFileSync(args[0], 'import { schema } from "nexus"\n');
     fs.writeFileSync(args[0], replacedNexusSchema, { flag: "a" });
