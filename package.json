@@ -1,11 +1,11 @@
 {
   "name": "riotql",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "graphql wrapper for the RIOT API",
   "main": "build/index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc",
+    "build": "nexus build",
     "start": "node build/index.js",
     "dev": "nexus dev",
     "graphql-types": "graphql-codegen --config codegen.yml",
