@@ -28,7 +28,8 @@ export function removeNulls<T>(val: T) {
   return removeNull(val);
 }
 
-export function groupRegions(region: RegionInput): RegionInput {
+// TODO figure out type safety for this
+export function groupRegions(region: any): any {
   switch (region) {
     //  NA, BR, LAN, LAS, and OCE is americas
     case "na1":
