@@ -1,1 +1,1 @@
-web: node build/src/index.js --trace-uncaught
+web: node build/src/index.js 
