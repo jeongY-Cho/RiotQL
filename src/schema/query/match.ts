@@ -1,48 +1,55 @@
-import { schema } from "nexus";
-import { groupRegions } from "../../utils";
+import { schema } from 'nexus'
+import { groupRegions } from '../../utils'
+import { APIKeyType } from '../../app'
 
 schema.extendType({
-  type: "Query",
+  type: 'Query',
   definition(t) {
-    t.field("match", {
+    t.field('match', {
       args: {
         region: schema.arg({
-          type: "RegionInput",
+          type: 'RegionInput',
           required: true,
         }),
         matchId: schema.arg({
-          type: "MatchId",
+          type: 'MatchId',
           required: true,
         }),
         game: schema.arg({
-          type: "Game",
+          type: '_Game',
           required: true,
         }),
       },
       nullable: true,
-      type: "Match",
+      type: 'Match',
       async resolve(root, args, context, info) {
         switch (args.game) {
-          case "League":
-            let res = await context.api(args.region, "match-v4.getMatch", {
-              matchId: args.matchId,
-            });
+          case 'League':
+            let res = await context.api(
+              APIKeyType.League,
+              args.region,
+              'match-v4.getMatch',
+              {
+                matchId: args.matchId,
+              },
+            )
             // HACK some kind of typing error
-            return res ? (res.data as any) : null;
-          case "TFT":
+            return res ? (res.data as any) : null
+          case 'TFT':
             try {
               let res2 = await context.api(
+                APIKeyType.TFT,
                 groupRegions(args.region),
-                "tft-match-v1.getMatch",
+                'tft-match-v1.getMatch',
                 {
                   matchId: args.matchId,
-                }
-              );
+                },
+              )
 
-              return res2 ? res2.data : null;
+              return res2 ? res2.data : null
             } catch (err) {
-              console.log(err);
-              return null;
+              console.log(err)
+              return null
             }
 
           //   case "LOR":
@@ -52,21 +59,21 @@ schema.extendType({
           //   case "Valorant":
           //     return null;
         }
-        return null;
+        return null
       },
-    });
+    })
   },
-});
+})
 
 schema.unionType({
-  name: "Match",
+  name: 'Match',
   definition(t) {
-    t.members("Matchv4Match", "Tftmatchv1Match");
+    t.members('Matchv4Match', 'Tftmatchv1Match')
     t.resolveType((source, context, info) => {
       // @ts-expect-error || some stupid type thing cant check for props
       if (source.info) {
-        return "Tftmatchv1Match";
-      } else return "Matchv4Match";
-    });
+        return 'Tftmatchv1Match'
+      } else return 'Matchv4Match'
+    })
   },
-});
+})

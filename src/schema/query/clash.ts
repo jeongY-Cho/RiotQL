@@ -1,4 +1,5 @@
 import { schema } from 'nexus'
+import { APIKeyType } from '../../app'
 
 schema.extendType({
   type: 'Query',
@@ -27,8 +28,12 @@ schema.objectType({
       type: 'Clashv1Tournament',
       list: true,
       async resolve(root, args, context) {
-        // @ts-expect-error
-        let res = await context.api(root.region, 'clash-v1.getTournaments')
+        let res = await context.api(
+          APIKeyType.League,
+          // @ts-expect-error
+          root.region,
+          'clash-v1.getTournaments',
+        )
         return res ? res.data : []
       },
     })
