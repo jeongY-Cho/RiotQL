@@ -1,4 +1,3 @@
-// TODO clash.ts
 import { schema } from 'nexus'
 
 schema.extendType({
