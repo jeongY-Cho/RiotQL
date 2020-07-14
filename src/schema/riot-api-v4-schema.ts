@@ -1,5 +1,5 @@
 import { schema } from "nexus"
-import { objectType, inputObjectType, enumType, scalarType } from '@nexus/schema';
+
 
 export const Championmasteryv4ChampionMastery = schema.objectType({
   name: "Championmasteryv4ChampionMastery",
@@ -320,7 +320,7 @@ export const Matchv4MatchEvent = schema.objectType({
     t.string("towerType", { nullable: true })
     t.field("type", {
       type: Type,
-      description: "(Legal values:  CHAMPION_KILL,  WARD_PLACED,  WARD_KILL,  BUILDING_KILL,  ELITE_MONSTER_KILL,  ITEM_PURCHASED,  ITEM_SOLD,  ITEM_DESTROYED,  ITEM_UNDO,  SKILL_LEVEL_UP,  ASCENDED_EVENT,  CAPTURE_POINT,  PORO_KING_SUMMON)",
+      description: "(Legal values:  CHAMPION_KILL,  WARD_PLACED,  WARD_KILL,  BUILDING_KILL, \nELITE_MONSTER_KILL,  ITEM_PURCHASED,  ITEM_SOLD,  ITEM_DESTROYED,  ITEM_UNDO, \nSKILL_LEVEL_UP,  ASCENDED_EVENT,  CAPTURE_POINT,  PORO_KING_SUMMON)",
     })
     t.int("victimId", { nullable: true })
     t.string("wardType", { nullable: true })
@@ -376,7 +376,7 @@ export const Matchv4Matchlist = schema.objectType({
       list: [false],
     })
     t.int("startIndex")
-    t.int("totalGames", { description: "There is a known issue that this field doesn't correctly return the total number of games that match the parameters of the request. Please paginate using beginIndex until you reach the end of a player's matchlist." })
+    t.int("totalGames", { description: "There is a known issue that this field doesn't correctly return the total\nnumber of games that match the parameters of the request. Please paginate\nusing beginIndex until you reach the end of a player's matchlist." })
   }
 })
 export const Matchv4Participant = schema.objectType({
@@ -386,7 +386,7 @@ export const Matchv4Participant = schema.objectType({
     t.field("highestAchievedSeasonTier", {
       type: HighestAchievedSeasonTier,
       nullable: true,
-      description: "Highest ranked tier achieved for the previous season in a specific subset of queueIds, if any, otherwise null. Used to display border in game loading screen. Please refer to the Ranked Info documentation.\n             (Legal values:  CHALLENGER,  MASTER,  DIAMOND,  PLATINUM,  GOLD,  SILVER,  BRONZE,  UNRANKED)",
+      description: "Highest ranked tier achieved for the previous season in a specific subset of\nqueueIds, if any, otherwise null. Used to display border in game loading\nscreen. Please refer to the Ranked Info documentation.\n             (Legal values:  CHALLENGER,  MASTER,  DIAMOND,  PLATINUM,  GOLD,  SILVER,  BRONZE,  UNRANKED)",
     })
     t.field("masteries", {
       type: Matchv4Mastery,
@@ -852,7 +852,7 @@ export const Summonerv4Summoner = schema.objectType({
     t.string("name", { description: "Summoner name." })
     t.int("profileIconId", { description: "ID of the summoner icon associated with the summoner." })
     t.string("puuid", { description: "Encrypted PUUID. Exact length of 78 characters." })
-    t.float("revisionDate", { description: "Date summoner was last modified specified as epoch milliseconds. The following events will update this timestamp: summoner name change, summoner level change, or profile icon change." })
+    t.float("revisionDate", { description: "Date summoner was last modified specified as epoch milliseconds. The following\nevents will update this timestamp: summoner name change, summoner level\nchange, or profile icon change." })
     t.float("summonerLevel", { description: "Summoner level associated with the summoner." })
   }
 })
@@ -1022,7 +1022,7 @@ export const Tftsummonerv1Summoner = schema.objectType({
     t.string("name", { description: "Summoner name." })
     t.int("profileIconId", { description: "ID of the summoner icon associated with the summoner." })
     t.string("puuid", { description: "Encrypted PUUID. Exact length of 78 characters." })
-    t.float("revisionDate", { description: "Date summoner was last modified specified as epoch milliseconds. The following events will update this timestamp: summoner name change, summoner level change, or profile icon change." })
+    t.float("revisionDate", { description: "Date summoner was last modified specified as epoch milliseconds. The following\nevents will update this timestamp: summoner name change, summoner level\nchange, or profile icon change." })
     t.float("summonerLevel", { description: "Summoner level associated with the summoner." })
   }
 })
@@ -1382,7 +1382,7 @@ export const Tournamentstubv4ProviderRegistrationParametersInput = schema.inputO
     })
     t.string("url", {
       required: true,
-      description: "The provider's callback URL to which tournament game results in this region should be posted. The URL must be well-formed, use the http or https protocol, and use the default port for the protocol (http URLs must use port 80, https URLs must use port 443).",
+      description: "The provider's callback URL to which tournament game results in this region\nshould be posted. The URL must be well-formed, use the http or https protocol,\nand use the default port for the protocol (http URLs must use port 80, https\nURLs must use port 443).",
     })
   }
 });
@@ -1391,14 +1391,14 @@ export const Tournamentstubv4TournamentCodeParametersInput = schema.inputObjectT
   definition(t) {
     t.string("allowedSummonerIds", {
       list: [false],
-      description: "Optional list of encrypted summonerIds in order to validate the players eligible to join the lobby. NOTE: We currently do not enforce participants at the team level, but rather the aggregate of teamOne and teamTwo. We may add the ability to enforce at the team level in the future.",
+      description: "Optional list of encrypted summonerIds in order to validate the players\neligible to join the lobby. NOTE: We currently do not enforce participants at\nthe team level, but rather the aggregate of teamOne and teamTwo. We may add\nthe ability to enforce at the team level in the future.",
     })
     t.field("mapType", {
       type: MapType,
       required: true,
       description: "The map type of the game.\n             (Legal values:  SUMMONERS_RIFT,  TWISTED_TREELINE,  HOWLING_ABYSS)",
     })
-    t.string("metadata", { description: "Optional string that may contain any data in any format, if specified at all. Used to denote any custom information about the game." })
+    t.string("metadata", { description: "Optional string that may contain any data in any format, if specified at all.\nUsed to denote any custom information about the game." })
     t.field("pickType", {
       type: PickType,
       required: true,
@@ -1435,7 +1435,7 @@ export const Tournamentv4ProviderRegistrationParametersInput = schema.inputObjec
     })
     t.string("url", {
       required: true,
-      description: "The provider's callback URL to which tournament game results in this region should be posted. The URL must be well-formed, use the http or https protocol, and use the default port for the protocol (http URLs must use port 80, https URLs must use port 443).",
+      description: "The provider's callback URL to which tournament game results in this region\nshould be posted. The URL must be well-formed, use the http or https protocol,\nand use the default port for the protocol (http URLs must use port 80, https\nURLs must use port 443).",
     })
   }
 });
@@ -1444,14 +1444,14 @@ export const Tournamentv4TournamentCodeParametersInput = schema.inputObjectType(
   definition(t) {
     t.string("allowedSummonerIds", {
       list: [false],
-      description: "Optional list of encrypted summonerIds in order to validate the players eligible to join the lobby. NOTE: We currently do not enforce participants at the team level, but rather the aggregate of teamOne and teamTwo. We may add the ability to enforce at the team level in the future.",
+      description: "Optional list of encrypted summonerIds in order to validate the players\neligible to join the lobby. NOTE: We currently do not enforce participants at\nthe team level, but rather the aggregate of teamOne and teamTwo. We may add\nthe ability to enforce at the team level in the future.",
     })
     t.field("mapType", {
       type: MapType,
       required: true,
       description: "The map type of the game.\n             (Legal values:  SUMMONERS_RIFT,  TWISTED_TREELINE,  HOWLING_ABYSS)",
     })
-    t.string("metadata", { description: "Optional string that may contain any data in any format, if specified at all. Used to denote any custom information about the game." })
+    t.string("metadata", { description: "Optional string that may contain any data in any format, if specified at all.\nUsed to denote any custom information about the game." })
     t.field("pickType", {
       type: PickType,
       required: true,
@@ -1473,7 +1473,7 @@ export const Tournamentv4TournamentCodeUpdateParametersInput = schema.inputObjec
   definition(t) {
     t.string("allowedSummonerIds", {
       list: [false],
-      description: "Optional list of encrypted summonerIds in order to validate the players eligible to join the lobby. NOTE: We currently do not enforce participants at the team level, but rather the aggregate of teamOne and teamTwo. We may add the ability to enforce at the team level in the future.",
+      description: "Optional list of encrypted summonerIds in order to validate the players\neligible to join the lobby. NOTE: We currently do not enforce participants at\nthe team level, but rather the aggregate of teamOne and teamTwo. We may add\nthe ability to enforce at the team level in the future.",
     })
     t.field("mapType", {
       type: MapType2,
