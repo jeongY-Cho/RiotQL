@@ -52,7 +52,7 @@ import qs from 'qs'
 
 settings.change({
   server: {
-    port: process.env.PORT,
+    port: parseInt(process.env.PORT!),
     playground: { path: '/playground' },
   },
   schema: {
