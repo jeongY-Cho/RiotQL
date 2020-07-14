@@ -196,7 +196,7 @@ process.on('unhandledRejection', (reason: any, promise) => {
 
 function apiKeyAlerts() {
   if (!process.env.RIOT_API_DEVELOPMENT_KEY) {
-    console.error('no development key')
+    console.info('no development key')
   }
 
   if (!process.env.RIOT_API_DEVELOPMENT_KEY) {
