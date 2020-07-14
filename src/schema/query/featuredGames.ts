@@ -1,4 +1,5 @@
 import { schema } from 'nexus'
+import { APIKeyType } from '../../app'
 
 schema.extendType({
   type: 'Query',
@@ -13,6 +14,7 @@ schema.extendType({
       },
       async resolve(root, args, context) {
         let res = await context.api(
+          APIKeyType.League,
           args.region,
           'spectator-v4.getFeaturedGames',
         )

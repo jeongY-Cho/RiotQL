@@ -1,4 +1,5 @@
 import { schema } from 'nexus'
+import { APIKeyType } from '../../../app'
 
 schema.extendType({
   type: 'Summonerv4Summoner',
@@ -17,6 +18,7 @@ schema.extendType({
         switch (args.game) {
           case 'League':
             let leagueRes = await context.api(
+              APIKeyType.League,
               root.region,
               'match-v4.getMatchlist',
               {
@@ -44,6 +46,7 @@ schema.extendType({
             return leagueRes?.data
           case 'TFT':
             let tftRes = await context.api(
+              APIKeyType.TFT,
               root.region,
               'tft-match-v1.getMatchIdsByPUUID',
               {
