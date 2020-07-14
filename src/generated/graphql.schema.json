@@ -19,8 +19,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "OBJECT",
+                "name": "Info",
                 "ofType": null
               }
             },
@@ -88,7 +88,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "SummonerV4Summoner",
+              "name": "Summonerv4Summoner",
               "ofType": null
             },
             "isDeprecated": false,
@@ -120,7 +120,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Long",
+                    "name": "MatchId",
                     "ofType": null
                   }
                 },
@@ -175,7 +175,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "Queue",
+                    "name": "AllRankedQueues",
                     "ofType": null
                   }
                 },
@@ -199,9 +199,13 @@
                 "name": "division",
                 "description": null,
                 "type": {
-                  "kind": "ENUM",
-                  "name": "Division",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "Division",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               },
@@ -212,20 +216,6 @@
                   "kind": "SCALAR",
                   "name": "Int",
                   "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "game",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "Game",
-                    "ofType": null
-                  }
                 },
                 "defaultValue": null
               }
@@ -241,7 +231,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "LeagueV4LeagueList",
+                    "name": "Leaguev4LeagueEntry",
                     "ofType": null
                   }
                 }
@@ -252,14 +242,38 @@
           },
           {
             "name": "rankedLeague",
-            "description": null,
+            "description": "#### Implementation Notes:\n\nuse the following arg combinations to get league lists\n\n##### param combinations:\n\ntier & queue -> for ranks master and above\n\nleagueId & game -> for all ranks\n\nleagueId & queue -> for all ranks",
             "args": [
+              {
+                "name": "region",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RegionInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
               {
                 "name": "tier",
                 "description": null,
                 "type": {
                   "kind": "ENUM",
                   "name": "Tier",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "queue",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "AllRankedQueues",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -278,25 +292,17 @@
                 "name": "game",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "Game",
-                    "ofType": null
-                  }
+                  "kind": "ENUM",
+                  "name": "Game",
+                  "ofType": null
                 },
                 "defaultValue": null
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "LeagueV4LeagueEntry",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "Leaguev4LeagueList",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -322,16 +328,61 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "TournamentV4TournamentCode",
+              "name": "Tournamentv4TournamentCode",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "featured_games",
+            "name": "tournamentStub",
             "description": null,
             "args": [
+              {
+                "name": "code",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "TournamentStub",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "featuredGames",
+            "description": "Get featured league games.\nnote! game parameter is ignored atm",
+            "args": [
+              {
+                "name": "region",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RegionInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
               {
                 "name": "game",
                 "description": null,
@@ -340,12 +391,118 @@
                   "name": "Game",
                   "ofType": null
                 },
+                "defaultValue": "League"
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Spectatorv4FeaturedGames",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "championRotation",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Championv3ChampionInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "clash",
+            "description": null,
+            "args": [
+              {
+                "name": "region",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "RegionInput",
+                    "ofType": null
+                  }
+                },
                 "defaultValue": null
               }
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "SpectatorV4FeaturedGames",
+              "name": "Clash",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Info",
+        "description": null,
+        "fields": [
+          {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "version",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "constants",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "repo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -464,7 +621,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SummonerV4Summoner",
+        "name": "Summonerv4Summoner",
         "description": "represents a summoner",
         "fields": [
           {
@@ -485,7 +642,7 @@
           },
           {
             "name": "activeMatch",
-            "description": null,
+            "description": "Get current game information for the given summoner.",
             "args": [
               {
                 "name": "game",
@@ -504,7 +661,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "SpectatorV4CurrentGameInfo",
+              "name": "Spectatorv4CurrentGameInfo",
               "ofType": null
             },
             "isDeprecated": false,
@@ -512,12 +669,40 @@
           },
           {
             "name": "championMastery",
-            "description": null,
+            "description": "Get champion mastery information of this summoner",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "ChampionMastery",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ChampionMastery",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "clash",
+            "description": "Get an array of clash registrations for this summoner.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Clashv1PlayerRegistration",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -540,7 +725,7 @@
           },
           {
             "name": "matchList",
-            "description": null,
+            "description": "Get matchlist for games played by this summoner and game title and filtered using given filter parameters, if any.\n\n##### Implementation Notes\nA number of optional parameters are provided for filtering. It is up to the caller to ensure that the combination of filter parameters provided is valid for the requested account, otherwise, no matches may be returned.\n\nIf beginIndex is specified, but not endIndex, then endIndex defaults to beginIndex+100. If endIndex is specified, but not beginIndex, then beginIndex defaults to 0. If both are specified, then endIndex must be greater than beginIndex. The maximum range allowed is 100, otherwise a 400 error code is returned.\n\nIf beginTime is specified, but not endTime, then endTime defaults to the the current unix timestamp in milliseconds (the maximum time range limitation is not observed in this specific case). If endTime is specified, but not beginTime, then beginTime defaults to the start of the account's match history returning a 400 due to the maximum time range limitation. If both are specified, then endTime should be greater than beginTime. The maximum time range allowed is one week, otherwise a 400 error code is returned.\n\nIf game specified is League, filter ignores count\n\nIf game specified is TFT, filter only uses count",
             "args": [
               {
                 "name": "game",
@@ -625,7 +810,7 @@
           },
           {
             "name": "rank",
-            "description": null,
+            "description": "Get ranked details of this summoner by queue.",
             "args": [
               {
                 "name": "queue",
@@ -635,7 +820,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "Queue",
+                    "name": "AllRankedQueues",
                     "ofType": null
                   }
                 },
@@ -644,7 +829,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "LeagueV4LeagueEntry",
+              "name": "Leaguev4LeagueEntry",
               "ofType": null
             },
             "isDeprecated": false,
@@ -726,7 +911,7 @@
           },
           {
             "name": "LOR",
-            "description": null,
+            "description": "LOR is not implemented",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -735,7 +920,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4CurrentGameInfo",
+        "name": "Spectatorv4CurrentGameInfo",
         "description": null,
         "fields": [
           {
@@ -750,7 +935,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "SpectatorV4BannedChampion",
+                  "name": "Spectatorv4BannedChampion",
                   "ofType": null
                 }
               }
@@ -875,7 +1060,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "SpectatorV4Observer",
+                "name": "Spectatorv4Observer",
                 "ofType": null
               }
             },
@@ -894,7 +1079,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "SpectatorV4CurrentGameParticipant",
+                  "name": "Spectatorv4CurrentGameParticipant",
                   "ofType": null
                 }
               }
@@ -926,7 +1111,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4BannedChampion",
+        "name": "Spectatorv4BannedChampion",
         "description": null,
         "fields": [
           {
@@ -1005,7 +1190,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4Observer",
+        "name": "Spectatorv4Observer",
         "description": null,
         "fields": [
           {
@@ -1032,7 +1217,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4CurrentGameParticipant",
+        "name": "Spectatorv4CurrentGameParticipant",
         "description": null,
         "fields": [
           {
@@ -1079,7 +1264,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "SpectatorV4GameCustomizationObject",
+                  "name": "Spectatorv4GameCustomizationObject",
                   "ofType": null
                 }
               }
@@ -1096,7 +1281,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "SpectatorV4Perks",
+                "name": "Spectatorv4Perks",
                 "ofType": null
               }
             },
@@ -1217,7 +1402,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4GameCustomizationObject",
+        "name": "Spectatorv4GameCustomizationObject",
         "description": null,
         "fields": [
           {
@@ -1260,7 +1445,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4Perks",
+        "name": "Spectatorv4Perks",
         "description": null,
         "fields": [
           {
@@ -1324,11 +1509,11 @@
       {
         "kind": "OBJECT",
         "name": "ChampionMastery",
-        "description": null,
+        "description": "Champion Mastery for league accounts",
         "fields": [
           {
             "name": "score",
-            "description": null,
+            "description": "Get a player's total champion mastery score, which is the sum of individual champion mastery levels.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1344,7 +1529,7 @@
           },
           {
             "name": "byChampion",
-            "description": null,
+            "description": "Get all champion mastery entries sorted by number of champion points descending filtered by champion Ids if specified.",
             "args": [
               {
                 "name": "champIds",
@@ -1366,9 +1551,17 @@
               }
             ],
             "type": {
-              "kind": "OBJECT",
-              "name": "ChampionMasteryV4ChampionMastery",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Championmasteryv4ChampionMastery",
+                  "ofType": null
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1381,7 +1574,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ChampionMasteryV4ChampionMastery",
+        "name": "Championmasteryv4ChampionMastery",
         "description": "This object contains single Champion Mastery information for player and champion combination.",
         "fields": [
           {
@@ -1535,6 +1728,391 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "Clashv1PlayerRegistration",
+        "description": null,
+        "fields": [
+          {
+            "name": "position",
+            "description": "Clash lane assignment",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Position",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "role",
+            "description": "Clash team role assignment",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Role",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "summonerId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "teamId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "team",
+            "description": "Clash team details",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Clashv1Team",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "Position",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "UNSELECTED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "FILL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TOP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "JUNGLE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MIDDLE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BOTTOM",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UTILITY",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "Role",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "CAPTAIN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MEMBER",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Clashv1Team",
+        "description": null,
+        "fields": [
+          {
+            "name": "abbreviation",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "captain",
+            "description": "Summoner ID of the team captain.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iconId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "players",
+            "description": "Team members.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Clashv1Player",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tier",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tournamentId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Clashv1Player",
+        "description": null,
+        "fields": [
+          {
+            "name": "position",
+            "description": "(Legal values:  UNSELECTED,  FILL,  TOP,  JUNGLE,  MIDDLE,  BOTTOM,  UTILITY)",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Position",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "role",
+            "description": "(Legal values:  CAPTAIN,  MEMBER)",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Role",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "summonerId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "teamId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "MatchListFilterInput",
         "description": null,
@@ -1542,7 +2120,7 @@
         "inputFields": [
           {
             "name": "champion",
-            "description": null,
+            "description": "Champion Ids",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -1560,7 +2138,7 @@
           },
           {
             "name": "queue",
-            "description": null,
+            "description": "Queue type by id",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -1578,7 +2156,7 @@
           },
           {
             "name": "season",
-            "description": null,
+            "description": "Season",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -1596,7 +2174,7 @@
           },
           {
             "name": "endTime",
-            "description": null,
+            "description": "Timestamp in UNIX milliseconds",
             "type": {
               "kind": "SCALAR",
               "name": "Long",
@@ -1606,7 +2184,7 @@
           },
           {
             "name": "beginTime",
-            "description": null,
+            "description": "Timestamp in UNIX milliseconds",
             "type": {
               "kind": "SCALAR",
               "name": "Long",
@@ -1616,7 +2194,7 @@
           },
           {
             "name": "endIndex",
-            "description": null,
+            "description": "Last index of game to be returned.\n\nSee notes",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -1626,7 +2204,7 @@
           },
           {
             "name": "beginIndex",
-            "description": null,
+            "description": "First index of game to be returned.\n\nSee notes.",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -1636,7 +2214,7 @@
           },
           {
             "name": "count",
-            "description": null,
+            "description": "Number of matches to return\n\n#### Note:\n\nOnly for TFT",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -1652,7 +2230,7 @@
       {
         "kind": "ENUM",
         "name": "QueueId",
-        "description": null,
+        "description": "League Game Queue Ids",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1685,7 +2263,7 @@
       {
         "kind": "UNION",
         "name": "MatchList",
-        "description": null,
+        "description": "Matchlist return types. TFT matchlist returns only a list of ids",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1693,7 +2271,7 @@
         "possibleTypes": [
           {
             "kind": "OBJECT",
-            "name": "MatchV4Matchlist",
+            "name": "Matchv4Matchlist",
             "ofType": null
           },
           {
@@ -1705,7 +2283,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4Matchlist",
+        "name": "Matchv4Matchlist",
         "description": null,
         "fields": [
           {
@@ -1736,7 +2314,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "MatchV4MatchReference",
+                  "name": "Matchv4MatchReference",
                   "ofType": null
                 }
               }
@@ -1784,7 +2362,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4MatchReference",
+        "name": "Matchv4MatchReference",
         "description": null,
         "fields": [
           {
@@ -1924,10 +2502,10 @@
       {
         "kind": "OBJECT",
         "name": "TFTMatchIdList",
-        "description": null,
+        "description": "TFT matchlist return type. Returns a list of match ids",
         "fields": [
           {
-            "name": "matchIds",
+            "name": "matches",
             "description": null,
             "args": [],
             "type": {
@@ -1958,30 +2536,12 @@
       },
       {
         "kind": "ENUM",
-        "name": "Queue",
+        "name": "AllRankedQueues",
         "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
-          {
-            "name": "RANKED_FLEX_SR",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RANKED_FLEX_TT",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RANKED_SOLO_5X5",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "RANKED_SOLO_5x5",
             "description": null,
@@ -1993,13 +2553,25 @@
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "RANKED_FLEX_SR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RANKED_FLEX_TT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
       },
       {
         "kind": "OBJECT",
-        "name": "LeagueV4LeagueEntry",
+        "name": "Leaguev4LeagueEntry",
         "description": null,
         "fields": [
           {
@@ -2104,7 +2676,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "LeagueV4MiniSeries",
+              "name": "Leaguev4MiniSeries",
               "ofType": null
             },
             "isDeprecated": false,
@@ -2230,7 +2802,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LeagueV4MiniSeries",
+        "name": "Leaguev4MiniSeries",
         "description": null,
         "fields": [
           {
@@ -2304,6 +2876,16 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "MatchId",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "UNION",
         "name": "Match",
         "description": null,
@@ -2314,19 +2896,19 @@
         "possibleTypes": [
           {
             "kind": "OBJECT",
-            "name": "MatchV4Match",
+            "name": "Matchv4Match",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "TftMatchV1Match",
+            "name": "Tftmatchv1Match",
             "ofType": null
           }
         ]
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4Match",
+        "name": "Matchv4Match",
         "description": null,
         "fields": [
           {
@@ -2453,7 +3035,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "MatchV4ParticipantIdentity",
+                  "name": "Matchv4ParticipantIdentity",
                   "ofType": null
                 }
               }
@@ -2473,7 +3055,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "MatchV4Participant",
+                  "name": "Matchv4Participant",
                   "ofType": null
                 }
               }
@@ -2541,7 +3123,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "MatchV4TeamStats",
+                  "name": "Matchv4TeamStats",
                   "ofType": null
                 }
               }
@@ -2557,7 +3139,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4ParticipantIdentity",
+        "name": "Matchv4ParticipantIdentity",
         "description": null,
         "fields": [
           {
@@ -2585,7 +3167,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "MatchV4Player",
+                "name": "Matchv4Player",
                 "ofType": null
               }
             },
@@ -2600,7 +3182,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4Player",
+        "name": "Matchv4Player",
         "description": null,
         "fields": [
           {
@@ -2739,7 +3321,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4Participant",
+        "name": "Matchv4Participant",
         "description": null,
         "fields": [
           {
@@ -2779,7 +3361,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "MatchV4Mastery",
+                "name": "Matchv4Mastery",
                 "ofType": null
               }
             },
@@ -2811,7 +3393,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "MatchV4Rune",
+                "name": "Matchv4Rune",
                 "ofType": null
               }
             },
@@ -2859,7 +3441,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "MatchV4ParticipantStats",
+                "name": "Matchv4ParticipantStats",
                 "ofType": null
               }
             },
@@ -2891,7 +3473,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "MatchV4ParticipantTimeline",
+                "name": "Matchv4ParticipantTimeline",
                 "ofType": null
               }
             },
@@ -2965,7 +3547,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4Mastery",
+        "name": "Matchv4Mastery",
         "description": null,
         "fields": [
           {
@@ -3008,7 +3590,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4Rune",
+        "name": "Matchv4Rune",
         "description": null,
         "fields": [
           {
@@ -3051,7 +3633,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4ParticipantStats",
+        "name": "Matchv4ParticipantStats",
         "description": null,
         "fields": [
           {
@@ -4558,7 +5140,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4ParticipantTimeline",
+        "name": "Matchv4ParticipantTimeline",
         "description": null,
         "fields": [
           {
@@ -4787,7 +5369,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4TeamStats",
+        "name": "Matchv4TeamStats",
         "description": null,
         "fields": [
           {
@@ -4802,7 +5384,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "MatchV4TeamBans",
+                  "name": "Matchv4TeamBans",
                   "ofType": null
                 }
               }
@@ -5058,7 +5640,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4TeamBans",
+        "name": "Matchv4TeamBans",
         "description": null,
         "fields": [
           {
@@ -5124,7 +5706,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftMatchV1Match",
+        "name": "Tftmatchv1Match",
         "description": null,
         "fields": [
           {
@@ -5136,7 +5718,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "TftMatchV1Info",
+                "name": "Tftmatchv1Info",
                 "ofType": null
               }
             },
@@ -5152,7 +5734,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "TftMatchV1Metadata",
+                "name": "Tftmatchv1Metadata",
                 "ofType": null
               }
             },
@@ -5167,11 +5749,11 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftMatchV1Info",
+        "name": "Tftmatchv1Info",
         "description": null,
         "fields": [
           {
-            "name": "gameDatetime",
+            "name": "game_datetime",
             "description": "Unix timestamp.",
             "args": [],
             "type": {
@@ -5187,7 +5769,7 @@
             "deprecationReason": null
           },
           {
-            "name": "gameLength",
+            "name": "game_length",
             "description": "Game length in seconds.",
             "args": [],
             "type": {
@@ -5203,7 +5785,7 @@
             "deprecationReason": null
           },
           {
-            "name": "gameVariation",
+            "name": "game_variation",
             "description": "Game variation key. Game variations documented in TFT static data.",
             "args": [],
             "type": {
@@ -5215,7 +5797,7 @@
             "deprecationReason": null
           },
           {
-            "name": "gameVersion",
+            "name": "game_version",
             "description": "Game client version.",
             "args": [],
             "type": {
@@ -5242,7 +5824,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "TftMatchV1Participant",
+                  "name": "Tftmatchv1Participant",
                   "ofType": null
                 }
               }
@@ -5251,7 +5833,7 @@
             "deprecationReason": null
           },
           {
-            "name": "queueId",
+            "name": "queue_id",
             "description": "Please refer to the League of Legends documentation.",
             "args": [],
             "type": {
@@ -5267,7 +5849,7 @@
             "deprecationReason": null
           },
           {
-            "name": "tftSetNumber",
+            "name": "tft_set_number",
             "description": "Teamfight Tactics set number.",
             "args": [],
             "type": {
@@ -5290,7 +5872,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftMatchV1Participant",
+        "name": "Tftmatchv1Participant",
         "description": null,
         "fields": [
           {
@@ -5302,7 +5884,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "TftMatchV1Companion",
+                "name": "Tftmatchv1Companion",
                 "ofType": null
               }
             },
@@ -5310,7 +5892,7 @@
             "deprecationReason": null
           },
           {
-            "name": "goldLeft",
+            "name": "gold_left",
             "description": "Gold left after participant was eliminated.",
             "args": [],
             "type": {
@@ -5326,7 +5908,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastRound",
+            "name": "last_round",
             "description": "The round the participant was eliminated in. Note: If the player was eliminated in stage 2-1 their last_round would be 5.",
             "args": [],
             "type": {
@@ -5374,7 +5956,7 @@
             "deprecationReason": null
           },
           {
-            "name": "playersEliminated",
+            "name": "players_eliminated",
             "description": "Number of players the participant eliminated.",
             "args": [],
             "type": {
@@ -5406,7 +5988,7 @@
             "deprecationReason": null
           },
           {
-            "name": "timeEliminated",
+            "name": "time_eliminated",
             "description": "The number of seconds before the participant was eliminated.",
             "args": [],
             "type": {
@@ -5422,7 +6004,7 @@
             "deprecationReason": null
           },
           {
-            "name": "totalDamageToPlayers",
+            "name": "total_damage_to_players",
             "description": "Damage the participant dealt to other players.",
             "args": [],
             "type": {
@@ -5449,7 +6031,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "TftMatchV1Trait",
+                  "name": "Tftmatchv1Trait",
                   "ofType": null
                 }
               }
@@ -5469,7 +6051,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "TftMatchV1Unit",
+                  "name": "Tftmatchv1Unit",
                   "ofType": null
                 }
               }
@@ -5485,11 +6067,11 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftMatchV1Companion",
+        "name": "Tftmatchv1Companion",
         "description": null,
         "fields": [
           {
-            "name": "contentID",
+            "name": "content_ID",
             "description": null,
             "args": [],
             "type": {
@@ -5505,7 +6087,7 @@
             "deprecationReason": null
           },
           {
-            "name": "skinID",
+            "name": "skin_ID",
             "description": null,
             "args": [],
             "type": {
@@ -5544,7 +6126,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftMatchV1Trait",
+        "name": "Tftmatchv1Trait",
         "description": null,
         "fields": [
           {
@@ -5564,7 +6146,7 @@
             "deprecationReason": null
           },
           {
-            "name": "numUnits",
+            "name": "num_units",
             "description": "Number of units with this trait.",
             "args": [],
             "type": {
@@ -5580,7 +6162,7 @@
             "deprecationReason": null
           },
           {
-            "name": "tierCurrent",
+            "name": "tier_current",
             "description": "Current active tier for the trait.",
             "args": [],
             "type": {
@@ -5596,7 +6178,7 @@
             "deprecationReason": null
           },
           {
-            "name": "tierTotal",
+            "name": "tier_total",
             "description": "Total tiers for the trait.",
             "args": [],
             "type": {
@@ -5615,11 +6197,11 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftMatchV1Unit",
+        "name": "Tftmatchv1Unit",
         "description": null,
         "fields": [
           {
-            "name": "characterId",
+            "name": "character_id",
             "description": "This field was introduced in patch 9.22 with data_version 2.",
             "args": [],
             "type": {
@@ -5710,11 +6292,11 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftMatchV1Metadata",
+        "name": "Tftmatchv1Metadata",
         "description": null,
         "fields": [
           {
-            "name": "dataVersion",
+            "name": "data_version",
             "description": "Match data version.",
             "args": [],
             "type": {
@@ -5730,7 +6312,7 @@
             "deprecationReason": null
           },
           {
-            "name": "matchId",
+            "name": "match_id",
             "description": "Match id.",
             "args": [],
             "type": {
@@ -5860,8 +6442,73 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "Tier",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "CHALLENGER",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GRANDMASTER",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MASTER",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DIAMOND",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PLATINUM",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GOLD",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SILVER",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BRONZE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IRON",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
-        "name": "LeagueV4LeagueList",
+        "name": "Leaguev4LeagueList",
         "description": null,
         "fields": [
           {
@@ -5876,7 +6523,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LeagueV4LeagueItem",
+                  "name": "Leaguev4LeagueItem",
                   "ofType": null
                 }
               }
@@ -5956,7 +6603,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LeagueV4LeagueItem",
+        "name": "Leaguev4LeagueItem",
         "description": null,
         "fields": [
           {
@@ -6045,7 +6692,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "LeagueV4MiniSeries",
+              "name": "Leaguev4MiniSeries",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6138,73 +6785,8 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "Tier",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "CHALLENGER",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GRANDMASTER",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "MASTER",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DIAMOND",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "PLATINUM",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GOLD",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "SILVER",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "BRONZE",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IRON",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
-        "name": "TournamentV4TournamentCode",
+        "name": "Tournamentv4TournamentCode",
         "description": null,
         "fields": [
           {
@@ -6244,9 +6826,21 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "TournamentV4LobbyEvent",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Tournamentv4LobbyEvent",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -6304,8 +6898,32 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "MatchV4Match",
+              "name": "Matchv4Match",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "matchList",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Long",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -6466,7 +7084,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TournamentV4LobbyEvent",
+        "name": "Tournamentv4LobbyEvent",
         "description": null,
         "fields": [
           {
@@ -6602,7 +7220,42 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4FeaturedGames",
+        "name": "TournamentStub",
+        "description": null,
+        "fields": [
+          {
+            "name": "lobbyEvents",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Tournamentv4LobbyEvent",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Spectatorv4FeaturedGames",
         "description": null,
         "fields": [
           {
@@ -6633,7 +7286,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "SpectatorV4FeaturedGameInfo",
+                  "name": "Spectatorv4FeaturedGameInfo",
                   "ofType": null
                 }
               }
@@ -6649,7 +7302,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4FeaturedGameInfo",
+        "name": "Spectatorv4FeaturedGameInfo",
         "description": null,
         "fields": [
           {
@@ -6664,7 +7317,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "SpectatorV4BannedChampion",
+                  "name": "Spectatorv4BannedChampion",
                   "ofType": null
                 }
               }
@@ -6793,7 +7446,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "SpectatorV4Observer",
+                "name": "Spectatorv4Observer",
                 "ofType": null
               }
             },
@@ -6812,7 +7465,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "SpectatorV4Participant",
+                  "name": "Spectatorv4Participant",
                   "ofType": null
                 }
               }
@@ -6932,7 +7585,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SpectatorV4Participant",
+        "name": "Spectatorv4Participant",
         "description": null,
         "fields": [
           {
@@ -7034,6 +7687,332 @@
           {
             "name": "teamId",
             "description": "The team ID of this participant, indicating the participant's team",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Championv3ChampionInfo",
+        "description": null,
+        "fields": [
+          {
+            "name": "freeChampionIds",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "freeChampionIdsForNewPlayers",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maxNewPlayerLevel",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Clash",
+        "description": null,
+        "fields": [
+          {
+            "name": "upcoming",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Clashv1Tournament",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "team",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Clashv1Team",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tournament",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Clashv1Tournament",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Clashv1Tournament",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nameKey",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nameKeySecondary",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "schedule",
+            "description": "Tournament phase.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Clashv1TournamentPhase",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "themeId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Clashv1TournamentPhase",
+        "description": null,
+        "fields": [
+          {
+            "name": "cancelled",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "registrationTime",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "startTime",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -7879,537 +8858,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "ChampionV3ChampionInfo",
-        "description": null,
-        "fields": [
-          {
-            "name": "freeChampionIds",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "freeChampionIdsForNewPlayers",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "maxNewPlayerLevel",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ClashV1Player",
-        "description": null,
-        "fields": [
-          {
-            "name": "position",
-            "description": "(Legal values:  UNSELECTED,  FILL,  TOP,  JUNGLE,  MIDDLE,  BOTTOM,  UTILITY)",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "Position",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "role",
-            "description": "(Legal values:  CAPTAIN,  MEMBER)",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "Role",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "summonerId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "teamId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "Position",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "UNSELECTED",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "FILL",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "TOP",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "JUNGLE",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "MIDDLE",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "BOTTOM",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "UTILITY",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "Role",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "CAPTAIN",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "MEMBER",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ClashV1Team",
-        "description": null,
-        "fields": [
-          {
-            "name": "abbreviation",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "captain",
-            "description": "Summoner ID of the team captain.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "iconId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "players",
-            "description": "Team members.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "ClashV1Player",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "tier",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "tournamentId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ClashV1Tournament",
-        "description": null,
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "nameKey",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "nameKeySecondary",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "schedule",
-            "description": "Tournament phase.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "ClashV1TournamentPhase",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "themeId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ClashV1TournamentPhase",
-        "description": null,
-        "fields": [
-          {
-            "name": "cancelled",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "registrationTime",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "ENUM",
         "name": "Division2",
         "description": null,
@@ -8446,7 +8894,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LeagueExpV4LeagueEntry",
+        "name": "Leagueexpv4LeagueEntry",
         "description": null,
         "fields": [
           {
@@ -8551,7 +8999,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "LeagueExpV4MiniSeries",
+              "name": "Leagueexpv4MiniSeries",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8677,7 +9125,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LeagueExpV4MiniSeries",
+        "name": "Leagueexpv4MiniSeries",
         "description": null,
         "fields": [
           {
@@ -8752,7 +9200,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LolStatusV3Incident",
+        "name": "Lolstatusv3Incident",
         "description": null,
         "fields": [
           {
@@ -8772,7 +9220,7 @@
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "created_at",
             "description": null,
             "args": [],
             "type": {
@@ -8815,7 +9263,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LolStatusV3Message",
+                  "name": "Lolstatusv3Message",
                   "ofType": null
                 }
               }
@@ -8831,7 +9279,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LolStatusV3Message",
+        "name": "Lolstatusv3Message",
         "description": null,
         "fields": [
           {
@@ -8867,7 +9315,7 @@
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "created_at",
             "description": null,
             "args": [],
             "type": {
@@ -8926,7 +9374,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LolStatusV3Translation",
+                  "name": "Lolstatusv3Translation",
                   "ofType": null
                 }
               }
@@ -8935,7 +9383,7 @@
             "deprecationReason": null
           },
           {
-            "name": "updatedAt",
+            "name": "updated_at",
             "description": null,
             "args": [],
             "type": {
@@ -8958,7 +9406,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LolStatusV3Translation",
+        "name": "Lolstatusv3Translation",
         "description": null,
         "fields": [
           {
@@ -9017,7 +9465,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LolStatusV3Service",
+        "name": "Lolstatusv3Service",
         "description": null,
         "fields": [
           {
@@ -9032,7 +9480,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LolStatusV3Incident",
+                  "name": "Lolstatusv3Incident",
                   "ofType": null
                 }
               }
@@ -9096,7 +9544,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LolStatusV3ShardStatus",
+        "name": "Lolstatusv3ShardStatus",
         "description": null,
         "fields": [
           {
@@ -9152,7 +9600,7 @@
             "deprecationReason": null
           },
           {
-            "name": "regionTag",
+            "name": "region_tag",
             "description": null,
             "args": [],
             "type": {
@@ -9179,7 +9627,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LolStatusV3Service",
+                  "name": "Lolstatusv3Service",
                   "ofType": null
                 }
               }
@@ -9211,7 +9659,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LorRankedV1Leaderboard",
+        "name": "Lorrankedv1Leaderboard",
         "description": null,
         "fields": [
           {
@@ -9226,7 +9674,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "LorRankedV1Player",
+                  "name": "Lorrankedv1Player",
                   "ofType": null
                 }
               }
@@ -9242,7 +9690,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LorRankedV1Player",
+        "name": "Lorrankedv1Player",
         "description": null,
         "fields": [
           {
@@ -9330,7 +9778,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4MatchEvent",
+        "name": "Matchv4MatchEvent",
         "description": null,
         "fields": [
           {
@@ -9523,7 +9971,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "MatchV4MatchPosition",
+              "name": "Matchv4MatchPosition",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9583,7 +10031,7 @@
           },
           {
             "name": "type",
-            "description": "(Legal values:  CHAMPION_KILL,  WARD_PLACED,  WARD_KILL,  BUILDING_KILL,\nELITE_MONSTER_KILL,  ITEM_PURCHASED,  ITEM_SOLD,  ITEM_DESTROYED,  ITEM_UNDO,\nSKILL_LEVEL_UP,  ASCENDED_EVENT,  CAPTURE_POINT,  PORO_KING_SUMMON)",
+            "description": "(Legal values:  CHAMPION_KILL,  WARD_PLACED,  WARD_KILL,  BUILDING_KILL, \nELITE_MONSTER_KILL,  ITEM_PURCHASED,  ITEM_SOLD,  ITEM_DESTROYED,  ITEM_UNDO, \nSKILL_LEVEL_UP,  ASCENDED_EVENT,  CAPTURE_POINT,  PORO_KING_SUMMON)",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9629,7 +10077,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4MatchPosition",
+        "name": "Matchv4MatchPosition",
         "description": null,
         "fields": [
           {
@@ -9761,7 +10209,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4MatchFrame",
+        "name": "Matchv4MatchFrame",
         "description": null,
         "fields": [
           {
@@ -9776,7 +10224,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "MatchV4MatchEvent",
+                  "name": "Matchv4MatchEvent",
                   "ofType": null
                 }
               }
@@ -9824,7 +10272,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MatchV4MatchTimeline",
+        "name": "Matchv4MatchTimeline",
         "description": null,
         "fields": [
           {
@@ -9855,7 +10303,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "MatchV4MatchFrame",
+                  "name": "Matchv4MatchFrame",
                   "ofType": null
                 }
               }
@@ -9897,6 +10345,41 @@
           },
           {
             "name": "TOURNAMENT_DRAFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "Queue",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "RANKED_SOLO_5X5",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RANKED_TFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RANKED_FLEX_SR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RANKED_FLEX_TT",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -10041,7 +10524,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftLeagueV1LeagueEntry",
+        "name": "Tftleaguev1LeagueEntry",
         "description": null,
         "fields": [
           {
@@ -10146,7 +10629,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "TftLeagueV1MiniSeries",
+              "name": "Tftleaguev1MiniSeries",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10272,7 +10755,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftLeagueV1MiniSeries",
+        "name": "Tftleaguev1MiniSeries",
         "description": null,
         "fields": [
           {
@@ -10347,7 +10830,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftLeagueV1LeagueItem",
+        "name": "Tftleaguev1LeagueItem",
         "description": null,
         "fields": [
           {
@@ -10436,7 +10919,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "TftLeagueV1MiniSeries",
+              "name": "Tftleaguev1MiniSeries",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10530,7 +11013,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftLeagueV1LeagueList",
+        "name": "Tftleaguev1LeagueList",
         "description": null,
         "fields": [
           {
@@ -10545,7 +11028,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "TftLeagueV1LeagueItem",
+                  "name": "Tftleaguev1LeagueItem",
                   "ofType": null
                 }
               }
@@ -10625,7 +11108,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TftSummonerV1Summoner",
+        "name": "Tftsummonerv1Summoner",
         "description": "represents a summoner",
         "fields": [
           {
@@ -10842,7 +11325,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TournamentStubV4LobbyEvent",
+        "name": "Tournamentstubv4LobbyEvent",
         "description": null,
         "fields": [
           {
@@ -10901,7 +11384,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TournamentStubV4LobbyEventDTOWrapper",
+        "name": "Tournamentstubv4LobbyEventDTOWrapper",
         "description": null,
         "fields": [
           {
@@ -10916,7 +11399,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "TournamentStubV4LobbyEvent",
+                  "name": "Tournamentstubv4LobbyEvent",
                   "ofType": null
                 }
               }
@@ -10932,7 +11415,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TournamentStubV4ProviderRegistrationParametersInput",
+        "name": "Tournamentstubv4ProviderRegistrationParametersInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -10971,7 +11454,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TournamentStubV4TournamentCodeParametersInput",
+        "name": "Tournamentstubv4TournamentCodeParametersInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11062,7 +11545,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TournamentStubV4TournamentRegistrationParametersInput",
+        "name": "Tournamentstubv4TournamentRegistrationParametersInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11097,7 +11580,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TournamentV4LobbyEventDTOWrapper",
+        "name": "Tournamentv4LobbyEventDTOWrapper",
         "description": null,
         "fields": [
           {
@@ -11112,7 +11595,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "TournamentV4LobbyEvent",
+                  "name": "Tournamentv4LobbyEvent",
                   "ofType": null
                 }
               }
@@ -11128,7 +11611,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TournamentV4ProviderRegistrationParametersInput",
+        "name": "Tournamentv4ProviderRegistrationParametersInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11167,7 +11650,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TournamentV4TournamentCodeParametersInput",
+        "name": "Tournamentv4TournamentCodeParametersInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11258,7 +11741,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TournamentV4TournamentRegistrationParametersInput",
+        "name": "Tournamentv4TournamentRegistrationParametersInput",
         "description": null,
         "fields": null,
         "inputFields": [
