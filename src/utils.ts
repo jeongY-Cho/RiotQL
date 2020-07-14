@@ -1,4 +1,3 @@
-import * as log from "loglevel";
 import { RegionInput } from "./generated/graphql";
 
 const rfdc = require("rfdc")();

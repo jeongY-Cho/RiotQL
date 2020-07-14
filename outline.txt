@@ -1,0 +1,49 @@
+query {
+  info
+  summoner(region, ids): Summoner
+  match(region, matchId, game): (LeagueMatch | TFTMatch | LORMatch)
+  ranked(region, queue, tier, division, game): LeagueListDTO | LeagueEntryDTO
+  tournament(code)
+  featured_game(game)
+}
+
+
+mutuation {
+  registerTournamentProvider(region: Region, URL: String!): Int!
+  registerTournament(name: String, providerId: Int!): Int!
+  getTournamentCodes(count: Int!, tournamentId: Float!, params: TournamentCodeParams!)
+  updateTournamentCodeSettings(code: String!, params: TouranmentCodeupdateParams!)
+}
+
+
+type Summoner implements summoner {
+  and:
+    matchList(game)
+    activeMatch
+    champMastery {
+      score 
+      byChamp(champId: Int?)
+    }
+    leagueEntry(game)
+
+}
+
+
+enum Game {
+  TFT,
+  League,
+  LOR
+}
+
+tournament {
+  match ids by code
+  match details
+
+}
+
+
+Query: {
+  info: {
+    __type: Object
+  }
+}
