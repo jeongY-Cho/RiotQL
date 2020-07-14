@@ -13,10 +13,10 @@
   },
   "scripts": {
     "test": "jest",
-    "riot-api-types": "ts-node ./src/scripts/RiotAPICodegen.ts http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.min.json",
-    "openapi-to-nexus-schema": "ts-node ./src/scripts/RiotAPIToNexusSchema.ts ./src/schema/riot-api-v4-schema.ts",
-    "fetch-latest-openapi-schema": "ts-node ./src/scripts/FetchLatestOpenAPISchema.ts ./riot-openapi-schema.json",
-    "generate-all-from-openapi": "npm run riot-api-types && npm run openapi-to-nexus-schema && npm run fetch-latest-openapi-schema",
+    "api-client-types": "ts-node ./src/scripts/APIClientCodegen.ts",
+    "openapi-to-nexus-schema": "ts-node ./src/scripts/RiotAPIToNexusSchema.ts ./src/schema/riot-api-schema.ts",
+    "fetch-latest-openapi-schema": "ts-node ./src/scripts/FetchLatestOpenAPISchema.ts ./src/generated/",
+    "generate-all-from-openapi": "npm run fetch-latest-openapi-schema && npm run riot-api-types && npm run openapi-to-nexus-schema",
     "format": "npx prettier --write './**/*.{ts,md}'",
     "dev": "nexus dev",
     "build": "nexus build",
@@ -29,12 +29,13 @@
     "trailingComma": "all"
   },
   "devDependencies": {
+    "@anttiviljami/dtsgenerator": "^2.5.2",
+    "@stoplight/prism-cli": "^3.3.6",
     "indent-string": "^4.0.0",
     "json-ptr": "^1.2.0",
     "json-schema-deref-sync": "^0.13.0",
-    "@anttiviljami/dtsgenerator": "^2.5.2",
-    "prettier": "^2.0.5",
     "openapi-schema-validation": "^0.4.2",
-    "openapi-to-graphql": "^2.2.3"
+    "openapi-to-graphql": "^2.2.3",
+    "prettier": "^2.0.5"
   }
 }
