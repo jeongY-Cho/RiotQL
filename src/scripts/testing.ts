@@ -1,32 +1,37 @@
-// import { getHttpOperationsFromResource } from '@stoplight/prism-http'
-// import { createServer } from '@stoplight/prism-http-server'
-// import { createLogger } from '@stoplight/prism-core'
+import { getHttpOperationsFromResource } from '@stoplight/prism-http'
+import { createServer } from '@stoplight/prism-http-server'
+import { createLogger } from '@stoplight/prism-core'
+import axios from "axios"
 
-// async function createPrismServer() {
-//   const operations = await getHttpOperationsFromResource('YOUR-URL')
+require("dotenv").config()
 
-//   const server = createServer(operations, {
-//     components: {
-//       logger: createLogger('TestLogger'),
-//     },
-//     cors: true,
-//     config: {
-//       checkSecurity: true,
-//       validateRequest: true,
-//       validateResponse: true,
-//       mock: { dynamic: false },
-//       errors: false,
-//     },
-//   })
-//   await server.listen(4010)
+async function createPrismServer() {
+  const operations = await getHttpOperationsFromResource(process.env.RIOT_OPENAPI_SCHEMA!)
 
-//   return {
-//     close: server.close.bind(server),
-//   }
-// }
+  const server = createServer(operations, {
+    components: {
+      logger: createLogger('TestLogger'),
+    },
+    cors: true,
+    config: {
+      checkSecurity: true,
+      validateRequest: true,
+      validateResponse: true,
+      mock: { dynamic: true },
+      errors: false,
+    },
+  })
+  await server.listen(4010)
 
-// createPrismServer().then((server) => {
-//   console.log(server)
-// })
+  return {
+    close: server.close.bind(server),
+  }
+}
 
-console.log(new Date().toLocaleDateString().replace(/\//g, '_'))
+createPrismServer().then((server) => {
+  axios.get("http://127.0.0.1:4010/lol/champion-mastery/v4/champion-masteries/by-summoner/asasdfasdf", { headers: { "X-Riot-Token": "abc" } }).then(res => {
+    console.log(res)
+  })
+  console.log(server)
+})
+
