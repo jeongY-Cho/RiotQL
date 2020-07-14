@@ -36,6 +36,8 @@
     "json-schema-deref-sync": "^0.13.0",
     "openapi-schema-validation": "^0.4.2",
     "openapi-to-graphql": "^2.2.3",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
   }
 }
