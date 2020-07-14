@@ -1,3 +1,3 @@
-import { main } from "openapi-client-axios/typegen";
+import { main } from "../../openapi-client-axios/typegen";
 
 main();
