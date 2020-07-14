@@ -63,16 +63,17 @@ settings.change({
   },
 })
 
-apiContext().then((api) => {
-  schema.addToContext(() => {
-    return {
-      api,
-    }
-  })
-})
-
 type OpMethodKeys = keyof OperationMethods
+export enum APIKeyType {
+  'League',
+  'TFT',
+  'VAL',
+  'LOR',
+  'DEV',
+  'TOURNAMENT',
+}
 export type ApiClient = <T extends OpMethodKeys>(
+  keyType: APIKeyType,
   region: Region,
   endpoint: T,
   parameters?: Parameters<OperationMethods[T]>[0],
@@ -84,12 +85,33 @@ async function apiContext(options?: AxiosRequestConfig) {
   dotenv.config()
 
   const RIOT_KEY = process.env.RIOT_KEY
-  if (!process.env.RIOT_KEY || !process.env.RIOT_OPENAPI_SCHEMA) {
-    throw new Error('no RIOT_KEY or no RIOT_OPENAPI_SCHEMA in .env')
+
+  apiKeyAlerts()
+
+  const APIKeyLookup: { [k in APIKeyType]: string } = {
+    [APIKeyType.League]:
+      process.env.RIOT_API_LEAGUE_KEY ||
+      process.env.RIOT_API_DEVELOPMENT_KEY ||
+      '',
+    [APIKeyType.TFT]:
+      process.env.RIOT_API_TFT_KEY ||
+      process.env.RIOT_API_DEVELOPMENT_KEY ||
+      '',
+    [APIKeyType.LOR]:
+      process.env.RIOT_API_LOR_KEY ||
+      process.env.RIOT_API_DEVELOPMENT_KEY ||
+      '',
+    [APIKeyType.VAL]:
+      process.env.RIOT_API_VAL_KEY ||
+      process.env.RIOT_API_DEVELOPMENT_KEY ||
+      '',
+    [APIKeyType.DEV]: process.env.RIOT_API_DEVELOPMENT_KEY || '',
+    [APIKeyType.TOURNAMENT]: process.env.RIOT_API_TOURNAMENT_KEY || '',
   }
 
+  let latestRecord = require('./generated/SchemaRecord.json')[0]
   const OpenAPI = new OpenAPIClientAxios({
-    definition: './riot-openapi-schema.json',
+    definition: latestRecord,
     validate: false,
     axiosConfigDefaults: {
       headers: {
@@ -106,7 +128,16 @@ async function apiContext(options?: AxiosRequestConfig) {
   await OpenAPI.init<Client>()
   const client = await OpenAPI.getClient<Client>()
 
+  if (process.env.testing) {
+    console.log('diverting requests to prism mock server')
+    client.interceptors.request.use((config) => {
+      config.baseURL = 'http://127.0.0.1:4010'
+      return config
+    })
+  }
+
   let api = <T extends keyof OperationMethods>(
+    keyType: APIKeyType,
     region: Region,
     endpoint: T,
     parameters?: Parameters<OperationMethods[T]>[0],
@@ -118,7 +149,10 @@ async function apiContext(options?: AxiosRequestConfig) {
 
     let configWithRegion = {
       baseURL,
-      ...config,
+      headers: {
+        'X-Riot-Token': APIKeyLookup[keyType],
+      },
+      ...config!,
     }
 
     try {
@@ -136,6 +170,7 @@ async function apiContext(options?: AxiosRequestConfig) {
   }
   return api as ApiClient
 }
+
 apiContext()
   .then((api) => {
     schema.addToContext(() => {
@@ -158,3 +193,63 @@ process.on('unhandledRejection', (reason: any, promise) => {
   // Recommended: send the information to sentry.io
   // or whatever crash reporting service you use
 })
+
+function apiKeyAlerts() {
+  if (!process.env.RIOT_API_DEVELOPMENT_KEY) {
+    console.error('no development key')
+  }
+
+  if (!process.env.RIOT_API_DEVELOPMENT_KEY) {
+    if (!process.env.RIOT_API_LEAGUE_KEY) {
+      console.info(
+        'no RIOT_API_LEAGUE_KEY in .env; no RIOT_API_DEVLOPMENT_KEY either. Calls to these endpoints will throw errors.',
+      )
+    }
+    if (!process.env.RIOT_API_TFT_KEY) {
+      console.info(
+        'no RIOT_API_TFT_KEY in .env; no RIOT_API_DEVLOPMENT_KEY either. Calls to these endpoints will throw errors.',
+      )
+    }
+    if (!process.env.RIOT_API_LOR_KEY) {
+      console.info(
+        'no RIOT_API_LOR_KEY in .env; no RIOT_API_DEVLOPMENT_KEY either. Calls to these endpoints will throw errors.',
+      )
+    }
+    if (!process.env.RIOT_API_VAL_KEY) {
+      console.info(
+        'no RIOT_API_VAL_KEY in .env; no RIOT_API_DEVLOPMENT_KEY either. Calls to these endpoints will throw errors.',
+      )
+    }
+    if (!process.env.RIOT_API_TOURNAMENT_KEY) {
+      console.info(
+        'no RIOT_API_TOURNAMENT_KEY in .env; calls to tournament endpoint will throw errors',
+      )
+    }
+  } else {
+    if (!process.env.RIOT_API_LEAGUE_KEY) {
+      console.info(
+        'no RIOT_API_LEAGUE_KEY in .env falling back to RIOT_API_DEVELOPMENT_KEY',
+      )
+    }
+    if (!process.env.RIOT_API_TFT_KEY) {
+      console.info(
+        'no RIOT_API_TFT_KEY in .env falling back to RIOT_API_DEVELOPMENT_KEY',
+      )
+    }
+    if (!process.env.RIOT_API_LOR_KEY) {
+      console.info(
+        'no RIOT_API_LOR_KEY in .env falling back to RIOT_API_DEVELOPMENT_KEY',
+      )
+    }
+    if (!process.env.RIOT_API_VAL_KEY) {
+      console.info(
+        'no RIOT_API_VAL_KEY in .env falling back to RIOT_API_DEVELOPMENT_KEY',
+      )
+    }
+    if (!process.env.RIOT_API_TOURNAMENT_KEY) {
+      console.info(
+        'no RIOT_API_TOURNAMENT_KEY in .env; calls to tournament endpoint will throw errors',
+      )
+    }
+  }
+}
