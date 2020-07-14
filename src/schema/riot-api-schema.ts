@@ -1,6 +1,22 @@
 import { schema } from "nexus"
 
 
+export const Accountv1Account = schema.objectType({
+  name: "Accountv1Account",
+  definition(t) {
+    t.string("gameName")
+    t.string("puuid")
+    t.string("tagLine")
+  }
+})
+export const Accountv1ActiveShard = schema.objectType({
+  name: "Accountv1ActiveShard",
+  definition(t) {
+    t.string("activeShard")
+    t.string("game")
+    t.string("puuid")
+  }
+})
 export const Championmasteryv4ChampionMastery = schema.objectType({
   name: "Championmasteryv4ChampionMastery",
   description: "This object contains single Champion Mastery information for player and champion combination.",
@@ -1510,6 +1526,10 @@ export const Division = schema.enumType({
 export const Division2 = schema.enumType({
   name: "Division2",
   members: ["I","II","III","IV"],
+});
+export const Game = schema.enumType({
+  name: "Game",
+  members: ["VAL","LOR"],
 });
 export const GameMode = schema.enumType({
   name: "GameMode",

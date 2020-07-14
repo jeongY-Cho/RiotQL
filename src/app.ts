@@ -63,14 +63,6 @@ settings.change({
   },
 })
 
-apiContext().then((api) => {
-  schema.addToContext(() => {
-    return {
-      api,
-    }
-  })
-})
-
 type OpMethodKeys = keyof OperationMethods
 export type ApiClient = <T extends OpMethodKeys>(
   region: Region,
@@ -87,9 +79,9 @@ async function apiContext(options?: AxiosRequestConfig) {
   if (!process.env.RIOT_KEY || !process.env.RIOT_OPENAPI_SCHEMA) {
     throw new Error('no RIOT_KEY or no RIOT_OPENAPI_SCHEMA in .env')
   }
-
+  let latestRecord = require('./generated/SchemaRecord.json')[0]
   const OpenAPI = new OpenAPIClientAxios({
-    definition: './riot-openapi-schema.json',
+    definition: latestRecord,
     validate: false,
     axiosConfigDefaults: {
       headers: {
@@ -106,6 +98,14 @@ async function apiContext(options?: AxiosRequestConfig) {
   await OpenAPI.init<Client>()
   const client = await OpenAPI.getClient<Client>()
 
+  if (process.env.testing) {
+    console.log('diverting requests to prism mock server')
+    client.interceptors.request.use((config) => {
+      config.baseURL = 'http://127.0.0.1:4010'
+      return config
+    })
+  }
+
   let api = <T extends keyof OperationMethods>(
     region: Region,
     endpoint: T,
@@ -118,7 +118,7 @@ async function apiContext(options?: AxiosRequestConfig) {
 
     let configWithRegion = {
       baseURL,
-      ...config,
+      ...config!,
     }
 
     try {
@@ -136,6 +136,7 @@ async function apiContext(options?: AxiosRequestConfig) {
   }
   return api as ApiClient
 }
+
 apiContext()
   .then((api) => {
     schema.addToContext(() => {
