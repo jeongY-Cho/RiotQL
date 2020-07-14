@@ -136,35 +136,19 @@ async function apiContext(options?: AxiosRequestConfig) {
   }
   return api as ApiClient
 }
-try {
-  settings.change({
-    server: {
-      playground: { path: '/playground' },
-    },
-    schema: {
-      nullable: {
-        outputs: false,
-        inputs: true,
-      },
-    },
-  })
-
-  apiContext()
-    .then((api) => {
-      schema.addToContext(() => {
-        return {
-          api,
-        }
-      })
+apiContext()
+  .then((api) => {
+    schema.addToContext(() => {
+      return {
+        api,
+      }
     })
-    .catch((err) => console.log(err))
-
-  server.express.get('/', (req, res) => {
-    res.send('test')
   })
-} catch (err) {
-  console.error(err)
-}
+  .catch((err) => console.log(err))
+
+server.express.get('/', (req, res) => {
+  res.send('test')
+})
 
 process.on('unhandledRejection', (reason: any, promise) => {
   promise.then((...rets) => {
