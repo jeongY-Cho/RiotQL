@@ -19,7 +19,7 @@ axios.get(process.env.RIOT_OPENAPI_SCHEMA).then((data) => {
   let fileName = 'riot-openapi-schema_' + localeDateString + '.oas.json'
   let filePath = path.join(base, fileName)
 
-  const recordFile = './src/generated/SchemaRecord.json'
+  const recordFile = './SchemaRecord.json'
   let record = readFileSync(recordFile)
   let recordJson: string[] = JSON.parse(record.toString())
   recordJson.unshift(filePath)
