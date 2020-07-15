@@ -90,8 +90,6 @@ async function apiContext(options?: AxiosRequestConfig) {
   // testing environment uses its own adapter.
   if (!process.env.TESTING && options?.adapter) {
     client.defaults.adapter = options.adapter
-  } else {
-    console.log('adpater')
   }
 
   let api = <T extends keyof OperationMethods>(

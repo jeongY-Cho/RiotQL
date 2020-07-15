@@ -1,17 +1,40 @@
 import axios from 'axios'
-import testAdapter from './tests/test_adapter'
+import { createTestContext } from './tests/__helpers'
 
-// set adapter to testAdapter
-// test adapter redirects all calls to a mock api with the same openapi schema as riot api
-beforeAll(async () => {
-  axios.defaults.adapter = await testAdapter()
+const ctx = createTestContext()
+
+test('test info', async () => {
+  const res = await ctx.client.send(`
+    {
+      info {
+        description
+      }
+    }
+  `)
+  expect(res).toMatchInlineSnapshot(`
+    Object {
+      "info": Object {
+        "description": "This is a graphql wrapper of RIOT API",
+      },
+    }
+  `)
 })
 
-test('trial', async () => {
-  console.log(axios.defaults.adapter)
-  let res = await axios.get(
-    '/lol/champion-mastery/v4/champion-masteries/by-summoner/asasdfasdf',
-  )
-  console.log(res)
-  expect(3).toBe(3)
+test('custom adapter', async () => {
+  const res = await ctx.client.send(`
+    {
+      summoner(region: na1, summonerName: "abc") {
+        accountId
+        id
+        region
+      }
+    }
+  `)
+  expect(res).toMatchObject({
+    summoner: {
+      accountId: expect.any(String),
+      id: expect.any(String),
+      region: expect.any(String),
+    },
+  })
 })
