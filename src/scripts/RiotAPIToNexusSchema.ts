@@ -11,7 +11,7 @@ if (!process.env.RIOT_OPENAPI_SCHEMA)
   throw new Error('no riot api openapi schema link')
 
 const args = process.argv.slice(2)
-let latestRecord = require('../generated/SchemaRecord')[0]
+let latestRecord = require('../../SchemaRecord')[0]
 let swaggerParser = new SwaggerParser()
 swaggerParser.bundle(latestRecord).then(async (schemaBundle) => {
   // @ts-ignore

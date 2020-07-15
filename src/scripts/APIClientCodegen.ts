@@ -1,6 +1,6 @@
 import { generateTypesForDocument } from '../../openapi-client-axios/typegen/typegen.js'
 import * as fs from 'fs'
-const SchemaRecord = require('../generated/SchemaRecord')
+const SchemaRecord = require('../../SchemaRecord')
 let latestSchema = SchemaRecord[0]
 
 generateTypesForDocument(latestSchema).then((res) => {
