@@ -4,6 +4,7 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
+    "jsx": "react",
     "lib": ["es6"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

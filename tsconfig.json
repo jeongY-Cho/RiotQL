@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "target": "es2016",
     "module": "commonjs",
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "strict": true,
     "rootDir": "src",
     "noEmit": true,
@@ -15,13 +14,7 @@
       }
     ],
     "skipLibCheck": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "types"
-    ]
+    "typeRoots": ["node_modules/@types", "types"]
   },
-  "include": [
-    "types.d.ts",
-    "src"
-  ]
+  "include": ["types.d.ts", "src", "views"]
 }
