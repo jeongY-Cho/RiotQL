@@ -1,44 +1,3 @@
-/**
- * This file is your server entrypoint. Don't worry about its emptyness, Nexus handles everything for you.
- * However, if you need to add settings, enable plugins, schema middleware etc, this is place to do it.
- * Below are some examples of what you can do. Uncomment them to try them out!
- */
-
-/**
- * Change a variety of settings
- */
-
-// import { settings } from 'nexus'
-//
-// settings.change({
-//   server: {
-//     port: 4001
-//   }
-// })
-
-/**
- * Add some schema middleware
- */
-
-// import { schema } from 'nexus'
-//
-// schema.middleware((_config) => {
-//   return async (root, args, ctx, info, next) {
-//     ctx.log.trace('before resolver')
-//     await next(root, args, ctx, info)
-//     ctx.log.trace('after resolver')
-//   }
-// })
-
-/**
- * Enable the Prisma plugin. (Needs `nexus-plugin-prisma` installed)
- */
-
-// import { use } from 'nexus'
-// import { prisma } from 'nexus-plugin-prisma'
-//
-// use(prisma())
-
 import { schema, settings, server } from 'nexus'
 import { Client, OperationMethods } from './generated/riot-types'
 import * as dotenv from 'dotenv'
@@ -50,6 +9,7 @@ import OpenAPIClientAxios, {
 } from '../openapi-client-axios'
 import qs from 'qs'
 
+dotenv.config()
 settings.change({
   server: {
     port: parseInt(process.env.PORT!),
@@ -82,8 +42,6 @@ export type ApiClient = <T extends OpMethodKeys>(
 ) => ReturnType<OperationMethods[T]> | Promise<null> | null
 
 async function apiContext(options?: AxiosRequestConfig) {
-  dotenv.config()
-
   const RIOT_KEY = process.env.RIOT_KEY
 
   apiKeyAlerts()
@@ -109,7 +67,7 @@ async function apiContext(options?: AxiosRequestConfig) {
     [APIKeyType.TOURNAMENT]: process.env.RIOT_API_TOURNAMENT_KEY || '',
   }
 
-  let latestRecord = require('./generated/SchemaRecord.json')[0]
+  let latestRecord = require('../SchemaRecord.json')[0]
   const OpenAPI = new OpenAPIClientAxios({
     definition: latestRecord,
     validate: false,
@@ -128,12 +86,10 @@ async function apiContext(options?: AxiosRequestConfig) {
   await OpenAPI.init<Client>()
   const client = await OpenAPI.getClient<Client>()
 
-  if (process.env.testing) {
-    console.log('diverting requests to prism mock server')
-    client.interceptors.request.use((config) => {
-      config.baseURL = 'http://127.0.0.1:4010'
-      return config
-    })
+  // add any adapter if not in testing environment
+  // testing environment uses its own adapter.
+  if (!process.env.TESTING && options?.adapter) {
+    client.defaults.adapter = options.adapter
   }
 
   let api = <T extends keyof OperationMethods>(
@@ -180,10 +136,6 @@ apiContext()
     })
   })
   .catch((err) => console.log(err))
-
-server.express.get('/', (req, res) => {
-  res.send('test')
-})
 
 process.on('unhandledRejection', (reason: any, promise) => {
   promise.then((...rets) => {
