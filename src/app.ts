@@ -86,6 +86,12 @@ async function apiContext(options?: AxiosRequestConfig) {
   await OpenAPI.init<Client>()
   const client = await OpenAPI.getClient<Client>()
 
+  // add any adapter if not in testing environment
+  // testing environment uses its own adapter.
+  if (!process.env.TESTING && options?.adapter) {
+    client.defaults.adapter = options.adapter
+  }
+
   let api = <T extends keyof OperationMethods>(
     keyType: APIKeyType,
     region: Region,
@@ -199,4 +205,3 @@ function apiKeyAlerts() {
     }
   }
 }
-export * as nexus from 'nexus'
