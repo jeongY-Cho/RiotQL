@@ -1,10 +1,10 @@
 import { getHttpOperationsFromResource } from '@stoplight/prism-http'
+import { createClientFromOperations } from '@stoplight/prism-http/dist/client'
 import { createServer } from '@stoplight/prism-http-server'
 import { createLogger } from '@stoplight/prism-core'
 import axios from 'axios'
 import OpenAPIClient from '../../openapi-client-axios'
 import { Client, OperationMethods } from '../generated/riot-types'
-import { createClientFromOperations } from '@stoplight/prism-http/dist/client'
 
 require('dotenv').config()
 
