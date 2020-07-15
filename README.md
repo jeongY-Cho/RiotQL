@@ -2,9 +2,6 @@
 
 ### A graphql wrapper for Riot API
 
-
-#### Note: graphql calls may or may not return data.
-
 ## Usage
 
 #### 1. Installation:
