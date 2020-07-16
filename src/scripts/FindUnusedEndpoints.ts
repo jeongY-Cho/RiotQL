@@ -44,8 +44,15 @@ async function findUnusedEndpoints() {
       }
     }
   }
-  console.log('Implemented:', matches)
-  console.log('Not Implemented:', difference(flattenedValues, matches))
+  console.log('Implemented:', JSON.stringify(Array.from(matches), undefined, 2))
+  console.log(
+    'Not Implemented:',
+    JSON.stringify(
+      Array.from(difference(flattenedValues, matches)),
+      undefined,
+      2,
+    ),
+  )
 }
 
 if (require.main === module) {
