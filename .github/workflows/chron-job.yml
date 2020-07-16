@@ -47,10 +47,6 @@ jobs:
         uses: actions/download-artifact@v2
         with: 
           name: latestSchema
-
-      
-      - name: cat latestSchema
-        run: cat ${{ env.latestSchema }}
         
       - name: diff schemas
         run: | 
@@ -87,7 +83,7 @@ jobs:
         run: |
           node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
           schema_changes=$(npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }})
-          endpoint_analysis=$(npm run find-unused-endpoints)
+          endpoint_analysis=$(node_modules/ts-node/dist/bin.js ./src/scripts/FindUnusedEndpoints.ts ./src/schema)
           echo $schema_changes >> report.txt
           echo $endpoint_analysis >> report.txt
       
