@@ -1,4 +1,4 @@
-name: Manually triggered workflow
+name: Check for breaking changes
 on:
   workflow_dispatch:
     inputs:
@@ -6,7 +6,8 @@ on:
         description: 'Remote Schema'
         required: true
         default: 'http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json'
-
+  schedule:
+    - cron: "0 1 * * *"
 
 jobs:        
   comp_diff: 
@@ -38,7 +39,8 @@ jobs:
         run: |
           echo "::error::Breaking Differences in api update"
           exit 1
-    
+    env:
+      schema_url: ${{github.event.inputs.schema_url ||  "http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json" }} 
         
 
         
