@@ -37,6 +37,7 @@
     "jest": "^26.1.0",
     "json-ptr": "^1.2.0",
     "json-schema-deref-sync": "^0.13.0",
+    "openapi-diff": "^0.23.2",
     "openapi-schema-validation": "^0.4.2",
     "openapi-to-graphql": "^2.2.3",
     "prettier": "^2.0.5",
