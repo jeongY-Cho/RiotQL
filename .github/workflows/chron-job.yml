@@ -82,8 +82,6 @@ jobs:
       - name: generate report 
         run: |
           node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
-          schema_changes=$(npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }})
-          endpoint_analysis=$(npm run find-unused-endpoints)
           npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }} >> report.txt
           npm run find-unused-endpoints |  grep -zo "Implemented:.*" >> report.txt
       
