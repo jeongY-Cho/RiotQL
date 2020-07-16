@@ -4,14 +4,12 @@ on:
     inputs:
       schema_url:
         description: 'Remote Schema'
-        required: true
-        default: 'http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json'
   schedule:
     - cron: "0 1 * * *"
 
 jobs:        
   comp_diff: 
-    name: 'comp_diff of openapi schema'
+    name: 'diff schemas'
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js environment
