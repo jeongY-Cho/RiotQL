@@ -85,7 +85,8 @@ jobs:
           npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }} >> report.txt
           npm run find-unused-endpoints |  grep -zo "Implemented:.*" >> report.txt
           cat report.txt
-        
+          git add report.txt
+          
       - name: push new report to branch 
         uses: github-actions-x/commit@v2.6
         with:
