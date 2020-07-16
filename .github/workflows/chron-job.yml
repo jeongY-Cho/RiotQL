@@ -83,7 +83,7 @@ jobs:
         run: |
           node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
           schema_changes=$(npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }})
-          endpoint_analysis=$(node_modules/ts-node/dist/bin.js ./src/scripts/FindUnusedEndpoints.ts ./src/schema)
+          endpoint_analysis=$(npm run find-unused-endpoints)
           echo $schema_changes >> report.txt
           echo $endpoint_analysis >> report.txt
       
