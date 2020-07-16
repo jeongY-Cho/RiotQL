@@ -30,15 +30,15 @@ jobs:
       
       - name: diff schemas
         run: | 
-          npx openapi-diff usedSchema.json latestSchema.json | grep "\"breakingDifferences\""
+          npx openapi-diff usedSchema.json latestSchema.json | grep "\"breakingDifferences\"" || exit 0
         continue-on-error: true
         
-      - name: pass if no results
+      - name: fail if breaking changes
         if: failure()
-        run: exit 0
-      
-      - name: fail if there is breaking differences
-        run: echo "::error::Breaking Differences in api update"
+        run: |
+          echo "::error::Breaking Differences in api update"
+          exit 1
+    
         
 
         
