@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.0
-      
-      - name: Checkout
-        uses: actions/checkout@v2.3.1
 
       - name: install openapi-diff
         run: npm i openapi-diff
