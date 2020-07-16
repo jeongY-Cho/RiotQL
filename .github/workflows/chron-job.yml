@@ -2,7 +2,7 @@ name: Manually triggered workflow
 on:
   workflow_dispatch:
     inputs:
-      name:
+      schema_url:
         description: 'Remote Schema'
         required: true
         default: 'http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json'
@@ -26,7 +26,7 @@ jobs:
         run: node .github/workflows/scripts/getUsedSchema.js > usedSchema.json
       
       - name: output full diff
-        run: npx openapi-diff usedSchema.json ${{ env.name }} 
+        run: npx openapi-diff usedSchema.json ${{  github.event.inputs.schema_url }} 
         
       - name: diff shchemas
         run: |
