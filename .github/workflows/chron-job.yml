@@ -16,12 +16,16 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.0
 
-
       - name: install openapi-diff
         run: npm i openapi-diff
         
       - name: Checkout
         uses: actions/checkout@v2.3.1      
+        
+      - name: get currently used schema
+        run: node .github/workflows/scripts/getUsedSchema.js > usedSchema.json
+      - name: echo json
+        run: echo usedSchema.json
         
       - name: diff shchemas
         run: |
