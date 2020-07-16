@@ -40,7 +40,7 @@ jobs:
           echo "::error::Breaking Differences in api update"
           exit 1
     env:
-      schema_url: ${{github.event.inputs.schema_url ||  "http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json" }} 
+      schema_url: ${{github.event.inputs.schema_url}} ||  "http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json"
         
 
         
