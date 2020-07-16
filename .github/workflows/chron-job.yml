@@ -31,7 +31,7 @@ jobs:
       - name: diff shchemas
         run: |
           npx openapi-diff usedSchema.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json | grep "\"breakingDifferencesFound\": false" -
-          res=$(npx openapi-diff usedSchema.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json | grep "\"breakingDifferencesFound\": false" -)
+          res=no
           echo $res
           echo "::set-env name=res::${res}"
       
