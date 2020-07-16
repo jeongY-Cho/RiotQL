@@ -31,6 +31,7 @@ export enum APIKeyType {
   'LOR',
   'DEV',
   'TOURNAMENT',
+  'ANY',
 }
 export type ApiClient = <T extends OpMethodKeys>(
   keyType: APIKeyType,
@@ -65,6 +66,13 @@ async function apiContext(options?: AxiosRequestConfig) {
       '',
     [APIKeyType.DEV]: process.env.RIOT_API_DEVELOPMENT_KEY || '',
     [APIKeyType.TOURNAMENT]: process.env.RIOT_API_TOURNAMENT_KEY || '',
+    [APIKeyType.ANY]:
+      process.env.RIOT_API_LEAGUE_KEY ||
+      process.env.RIOT_API_TFT_KEY ||
+      process.env.RIOT_API_LOR_KEY ||
+      process.env.RIOT_API_VAL_KEY ||
+      process.env.RIOT_API_DEVELOPMENT_KEY ||
+      '',
   }
 
   let latestRecord = require('../SchemaRecord.json')[0]
@@ -202,6 +210,18 @@ function apiKeyAlerts() {
       console.info(
         'no RIOT_API_TOURNAMENT_KEY in .env; calls to tournament endpoint will throw errors',
       )
+    }
+    if (
+      !(
+        process.env.RIOT_API_LEAGUE_KEY ||
+        process.env.RIOT_API_TFT_KEY ||
+        process.env.RIOT_API_LOR_KEY ||
+        process.env.RIOT_API_VAL_KEY ||
+        process.env.RIOT_API_DEVELOPMENT_KEY ||
+        ''
+      )
+    ) {
+      console.info(`no keys declared in .env calls will throw errors`)
     }
   }
 }

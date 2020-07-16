@@ -89,3 +89,8 @@ schema.enumType({
     'RANKED_FLEX_TT',
   ],
 })
+
+schema.enumType({
+  name: 'RealmInput',
+  members: ['americas', 'asia', 'europe'],
+})
