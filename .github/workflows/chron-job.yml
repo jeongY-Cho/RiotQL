@@ -24,6 +24,9 @@ jobs:
         
       - name: get currently used schema
         run: node .github/workflows/scripts/getUsedSchema.js > usedSchema.json
+      
+      - name: output full diff
+        run: npx openapi-diff usedSchema.json ${{ env.name }} 
         
       - name: diff shchemas
         run: |
