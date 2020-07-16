@@ -91,7 +91,8 @@ jobs:
         with:
           add: report.txt
           message: Update report.txt
-        env: ${{ secrets.GITHUB_TOKEN }}
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           
       - name: upload report
