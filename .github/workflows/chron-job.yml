@@ -95,7 +95,7 @@ jobs:
         with:
           add: report.txt
           message: Update report.txt
-          author_name: ${{ env.GITHUB_ACTOR }}
+          author_name: $GITHUB_ACTOR
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
