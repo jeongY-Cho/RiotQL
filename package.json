@@ -16,7 +16,7 @@
     "api-client-types": "ts-node ./src/scripts/APIClientCodegen.ts",
     "openapi-to-nexus-schema": "ts-node ./src/scripts/RiotAPIToNexusSchema.ts ./src/schema/riot-api-schema.ts",
     "fetch-latest-openapi-schema": "ts-node ./src/scripts/FetchLatestOpenAPISchema.ts ./src/generated/",
-    "find-unused-endpoints": "node node_modules/ts-node/dist/bin.js ./src/script/FindUnusedEndpoints.ts ./src/schema",
+    "find-unused-endpoints": "node node_modules/ts-node/dist/bin.js ./src/scripts/FindUnusedEndpoints.ts ./src/schema",
     "generate-all-from-openapi": "npm run fetch-latest-openapi-schema && npm run riot-api-types && npm run openapi-to-nexus-schema",
     "format": "npx prettier --write './**/*.{ts,md}'",
     "dev": "nexus dev",
