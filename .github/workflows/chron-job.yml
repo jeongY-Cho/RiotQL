@@ -30,22 +30,15 @@ jobs:
       
       - name: output full diff
         run: | 
-          npx openapi-diff usedSchema.json latestSchema.json 
+          npx openapi-diff usedSchema.json latestSchema.json | grep "\"breakingDifferences\""
         
-      - name: diff shchemas
-        run: |
-          changes=$(npx openapi-diff usedSchema.json latestSchema.json) 
-          echo $changes
-          echo $changes | grep "\"breakingDifferencesFound\": false"
-          res=no
-          echo $res
-          echo "::set-env name=res::${res}"
-      
-      - name: check for breaking diffs
-        if: contains(env.res, '"breakingDifferencesFound:\ false"') 
+      - name: pass if no results
+        if: failure()
         run: exit 0
-     
-      - name: breaking diff
-        run: exit 1
+      
+      - name: fail if there is breaking differences
+        run: echo "::error::Breaking Differences in api update"
+        
+
         
         
