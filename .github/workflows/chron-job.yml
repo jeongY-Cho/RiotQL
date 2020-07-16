@@ -62,7 +62,6 @@ jobs:
   generate_report:
     name: "generate report of used and unused endpoints"
     needs: fetch_latest_schema
-    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js environment
@@ -82,6 +81,8 @@ jobs:
       - name: generate report 
         run: |
           node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
+          date=$(date)
+          echo "==================== REPORT ${date} ===================" > report.txt
           npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }} >> report.txt
           npm run find-unused-endpoints |  grep -zo "Implemented:.*" >> report.txt
           cat report.txt
