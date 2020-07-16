@@ -31,11 +31,11 @@ jobs:
       - name: output full diff
         run: | 
           npx openapi-diff usedSchema.json latestSchema.json 
-          $(npx openapi-diff usedSchema.json latestSchema.json) | grep "\"breakingDifferencesFound\": false" -
         
       - name: diff shchemas
         run: |
-          npx openapi-diff usedSchema.json latestSchema.json | grep "\"breakingDifferencesFound\": false" -
+          changes=$(npx openapi-diff usedSchema.json latestSchema.json) 
+          echo $changes | grep "\"breakingDifferencesFound\": false"
           res=no
           echo $res
           echo "::set-env name=res::${res}"
