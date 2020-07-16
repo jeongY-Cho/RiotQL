@@ -32,7 +32,7 @@ jobs:
           echo "::set-env name=res::${res}"
       
       - name: check for breaking diffs
-        if: contains($res, '"breakingDifferencesFound:\ false"') 
+        if: contains(env.res, '"breakingDifferencesFound:\ false"') 
         run: exit 0
      
       - name: breaking diff
