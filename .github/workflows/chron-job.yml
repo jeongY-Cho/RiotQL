@@ -24,8 +24,8 @@ jobs:
         
       - name: get currently used schema
         run: node .github/workflows/scripts/getUsedSchema.js > usedSchema.json
-      - name: echo json
-        run: echo usedSchema.json
+      - name: cat json
+        run: cat usedSchema.json
         
       - name: diff shchemas
         run: |
