@@ -92,7 +92,7 @@ jobs:
           echo $endpoint_analysis >> report.txt
       
       - name: upload report
-        uses: artifact/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with: 
           name: report.txt
           path: report.txt
