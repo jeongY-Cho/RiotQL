@@ -49,6 +49,9 @@ jobs:
           name: latestSchema
           path: ${{ env.latestSchema }}
       
+      - name: cat latestSchema
+        run: cat ${{ env.latestSchema }}
+        
       - name: diff schemas
         run: | 
           npx openapi-diff ${{ env.currentSchema }} latestSchema.json | grep "\"breakingDifferences\"" || exit 0
