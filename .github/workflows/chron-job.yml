@@ -28,9 +28,10 @@ jobs:
       - name: get latest Schema
         run: curl ${{ github.event.inputs.schema_url }} --output latestSchema.json
       
-      - name: output full diff
+      - name: diff schemas
         run: | 
           npx openapi-diff usedSchema.json latestSchema.json | grep "\"breakingDifferences\""
+        continue-on-error: true
         
       - name: pass if no results
         if: failure()
