@@ -25,7 +25,7 @@ schema.extendType({
               puuid: args.puuid,
             },
           )
-          return res ? res.data : null
+          return res ? { ...res.data, realm: args.region } : null
         } else if (args.riotId) {
           let res = await context.api(
             APIKeyType.ANY,
@@ -37,7 +37,7 @@ schema.extendType({
             },
           )
           // FIXME: incorrect endpoint spec in openapi schema
-          return res ? (res.data as any) : null
+          return res ? { ...(res.data as any), realm: args.region } : null
         } else {
           throw new Error('no puuid or riotId supplied')
         }
@@ -51,5 +51,14 @@ schema.inputObjectType({
   definition(t) {
     t.string('gameName', { nullable: false, description: 'ingame name' })
     t.string('tagLine', { nullable: false })
+  },
+})
+
+schema.extendType({
+  type: 'Accountv1Account',
+  definition(t) {
+    t.field('realm', {
+      type: 'RealmInput',
+    })
   },
 })
