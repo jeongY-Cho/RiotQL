@@ -86,14 +86,9 @@ jobs:
           npm run find-unused-endpoints |  grep -zo "Implemented:.*" >> report.txt
           cat report.txt
           git add report.txt
+          git commit --all -m 'upadate report'
+          git push
           
-      - name: push new report to branch 
-        uses: github-actions-x/commit@v2.6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: update report.txt
-          files: report.txt
-      
       - name: upload report
         uses: actions/upload-artifact@v2
         with: 
