@@ -36,7 +36,8 @@ schema.extendType({
               tagLine: args.riotId.tagLine,
             },
           )
-          return res ? res.data : null
+          // FIXME: incorrect endpoint spec in openapi schema
+          return res ? (res.data as any) : null
         } else {
           throw new Error('no puuid or riotId supplied')
         }
