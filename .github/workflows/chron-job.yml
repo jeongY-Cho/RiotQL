@@ -25,7 +25,7 @@ jobs:
         run: node .github/workflows/scripts/getUsedSchema.js > usedSchema.json
       
       - name: get latest Schema
-        run: curl ${{ github.events.input.schema_url }} --output latestSchema.json || curl ${{ env.schema_url }} --output latestSchema.json
+        run: curl ${{ github.events.input.schema_url }} --output latestSchema.json || curl ${{ env.default_url }} --output latestSchema.json
       
       - name: diff schemas
         run: | 
