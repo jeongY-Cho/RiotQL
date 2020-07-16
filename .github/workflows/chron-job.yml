@@ -84,8 +84,8 @@ jobs:
           node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
           schema_changes=$(npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }})
           endpoint_analysis=$(npm run find-unused-endpoints)
-          echo $schema_changes >> report.txt
-          echo $endpoint_analysis >> report.txt
+          npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }} >> report.txt
+          npm run find-unused-endpoints |  grep -zo "Implemented:.*" >> report.txt
       
       - name: upload report
         uses: actions/upload-artifact@v2
