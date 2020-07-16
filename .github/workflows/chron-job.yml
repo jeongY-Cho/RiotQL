@@ -26,6 +26,7 @@ jobs:
       - name: diff shchemas
         run: |
           npx openapi-diff riot-openapi-schema.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json | grep "\"breakingDifferencesFound\": false" - && res=-
+          echo $res
           echo "::set-env name=res::${res}"
       
       - name: check for breaking diffs
