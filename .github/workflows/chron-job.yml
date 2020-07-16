@@ -35,6 +35,7 @@ jobs:
       - name: diff shchemas
         run: |
           changes=$(npx openapi-diff usedSchema.json latestSchema.json) 
+          echo $changes
           echo $changes | grep "\"breakingDifferencesFound\": false"
           res=no
           echo $res
