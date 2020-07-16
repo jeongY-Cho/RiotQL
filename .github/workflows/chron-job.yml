@@ -15,7 +15,7 @@ env:
 jobs:        
   fetch_latest_schema:
     name: "fetch latest riot api openapi schema"
-    runs-on: ubunutu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: get latest Schema
         run: curl ${{ github.events.input.schema_url }} --output ${{ env.latestSchema }} || curl ${{ env.default_url }} --output ${{ env.latestSchema }}
