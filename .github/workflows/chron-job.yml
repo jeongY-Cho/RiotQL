@@ -23,12 +23,8 @@ jobs:
         run: npm i openapi-diff
         
       - name: diff shchemas
-        run: npx openapi-diff riot-openapi-schema.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json > diff.txt
+        run: '$res=(npx openapi-diff riot-openapi-schema.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json | grep "\"breakingDifferencesFound\": false" -)'
       
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          # Artifact name
-          name: diff # optional
-          # A file, directory or wildcard pattern that describes what to upload
-          path: diff.txt
+      - name: check for breaking diffs
+        run: echo $res
+        
