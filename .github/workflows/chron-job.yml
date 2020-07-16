@@ -24,15 +24,18 @@ jobs:
         
       - name: get currently used schema
         run: node .github/workflows/scripts/getUsedSchema.js > usedSchema.json
-      - name: cat json
-        run: cat usedSchema.json
         
       - name: diff shchemas
         run: |
-          res=$(npx openapi-diff riot-openapi-schema.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json | grep "\"breakingDifferencesFound\": false" -)
+          res=$(npx openapi-diff usedScheam.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json | grep "\"breakingDifferencesFound\": false" -)
           echo $res
           echo "::set-env name=res::${res}"
       
       - name: check for breaking diffs
-        run: echo $res
+        if: contains($res, '"breakingDifferencesFounc": false') 
+        run: exit 0
+     
+      - name: breaking diff
+        run: exit 1
+        
         
