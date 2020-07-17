@@ -16,4 +16,7 @@ jobs:
        run: npm i openapi-diff
        
      - name: "4"
-       run: npx openapi-diff ./src/generated/riot-openapi-schema_7_14_2020_12_24_44.oas.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json
+       run: npx openapi-diff ./src/generated/riot-openapi-schema_7_14_2020_12_24_44.oas.json http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json > test.txt || echo "err"
+     
+     - name: "5" 
+       run: cat test.txt
