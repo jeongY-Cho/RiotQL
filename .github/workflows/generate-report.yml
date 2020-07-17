@@ -45,7 +45,9 @@ jobs:
           echo "8"
           echo "==================== END OF REPORT ===================" >> report.txt
           cat report.txt
-      
+        continue-on-error: true
+      - name: 3
+        run: npx openapi-diff currentSchema.json latestSchema.json
       - name: update report
         uses: EndBug/add-and-commit@v4.2.1
         with:
