@@ -13,6 +13,8 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
+    env:
+        RIOT_OPENAPI_SCHEMA: http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -25,24 +27,31 @@ jobs:
       run: | 
         npm i 
         echo "::add-mask::jy1998@hotmail.com"
-      env:
-        RIOT_OPENAPI_SCHEMA: http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json
+      
 
+    - name: Check for Breaking Changes in api
+      run: |
+        node .github/workflows/scripts/getUsedSchema.js > currentSchema.json
+        npx openpapi-diff currenSchema.json ${{ evn.RIOT_OPENAPI_SCHEMA }}
+        rm currentSchema.json
     # Runs a set of commands using the runners shell
     - name: Build App
       run: npm run build
     
-    - name: On Success, merge onto heroku-branch
-      run: |
-        git checkout heroku-branch
-        git merge --no-ff heroku-branch
-    
-    - name: Push merge
-      uses: ad-m/github-push-action@v0.6.0
+    - name: Merge to uat branch
+      uses: devmasx/merge-branch@v1.1.0
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: heroku-branch
-        force: true
+        type: now
+        target_branch: 'heroku-branch'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    
+#     - name: Push merge
+#       uses: ad-m/github-push-action@v0.6.0
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
+#         branch: heroku-branch
+#         force: true
   
     - name: Deploy to Heroku
       uses: AkhileshNS/heroku-deploy@v3.2.6
