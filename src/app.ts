@@ -1,11 +1,16 @@
 import { schema, settings, server } from 'nexus'
-import { Client, OperationMethods } from './generated/riot-types'
+import {
+  Client,
+  OperationMethods,
+  PathsDictionary,
+} from './generated/riot-types'
 import * as dotenv from 'dotenv'
 import { Region } from './types/Regions'
 
 import OpenAPIClientAxios, {
   Operation,
   AxiosRequestConfig,
+  OpenAPIClient,
 } from '../openapi-client-axios'
 import qs from 'qs'
 
@@ -31,6 +36,7 @@ export enum APIKeyType {
   'LOR',
   'DEV',
   'TOURNAMENT',
+  'ANY',
 }
 export type ApiClient = <T extends OpMethodKeys>(
   keyType: APIKeyType,
@@ -65,6 +71,13 @@ async function apiContext(options?: AxiosRequestConfig) {
       '',
     [APIKeyType.DEV]: process.env.RIOT_API_DEVELOPMENT_KEY || '',
     [APIKeyType.TOURNAMENT]: process.env.RIOT_API_TOURNAMENT_KEY || '',
+    [APIKeyType.ANY]:
+      process.env.RIOT_API_LEAGUE_KEY ||
+      process.env.RIOT_API_TFT_KEY ||
+      process.env.RIOT_API_LOR_KEY ||
+      process.env.RIOT_API_VAL_KEY ||
+      process.env.RIOT_API_DEVELOPMENT_KEY ||
+      '',
   }
 
   let latestRecord = require('../SchemaRecord.json')[0]
@@ -124,14 +137,22 @@ async function apiContext(options?: AxiosRequestConfig) {
       throw err
     }
   }
-  return api as ApiClient
+  return { api, client, OpenAPI } as {
+    api: ApiClient
+    client: OpenAPIClient<OperationMethods, PathsDictionary>
+    OpenAPI: OpenAPIClientAxios
+  }
 }
 
 apiContext()
   .then((api) => {
-    schema.addToContext(() => {
+    schema.addToContext((): {
+      api: ApiClient
+      client: OpenAPIClient<OperationMethods, PathsDictionary>
+      OpenAPI: OpenAPIClientAxios
+    } => {
       return {
-        api,
+        ...api,
       }
     })
   })
@@ -202,6 +223,18 @@ function apiKeyAlerts() {
       console.info(
         'no RIOT_API_TOURNAMENT_KEY in .env; calls to tournament endpoint will throw errors',
       )
+    }
+    if (
+      !(
+        process.env.RIOT_API_LEAGUE_KEY ||
+        process.env.RIOT_API_TFT_KEY ||
+        process.env.RIOT_API_LOR_KEY ||
+        process.env.RIOT_API_VAL_KEY ||
+        process.env.RIOT_API_DEVELOPMENT_KEY ||
+        ''
+      )
+    ) {
+      console.info(`no keys declared in .env calls will throw errors`)
     }
   }
 }

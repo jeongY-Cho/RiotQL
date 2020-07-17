@@ -13,8 +13,9 @@
         "name": "nexus/typescript-language-service"
       }
     ],
+    "noErrorTruncation": true,
     "skipLibCheck": true,
     "typeRoots": ["node_modules/@types", "types"]
   },
-  "include": ["types.d.ts", "src", "views"]
+  "include": ["types.d.ts", "src"]
 }

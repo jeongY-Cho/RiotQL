@@ -52,12 +52,19 @@ schema.extendType({
               return null
             }
 
-          //   case "LOR":
-          //     // TODO lor match
-          //     return null;
-          //   // @ts-expect-error || save for valorant
-          //   case "Valorant":
-          //     return null;
+          case 'LOR':
+            // TODO lor match
+            return null
+          case 'VAL':
+            let valMatch = await context.api(
+              APIKeyType.VAL,
+              args.region,
+              'val-match-v1.getMatch',
+              {
+                matchId: args.matchId,
+              },
+            )
+            return valMatch ? valMatch.data : null
         }
         return null
       },
@@ -68,8 +75,10 @@ schema.extendType({
 schema.unionType({
   name: 'Match',
   definition(t) {
-    t.members('Matchv4Match', 'Tftmatchv1Match')
+    t.members('Matchv4Match', 'Tftmatchv1Match', 'Valmatchv1Match')
     t.resolveType((source, context, info) => {
+      // @ts-expect-error || some stupid type thing cant check for props
+      if (source.roundResults) return 'Valmatchv1Match'
       // @ts-expect-error || some stupid type thing cant check for props
       if (source.info) {
         return 'Tftmatchv1Match'

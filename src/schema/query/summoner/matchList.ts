@@ -43,7 +43,7 @@ schema.extendType({
               },
             )
             if (!leagueRes) throw new Error('no matchList found')
-            return leagueRes?.data
+            return leagueRes.data
           case 'TFT':
             let tftRes = await context.api(
               APIKeyType.TFT,
@@ -59,10 +59,15 @@ schema.extendType({
           case 'LOR':
             // TODO LOR matchlist
             throw new Error('no matchlist for lor implemented')
-          // @ts-expect-error
-          case 'Valorant':
-            // TODO: valorant matchlist
-            throw new Error('no matchlist for valorant implemented')
+          case 'VAL':
+            let valRes = await context.api(
+              APIKeyType.VAL,
+              root.region,
+              'val-match-v1.getMatchlist',
+              { puuid: root.puuid },
+            )
+            if (!valRes) throw new Error('no matchlist found')
+            return valRes.data
           default:
             throw new Error(`no matchlist for ${args.game} `)
         }
@@ -105,12 +110,15 @@ schema.unionType({
   description:
     'Matchlist return types. TFT matchlist returns only a list of ids',
   definition(t) {
-    t.members('Matchv4Matchlist', 'TFTMatchIdList')
+    t.members('Matchv4Matchlist', 'TFTMatchIdList', 'Valmatchv1Matchlist')
     t.resolveType(function (source, context, info) {
-      if (source.matches !== undefined && source.matches !== null) {
+      // @ts-expect-error
+      if (source.history) return 'Valmatchv1Matchlist'
+      // @ts-expect-error
+      if (source.matches) {
+        // @ts-expect-error
         let first = source.matches[0]
         if (first !== null) {
-          // @ts-expect-error
           return first.champion ? 'Matchv4Matchlist' : 'TFTMatchIdList'
         }
       }
