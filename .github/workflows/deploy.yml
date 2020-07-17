@@ -25,6 +25,8 @@ jobs:
       run: | 
         npm i 
         echo "::add-mask::jy1998@hotmail.com"
+      env:
+        RIOT_OPENAPI_SCHEMA: http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json
 
     # Runs a set of commands using the runners shell
     - name: Build App
