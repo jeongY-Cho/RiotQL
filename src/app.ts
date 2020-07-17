@@ -1,11 +1,16 @@
 import { schema, settings, server } from 'nexus'
-import { Client, OperationMethods } from './generated/riot-types'
+import {
+  Client,
+  OperationMethods,
+  PathsDictionary,
+} from './generated/riot-types'
 import * as dotenv from 'dotenv'
 import { Region } from './types/Regions'
 
 import OpenAPIClientAxios, {
   Operation,
   AxiosRequestConfig,
+  OpenAPIClient,
 } from '../openapi-client-axios'
 import qs from 'qs'
 
@@ -132,14 +137,22 @@ async function apiContext(options?: AxiosRequestConfig) {
       throw err
     }
   }
-  return api as ApiClient
+  return { api, client, OpenAPI } as {
+    api: ApiClient
+    client: OpenAPIClient<OperationMethods, PathsDictionary>
+    OpenAPI: OpenAPIClientAxios
+  }
 }
 
 apiContext()
   .then((api) => {
-    schema.addToContext(() => {
+    schema.addToContext((): {
+      api: ApiClient
+      client: OpenAPIClient<OperationMethods, PathsDictionary>
+      OpenAPI: OpenAPIClientAxios
+    } => {
       return {
-        api,
+        ...api,
       }
     })
   })
