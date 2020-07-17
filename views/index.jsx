@@ -77,7 +77,7 @@ module.exports = (props) => {
           </a>
         </span>
       </nav>
-      <div style={{}}>
+      <div style={{ margin: '0 5%' }}>
         <div
           style={{
             height: '60vh',
