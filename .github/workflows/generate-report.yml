@@ -1,0 +1,48 @@
+name: Update Report.txt
+on: push
+
+env:
+  default_url: "http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json"
+  latestSchema: latestSchema.json
+  currentSchema: currentSchema.json
+
+jobs:
+  generate_report:
+    runs-on: ubuntu-latest
+    name: generate report
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.0
+        
+      - name: checkout
+        uses: actions/checkout@v2.3.1
+      
+      - name: install packages
+        run: npm i typescript ts-node swagger-parser
+        
+      - name: get latest schema
+        run: curl ${{ env.default_url }} --output ${{ env.latestSchema }}
+      
+      - name: get current schema
+        run: node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
+        
+      - name: generate report 
+        run: |
+          node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
+          date=$(date)
+          echo -e "==================== REPORT ${date} ===================\n" > report.txt
+          echo "<<<< SCHEMA DIFF >>>>" >> report.txt
+          npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }} >> report.txt || echo "breakingDiffs"
+          echo -e "\n<<<< ENDPOINT REPORT >>>>" >> report.txt
+          npm run find-unused-endpoints |  grep -zo "Implemented:.*" >> report.txt
+          echo "==================== END OF REPORT ===================" >> report.txt
+          cat report.txt
+      
+      - name: update report
+        uses: EndBug/add-and-commit@v4.2.1
+        with:
+          add: report.txt
+          message: Update report.txt
+          author_name: $GITHUB_ACTOR
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

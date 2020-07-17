@@ -1,0 +1,65 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy to Heroku
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    env:
+        RIOT_OPENAPI_SCHEMA: http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Runs a single command using the runners shell
+    - name: Install Packages
+      run: | 
+        npm i 
+        echo "::add-mask::jy1998@hotmail.com"
+      
+
+    - name: Check for Breaking Changes in api
+      run: |
+        node .github/workflows/scripts/getUsedSchema.js > currentSchema.json
+        npx openapi-diff currentSchema.json ${{ env.RIOT_OPENAPI_SCHEMA }}
+        rm currentSchema.json
+    # Runs a set of commands using the runners shell
+    - name: Build App
+      run: |
+        npm run build
+        git status
+        git pull
+    
+    - name: Merge to heroku-branch branch
+      uses: devmasx/merge-branch@v1.1.0
+      with:
+        type: now
+        target_branch: 'heroku-branch'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    
+#     - name: Push merge
+#       uses: ad-m/github-push-action@v0.6.0
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
+#         branch: heroku-branch
+#         force: true
+  
+    - name: Deploy to Heroku
+      uses: AkhileshNS/heroku-deploy@v3.2.6
+      with: 
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_email: jy1998@hotmail.com
+        branch: heroku-branch
+        heroku_app_name: riotql
