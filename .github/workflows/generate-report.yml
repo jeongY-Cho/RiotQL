@@ -30,12 +30,12 @@ jobs:
         run: |
           node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
           date=$(date)
-          echo -e "==================== REPORT ${date} ===================\n" > report.txt
+          echo -e "#==================== REPORT ${date} ===================#\n" > report.txt
           echo "#### SCHEMA DIFF ####" >> report.txt
           npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }} >> report.txt || echo "::warning::breaking changes"
           echo -e "\n#### ENDPOINT REPORT ####" >> report.txt
           npm run find-unused-endpoints |  grep -zo "Implemented:.*" >> report.txt
-          echo "==================== END OF REPORT ===================" >> report.txt
+          echo "#==================== END OF REPORT ===================#" >> report.txt
           cat report.txt
 
       - name: 3
