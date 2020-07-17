@@ -4,7 +4,7 @@
     "title": "Riot API",
     "description": "\nOpenAPI/Swagger version of the [Riot API](https://developer.riotgames.com/). Automatically generated daily.\n## Download OpenAPI Spec File\nThe following versions of the Riot API spec file are available:\n- `openapi-3.0.0.json` ([view file](../openapi-3.0.0.json), [ui select](?url=../openapi-3.0.0.json))\n- `openapi-3.0.0.min.json` ([view file](../openapi-3.0.0.min.json), [ui select](?url=../openapi-3.0.0.min.json))\n- `openapi-3.0.0.yml` ([view file](../openapi-3.0.0.yml), [ui select](?url=../openapi-3.0.0.yml))\n- `openapi-3.0.0.min.yml` ([view file](../openapi-3.0.0.min.yml), [ui select](?url=../openapi-3.0.0.min.yml))\n- `swaggerspec-2.0.json` ([view file](../swaggerspec-2.0.json), [ui select](?url=../swaggerspec-2.0.json))\n- `swaggerspec-2.0.min.json` ([view file](../swaggerspec-2.0.min.json), [ui select](?url=../swaggerspec-2.0.min.json))\n- `swaggerspec-2.0.yml` ([view file](../swaggerspec-2.0.yml), [ui select](?url=../swaggerspec-2.0.yml))\n- `swaggerspec-2.0.min.yml` ([view file](../swaggerspec-2.0.min.yml), [ui select](?url=../swaggerspec-2.0.min.yml))\n## Source Code\nSource code on [GitHub](https://github.com/MingweiSamuel/riotapi-schema). Pull requests welcome!\n## Automatically Generated\nRebuilt on [Travis CI](https://travis-ci.com/MingweiSamuel/riotapi-schema/builds) daily.\n***\n",
     "termsOfService": "https://developer.riotgames.com/terms-and-conditions.html",
-    "version": "af29e140a03aabbd77664b926746eecaae877d2b"
+    "version": "ce249d47e5205e2141923e8dade20ac0ac4fc33c"
   },
   "servers": [
     {
@@ -12,6 +12,9 @@
       "variables": {
         "platform": {
           "enum": [
+            "americas",
+            "asia",
+            "europe",
             "br1",
             "eun1",
             "euw1",
@@ -21,22 +24,280 @@
             "la2",
             "na1",
             "oc1",
-            "tr1",
             "ru",
+            "tr1",
             "pbe1",
-            "americas",
-            "europe",
-            "asia"
+            "sea",
+            "ap",
+            "br",
+            "eu",
+            "latam",
+            "na"
           ],
-          "default": "na1"
+          "default": "americas"
         }
       }
     }
   ],
   "paths": {
+    "/riot/account/v1/accounts/by-puuid/{puuid}": {
+      "get": {
+        "tags": [
+          "account-v1"
+        ],
+        "summary": "Get account by puuid",
+        "externalDocs": {
+          "description": "Official API Reference",
+          "url": "https://developer.riotgames.com/api-methods/#account-v1/GET_getByPuuid"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/account-v1.AccountDto",
+                  "x-type": "AccountDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "405": {
+            "description": "Method not allowed"
+          },
+          "415": {
+            "description": "Unsupported media type"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Bad gateway"
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway timeout"
+          }
+        },
+        "operationId": "account-v1.getByPuuid",
+        "description": "Get account by puuid",
+        "parameters": [
+          {
+            "name": "puuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-type": "string"
+            }
+          }
+        ]
+      },
+      "x-endpoint": "account-v1",
+      "x-platforms-available": [
+        "americas",
+        "asia",
+        "europe"
+      ]
+    },
+    "/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}": {
+      "get": {
+        "tags": [
+          "account-v1"
+        ],
+        "summary": "Get account by riot id",
+        "externalDocs": {
+          "description": "Official API Reference",
+          "url": "https://developer.riotgames.com/api-methods/#account-v1/GET_getByRiotId"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "x-type": "String"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "405": {
+            "description": "Method not allowed"
+          },
+          "415": {
+            "description": "Unsupported media type"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Bad gateway"
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway timeout"
+          }
+        },
+        "operationId": "account-v1.getByRiotId",
+        "description": "Get account by riot id",
+        "parameters": [
+          {
+            "name": "tagLine",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-type": "string"
+            }
+          },
+          {
+            "name": "gameName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-type": "string"
+            }
+          }
+        ]
+      },
+      "x-endpoint": "account-v1",
+      "x-platforms-available": [
+        "americas",
+        "asia",
+        "europe"
+      ]
+    },
+    "/riot/account/v1/active-shards/by-game/{game}/by-puuid/{puuid}": {
+      "get": {
+        "tags": [
+          "account-v1"
+        ],
+        "summary": "Get active shard for a player",
+        "externalDocs": {
+          "description": "Official API Reference",
+          "url": "https://developer.riotgames.com/api-methods/#account-v1/GET_getActiveShard"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/account-v1.ActiveShardDto",
+                  "x-type": "ActiveShardDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "405": {
+            "description": "Method not allowed"
+          },
+          "415": {
+            "description": "Unsupported media type"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Bad gateway"
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway timeout"
+          }
+        },
+        "operationId": "account-v1.getActiveShard",
+        "description": "Get active shard for a player",
+        "parameters": [
+          {
+            "name": "puuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-type": "string"
+            }
+          },
+          {
+            "name": "game",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-type": "string",
+              "enum": [
+                "val",
+                "lor"
+              ]
+            }
+          }
+        ]
+      },
+      "x-endpoint": "account-v1",
+      "x-platforms-available": [
+        "americas",
+        "asia",
+        "europe"
+      ]
+    },
     "/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}": {
       "get": {
-        "tags": ["champion-mastery-v4"],
+        "tags": [
+          "champion-mastery-v4"
+        ],
         "summary": "Get all champion mastery entries sorted by number of champion points descending,",
         "externalDocs": {
           "description": "Official API Reference",
@@ -124,7 +385,9 @@
     },
     "/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}": {
       "get": {
-        "tags": ["champion-mastery-v4"],
+        "tags": [
+          "champion-mastery-v4"
+        ],
         "summary": "Get a champion mastery by player ID and champion ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -221,7 +484,9 @@
     },
     "/lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}": {
       "get": {
-        "tags": ["champion-mastery-v4"],
+        "tags": [
+          "champion-mastery-v4"
+        ],
         "summary": "Get a player's total champion mastery score, which is the sum of individual champion mastery levels.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -306,7 +571,9 @@
     },
     "/lol/platform/v3/champion-rotations": {
       "get": {
-        "tags": ["champion-v3"],
+        "tags": [
+          "champion-v3"
+        ],
         "summary": "Returns champion rotations, including free-to-play and low-level free-to-play rotations (REST)",
         "externalDocs": {
           "description": "Official API Reference",
@@ -378,7 +645,9 @@
     },
     "/lol/clash/v1/players/by-summoner/{summonerId}": {
       "get": {
-        "tags": ["clash-v1"],
+        "tags": [
+          "clash-v1"
+        ],
         "summary": "Get players by summoner ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -465,7 +734,9 @@
     },
     "/lol/clash/v1/teams/{teamId}": {
       "get": {
-        "tags": ["clash-v1"],
+        "tags": [
+          "clash-v1"
+        ],
         "summary": "Get team by ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -549,7 +820,9 @@
     },
     "/lol/clash/v1/tournaments": {
       "get": {
-        "tags": ["clash-v1"],
+        "tags": [
+          "clash-v1"
+        ],
         "summary": "Get all active or upcoming tournaments.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -625,7 +898,9 @@
     },
     "/lol/clash/v1/tournaments/by-team/{teamId}": {
       "get": {
-        "tags": ["clash-v1"],
+        "tags": [
+          "clash-v1"
+        ],
         "summary": "Get tournament by team ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -709,7 +984,9 @@
     },
     "/lol/clash/v1/tournaments/{tournamentId}": {
       "get": {
-        "tags": ["clash-v1"],
+        "tags": [
+          "clash-v1"
+        ],
         "summary": "Get tournament by ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -794,7 +1071,9 @@
     },
     "/lol/league-exp/v4/entries/{queue}/{tier}/{division}": {
       "get": {
-        "tags": ["league-exp-v4"],
+        "tags": [
+          "league-exp-v4"
+        ],
         "summary": "Get all the league entries.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -899,7 +1178,12 @@
               "type": "string",
               "x-type": "string",
               "x-enum": "division",
-              "enum": ["I", "II", "III", "IV"]
+              "enum": [
+                "I",
+                "II",
+                "III",
+                "IV"
+              ]
             }
           },
           {
@@ -932,7 +1216,9 @@
     },
     "/lol/league/v4/challengerleagues/by-queue/{queue}": {
       "get": {
-        "tags": ["league-v4"],
+        "tags": [
+          "league-v4"
+        ],
         "summary": "Get the challenger league for given queue.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -995,7 +1281,11 @@
               "type": "string",
               "x-type": "string",
               "x-enum": "queueType",
-              "enum": ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
+              "enum": [
+                "RANKED_SOLO_5x5",
+                "RANKED_FLEX_SR",
+                "RANKED_FLEX_TT"
+              ]
             }
           }
         ]
@@ -1017,7 +1307,9 @@
     },
     "/lol/league/v4/entries/by-summoner/{encryptedSummonerId}": {
       "get": {
-        "tags": ["league-v4"],
+        "tags": [
+          "league-v4"
+        ],
         "summary": "Get league entries in all queues for a given summoner ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1104,7 +1396,9 @@
     },
     "/lol/league/v4/entries/{queue}/{tier}/{division}": {
       "get": {
-        "tags": ["league-v4"],
+        "tags": [
+          "league-v4"
+        ],
         "summary": "Get all the league entries.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1171,7 +1465,12 @@
               "type": "string",
               "x-type": "string",
               "x-enum": "division",
-              "enum": ["I", "II", "III", "IV"]
+              "enum": [
+                "I",
+                "II",
+                "III",
+                "IV"
+              ]
             }
           },
           {
@@ -1200,7 +1499,11 @@
               "type": "string",
               "x-type": "string",
               "x-enum": "queueType",
-              "enum": ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
+              "enum": [
+                "RANKED_SOLO_5x5",
+                "RANKED_FLEX_SR",
+                "RANKED_FLEX_TT"
+              ]
             },
             "description": "Note that the queue value must be a valid ranked queue."
           },
@@ -1234,7 +1537,9 @@
     },
     "/lol/league/v4/grandmasterleagues/by-queue/{queue}": {
       "get": {
-        "tags": ["league-v4"],
+        "tags": [
+          "league-v4"
+        ],
         "summary": "Get the grandmaster league of a specific queue.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1297,7 +1602,11 @@
               "type": "string",
               "x-type": "string",
               "x-enum": "queueType",
-              "enum": ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
+              "enum": [
+                "RANKED_SOLO_5x5",
+                "RANKED_FLEX_SR",
+                "RANKED_FLEX_TT"
+              ]
             }
           }
         ]
@@ -1319,7 +1628,9 @@
     },
     "/lol/league/v4/leagues/{leagueId}": {
       "get": {
-        "tags": ["league-v4"],
+        "tags": [
+          "league-v4"
+        ],
         "summary": "Get league with given ID, including inactive entries.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1404,7 +1715,9 @@
     },
     "/lol/league/v4/masterleagues/by-queue/{queue}": {
       "get": {
-        "tags": ["league-v4"],
+        "tags": [
+          "league-v4"
+        ],
         "summary": "Get the master league for given queue.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1467,7 +1780,11 @@
               "type": "string",
               "x-type": "string",
               "x-enum": "queueType",
-              "enum": ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
+              "enum": [
+                "RANKED_SOLO_5x5",
+                "RANKED_FLEX_SR",
+                "RANKED_FLEX_TT"
+              ]
             }
           }
         ]
@@ -1489,7 +1806,9 @@
     },
     "/lol/status/v3/shard-data": {
       "get": {
-        "tags": ["lol-status-v3"],
+        "tags": [
+          "lol-status-v3"
+        ],
         "summary": "Get League of Legends status for the given shard.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1563,7 +1882,9 @@
     },
     "/lor/ranked/v1/leaderboards": {
       "get": {
-        "tags": ["lor-ranked-v1"],
+        "tags": [
+          "lor-ranked-v1"
+        ],
         "summary": "Get the players in Master tier.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1619,11 +1940,18 @@
         "description": "Get the players in Master tier."
       },
       "x-endpoint": "lor-ranked-v1",
-      "x-platforms-available": ["americas", "asia", "europe", "sea"]
+      "x-platforms-available": [
+        "americas",
+        "asia",
+        "europe",
+        "sea"
+      ]
     },
     "/lol/match/v4/matches/by-tournament-code/{tournamentCode}/ids": {
       "get": {
-        "tags": ["match-v4"],
+        "tags": [
+          "match-v4"
+        ],
         "summary": "Get match IDs by tournament code.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1712,7 +2040,9 @@
     },
     "/lol/match/v4/matches/{matchId}": {
       "get": {
-        "tags": ["match-v4"],
+        "tags": [
+          "match-v4"
+        ],
         "summary": "Get match by match ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1798,7 +2128,9 @@
     },
     "/lol/match/v4/matches/{matchId}/by-tournament-code/{tournamentCode}": {
       "get": {
-        "tags": ["match-v4"],
+        "tags": [
+          "match-v4"
+        ],
         "summary": "Get match by match ID and tournament code.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -1893,7 +2225,9 @@
     },
     "/lol/match/v4/matchlists/by-account/{encryptedAccountId}": {
       "get": {
-        "tags": ["match-v4"],
+        "tags": [
+          "match-v4"
+        ],
         "summary": "Get matchlist for games played on given account ID and platform ID and filtered using given filter parameters, if any.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2073,7 +2407,9 @@
     },
     "/lol/match/v4/timelines/by-match/{matchId}": {
       "get": {
-        "tags": ["match-v4"],
+        "tags": [
+          "match-v4"
+        ],
         "summary": "Get match timeline by match ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2159,7 +2495,9 @@
     },
     "/lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}": {
       "get": {
-        "tags": ["spectator-v4"],
+        "tags": [
+          "spectator-v4"
+        ],
         "summary": "Get current game information for the given summoner ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2244,7 +2582,9 @@
     },
     "/lol/spectator/v4/featured-games": {
       "get": {
-        "tags": ["spectator-v4"],
+        "tags": [
+          "spectator-v4"
+        ],
         "summary": "Get list of featured games.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2316,7 +2656,9 @@
     },
     "/lol/summoner/v4/summoners/by-account/{encryptedAccountId}": {
       "get": {
-        "tags": ["summoner-v4"],
+        "tags": [
+          "summoner-v4"
+        ],
         "summary": "Get a summoner by account ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2399,7 +2741,9 @@
     },
     "/lol/summoner/v4/summoners/by-name/{summonerName}": {
       "get": {
-        "tags": ["summoner-v4"],
+        "tags": [
+          "summoner-v4"
+        ],
         "summary": "Get a summoner by summoner name.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2484,7 +2828,9 @@
     },
     "/lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}": {
       "get": {
-        "tags": ["summoner-v4"],
+        "tags": [
+          "summoner-v4"
+        ],
         "summary": "Get a summoner by PUUID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2568,7 +2914,9 @@
     },
     "/lol/summoner/v4/summoners/{encryptedSummonerId}": {
       "get": {
-        "tags": ["summoner-v4"],
+        "tags": [
+          "summoner-v4"
+        ],
         "summary": "Get a summoner by summoner ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2652,7 +3000,9 @@
     },
     "/tft/league/v1/challenger": {
       "get": {
-        "tags": ["tft-league-v1"],
+        "tags": [
+          "tft-league-v1"
+        ],
         "summary": "Get the challenger league.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2724,7 +3074,9 @@
     },
     "/tft/league/v1/entries/by-summoner/{encryptedSummonerId}": {
       "get": {
-        "tags": ["tft-league-v1"],
+        "tags": [
+          "tft-league-v1"
+        ],
         "summary": "Get league entries for a given summoner ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2811,7 +3163,9 @@
     },
     "/tft/league/v1/entries/{tier}/{division}": {
       "get": {
-        "tags": ["tft-league-v1"],
+        "tags": [
+          "tft-league-v1"
+        ],
         "summary": "Get all the league entries.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2894,7 +3248,12 @@
             "schema": {
               "type": "string",
               "x-type": "string",
-              "enum": ["I", "II", "III", "IV"]
+              "enum": [
+                "I",
+                "II",
+                "III",
+                "IV"
+              ]
             }
           },
           {
@@ -2927,7 +3286,9 @@
     },
     "/tft/league/v1/grandmaster": {
       "get": {
-        "tags": ["tft-league-v1"],
+        "tags": [
+          "tft-league-v1"
+        ],
         "summary": "Get the grandmaster league.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -2999,7 +3360,9 @@
     },
     "/tft/league/v1/leagues/{leagueId}": {
       "get": {
-        "tags": ["tft-league-v1"],
+        "tags": [
+          "tft-league-v1"
+        ],
         "summary": "Get league with given ID, including inactive entries.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3084,7 +3447,9 @@
     },
     "/tft/league/v1/master": {
       "get": {
-        "tags": ["tft-league-v1"],
+        "tags": [
+          "tft-league-v1"
+        ],
         "summary": "Get the master league.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3156,7 +3521,9 @@
     },
     "/tft/match/v1/matches/by-puuid/{puuid}/ids": {
       "get": {
-        "tags": ["tft-match-v1"],
+        "tags": [
+          "tft-match-v1"
+        ],
         "summary": "Get a list of match ids by PUUID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3237,11 +3604,17 @@
         ]
       },
       "x-endpoint": "tft-match-v1",
-      "x-platforms-available": ["americas", "asia", "europe"]
+      "x-platforms-available": [
+        "americas",
+        "asia",
+        "europe"
+      ]
     },
     "/tft/match/v1/matches/{matchId}": {
       "get": {
-        "tags": ["tft-match-v1"],
+        "tags": [
+          "tft-match-v1"
+        ],
         "summary": "Get a match by match id.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3309,11 +3682,17 @@
         ]
       },
       "x-endpoint": "tft-match-v1",
-      "x-platforms-available": ["americas", "asia", "europe"]
+      "x-platforms-available": [
+        "americas",
+        "asia",
+        "europe"
+      ]
     },
     "/tft/summoner/v1/summoners/by-account/{encryptedAccountId}": {
       "get": {
-        "tags": ["tft-summoner-v1"],
+        "tags": [
+          "tft-summoner-v1"
+        ],
         "summary": "Get a summoner by account ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3396,7 +3775,9 @@
     },
     "/tft/summoner/v1/summoners/by-name/{summonerName}": {
       "get": {
-        "tags": ["tft-summoner-v1"],
+        "tags": [
+          "tft-summoner-v1"
+        ],
         "summary": "Get a summoner by summoner name.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3481,7 +3862,9 @@
     },
     "/tft/summoner/v1/summoners/by-puuid/{encryptedPUUID}": {
       "get": {
-        "tags": ["tft-summoner-v1"],
+        "tags": [
+          "tft-summoner-v1"
+        ],
         "summary": "Get a summoner by PUUID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3565,7 +3948,9 @@
     },
     "/tft/summoner/v1/summoners/{encryptedSummonerId}": {
       "get": {
-        "tags": ["tft-summoner-v1"],
+        "tags": [
+          "tft-summoner-v1"
+        ],
         "summary": "Get a summoner by summoner ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3649,7 +4034,9 @@
     },
     "/lol/platform/v4/third-party-code/by-summoner/{encryptedSummonerId}": {
       "get": {
-        "tags": ["third-party-code-v4"],
+        "tags": [
+          "third-party-code-v4"
+        ],
         "summary": "Get third party code for a given summoner ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3732,7 +4119,9 @@
     },
     "/lol/tournament-stub/v4/codes": {
       "post": {
-        "tags": ["tournament-stub-v4"],
+        "tags": [
+          "tournament-stub-v4"
+        ],
         "summary": "Create a mock tournament code for the given tournament.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3828,11 +4217,15 @@
         ]
       },
       "x-endpoint": "tournament-stub-v4",
-      "x-platforms-available": ["americas"]
+      "x-platforms-available": [
+        "americas"
+      ]
     },
     "/lol/tournament-stub/v4/lobby-events/by-code/{tournamentCode}": {
       "get": {
-        "tags": ["tournament-stub-v4"],
+        "tags": [
+          "tournament-stub-v4"
+        ],
         "summary": "Gets a mock list of lobby events by tournament code.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3900,11 +4293,15 @@
         ]
       },
       "x-endpoint": "tournament-stub-v4",
-      "x-platforms-available": ["americas"]
+      "x-platforms-available": [
+        "americas"
+      ]
     },
     "/lol/tournament-stub/v4/providers": {
       "post": {
-        "tags": ["tournament-stub-v4"],
+        "tags": [
+          "tournament-stub-v4"
+        ],
         "summary": "Creates a mock tournament provider and returns its ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -3973,11 +4370,15 @@
         }
       },
       "x-endpoint": "tournament-stub-v4",
-      "x-platforms-available": ["americas"]
+      "x-platforms-available": [
+        "americas"
+      ]
     },
     "/lol/tournament-stub/v4/tournaments": {
       "post": {
-        "tags": ["tournament-stub-v4"],
+        "tags": [
+          "tournament-stub-v4"
+        ],
         "summary": "Creates a mock tournament and returns its ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4046,11 +4447,15 @@
         }
       },
       "x-endpoint": "tournament-stub-v4",
-      "x-platforms-available": ["americas"]
+      "x-platforms-available": [
+        "americas"
+      ]
     },
     "/lol/tournament/v4/codes": {
       "post": {
-        "tags": ["tournament-v4"],
+        "tags": [
+          "tournament-v4"
+        ],
         "summary": "Create a tournament code for the given tournament.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4146,11 +4551,15 @@
         ]
       },
       "x-endpoint": "tournament-v4",
-      "x-platforms-available": ["americas"]
+      "x-platforms-available": [
+        "americas"
+      ]
     },
     "/lol/tournament/v4/codes/{tournamentCode}": {
       "get": {
-        "tags": ["tournament-v4"],
+        "tags": [
+          "tournament-v4"
+        ],
         "summary": "Returns the tournament code DTO associated with a tournament code string.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4218,9 +4627,13 @@
         ]
       },
       "x-endpoint": "tournament-v4",
-      "x-platforms-available": ["americas"],
+      "x-platforms-available": [
+        "americas"
+      ],
       "put": {
-        "tags": ["tournament-v4"],
+        "tags": [
+          "tournament-v4"
+        ],
         "summary": "Update the pick type, map, spectator type, or allowed summoners for a code.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4294,7 +4707,9 @@
     },
     "/lol/tournament/v4/lobby-events/by-code/{tournamentCode}": {
       "get": {
-        "tags": ["tournament-v4"],
+        "tags": [
+          "tournament-v4"
+        ],
         "summary": "Gets a list of lobby events by tournament code.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4362,11 +4777,15 @@
         ]
       },
       "x-endpoint": "tournament-v4",
-      "x-platforms-available": ["americas"]
+      "x-platforms-available": [
+        "americas"
+      ]
     },
     "/lol/tournament/v4/providers": {
       "post": {
-        "tags": ["tournament-v4"],
+        "tags": [
+          "tournament-v4"
+        ],
         "summary": "Creates a tournament provider and returns its ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4435,11 +4854,15 @@
         }
       },
       "x-endpoint": "tournament-v4",
-      "x-platforms-available": ["americas"]
+      "x-platforms-available": [
+        "americas"
+      ]
     },
     "/lol/tournament/v4/tournaments": {
       "post": {
-        "tags": ["tournament-v4"],
+        "tags": [
+          "tournament-v4"
+        ],
         "summary": "Creates a tournament and returns its ID.",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4508,11 +4931,15 @@
         }
       },
       "x-endpoint": "tournament-v4",
-      "x-platforms-available": ["americas"]
+      "x-platforms-available": [
+        "americas"
+      ]
     },
     "/val/content/v1/contents": {
       "get": {
-        "tags": ["val-content-v1"],
+        "tags": [
+          "val-content-v1"
+        ],
         "summary": "Get content optionally filtered by locale",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4579,11 +5006,20 @@
         ]
       },
       "x-endpoint": "val-content-v1",
-      "x-platforms-available": ["apac", "br", "eu", "kr", "latam", "na", "pbe1"]
+      "x-platforms-available": [
+        "ap",
+        "br",
+        "eu",
+        "kr",
+        "latam",
+        "na"
+      ]
     },
     "/val/match/v1/matches/{matchId}": {
       "get": {
-        "tags": ["val-match-v1"],
+        "tags": [
+          "val-match-v1"
+        ],
         "summary": "Get match by id",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4650,11 +5086,20 @@
         ]
       },
       "x-endpoint": "val-match-v1",
-      "x-platforms-available": ["apac", "br", "eu", "kr", "latam", "na", "pbe1"]
+      "x-platforms-available": [
+        "ap",
+        "br",
+        "eu",
+        "kr",
+        "latam",
+        "na"
+      ]
     },
     "/val/match/v1/matchlists/by-puuid/{puuid}": {
       "get": {
-        "tags": ["val-match-v1"],
+        "tags": [
+          "val-match-v1"
+        ],
         "summary": "Get matchlist for games played by puuid",
         "externalDocs": {
           "description": "Official API Reference",
@@ -4721,7 +5166,14 @@
         ]
       },
       "x-endpoint": "val-match-v1",
-      "x-platforms-available": ["apac", "br", "eu", "kr", "latam", "na", "pbe1"]
+      "x-platforms-available": [
+        "ap",
+        "br",
+        "eu",
+        "kr",
+        "latam",
+        "na"
+      ]
     }
   },
   "components": {
@@ -4741,6 +5193,52 @@
             }
           }
         }
+      },
+      "account-v1.AccountDto": {
+        "type": "object",
+        "title": "AccountDto",
+        "properties": {
+          "puuid": {
+            "type": "string",
+            "x-type": "string"
+          },
+          "gameName": {
+            "type": "string",
+            "x-type": "string"
+          },
+          "tagLine": {
+            "type": "string",
+            "x-type": "string"
+          }
+        },
+        "required": [
+          "puuid",
+          "gameName",
+          "tagLine"
+        ]
+      },
+      "account-v1.ActiveShardDto": {
+        "type": "object",
+        "title": "ActiveShardDto",
+        "properties": {
+          "puuid": {
+            "type": "string",
+            "x-type": "string"
+          },
+          "game": {
+            "type": "string",
+            "x-type": "string"
+          },
+          "activeShard": {
+            "type": "string",
+            "x-type": "string"
+          }
+        },
+        "required": [
+          "puuid",
+          "game",
+          "activeShard"
+        ]
       },
       "champion-mastery-v4.ChampionMasteryDTO": {
         "type": "object",
@@ -4878,11 +5376,19 @@
           "role": {
             "type": "string",
             "x-type": "string",
-            "enum": ["CAPTAIN", "MEMBER"],
+            "enum": [
+              "CAPTAIN",
+              "MEMBER"
+            ],
             "description": "(Legal values:  CAPTAIN,  MEMBER)"
           }
         },
-        "required": ["summonerId", "teamId", "position", "role"]
+        "required": [
+          "summonerId",
+          "teamId",
+          "position",
+          "role"
+        ]
       },
       "clash-v1.TeamDto": {
         "type": "object",
@@ -4973,7 +5479,13 @@
             "description": "Tournament phase."
           }
         },
-        "required": ["id", "themeId", "nameKey", "nameKeySecondary", "schedule"]
+        "required": [
+          "id",
+          "themeId",
+          "nameKey",
+          "nameKeySecondary",
+          "schedule"
+        ]
       },
       "clash-v1.TournamentPhaseDto": {
         "type": "object",
@@ -4999,7 +5511,12 @@
             "x-type": "boolean"
           }
         },
-        "required": ["id", "registrationTime", "startTime", "cancelled"]
+        "required": [
+          "id",
+          "registrationTime",
+          "startTime",
+          "cancelled"
+        ]
       },
       "league-exp-v4.LeagueEntryDTO": {
         "type": "object",
@@ -5111,7 +5628,12 @@
             "x-type": "int"
           }
         },
-        "required": ["losses", "progress", "target", "wins"]
+        "required": [
+          "losses",
+          "progress",
+          "target",
+          "wins"
+        ]
       },
       "league-v4.LeagueListDTO": {
         "type": "object",
@@ -5144,7 +5666,13 @@
             "x-enum": "queueType"
           }
         },
-        "required": ["leagueId", "entries", "tier", "name", "queue"]
+        "required": [
+          "leagueId",
+          "entries",
+          "tier",
+          "name",
+          "queue"
+        ]
       },
       "league-v4.LeagueItemDTO": {
         "type": "object",
@@ -5239,7 +5767,12 @@
             "x-type": "int"
           }
         },
-        "required": ["losses", "progress", "target", "wins"]
+        "required": [
+          "losses",
+          "progress",
+          "target",
+          "wins"
+        ]
       },
       "league-v4.LeagueEntryDTO": {
         "type": "object",
@@ -5399,7 +5932,12 @@
             "x-type": "string"
           }
         },
-        "required": ["incidents", "name", "slug", "status"]
+        "required": [
+          "incidents",
+          "name",
+          "slug",
+          "status"
+        ]
       },
       "lol-status-v3.Incident": {
         "type": "object",
@@ -5427,7 +5965,12 @@
             "x-type": "List[Message]"
           }
         },
-        "required": ["active", "created_at", "id", "updates"]
+        "required": [
+          "active",
+          "created_at",
+          "id",
+          "updates"
+        ]
       },
       "lol-status-v3.Message": {
         "type": "object",
@@ -5494,7 +6037,11 @@
             "x-type": "string"
           }
         },
-        "required": ["locale", "content", "heading"]
+        "required": [
+          "locale",
+          "content",
+          "heading"
+        ]
       },
       "lor-ranked-v1.LeaderboardDto": {
         "type": "object",
@@ -5510,7 +6057,9 @@
             "description": "A list of players in Master tier."
           }
         },
-        "required": ["players"]
+        "required": [
+          "players"
+        ]
       },
       "lor-ranked-v1.PlayerDto": {
         "type": "object",
@@ -5532,7 +6081,11 @@
             "description": "League points."
           }
         },
-        "required": ["name", "rank", "lp"]
+        "required": [
+          "name",
+          "rank",
+          "lp"
+        ]
       },
       "match-v4.MatchDto": {
         "type": "object",
@@ -5657,7 +6210,10 @@
             "description": "Player information not included in the response for custom matches. Custom matches are considered private unless a tournament code was used to create the match."
           }
         },
-        "required": ["participantId", "player"]
+        "required": [
+          "participantId",
+          "player"
+        ]
       },
       "match-v4.PlayerDto": {
         "type": "object",
@@ -5808,7 +6364,10 @@
           "win": {
             "type": "string",
             "x-type": "string",
-            "enum": ["Fail", "Win"],
+            "enum": [
+              "Fail",
+              "Win"
+            ],
             "description": "String indicating whether or not the team won. There are only two values visibile in public match history.\n             (Legal values:  Fail,  Win)"
           }
         },
@@ -5849,7 +6408,10 @@
             "description": "Turn during which the champion was banned."
           }
         },
-        "required": ["championId", "pickTurn"]
+        "required": [
+          "championId",
+          "pickTurn"
+        ]
       },
       "match-v4.ParticipantDto": {
         "type": "object",
@@ -5955,7 +6517,10 @@
             "x-type": "int"
           }
         },
-        "required": ["runeId", "rank"]
+        "required": [
+          "runeId",
+          "rank"
+        ]
       },
       "match-v4.ParticipantStatsDto": {
         "type": "object",
@@ -6614,7 +7179,13 @@
           "role": {
             "type": "string",
             "x-type": "string",
-            "enum": ["DUO", "NONE", "SOLO", "DUO_CARRY", "DUO_SUPPORT"],
+            "enum": [
+              "DUO",
+              "NONE",
+              "SOLO",
+              "DUO_CARRY",
+              "DUO_SUPPORT"
+            ],
             "description": "Participant's calculated role.\n             (Legal values:  DUO,  NONE,  SOLO,  DUO_CARRY,  DUO_SUPPORT)"
           },
           "damageTakenDiffPerMinDeltas": {
@@ -6662,7 +7233,14 @@
           "lane": {
             "type": "string",
             "x-type": "string",
-            "enum": ["MID", "MIDDLE", "TOP", "JUNGLE", "BOT", "BOTTOM"],
+            "enum": [
+              "MID",
+              "MIDDLE",
+              "TOP",
+              "JUNGLE",
+              "BOT",
+              "BOTTOM"
+            ],
             "description": "Participant's calculated lane. MID and BOT are legacy values.\n             (Legal values:  MID,  MIDDLE,  TOP,  JUNGLE,  BOT,  BOTTOM)"
           },
           "creepsPerMinDeltas": {
@@ -6710,7 +7288,10 @@
             "x-type": "int"
           }
         },
-        "required": ["rank", "masteryId"]
+        "required": [
+          "rank",
+          "masteryId"
+        ]
       },
       "match-v4.MatchlistDto": {
         "type": "object",
@@ -6741,7 +7322,12 @@
             "x-type": "List[MatchReferenceDto]"
           }
         },
-        "required": ["startIndex", "totalGames", "endIndex", "matches"]
+        "required": [
+          "startIndex",
+          "totalGames",
+          "endIndex",
+          "matches"
+        ]
       },
       "match-v4.MatchReferenceDto": {
         "type": "object",
@@ -6816,7 +7402,10 @@
             "x-type": "long"
           }
         },
-        "required": ["frames", "frameInterval"]
+        "required": [
+          "frames",
+          "frameInterval"
+        ]
       },
       "match-v4.MatchFrameDto": {
         "type": "object",
@@ -6848,7 +7437,11 @@
             "x-type": "long"
           }
         },
-        "required": ["participantFrames", "events", "timestamp"]
+        "required": [
+          "participantFrames",
+          "events",
+          "timestamp"
+        ]
       },
       "match-v4.MatchParticipantFrameDto": {
         "type": "object",
@@ -6929,7 +7522,10 @@
             "x-type": "int"
           }
         },
-        "required": ["x", "y"]
+        "required": [
+          "x",
+          "y"
+        ]
       },
       "match-v4.MatchEventDto": {
         "type": "object",
@@ -7060,7 +7656,10 @@
             "x-type": "int"
           }
         },
-        "required": ["type", "timestamp"]
+        "required": [
+          "type",
+          "timestamp"
+        ]
       },
       "spectator-v4.CurrentGameInfo": {
         "type": "object",
@@ -7177,7 +7776,11 @@
             "x-enum": "team"
           }
         },
-        "required": ["pickTurn", "championId", "teamId"]
+        "required": [
+          "pickTurn",
+          "championId",
+          "teamId"
+        ]
       },
       "spectator-v4.Observer": {
         "type": "object",
@@ -7189,7 +7792,9 @@
             "description": "Key used to decrypt the spectator grid game data for playback"
           }
         },
-        "required": ["encryptionKey"]
+        "required": [
+          "encryptionKey"
+        ]
       },
       "spectator-v4.CurrentGameParticipant": {
         "type": "object",
@@ -7297,7 +7902,11 @@
             "description": "Secondary runes path"
           }
         },
-        "required": ["perkIds", "perkStyle", "perkSubStyle"]
+        "required": [
+          "perkIds",
+          "perkStyle",
+          "perkSubStyle"
+        ]
       },
       "spectator-v4.GameCustomizationObject": {
         "type": "object",
@@ -7314,7 +7923,10 @@
             "description": "Game Customization content"
           }
         },
-        "required": ["category", "content"]
+        "required": [
+          "category",
+          "content"
+        ]
       },
       "spectator-v4.FeaturedGames": {
         "type": "object",
@@ -7336,7 +7948,10 @@
             "description": "The suggested interval to wait before requesting FeaturedGames again"
           }
         },
-        "required": ["gameList", "clientRefreshInterval"]
+        "required": [
+          "gameList",
+          "clientRefreshInterval"
+        ]
       },
       "spectator-v4.FeaturedGameInfo": {
         "type": "object",
@@ -7374,7 +7989,11 @@
           "gameType": {
             "type": "string",
             "x-type": "string",
-            "enum": ["CUSTOM_GAME", "MATCHED_GAME", "TUTORIAL_GAME"],
+            "enum": [
+              "CUSTOM_GAME",
+              "MATCHED_GAME",
+              "TUTORIAL_GAME"
+            ],
             "description": "The game type\n             (Legal values:  CUSTOM_GAME,  MATCHED_GAME,  TUTORIAL_GAME)",
             "x-enum": "gameType"
           },
@@ -7582,7 +8201,13 @@
             "x-enum": "queueType"
           }
         },
-        "required": ["leagueId", "entries", "tier", "name", "queue"]
+        "required": [
+          "leagueId",
+          "entries",
+          "tier",
+          "name",
+          "queue"
+        ]
       },
       "tft-league-v1.LeagueItemDTO": {
         "type": "object",
@@ -7677,7 +8302,12 @@
             "x-type": "int"
           }
         },
-        "required": ["losses", "progress", "target", "wins"]
+        "required": [
+          "losses",
+          "progress",
+          "target",
+          "wins"
+        ]
       },
       "tft-league-v1.LeagueEntryDTO": {
         "type": "object",
@@ -7780,7 +8410,10 @@
             "description": "Match info."
           }
         },
-        "required": ["metadata", "info"]
+        "required": [
+          "metadata",
+          "info"
+        ]
       },
       "tft-match-v1.MetadataDto": {
         "type": "object",
@@ -7806,7 +8439,11 @@
             "description": "A list of encrypted participant PUUIDs."
           }
         },
-        "required": ["data_version", "match_id", "participants"]
+        "required": [
+          "data_version",
+          "match_id",
+          "participants"
+        ]
       },
       "tft-match-v1.InfoDto": {
         "type": "object",
@@ -7982,7 +8619,11 @@
             "description": "Total tiers for the trait."
           }
         },
-        "required": ["name", "num_units", "tier_current"]
+        "required": [
+          "name",
+          "num_units",
+          "tier_current"
+        ]
       },
       "tft-match-v1.UnitDto": {
         "type": "object",
@@ -8021,7 +8662,13 @@
             "description": "Unit tier."
           }
         },
-        "required": ["items", "character_id", "name", "rarity", "tier"]
+        "required": [
+          "items",
+          "character_id",
+          "name",
+          "rarity",
+          "tier"
+        ]
       },
       "tft-match-v1.CompanionDto": {
         "type": "object",
@@ -8041,7 +8688,11 @@
             "x-type": "string"
           }
         },
-        "required": ["skin_ID", "content_ID", "species"]
+        "required": [
+          "skin_ID",
+          "content_ID",
+          "species"
+        ]
       },
       "tft-summoner-v1.SummonerDTO": {
         "type": "object",
@@ -8137,17 +8788,30 @@
           "mapType": {
             "type": "string",
             "x-type": "string",
-            "enum": ["SUMMONERS_RIFT", "TWISTED_TREELINE", "HOWLING_ABYSS"],
+            "enum": [
+              "SUMMONERS_RIFT",
+              "TWISTED_TREELINE",
+              "HOWLING_ABYSS"
+            ],
             "description": "The map type of the game.\n             (Legal values:  SUMMONERS_RIFT,  TWISTED_TREELINE,  HOWLING_ABYSS)"
           },
           "spectatorType": {
             "type": "string",
             "x-type": "string",
-            "enum": ["NONE", "LOBBYONLY", "ALL"],
+            "enum": [
+              "NONE",
+              "LOBBYONLY",
+              "ALL"
+            ],
             "description": "The spectator type of the game.\n             (Legal values:  NONE,  LOBBYONLY,  ALL)"
           }
         },
-        "required": ["teamSize", "pickType", "mapType", "spectatorType"]
+        "required": [
+          "teamSize",
+          "pickType",
+          "mapType",
+          "spectatorType"
+        ]
       },
       "tournament-stub-v4.LobbyEventDTOWrapper": {
         "type": "object",
@@ -8162,7 +8826,9 @@
             "x-type": "List[LobbyEventDTO]"
           }
         },
-        "required": ["eventList"]
+        "required": [
+          "eventList"
+        ]
       },
       "tournament-stub-v4.LobbyEventDTO": {
         "type": "object",
@@ -8184,7 +8850,11 @@
             "description": "Timestamp from the event"
           }
         },
-        "required": ["summonerId", "eventType", "timestamp"]
+        "required": [
+          "summonerId",
+          "eventType",
+          "timestamp"
+        ]
       },
       "tournament-stub-v4.ProviderRegistrationParameters": {
         "type": "object",
@@ -8214,7 +8884,10 @@
             "description": "The provider's callback URL to which tournament game results in this region should be posted. The URL must be well-formed, use the http or https protocol, and use the default port for the protocol (http URLs must use port 80, https URLs must use port 443)."
           }
         },
-        "required": ["region", "url"]
+        "required": [
+          "region",
+          "url"
+        ]
       },
       "tournament-stub-v4.TournamentRegistrationParameters": {
         "type": "object",
@@ -8232,7 +8905,9 @@
             "description": "The optional name of the tournament."
           }
         },
-        "required": ["providerId"]
+        "required": [
+          "providerId"
+        ]
       },
       "tournament-v4.TournamentCodeParameters": {
         "type": "object",
@@ -8274,17 +8949,30 @@
           "mapType": {
             "type": "string",
             "x-type": "string",
-            "enum": ["SUMMONERS_RIFT", "TWISTED_TREELINE", "HOWLING_ABYSS"],
+            "enum": [
+              "SUMMONERS_RIFT",
+              "TWISTED_TREELINE",
+              "HOWLING_ABYSS"
+            ],
             "description": "The map type of the game.\n             (Legal values:  SUMMONERS_RIFT,  TWISTED_TREELINE,  HOWLING_ABYSS)"
           },
           "spectatorType": {
             "type": "string",
             "x-type": "string",
-            "enum": ["NONE", "LOBBYONLY", "ALL"],
+            "enum": [
+              "NONE",
+              "LOBBYONLY",
+              "ALL"
+            ],
             "description": "The spectator type of the game.\n             (Legal values:  NONE,  LOBBYONLY,  ALL)"
           }
         },
-        "required": ["teamSize", "pickType", "mapType", "spectatorType"]
+        "required": [
+          "teamSize",
+          "pickType",
+          "mapType",
+          "spectatorType"
+        ]
       },
       "tournament-v4.TournamentCodeDTO": {
         "type": "object",
@@ -8420,17 +9108,29 @@
           "mapType": {
             "type": "string",
             "x-type": "string",
-            "enum": ["SUMMONERS_RIFT", "TWISTED_TREELINE", "HOWLING_ABYSS"],
+            "enum": [
+              "SUMMONERS_RIFT",
+              "TWISTED_TREELINE",
+              "HOWLING_ABYSS"
+            ],
             "description": "The map type\n             (Legal values:  SUMMONERS_RIFT,  TWISTED_TREELINE,  HOWLING_ABYSS)"
           },
           "spectatorType": {
             "type": "string",
             "x-type": "string",
-            "enum": ["NONE", "LOBBYONLY", "ALL"],
+            "enum": [
+              "NONE",
+              "LOBBYONLY",
+              "ALL"
+            ],
             "description": "The spectator type\n             (Legal values:  NONE,  LOBBYONLY,  ALL)"
           }
         },
-        "required": ["pickType", "mapType", "spectatorType"]
+        "required": [
+          "pickType",
+          "mapType",
+          "spectatorType"
+        ]
       },
       "tournament-v4.LobbyEventDTOWrapper": {
         "type": "object",
@@ -8445,7 +9145,9 @@
             "x-type": "List[LobbyEventDTO]"
           }
         },
-        "required": ["eventList"]
+        "required": [
+          "eventList"
+        ]
       },
       "tournament-v4.LobbyEventDTO": {
         "type": "object",
@@ -8467,7 +9169,11 @@
             "description": "The summonerId that triggered the event (Encrypted)"
           }
         },
-        "required": ["timestamp", "eventType", "summonerId"]
+        "required": [
+          "timestamp",
+          "eventType",
+          "summonerId"
+        ]
       },
       "tournament-v4.ProviderRegistrationParameters": {
         "type": "object",
@@ -8497,7 +9203,10 @@
             "description": "The provider's callback URL to which tournament game results in this region should be posted. The URL must be well-formed, use the http or https protocol, and use the default port for the protocol (http URLs must use port 80, https URLs must use port 443)."
           }
         },
-        "required": ["region", "url"]
+        "required": [
+          "region",
+          "url"
+        ]
       },
       "tournament-v4.TournamentRegistrationParameters": {
         "type": "object",
@@ -8515,7 +9224,9 @@
             "description": "The optional name of the tournament."
           }
         },
-        "required": ["providerId"]
+        "required": [
+          "providerId"
+        ]
       },
       "val-content-v1.ContentDto": {
         "type": "object",
@@ -8665,7 +9376,10 @@
             "x-type": "string"
           }
         },
-        "required": ["name", "assetName"]
+        "required": [
+          "name",
+          "assetName"
+        ]
       },
       "val-content-v1.LocalizedNamesDto": {
         "type": "object",
@@ -8807,7 +9521,12 @@
             "x-type": "List[RoundResultDto]"
           }
         },
-        "required": ["matchInfo", "players", "teams", "roundResults"]
+        "required": [
+          "matchInfo",
+          "players",
+          "teams",
+          "roundResults"
+        ]
       },
       "val-match-v1.MatchInfoDto": {
         "type": "object",
@@ -8961,7 +9680,14 @@
             "x-type": "AbilityDto"
           }
         },
-        "required": ["puuid", "kills", "damage", "score", "economy", "ability"]
+        "required": [
+          "puuid",
+          "kills",
+          "damage",
+          "score",
+          "economy",
+          "ability"
+        ]
       },
       "val-match-v1.KillDto": {
         "type": "object",
@@ -9039,7 +9765,10 @@
             "x-type": "int"
           }
         },
-        "required": ["x", "y"]
+        "required": [
+          "x",
+          "y"
+        ]
       },
       "val-match-v1.PlayerLocationsDto": {
         "type": "object",
@@ -9059,7 +9788,11 @@
             "x-type": "LocationDto"
           }
         },
-        "required": ["puuid", "viewRadians", "location"]
+        "required": [
+          "puuid",
+          "viewRadians",
+          "location"
+        ]
       },
       "val-match-v1.FinishingDamageDto": {
         "type": "object",
@@ -9078,7 +9811,11 @@
             "x-type": "boolean"
           }
         },
-        "required": ["damageType", "damageItem", "isSecondaryFireMode"]
+        "required": [
+          "damageType",
+          "damageItem",
+          "isSecondaryFireMode"
+        ]
       },
       "val-match-v1.DamageDto": {
         "type": "object",
@@ -9110,7 +9847,13 @@
             "x-type": "int"
           }
         },
-        "required": ["receiver", "damage", "legshots", "bodyshots", "headshots"]
+        "required": [
+          "receiver",
+          "damage",
+          "legshots",
+          "bodyshots",
+          "headshots"
+        ]
       },
       "val-match-v1.EconomyDto": {
         "type": "object",
@@ -9140,7 +9883,13 @@
             "x-type": "int"
           }
         },
-        "required": ["loadoutValue", "weapon", "armor", "remaining", "spent"]
+        "required": [
+          "loadoutValue",
+          "weapon",
+          "armor",
+          "remaining",
+          "spent"
+        ]
       },
       "val-match-v1.AbilityDto": {
         "type": "object",
@@ -9193,7 +9942,12 @@
             "x-type": "int"
           }
         },
-        "required": ["teamId", "won", "roundsPlayed", "roundsWon"]
+        "required": [
+          "teamId",
+          "won",
+          "roundsPlayed",
+          "roundsWon"
+        ]
       },
       "val-match-v1.RoundResultDto": {
         "type": "object",
@@ -9312,7 +10066,10 @@
             "x-type": "List[MatchDto]"
           }
         },
-        "required": ["puuid", "history"]
+        "required": [
+          "puuid",
+          "history"
+        ]
       },
       "val-match-v1.MatchReferenceDto": {
         "type": "object",
@@ -9332,7 +10089,11 @@
             "x-type": "string"
           }
         },
-        "required": ["matchId", "gameStartTime", "teamId"]
+        "required": [
+          "matchId",
+          "gameStartTime",
+          "teamId"
+        ]
       }
     },
     "securitySchemes": {

@@ -76,6 +76,7 @@ var referenceResolver_1 = __importDefault(require("@anttiviljami/dtsgenerator/di
 var schemaConvertor_1 = __importDefault(require("@anttiviljami/dtsgenerator/dist/core/schemaConvertor"));
 var writeProcessor_1 = __importDefault(require("@anttiviljami/dtsgenerator/dist/core/writeProcessor"));
 var swagger_parser_1 = __importDefault(require("swagger-parser"));
+var typeNameConvertor_1 = require("@anttiviljami/dtsgenerator/dist/core/typeNameConvertor");
 function main() {
     return __awaiter(this, void 0, void 0, function () {
         var argv, _a, imports, schemaTypes, operationTypings;
@@ -139,11 +140,12 @@ exports.generateTypesForDocument = generateTypesForDocument;
 function generateMethodForOperation(methodName, operation, exportTypes) {
     var operationId = operation.operationId, summary = operation.summary, description = operation.description;
     // parameters arg
+    var normalizedOperationId = typeNameConvertor_1.normalizeTypeName(operationId);
     var parameterTypePaths = lodash_1.default.chain([
-        lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + operationId + "/pathParameters" }),
-        lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + operationId + "/queryParameters" }),
-        lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + operationId + "/headerParameters" }),
-        lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + operationId + "/cookieParameters" }),
+        lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + normalizedOperationId + "/pathParameters" }),
+        lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + normalizedOperationId + "/queryParameters" }),
+        lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + normalizedOperationId + "/headerParameters" }),
+        lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + normalizedOperationId + "/cookieParameters" }),
     ])
         .filter()
         .map('path')
@@ -151,13 +153,13 @@ function generateMethodForOperation(methodName, operation, exportTypes) {
     var parametersType = !lodash_1.default.isEmpty(parameterTypePaths) ? parameterTypePaths.join(' & ') : 'UnknownParamsObject';
     var parametersArg = "parameters?: Parameters<" + parametersType + ">";
     // payload arg
-    var requestBodyType = lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + operationId + "/requestBody" });
+    var requestBodyType = lodash_1.default.find(exportTypes, { schemaRef: "#/paths/" + normalizedOperationId + "/requestBody" });
     var dataArg = "data?: " + (requestBodyType ? requestBodyType.path : 'any');
     // return type
     var responseTypePaths = lodash_1.default.chain(exportTypes)
         .filter(function (_a) {
         var schemaRef = _a.schemaRef;
-        return schemaRef.startsWith("#/paths/" + operationId + "/responses");
+        return schemaRef.startsWith("#/paths/" + normalizedOperationId + "/responses");
     })
         .map(function (_a) {
         var path = _a.path;
@@ -171,7 +173,7 @@ function generateMethodForOperation(methodName, operation, exportTypes) {
     var responseType = !lodash_1.default.isEmpty(responseTypePaths) ? responseTypePaths.join(' | ') : 'any';
     var returnType = "OperationResponse<" + responseType + ">";
     var operationArgs = [parametersArg, dataArg, 'config?: AxiosRequestConfig'];
-    var operationMethod = methodName + "(\n" + operationArgs
+    var operationMethod = "'" + methodName + "'(\n" + operationArgs
         .map(function (arg) { return indent_string_1.default(arg, 2); })
         .join(',\n') + "  \n): " + returnType;
     // comment for type
