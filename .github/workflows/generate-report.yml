@@ -2,7 +2,7 @@ name: Update Report.txt
 on: push
 
 env:
-  default_url: "http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json"
+  default_url: 'http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json'
   latestSchema: latestSchema.json
   currentSchema: currentSchema.json
 
@@ -13,39 +13,31 @@ jobs:
     steps:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.0
-        
+
       - name: checkout
         uses: actions/checkout@v2.3.1
-      
+
       - name: install packages
         run: npm i typescript ts-node swagger-parser
-        
+
       - name: get latest schema
         run: curl ${{ env.default_url }} --output ${{ env.latestSchema }}
-      
+
       - name: get current schema
         run: node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
-        
-      - name: generate report 
+
+      - name: generate report
         run: |
-          echo "1"
           node .github/workflows/scripts/getUsedSchema.js > ${{ env.currentSchema }}
-          echo "2"
           date=$(date)
-          echo "3"
-          echo -e "==================== REPORT ${date} ===================\n" > report.txt
-          echo "4"
-          echo "<<<< SCHEMA DIFF >>>>" >> report.txt
-          echo "5"
-          npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }} >> report.txt
-          echo "6"
-          echo -e "\n<<<< ENDPOINT REPORT >>>>" >> report.txt
-          echo "7"
+          echo -e " REPORT ${date} \n" > report.txt
+          echo "#### SCHEMA DIFF ####" >> report.txt
+          npx openapi-diff ${{ env.currentSchema }} ${{ env.latestSchema }} >> report.txt || echo "::warning::breaking changes"
+          echo -e "\n#### ENDPOINT REPORT ####" >> report.txt
           npm run find-unused-endpoints |  grep -zo "Implemented:.*" >> report.txt
-          echo "8"
-          echo "==================== END OF REPORT ===================" >> report.txt
+          echo " END OF REPORT " >> report.txt
           cat report.txt
-        continue-on-error: true
+
       - name: 3
         run: npx openapi-diff currentSchema.json latestSchema.json
       - name: update report
@@ -54,5 +46,5 @@ jobs:
           add: report.txt
           message: Update report.txt
           author_name: $GITHUB_ACTOR
-        env: 
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
