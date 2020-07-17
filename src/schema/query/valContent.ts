@@ -18,9 +18,9 @@ schema.extendType({
           OperationMethods,
           PathsDictionary
         >
+        // HACK: not sustainable?
         let parseURL = baseURL.replace('americas', args.region.toLowerCase())
 
-        // FIXME: something breaks this
         let res = await client['val-content-v1.getContent'](
           { locale: args.locale ? hyphenLocale(args.locale) : undefined },
           {},
@@ -51,7 +51,10 @@ schema.extendType({
     t.field('localizedNames', {
       type: 'Valcontentv1LocalizedNames',
       nullable: true,
+      description:
+        'This field is excluded from the response when a locale is set',
       resolve(root) {
+        // HACK instead of stepping through embeddings just reassign as necessary
         // @ts-expect-error
         return root.localizedNames
           ? // @ts-expect-error
@@ -62,12 +65,14 @@ schema.extendType({
   },
 })
 
+// NOTE: valorant content regions are different
 schema.enumType({
   name: 'ValContentRegion',
   description: 'Valorant content regions',
   members: ['NA', 'BR', 'EU', 'KR', 'LATAM', 'NA'],
 })
 
+// Locale extracted from keys of 'Valcontentv1LocalizedNames'
 schema.enumType({
   name: 'Locale',
   description: 'Locale for localizedNames',
@@ -94,6 +99,7 @@ schema.enumType({
   ],
 })
 
+// utility methods to hyphenate and un-hyphenate locale
 function hyphenLocale(locale: string) {
   return locale.slice(0, 2) + '-' + locale.slice(2)
 }
