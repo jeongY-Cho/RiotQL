@@ -22,7 +22,7 @@
     "dev": "nexus dev",
     "build": "nexus build",
     "start": "node .nexus/build/src",
-    "postinstall": "npm run fetch-latest-openapi-schema"
+    "postinstall": "npm run generate-all-from-openapi"
   },
   "prettier": {
     "semi": false,
