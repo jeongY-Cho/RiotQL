@@ -39,6 +39,7 @@ jobs:
       run: |
         npm run build
         git status
+        git pull
     
     - name: Merge to heroku-branch branch
       uses: devmasx/merge-branch@v1.1.0
