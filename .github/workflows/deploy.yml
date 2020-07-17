@@ -59,4 +59,4 @@ jobs:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_email: jy1998@hotmail.com
         branch: heroku-branch
-        app: riotql
+        heroku_app_name: riotql
