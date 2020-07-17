@@ -18,34 +18,45 @@ schema.extendType({
           OperationMethods,
           PathsDictionary
         >
-        console.log(baseURL)
         let parseURL = baseURL.replace('americas', args.region.toLowerCase())
-        console.log(baseURL, parseURL)
-        try {
-          // console.log(
-          //   client['val-content-v1.getContent'](undefined, undefined, {
-          //     headers: {
-          //       'X-Riot-Token': process.env.RIOT_API_DEVELOPMENT_KEY,
-          //     },
-          //   }),
-          // )
-          // FIXME: something breaks this
-          await client['val-content-v1.getContent'](
-            { locale: args.locale ? args.locale : undefined },
-            {},
-            {
-              baseURL: parseURL,
-              headers: {
-                'X-Riot-Token':
-                  process.env.RIOT_API_VAL_KEY ||
-                  process.env.RIOT_API_DEVELOPMENT_KEY ||
-                  '',
-              },
+
+        // FIXME: something breaks this
+        let res = await client['val-content-v1.getContent'](
+          { locale: args.locale ? hyphenLocale(args.locale) : undefined },
+          {},
+          {
+            baseURL: parseURL,
+            headers: {
+              'X-Riot-Token':
+                process.env.RIOT_API_VAL_KEY ||
+                process.env.RIOT_API_DEVELOPMENT_KEY ||
+                '',
             },
+          },
+        )
+        if (!res)
+          throw new Error(
+            'no val content returned which is weird because it should',
           )
-        } catch (e) {
-          console.log(e.response)
-        }
+
+        return res.data
+      },
+    })
+  },
+})
+
+schema.extendType({
+  type: 'Valcontentv1ContentItem',
+  definition(t) {
+    t.field('localizedNames', {
+      type: 'Valcontentv1LocalizedNames',
+      nullable: true,
+      resolve(root) {
+        // @ts-expect-error
+        return root.localizedNames
+          ? // @ts-expect-error
+            (unhyphenObject(root.localizedNames) as any)
+          : null
       },
     })
   },
@@ -83,17 +94,17 @@ schema.enumType({
   ],
 })
 
-function hyphenLocaleName(locale: string) {
+function hyphenLocale(locale: string) {
   return locale.slice(0, 2) + '-' + locale.slice(2)
 }
 
-function unhyphenLocaleName(locale: string) {
+function unhyphenLocale(locale: string) {
   return locale.slice(0, 2) + locale.slice(3)
 }
 
 function unhyphenObject(localeObj: { [key: string]: string }) {
   return Object.keys(localeObj).reduce((acc, cur) => {
-    acc[unhyphenLocaleName(cur)] = localeObj[cur]
+    acc[unhyphenLocale(cur)] = localeObj[cur]
     return acc
   }, {} as { [key: string]: string })
 }
