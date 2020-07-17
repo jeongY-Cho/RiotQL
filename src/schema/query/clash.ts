@@ -67,3 +67,31 @@ schema.objectType({
     })
   },
 })
+
+schema.extendType({
+  type: 'Clashv1Team',
+  definition(t) {
+    t.field('region', {
+      type: 'RegionInput',
+    })
+    t.field('tournament', {
+      type: 'Clashv1Tournament',
+      async resolve(root, _, context) {
+        let res = await context.api(
+          APIKeyType.League,
+          root.region,
+          'clash-v1.getTournamentByTeam',
+          {
+            teamId: root.id,
+          },
+        )
+        if (!res)
+          throw new Error(
+            'no tournament found which is weird because it should exist',
+          )
+
+        return res.data
+      },
+    })
+  },
+})

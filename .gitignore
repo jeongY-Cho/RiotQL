@@ -10,3 +10,4 @@ api.graphql
 .nexus
 build
 testing.ts
+.tmp_build

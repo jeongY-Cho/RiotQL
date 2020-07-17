@@ -49,8 +49,16 @@ schema.enumType({
   members: [
     'League',
     'TFT',
-    { description: 'LOR is not implemented', name: 'LOR', value: 'LOR' },
-    { description: 'VAL is not implemented', name: 'VAL', value: 'VAL' },
+    {
+      description: 'LOR is not implemented; calls will return null',
+      name: 'LOR',
+      value: 'LOR',
+    },
+    {
+      description: 'VAL has limited implementation',
+      name: 'VAL',
+      value: 'VAL',
+    },
   ],
 })
 
@@ -88,4 +96,9 @@ schema.enumType({
     'RANKED_FLEX_SR',
     'RANKED_FLEX_TT',
   ],
+})
+
+schema.enumType({
+  name: 'RealmInput',
+  members: ['americas', 'asia', 'europe'],
 })
