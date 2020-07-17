@@ -32,7 +32,7 @@ jobs:
     - name: Check for Breaking Changes in api
       run: |
         node .github/workflows/scripts/getUsedSchema.js > currentSchema.json
-        npx openpapi-diff currenSchema.json ${{ env.RIOT_OPENAPI_SCHEMA }}
+        npx openapi-diff currenSchema.json ${{ env.RIOT_OPENAPI_SCHEMA }}
         rm currentSchema.json
     # Runs a set of commands using the runners shell
     - name: Build App
