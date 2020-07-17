@@ -36,7 +36,9 @@ jobs:
         rm currentSchema.json
     # Runs a set of commands using the runners shell
     - name: Build App
-      run: npm run build
+      run: |
+        npm run build
+        git status
     
     - name: Merge to heroku-branch branch
       uses: devmasx/merge-branch@v1.1.0
