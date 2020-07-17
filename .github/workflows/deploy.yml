@@ -39,7 +39,6 @@ jobs:
       run: |
         npm run build
         git status
-        git pull
     
     - name: Merge to heroku-branch branch
       uses: devmasx/merge-branch@v1.1.0
@@ -49,6 +48,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     
+    - name: checkout heroku-branch
+      run: git checkout heroku-branch
 #     - name: Push merge
 #       uses: ad-m/github-push-action@v0.6.0
 #       with:
