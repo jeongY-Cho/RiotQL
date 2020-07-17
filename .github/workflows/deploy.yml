@@ -48,14 +48,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     
-    - name: checkout heroku-branch
-      run: git checkout heroku-branch
-#     - name: Push merge
-#       uses: ad-m/github-push-action@v0.6.0
-#       with:
-#         github_token: ${{ secrets.GITHUB_TOKEN }}
-#         branch: heroku-branch
-#         force: true
+    - name: Checkout heroku-branch
+      uses: actions/checkout@v2
+      with:
+        ref: heroku-branch
   
     - name: Deploy to Heroku
       uses: AkhileshNS/heroku-deploy@v3.2.6
