@@ -13,12 +13,13 @@ import OpenAPIClientAxios, {
   OpenAPIClient,
 } from '../openapi-client-axios'
 import qs from 'qs'
+import graphqlPlayground from 'graphql-playground-middleware-express'
 
 dotenv.config()
 settings.change({
   server: {
-    port: parseInt(process.env.PORT!),
-    playground: { path: '/playground' },
+    port: parseInt(process.env.PORT!) || 4000,
+    playground: false,
   },
   schema: {
     nullable: {
@@ -27,6 +28,12 @@ settings.change({
     },
   },
 })
+server.express.get(
+  '/playground',
+  graphqlPlayground({
+    endpoint: process.env.GRAPHQL_ENDPOINT ?? '/graphql',
+  }),
+)
 
 type OpMethodKeys = keyof OperationMethods
 export enum APIKeyType {
