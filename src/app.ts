@@ -88,6 +88,7 @@ async function apiContext(options?: AxiosRequestConfig) {
   }
 
   let latestRecord = require('../SchemaRecord.json')[0]
+  console.log(`using ${latestRecord}`)
   const OpenAPI = new OpenAPIClientAxios({
     definition: latestRecord,
     validate: false,
