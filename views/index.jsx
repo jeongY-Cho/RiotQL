@@ -59,7 +59,7 @@ module.exports = (props) => {
           RiotQL
         </span>
         <span style={{ margin: 'auto 10px', color: '#000' }}>
-          <a href="/playground">Playground</a>
+          <a href="./playground">Playground</a>
         </span>
 
         <span style={{ margin: 'auto 10px' }}>
@@ -161,7 +161,7 @@ module.exports = (props) => {
               alignContent: 'center',
             }}
           >
-            <a href="/playground">
+            <a href="./playground">
               <button className="btn btn-primary">Playground</button>
             </a>
           </div>
