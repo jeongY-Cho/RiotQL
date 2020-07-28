@@ -4,7 +4,7 @@ import { APIKeyType } from '../../app'
 schema.extendType({
   type: 'Mutation',
   definition(t) {
-    t.int('code', {
+    t.int('TournamentRegistration', {
       args: {
         TournamentRegistrationParameters: schema.arg({
           type: 'Tournamentstubv4TournamentRegistrationParametersInput',
