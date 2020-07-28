@@ -20,6 +20,7 @@ process.once('unhandledRejection', error => {
 require("./schema/globals");
 require("./schema/Match");
 require("./schema/riot-api-schema");
+require("./website/index");
 require("./schema/query/account");
 require("./schema/query/championRotation");
 require("./schema/query/clash");

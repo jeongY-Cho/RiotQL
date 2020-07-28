@@ -30,17 +30,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.APIKeyType = void 0;
 const nexus_1 = require("nexus");
 const dotenv = __importStar(require("dotenv"));
 const openapi_client_axios_1 = __importDefault(require("../openapi-client-axios"));
 const qs_1 = __importDefault(require("qs"));
+const graphql_playground_middleware_express_1 = __importDefault(require("graphql-playground-middleware-express"));
 dotenv.config();
 nexus_1.settings.change({
     server: {
-        port: parseInt(process.env.PORT),
-        playground: { path: '/playground' },
+        port: parseInt(process.env.PORT) || 4000,
+        playground: false,
     },
     schema: {
         nullable: {
@@ -49,6 +51,9 @@ nexus_1.settings.change({
         },
     },
 });
+nexus_1.server.express.get('/playground', graphql_playground_middleware_express_1.default({
+    endpoint: (_a = process.env.GRAPHQL_ENDPOINT) !== null && _a !== void 0 ? _a : '/graphql',
+}));
 var APIKeyType;
 (function (APIKeyType) {
     APIKeyType[APIKeyType["League"] = 0] = "League";
@@ -86,7 +91,7 @@ function apiContext(options) {
                 '',
         };
         let latestRecord = require('../SchemaRecord.json')[0];
-        console.log(latestRecord);
+        console.log(`using ${latestRecord}`);
         const OpenAPI = new openapi_client_axios_1.default({
             definition: latestRecord,
             validate: false,
