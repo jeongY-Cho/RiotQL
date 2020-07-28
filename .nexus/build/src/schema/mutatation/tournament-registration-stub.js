@@ -14,7 +14,7 @@ const app_1 = require("../../app");
 nexus_1.schema.extendType({
     type: 'Mutation',
     definition(t) {
-        t.int('code', {
+        t.int('TournamentRegistration', {
             args: {
                 TournamentRegistrationParameters: nexus_1.schema.arg({
                     type: 'Tournamentstubv4TournamentRegistrationParametersInput',
