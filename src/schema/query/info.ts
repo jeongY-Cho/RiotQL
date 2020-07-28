@@ -22,6 +22,8 @@ schema.extendType({
           constants:
             'https://developer.riotgames.com/docs/lol#general_game-constants',
           repo: 'https://github.com/jeongY-Cho/riotql',
+          notice:
+            'This demo only has currently only been approved to serve league of legends endpoints. Calls to non-league related endpoints will throw an error. If you want to try it out yourself, clone the repo and run "npm i && npm run build && npm start" with your own key',
         }
       },
     })
