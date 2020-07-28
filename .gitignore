@@ -7,7 +7,7 @@ lerna-debug.log*
 .vscode
 .env
 api.graphql
-.nexus
+
 build
 testing.ts
 .tmp_build
