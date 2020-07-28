@@ -682,7 +682,10 @@ export const Matchv4Player = schema.objectType({
     t.string("matchHistoryUri")
     t.string("platformId", { description: "Player's original platformId." })
     t.int("profileIcon")
-    t.string("summonerId", { description: "Player's summonerId (Encrypted)" })
+    t.string("summonerId", {
+      nullable: true,
+      description: "Player's summonerId (Encrypted)",
+    })
     t.string("summonerName")
   }
 })
