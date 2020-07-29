@@ -39,7 +39,7 @@ jobs:
         npm run build
         git status
     
-    - name: Merge to heroku-branch branch
+    - name: Merge to website-branch-develop
       uses: devmasx/merge-branch@v1.1.0
       with:
         type: now
