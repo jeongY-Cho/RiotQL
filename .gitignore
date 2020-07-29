@@ -11,3 +11,4 @@ api.graphql
 build
 testing.ts
 .tmp_build
+.gitignore
