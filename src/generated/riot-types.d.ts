@@ -791,7 +791,7 @@ declare namespace Components {
       /**
        * Player's summonerId (Encrypted)
        */
-      summonerId: string;
+      summonerId?: string;
       /**
        * Player's original platformId.
        */
