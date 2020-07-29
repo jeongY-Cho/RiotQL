@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy to Heroku
+name: Merge to website-branch-develop
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
