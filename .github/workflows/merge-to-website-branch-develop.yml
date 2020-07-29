@@ -7,11 +7,12 @@ name: Deploy to Heroku
 on:
   push:
     branches: [ master ]
+  workflow_dispatch: 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  merge:
     # The type of runner that the job will run on
     env:
         RIOT_OPENAPI_SCHEMA: http://www.mingweisamuel.com/riotapi-schema/openapi-3.0.0.json
@@ -26,8 +27,6 @@ jobs:
     - name: Install Packages
       run: | 
         npm i 
-        echo "::add-mask::jy1998@hotmail.com"
-      
 
     - name: Check for Breaking Changes in api
       run: |
@@ -44,19 +43,6 @@ jobs:
       uses: devmasx/merge-branch@v1.1.0
       with:
         type: now
-        target_branch: 'heroku-branch'
+        target_branch: 'website-branch-develop'
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    
-    - name: Checkout heroku-branch
-      uses: actions/checkout@v2
-      with:
-        ref: heroku-branch
-  
-    - name: Deploy to Heroku
-      uses: AkhileshNS/heroku-deploy@v3.2.6
-      with: 
-        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_email: jy1998@hotmail.com
-        branch: heroku-branch
-        heroku_app_name: riotql
