@@ -37,7 +37,7 @@ jobs:
     - name: Build App
       run: |
         npm run build
-        git status
+        git reset --hard
     
     - name: Merge to website-branch-develop
       uses: devmasx/merge-branch@v1.1.0
