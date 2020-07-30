@@ -26,9 +26,18 @@ npm run build
 
 #### 2. Declare .env vars:
 
-- RIOT_KEY
-  - riot api key
+- RIOT_API_DEVELOPMENT_KEY
+- RIOT_API_LEAGUE_KEY
+- RIOT_API_TFT_KEY
+- RIOT_API_VAL_KEY
+- RIOT_API_LOR_KEY
+- RIOT_API_TOURNAMENT_KEY
+  - riot api keys
   - get a key (developer or otherwise) from: https://developer.riotgames.com/
+  - the server will use the proper key for the proper endpoint
+  - **except** or will fallback to the development key if provided.
+  - **note:** tournament related calls will not fallback to the development key.
+  - **note 2:** server won't start if at least development key isn't declared
 - PORT
   - default: 4000
   - port to run server
@@ -41,20 +50,8 @@ npm run build
   npm start
 ```
 
-#### or import into your project:
-
-```typescript
-import RiotQL from "./build/index.js";
-
-RiotQL.start(({ port }) => {
-  console.log("RiotQL running on port: " + port);
-});
-```
-
 ## Todo
 
-- [x] ~~Caching for requests that go multiple times~~ exposed axios options to export so can use any adapter for caching
-- [ ] Rate limiting / request counting / how many requests left / 'retry-after' on error
 - [x] Query resolvers for:
 - - [x] match
 - - [x] rankedList
@@ -63,14 +60,17 @@ RiotQL.start(({ port }) => {
 - - [x] clash
 - - [x] featured games
 - - [x] free champion rotation
-- [ ] Mutation resolvers for:
-- - [ ] tournament
+- [x] Mutation resolvers for:
+- - [x] tournament
 - [ ] Subscription resolvers for:
 - - [ ] featured games
 - - [ ] free champion rotation
 - [ ] documentation: endpoint mapping from Riot API to RiotQL
-- [ ] testing!
 - [ ] riot api updates for tft, lor, valorant
+
+## Note About tests:
+
+This app is built from ground up with type safety. Assuming that the tools used to generate types aren't broken themselves, everything should work as advertized. So there aren't tests.
 
 ## Known Issues:
 
