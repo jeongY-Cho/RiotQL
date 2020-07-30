@@ -17,7 +17,7 @@ import qs from 'qs'
 dotenv.config()
 settings.change({
   server: {
-    port: parseInt(process.env.PORT!),
+    port: process.env.PORT ? parseInt(process.env.PORT) : 4000,
     playground: { path: '/playground' },
   },
   schema: {
