@@ -174,30 +174,39 @@ function apiKeyAlerts() {
   }
 
   if (!process.env.RIOT_API_DEVELOPMENT_KEY) {
+    let atLeastOne = false
     if (!process.env.RIOT_API_LEAGUE_KEY) {
+      atLeastOne = true
       console.info(
         'no RIOT_API_LEAGUE_KEY in .env; no RIOT_API_DEVLOPMENT_KEY either. Calls to these endpoints will throw errors.',
       )
     }
     if (!process.env.RIOT_API_TFT_KEY) {
+      atLeastOne = true
       console.info(
         'no RIOT_API_TFT_KEY in .env; no RIOT_API_DEVLOPMENT_KEY either. Calls to these endpoints will throw errors.',
       )
     }
     if (!process.env.RIOT_API_LOR_KEY) {
+      atLeastOne = true
       console.info(
         'no RIOT_API_LOR_KEY in .env; no RIOT_API_DEVLOPMENT_KEY either. Calls to these endpoints will throw errors.',
       )
     }
     if (!process.env.RIOT_API_VAL_KEY) {
+      atLeastOne = true
       console.info(
         'no RIOT_API_VAL_KEY in .env; no RIOT_API_DEVLOPMENT_KEY either. Calls to these endpoints will throw errors.',
       )
     }
     if (!process.env.RIOT_API_TOURNAMENT_KEY) {
+      atLeastOne = true
       console.info(
         'no RIOT_API_TOURNAMENT_KEY in .env; calls to tournament endpoint will throw errors',
       )
+    }
+    if (!atLeastOne) {
+      throw new Error('No keys declared')
     }
   } else {
     if (!process.env.RIOT_API_LEAGUE_KEY) {
