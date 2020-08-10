@@ -727,6 +727,7 @@ export const Matchv4TeamStats = schema.objectType({
     t.int("vilemawKills", { description: "Number of times the team killed Vilemaw." })
     t.field("win", {
       type: Win,
+      nullable: true,
       description: "String indicating whether or not the team won. There are only two values visibile in public match history.\n             (Legal values:  Fail,  Win)",
     })
   }
@@ -1205,6 +1206,15 @@ export const Valmatchv1Ability = schema.objectType({
     t.string("ultimateEffects")
   }
 })
+export const Valmatchv1AbilityCasts = schema.objectType({
+  name: "Valmatchv1AbilityCasts",
+  definition(t) {
+    t.int("ability1Casts")
+    t.int("ability2Casts")
+    t.int("grenadeCasts")
+    t.int("ultimateCasts")
+  }
+})
 export const Valmatchv1Damage = schema.objectType({
   name: "Valmatchv1Damage",
   definition(t) {
@@ -1299,7 +1309,7 @@ export const Valmatchv1MatchInfo = schema.objectType({
 export const Valmatchv1MatchReference = schema.objectType({
   name: "Valmatchv1MatchReference",
   definition(t) {
-    t.float("gameStartTime")
+    t.float("gameStartTimeMillis")
     t.string("matchId")
     t.string("teamId")
   }
@@ -1335,8 +1345,8 @@ export const Valmatchv1PlayerLocations = schema.objectType({
     t.float("viewRadians")
   }
 })
-export const Valmatchv1PlayerStats = schema.objectType({
-  name: "Valmatchv1PlayerStats",
+export const Valmatchv1PlayerRoundStats = schema.objectType({
+  name: "Valmatchv1PlayerRoundStats",
   definition(t) {
     t.field("ability", { type: Valmatchv1Ability })
     t.field("damage", {
@@ -1349,6 +1359,18 @@ export const Valmatchv1PlayerStats = schema.objectType({
       list: [false],
     })
     t.string("puuid")
+    t.int("score")
+  }
+})
+export const Valmatchv1PlayerStats = schema.objectType({
+  name: "Valmatchv1PlayerStats",
+  definition(t) {
+    t.field("abilityCasts", { type: Valmatchv1AbilityCasts })
+    t.int("assists")
+    t.int("deaths")
+    t.int("kills")
+    t.int("playtimeMillis")
+    t.int("roundsPlayed")
     t.int("score")
   }
 })
@@ -1371,7 +1393,7 @@ export const Valmatchv1RoundResult = schema.objectType({
     t.int("plantRoundTime")
     t.string("plantSite")
     t.field("playerStats", {
-      type: Valmatchv1PlayerStats,
+      type: Valmatchv1PlayerRoundStats,
       list: [false],
     })
     t.string("roundCeremony")

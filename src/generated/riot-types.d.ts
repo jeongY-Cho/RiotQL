@@ -885,7 +885,7 @@ declare namespace Components {
        * String indicating whether or not the team won. There are only two values visibile in public match history.
        *              (Legal values:  Fail,  Win)
        */
-      win: "Fail" | "Win";
+      win?: "Fail" | "Win";
     }
     /**
      * BannedChampion
@@ -1741,6 +1741,15 @@ declare namespace Components {
       "zh-TW": string;
     }
     /**
+     * AbilityCastsDto
+     */
+    export interface ValMatchV1AbilityCastsDto {
+      grenadeCasts: number; // int32
+      ability1Casts: number; // int32
+      ability2Casts: number; // int32
+      ultimateCasts: number; // int32
+    }
+    /**
      * AbilityDto
      */
     export interface ValMatchV1AbilityDto {
@@ -1839,7 +1848,7 @@ declare namespace Components {
      */
     export interface ValMatchV1MatchReferenceDto {
       matchId: string;
-      gameStartTime: number; // int64
+      gameStartTimeMillis: number; // int64
       teamId: string;
     }
     /**
@@ -1871,15 +1880,27 @@ declare namespace Components {
       location: ValMatchV1LocationDto;
     }
     /**
-     * PlayerStatsDto
+     * PlayerRoundStatsDto
      */
-    export interface ValMatchV1PlayerStatsDto {
+    export interface ValMatchV1PlayerRoundStatsDto {
       puuid: string;
       kills: ValMatchV1KillDto[];
       damage: ValMatchV1DamageDto[];
       score: number; // int32
       economy: ValMatchV1EconomyDto;
       ability: ValMatchV1AbilityDto;
+    }
+    /**
+     * PlayerStatsDto
+     */
+    export interface ValMatchV1PlayerStatsDto {
+      score: number; // int32
+      roundsPlayed: number; // int32
+      kills: number; // int32
+      deaths: number; // int32
+      assists: number; // int32
+      playtimeMillis: number; // int32
+      abilityCasts: ValMatchV1AbilityCastsDto;
     }
     /**
      * RoundResultDto
@@ -1904,7 +1925,7 @@ declare namespace Components {
       defuseRoundTime: number; // int32
       defusePlayerLocations: ValMatchV1PlayerLocationsDto[];
       defuseLocation: ValMatchV1LocationDto;
-      playerStats: ValMatchV1PlayerStatsDto[];
+      playerStats: ValMatchV1PlayerRoundStatsDto[];
       roundResultCode: string;
     }
     /**
