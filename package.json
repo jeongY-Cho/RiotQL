@@ -20,7 +20,7 @@
     "generate-all-from-openapi": "npm run fetch-latest-openapi-schema && npm run api-client-types && npm run openapi-to-nexus-schema",
     "format": "npx prettier --write './**/*.{ts,md}'",
     "dev": "nexus dev",
-    "build": "nexus build",
+    "build": "npm run generate-all-from-openapi && nexus build",
     "start": "node .nexus/build/src",
     "postinstall": "npm run generate-all-from-openapi"
   },
