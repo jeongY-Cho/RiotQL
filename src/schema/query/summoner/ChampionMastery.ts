@@ -50,11 +50,11 @@ schema.objectType({
       async resolve(root, args, context) {
         let res = await context.api(
           APIKeyType.League,
-          // @ts-expect-error
+          // @ts-expect-error  || passed in from parent
           root.region,
           'champion-mastery-v4.getAllChampionMasteries',
           {
-            // @ts-expect-error
+            // @ts-expect-error || passed in from parent
             encryptedSummonerId: root.id,
           },
         )
