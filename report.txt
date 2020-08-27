@@ -1,9 +1,2043 @@
- REPORT Wed Aug 26 01:18:11 UTC 2020 
+ REPORT Thu Aug 27 01:18:12 UTC 2020 
 
 .... SCHEMA DIFF ....
-Non breaking changes found between the two specifications:
+Breaking changes found between the two specifications:
 {
-    "breakingDifferencesFound": false,
+    "breakingDifferences": [
+        {
+            "type": "breaking",
+            "action": "add",
+            "code": "response.body.scope.add",
+            "destinationSpecEntityDetails": [
+                {
+                    "location": "paths./val/match/v1/matches/{matchId}.get.responses.200.content.application/json.schema",
+                    "value": {
+                        "x-type": "MatchDto",
+                        "type": "object",
+                        "title": "MatchDto",
+                        "properties": {
+                            "matchInfo": {
+                                "x-type": "MatchInfoDto",
+                                "type": "object",
+                                "title": "MatchInfoDto",
+                                "properties": {
+                                    "matchId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "mapId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "gameLengthMillis": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "x-type": "int"
+                                    },
+                                    "gameStartMillis": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "x-type": "long"
+                                    },
+                                    "provisioningFlowId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "isCompleted": {
+                                        "type": "boolean",
+                                        "x-type": "boolean"
+                                    },
+                                    "customGameName": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "queueId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "gameMode": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "isRanked": {
+                                        "type": "boolean",
+                                        "x-type": "boolean"
+                                    },
+                                    "seasonId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "matchId",
+                                    "mapId",
+                                    "gameLengthMillis",
+                                    "gameStartMillis",
+                                    "provisioningFlowId",
+                                    "isCompleted",
+                                    "customGameName",
+                                    "queueId",
+                                    "gameMode",
+                                    "isRanked",
+                                    "seasonId"
+                                ]
+                            },
+                            "players": {
+                                "type": "array",
+                                "items": {
+                                    "x-type": "PlayerDto",
+                                    "type": "object",
+                                    "title": "PlayerDto",
+                                    "properties": {
+                                        "puuid": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "teamId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "partyId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "characterId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "stats": {
+                                            "x-type": "PlayerStatsDto",
+                                            "type": "object",
+                                            "title": "PlayerStatsDto",
+                                            "properties": {
+                                                "score": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "roundsPlayed": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "kills": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "deaths": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "assists": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "playtimeMillis": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "abilityCasts": {
+                                                    "x-type": "AbilityCastsDto",
+                                                    "type": "object",
+                                                    "title": "AbilityCastsDto",
+                                                    "properties": {
+                                                        "grenadeCasts": {
+                                                            "type": "integer",
+                                                            "format": "int32",
+                                                            "x-type": "int"
+                                                        },
+                                                        "ability1Casts": {
+                                                            "type": "integer",
+                                                            "format": "int32",
+                                                            "x-type": "int"
+                                                        },
+                                                        "ability2Casts": {
+                                                            "type": "integer",
+                                                            "format": "int32",
+                                                            "x-type": "int"
+                                                        },
+                                                        "ultimateCasts": {
+                                                            "type": "integer",
+                                                            "format": "int32",
+                                                            "x-type": "int"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "grenadeCasts",
+                                                        "ability1Casts",
+                                                        "ability2Casts",
+                                                        "ultimateCasts"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "score",
+                                                "roundsPlayed",
+                                                "kills",
+                                                "deaths",
+                                                "assists",
+                                                "playtimeMillis",
+                                                "abilityCasts"
+                                            ]
+                                        },
+                                        "competitiveTier": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "playerCard": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "playerTitle": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "puuid",
+                                        "teamId",
+                                        "partyId",
+                                        "characterId",
+                                        "stats",
+                                        "competitiveTier",
+                                        "playerCard",
+                                        "playerTitle"
+                                    ]
+                                },
+                                "x-type": "List[PlayerDto]"
+                            },
+                            "teams": {
+                                "type": "array",
+                                "items": {
+                                    "x-type": "TeamDto",
+                                    "type": "object",
+                                    "title": "TeamDto",
+                                    "properties": {
+                                        "teamId": {
+                                            "type": "string",
+                                            "x-type": "string",
+                                            "description": "This is an arbitrary string. Red and Blue in bomb modes. The puuid of the player in deathmatch."
+                                        },
+                                        "won": {
+                                            "type": "boolean",
+                                            "x-type": "boolean"
+                                        },
+                                        "roundsPlayed": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "roundsWon": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "numPoints": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int",
+                                            "description": "Team points scored. Number of kills in deathmatch."
+                                        }
+                                    },
+                                    "required": [
+                                        "teamId",
+                                        "won",
+                                        "roundsPlayed",
+                                        "roundsWon",
+                                        "numPoints"
+                                    ]
+                                },
+                                "x-type": "List[TeamDto]"
+                            },
+                            "roundResults": {
+                                "type": "array",
+                                "items": {
+                                    "x-type": "RoundResultDto",
+                                    "type": "object",
+                                    "title": "RoundResultDto",
+                                    "properties": {
+                                        "roundNum": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "roundResult": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "roundCeremony": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "winningTeam": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "bombPlanter": {
+                                            "type": "string",
+                                            "x-type": "string",
+                                            "description": "PUUID of player"
+                                        },
+                                        "bombDefuser": {
+                                            "type": "string",
+                                            "x-type": "string",
+                                            "description": "PUUID of player"
+                                        },
+                                        "plantRoundTime": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "plantPlayerLocations": {
+                                            "type": "array",
+                                            "items": {
+                                                "x-type": "PlayerLocationsDto",
+                                                "type": "object",
+                                                "title": "PlayerLocationsDto",
+                                                "properties": {
+                                                    "puuid": {
+                                                        "type": "string",
+                                                        "x-type": "string"
+                                                    },
+                                                    "viewRadians": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "x-type": "float"
+                                                    },
+                                                    "location": {
+                                                        "x-type": "LocationDto",
+                                                        "type": "object",
+                                                        "title": "LocationDto",
+                                                        "properties": {
+                                                            "x": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            },
+                                                            "y": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "x",
+                                                            "y"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "puuid",
+                                                    "viewRadians",
+                                                    "location"
+                                                ]
+                                            },
+                                            "x-type": "List[PlayerLocationsDto]"
+                                        },
+                                        "plantLocation": {
+                                            "x-type": "LocationDto",
+                                            "type": "object",
+                                            "title": "LocationDto",
+                                            "properties": {
+                                                "x": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "y": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                }
+                                            },
+                                            "required": [
+                                                "x",
+                                                "y"
+                                            ]
+                                        },
+                                        "plantSite": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "defuseRoundTime": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "defusePlayerLocations": {
+                                            "type": "array",
+                                            "items": {
+                                                "x-type": "PlayerLocationsDto",
+                                                "type": "object",
+                                                "title": "PlayerLocationsDto",
+                                                "properties": {
+                                                    "puuid": {
+                                                        "type": "string",
+                                                        "x-type": "string"
+                                                    },
+                                                    "viewRadians": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "x-type": "float"
+                                                    },
+                                                    "location": {
+                                                        "x-type": "LocationDto",
+                                                        "type": "object",
+                                                        "title": "LocationDto",
+                                                        "properties": {
+                                                            "x": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            },
+                                                            "y": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "x",
+                                                            "y"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "puuid",
+                                                    "viewRadians",
+                                                    "location"
+                                                ]
+                                            },
+                                            "x-type": "List[PlayerLocationsDto]"
+                                        },
+                                        "defuseLocation": {
+                                            "x-type": "LocationDto",
+                                            "type": "object",
+                                            "title": "LocationDto",
+                                            "properties": {
+                                                "x": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "y": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                }
+                                            },
+                                            "required": [
+                                                "x",
+                                                "y"
+                                            ]
+                                        },
+                                        "playerStats": {
+                                            "type": "array",
+                                            "items": {
+                                                "x-type": "PlayerRoundStatsDto",
+                                                "type": "object",
+                                                "title": "PlayerRoundStatsDto",
+                                                "properties": {
+                                                    "puuid": {
+                                                        "type": "string",
+                                                        "x-type": "string"
+                                                    },
+                                                    "kills": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "x-type": "KillDto",
+                                                            "type": "object",
+                                                            "title": "KillDto",
+                                                            "properties": {
+                                                                "gameTime": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "roundTime": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "killer": {
+                                                                    "type": "string",
+                                                                    "x-type": "string",
+                                                                    "description": "PUUID"
+                                                                },
+                                                                "victim": {
+                                                                    "type": "string",
+                                                                    "x-type": "string",
+                                                                    "description": "PUUID"
+                                                                },
+                                                                "victimLocation": {
+                                                                    "x-type": "LocationDto",
+                                                                    "type": "object",
+                                                                    "title": "LocationDto",
+                                                                    "properties": {
+                                                                        "x": {
+                                                                            "type": "integer",
+                                                                            "format": "int32",
+                                                                            "x-type": "int"
+                                                                        },
+                                                                        "y": {
+                                                                            "type": "integer",
+                                                                            "format": "int32",
+                                                                            "x-type": "int"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "x",
+                                                                        "y"
+                                                                    ]
+                                                                },
+                                                                "assistants": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "string",
+                                                                        "x-type": "string"
+                                                                    },
+                                                                    "x-type": "List[string]",
+                                                                    "description": "List of PUUIDs"
+                                                                },
+                                                                "playerLocations": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "x-type": "PlayerLocationsDto",
+                                                                        "type": "object",
+                                                                        "title": "PlayerLocationsDto",
+                                                                        "properties": {
+                                                                            "puuid": {
+                                                                                "type": "string",
+                                                                                "x-type": "string"
+                                                                            },
+                                                                            "viewRadians": {
+                                                                                "type": "number",
+                                                                                "format": "float",
+                                                                                "x-type": "float"
+                                                                            },
+                                                                            "location": {
+                                                                                "x-type": "LocationDto",
+                                                                                "type": "object",
+                                                                                "title": "LocationDto",
+                                                                                "properties": {
+                                                                                    "x": {
+                                                                                        "type": "integer",
+                                                                                        "format": "int32",
+                                                                                        "x-type": "int"
+                                                                                    },
+                                                                                    "y": {
+                                                                                        "type": "integer",
+                                                                                        "format": "int32",
+                                                                                        "x-type": "int"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "x",
+                                                                                    "y"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "puuid",
+                                                                            "viewRadians",
+                                                                            "location"
+                                                                        ]
+                                                                    },
+                                                                    "x-type": "List[PlayerLocationsDto]"
+                                                                },
+                                                                "finishingDamage": {
+                                                                    "x-type": "FinishingDamageDto",
+                                                                    "type": "object",
+                                                                    "title": "FinishingDamageDto",
+                                                                    "properties": {
+                                                                        "damageType": {
+                                                                            "type": "string",
+                                                                            "x-type": "string"
+                                                                        },
+                                                                        "damageItem": {
+                                                                            "type": "string",
+                                                                            "x-type": "string"
+                                                                        },
+                                                                        "isSecondaryFireMode": {
+                                                                            "type": "boolean",
+                                                                            "x-type": "boolean"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "damageType",
+                                                                        "damageItem",
+                                                                        "isSecondaryFireMode"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "gameTime",
+                                                                "roundTime",
+                                                                "killer",
+                                                                "victim",
+                                                                "victimLocation",
+                                                                "assistants",
+                                                                "playerLocations",
+                                                                "finishingDamage"
+                                                            ]
+                                                        },
+                                                        "x-type": "List[KillDto]"
+                                                    },
+                                                    "damage": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "x-type": "DamageDto",
+                                                            "type": "object",
+                                                            "title": "DamageDto",
+                                                            "properties": {
+                                                                "receiver": {
+                                                                    "type": "string",
+                                                                    "x-type": "string",
+                                                                    "description": "PUUID"
+                                                                },
+                                                                "damage": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "legshots": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "bodyshots": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "headshots": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "receiver",
+                                                                "damage",
+                                                                "legshots",
+                                                                "bodyshots",
+                                                                "headshots"
+                                                            ]
+                                                        },
+                                                        "x-type": "List[DamageDto]"
+                                                    },
+                                                    "score": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "x-type": "int"
+                                                    },
+                                                    "economy": {
+                                                        "x-type": "EconomyDto",
+                                                        "type": "object",
+                                                        "title": "EconomyDto",
+                                                        "properties": {
+                                                            "loadoutValue": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            },
+                                                            "weapon": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "armor": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "remaining": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            },
+                                                            "spent": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "loadoutValue",
+                                                            "weapon",
+                                                            "armor",
+                                                            "remaining",
+                                                            "spent"
+                                                        ]
+                                                    },
+                                                    "ability": {
+                                                        "x-type": "AbilityDto",
+                                                        "type": "object",
+                                                        "title": "AbilityDto",
+                                                        "properties": {
+                                                            "grenadeEffects": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "ability1Effects": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "ability2Effects": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "ultimateEffects": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "grenadeEffects",
+                                                            "ability1Effects",
+                                                            "ability2Effects",
+                                                            "ultimateEffects"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "puuid",
+                                                    "kills",
+                                                    "damage",
+                                                    "score",
+                                                    "economy",
+                                                    "ability"
+                                                ]
+                                            },
+                                            "x-type": "List[PlayerRoundStatsDto]"
+                                        },
+                                        "roundResultCode": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "roundNum",
+                                        "roundResult",
+                                        "roundCeremony",
+                                        "winningTeam",
+                                        "bombPlanter",
+                                        "bombDefuser",
+                                        "plantRoundTime",
+                                        "plantPlayerLocations",
+                                        "plantLocation",
+                                        "plantSite",
+                                        "defuseRoundTime",
+                                        "defusePlayerLocations",
+                                        "defuseLocation",
+                                        "playerStats",
+                                        "roundResultCode"
+                                    ]
+                                },
+                                "x-type": "List[RoundResultDto]"
+                            }
+                        },
+                        "required": [
+                            "matchInfo",
+                            "players",
+                            "teams",
+                            "roundResults"
+                        ]
+                    }
+                }
+            ],
+            "entity": "response.body.scope",
+            "source": "json-schema-diff",
+            "sourceSpecEntityDetails": [
+                {
+                    "location": "paths./val/match/v1/matches/{matchId}.get.responses.200.content.application/json.schema",
+                    "value": {
+                        "x-type": "MatchDto",
+                        "type": "object",
+                        "title": "MatchDto",
+                        "properties": {
+                            "matchInfo": {
+                                "type": "array",
+                                "items": {
+                                    "x-type": "MatchInfoDto",
+                                    "type": "object",
+                                    "title": "MatchInfoDto",
+                                    "properties": {
+                                        "matchId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "mapId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "gameLengthMillis": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "gameStartMillis": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "x-type": "long"
+                                        },
+                                        "provisioningFlowId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "isCompleted": {
+                                            "type": "boolean",
+                                            "x-type": "boolean"
+                                        },
+                                        "customGameName": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "queueId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "gameMode": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "isRanked": {
+                                            "type": "boolean",
+                                            "x-type": "boolean"
+                                        },
+                                        "seasonId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "matchId",
+                                        "mapId",
+                                        "gameLengthMillis",
+                                        "gameStartMillis",
+                                        "provisioningFlowId",
+                                        "isCompleted",
+                                        "customGameName",
+                                        "queueId",
+                                        "gameMode",
+                                        "isRanked",
+                                        "seasonId"
+                                    ]
+                                },
+                                "x-type": "List[MatchInfoDto]"
+                            },
+                            "players": {
+                                "type": "array",
+                                "items": {
+                                    "x-type": "PlayerDto",
+                                    "type": "object",
+                                    "title": "PlayerDto",
+                                    "properties": {
+                                        "puuid": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "teamId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "partyId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "characterId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "stats": {
+                                            "x-type": "PlayerStatsDto",
+                                            "type": "object",
+                                            "title": "PlayerStatsDto",
+                                            "properties": {
+                                                "score": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "roundsPlayed": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "kills": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "deaths": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "assists": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "playtimeMillis": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "abilityCasts": {
+                                                    "x-type": "AbilityCastsDto",
+                                                    "type": "object",
+                                                    "title": "AbilityCastsDto",
+                                                    "properties": {
+                                                        "grenadeCasts": {
+                                                            "type": "integer",
+                                                            "format": "int32",
+                                                            "x-type": "int"
+                                                        },
+                                                        "ability1Casts": {
+                                                            "type": "integer",
+                                                            "format": "int32",
+                                                            "x-type": "int"
+                                                        },
+                                                        "ability2Casts": {
+                                                            "type": "integer",
+                                                            "format": "int32",
+                                                            "x-type": "int"
+                                                        },
+                                                        "ultimateCasts": {
+                                                            "type": "integer",
+                                                            "format": "int32",
+                                                            "x-type": "int"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "grenadeCasts",
+                                                        "ability1Casts",
+                                                        "ability2Casts",
+                                                        "ultimateCasts"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "score",
+                                                "roundsPlayed",
+                                                "kills",
+                                                "deaths",
+                                                "assists",
+                                                "playtimeMillis",
+                                                "abilityCasts"
+                                            ]
+                                        },
+                                        "competitiveTier": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "playerCard": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "playerTitle": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "puuid",
+                                        "teamId",
+                                        "partyId",
+                                        "characterId",
+                                        "stats",
+                                        "competitiveTier",
+                                        "playerCard",
+                                        "playerTitle"
+                                    ]
+                                },
+                                "x-type": "List[PlayerDto]"
+                            },
+                            "teams": {
+                                "type": "array",
+                                "items": {
+                                    "x-type": "TeamDto",
+                                    "type": "object",
+                                    "title": "TeamDto",
+                                    "properties": {
+                                        "teamId": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "won": {
+                                            "type": "boolean",
+                                            "x-type": "boolean"
+                                        },
+                                        "roundsPlayed": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "roundsWon": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        }
+                                    },
+                                    "required": [
+                                        "teamId",
+                                        "won",
+                                        "roundsPlayed",
+                                        "roundsWon"
+                                    ]
+                                },
+                                "x-type": "List[TeamDto]"
+                            },
+                            "roundResults": {
+                                "type": "array",
+                                "items": {
+                                    "x-type": "RoundResultDto",
+                                    "type": "object",
+                                    "title": "RoundResultDto",
+                                    "properties": {
+                                        "roundNum": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "roundResult": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "roundCeremony": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "winningTeam": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "bombPlanter": {
+                                            "type": "string",
+                                            "x-type": "string",
+                                            "description": "PUUID of player"
+                                        },
+                                        "bombDefuser": {
+                                            "type": "string",
+                                            "x-type": "string",
+                                            "description": "PUUID of player"
+                                        },
+                                        "plantRoundTime": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "plantPlayerLocations": {
+                                            "type": "array",
+                                            "items": {
+                                                "x-type": "PlayerLocationsDto",
+                                                "type": "object",
+                                                "title": "PlayerLocationsDto",
+                                                "properties": {
+                                                    "puuid": {
+                                                        "type": "string",
+                                                        "x-type": "string"
+                                                    },
+                                                    "viewRadians": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "x-type": "float"
+                                                    },
+                                                    "location": {
+                                                        "x-type": "LocationDto",
+                                                        "type": "object",
+                                                        "title": "LocationDto",
+                                                        "properties": {
+                                                            "x": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            },
+                                                            "y": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "x",
+                                                            "y"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "puuid",
+                                                    "viewRadians",
+                                                    "location"
+                                                ]
+                                            },
+                                            "x-type": "List[PlayerLocationsDto]"
+                                        },
+                                        "plantLocation": {
+                                            "x-type": "LocationDto",
+                                            "type": "object",
+                                            "title": "LocationDto",
+                                            "properties": {
+                                                "x": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "y": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                }
+                                            },
+                                            "required": [
+                                                "x",
+                                                "y"
+                                            ]
+                                        },
+                                        "plantSite": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        },
+                                        "defuseRoundTime": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "x-type": "int"
+                                        },
+                                        "defusePlayerLocations": {
+                                            "type": "array",
+                                            "items": {
+                                                "x-type": "PlayerLocationsDto",
+                                                "type": "object",
+                                                "title": "PlayerLocationsDto",
+                                                "properties": {
+                                                    "puuid": {
+                                                        "type": "string",
+                                                        "x-type": "string"
+                                                    },
+                                                    "viewRadians": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "x-type": "float"
+                                                    },
+                                                    "location": {
+                                                        "x-type": "LocationDto",
+                                                        "type": "object",
+                                                        "title": "LocationDto",
+                                                        "properties": {
+                                                            "x": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            },
+                                                            "y": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "x",
+                                                            "y"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "puuid",
+                                                    "viewRadians",
+                                                    "location"
+                                                ]
+                                            },
+                                            "x-type": "List[PlayerLocationsDto]"
+                                        },
+                                        "defuseLocation": {
+                                            "x-type": "LocationDto",
+                                            "type": "object",
+                                            "title": "LocationDto",
+                                            "properties": {
+                                                "x": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                },
+                                                "y": {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "x-type": "int"
+                                                }
+                                            },
+                                            "required": [
+                                                "x",
+                                                "y"
+                                            ]
+                                        },
+                                        "playerStats": {
+                                            "type": "array",
+                                            "items": {
+                                                "x-type": "PlayerRoundStatsDto",
+                                                "type": "object",
+                                                "title": "PlayerRoundStatsDto",
+                                                "properties": {
+                                                    "puuid": {
+                                                        "type": "string",
+                                                        "x-type": "string"
+                                                    },
+                                                    "kills": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "x-type": "KillDto",
+                                                            "type": "object",
+                                                            "title": "KillDto",
+                                                            "properties": {
+                                                                "gameTime": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "roundTime": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "killer": {
+                                                                    "type": "string",
+                                                                    "x-type": "string",
+                                                                    "description": "PUUID"
+                                                                },
+                                                                "victim": {
+                                                                    "type": "string",
+                                                                    "x-type": "string",
+                                                                    "description": "PUUID"
+                                                                },
+                                                                "victimLocation": {
+                                                                    "x-type": "LocationDto",
+                                                                    "type": "object",
+                                                                    "title": "LocationDto",
+                                                                    "properties": {
+                                                                        "x": {
+                                                                            "type": "integer",
+                                                                            "format": "int32",
+                                                                            "x-type": "int"
+                                                                        },
+                                                                        "y": {
+                                                                            "type": "integer",
+                                                                            "format": "int32",
+                                                                            "x-type": "int"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "x",
+                                                                        "y"
+                                                                    ]
+                                                                },
+                                                                "assistants": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "string",
+                                                                        "x-type": "string"
+                                                                    },
+                                                                    "x-type": "List[string]",
+                                                                    "description": "List of PUUIDs"
+                                                                },
+                                                                "playerLocations": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "x-type": "PlayerLocationsDto",
+                                                                        "type": "object",
+                                                                        "title": "PlayerLocationsDto",
+                                                                        "properties": {
+                                                                            "puuid": {
+                                                                                "type": "string",
+                                                                                "x-type": "string"
+                                                                            },
+                                                                            "viewRadians": {
+                                                                                "type": "number",
+                                                                                "format": "float",
+                                                                                "x-type": "float"
+                                                                            },
+                                                                            "location": {
+                                                                                "x-type": "LocationDto",
+                                                                                "type": "object",
+                                                                                "title": "LocationDto",
+                                                                                "properties": {
+                                                                                    "x": {
+                                                                                        "type": "integer",
+                                                                                        "format": "int32",
+                                                                                        "x-type": "int"
+                                                                                    },
+                                                                                    "y": {
+                                                                                        "type": "integer",
+                                                                                        "format": "int32",
+                                                                                        "x-type": "int"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "x",
+                                                                                    "y"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "puuid",
+                                                                            "viewRadians",
+                                                                            "location"
+                                                                        ]
+                                                                    },
+                                                                    "x-type": "List[PlayerLocationsDto]"
+                                                                },
+                                                                "finishingDamage": {
+                                                                    "x-type": "FinishingDamageDto",
+                                                                    "type": "object",
+                                                                    "title": "FinishingDamageDto",
+                                                                    "properties": {
+                                                                        "damageType": {
+                                                                            "type": "string",
+                                                                            "x-type": "string"
+                                                                        },
+                                                                        "damageItem": {
+                                                                            "type": "string",
+                                                                            "x-type": "string"
+                                                                        },
+                                                                        "isSecondaryFireMode": {
+                                                                            "type": "boolean",
+                                                                            "x-type": "boolean"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "damageType",
+                                                                        "damageItem",
+                                                                        "isSecondaryFireMode"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "gameTime",
+                                                                "roundTime",
+                                                                "killer",
+                                                                "victim",
+                                                                "victimLocation",
+                                                                "assistants",
+                                                                "playerLocations",
+                                                                "finishingDamage"
+                                                            ]
+                                                        },
+                                                        "x-type": "List[KillDto]"
+                                                    },
+                                                    "damage": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "x-type": "DamageDto",
+                                                            "type": "object",
+                                                            "title": "DamageDto",
+                                                            "properties": {
+                                                                "receiver": {
+                                                                    "type": "string",
+                                                                    "x-type": "string",
+                                                                    "description": "PUUID"
+                                                                },
+                                                                "damage": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "legshots": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "bodyshots": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                },
+                                                                "headshots": {
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "x-type": "int"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "receiver",
+                                                                "damage",
+                                                                "legshots",
+                                                                "bodyshots",
+                                                                "headshots"
+                                                            ]
+                                                        },
+                                                        "x-type": "List[DamageDto]"
+                                                    },
+                                                    "score": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "x-type": "int"
+                                                    },
+                                                    "economy": {
+                                                        "x-type": "EconomyDto",
+                                                        "type": "object",
+                                                        "title": "EconomyDto",
+                                                        "properties": {
+                                                            "loadoutValue": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            },
+                                                            "weapon": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "armor": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "remaining": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            },
+                                                            "spent": {
+                                                                "type": "integer",
+                                                                "format": "int32",
+                                                                "x-type": "int"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "loadoutValue",
+                                                            "weapon",
+                                                            "armor",
+                                                            "remaining",
+                                                            "spent"
+                                                        ]
+                                                    },
+                                                    "ability": {
+                                                        "x-type": "AbilityDto",
+                                                        "type": "object",
+                                                        "title": "AbilityDto",
+                                                        "properties": {
+                                                            "grenadeEffects": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "ability1Effects": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "ability2Effects": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            },
+                                                            "ultimateEffects": {
+                                                                "type": "string",
+                                                                "x-type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "grenadeEffects",
+                                                            "ability1Effects",
+                                                            "ability2Effects",
+                                                            "ultimateEffects"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "puuid",
+                                                    "kills",
+                                                    "damage",
+                                                    "score",
+                                                    "economy",
+                                                    "ability"
+                                                ]
+                                            },
+                                            "x-type": "List[PlayerRoundStatsDto]"
+                                        },
+                                        "roundResultCode": {
+                                            "type": "string",
+                                            "x-type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "roundNum",
+                                        "roundResult",
+                                        "roundCeremony",
+                                        "winningTeam",
+                                        "bombPlanter",
+                                        "bombDefuser",
+                                        "plantRoundTime",
+                                        "plantPlayerLocations",
+                                        "plantLocation",
+                                        "plantSite",
+                                        "defuseRoundTime",
+                                        "defusePlayerLocations",
+                                        "defuseLocation",
+                                        "playerStats",
+                                        "roundResultCode"
+                                    ]
+                                },
+                                "x-type": "List[RoundResultDto]"
+                            }
+                        },
+                        "required": [
+                            "matchInfo",
+                            "players",
+                            "teams",
+                            "roundResults"
+                        ]
+                    }
+                }
+            ],
+            "details": {
+                "differenceSchema": {
+                    "type": "object",
+                    "properties": {
+                        "matchInfo": {
+                            "type": "object",
+                            "properties": {
+                                "matchId": {
+                                    "type": "string"
+                                },
+                                "mapId": {
+                                    "type": "string"
+                                },
+                                "gameLengthMillis": {
+                                    "type": "integer"
+                                },
+                                "gameStartMillis": {
+                                    "type": "integer"
+                                },
+                                "provisioningFlowId": {
+                                    "type": "string"
+                                },
+                                "isCompleted": {
+                                    "type": "boolean"
+                                },
+                                "customGameName": {
+                                    "type": "string"
+                                },
+                                "queueId": {
+                                    "type": "string"
+                                },
+                                "gameMode": {
+                                    "type": "string"
+                                },
+                                "isRanked": {
+                                    "type": "boolean"
+                                },
+                                "seasonId": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "matchId",
+                                "mapId",
+                                "gameLengthMillis",
+                                "gameStartMillis",
+                                "provisioningFlowId",
+                                "isCompleted",
+                                "customGameName",
+                                "queueId",
+                                "gameMode",
+                                "isRanked",
+                                "seasonId"
+                            ]
+                        },
+                        "players": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "puuid": {
+                                        "type": "string"
+                                    },
+                                    "teamId": {
+                                        "type": "string"
+                                    },
+                                    "partyId": {
+                                        "type": "string"
+                                    },
+                                    "characterId": {
+                                        "type": "string"
+                                    },
+                                    "stats": {
+                                        "type": "object",
+                                        "properties": {
+                                            "score": {
+                                                "type": "integer"
+                                            },
+                                            "roundsPlayed": {
+                                                "type": "integer"
+                                            },
+                                            "kills": {
+                                                "type": "integer"
+                                            },
+                                            "deaths": {
+                                                "type": "integer"
+                                            },
+                                            "assists": {
+                                                "type": "integer"
+                                            },
+                                            "playtimeMillis": {
+                                                "type": "integer"
+                                            },
+                                            "abilityCasts": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "grenadeCasts": {
+                                                        "type": "integer"
+                                                    },
+                                                    "ability1Casts": {
+                                                        "type": "integer"
+                                                    },
+                                                    "ability2Casts": {
+                                                        "type": "integer"
+                                                    },
+                                                    "ultimateCasts": {
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "grenadeCasts",
+                                                    "ability1Casts",
+                                                    "ability2Casts",
+                                                    "ultimateCasts"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "score",
+                                            "roundsPlayed",
+                                            "kills",
+                                            "deaths",
+                                            "assists",
+                                            "playtimeMillis",
+                                            "abilityCasts"
+                                        ]
+                                    },
+                                    "competitiveTier": {
+                                        "type": "integer"
+                                    },
+                                    "playerCard": {
+                                        "type": "string"
+                                    },
+                                    "playerTitle": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "puuid",
+                                    "teamId",
+                                    "partyId",
+                                    "characterId",
+                                    "stats",
+                                    "competitiveTier",
+                                    "playerCard",
+                                    "playerTitle"
+                                ]
+                            }
+                        },
+                        "teams": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "teamId": {
+                                        "type": "string"
+                                    },
+                                    "won": {
+                                        "type": "boolean"
+                                    },
+                                    "roundsPlayed": {
+                                        "type": "integer"
+                                    },
+                                    "roundsWon": {
+                                        "type": "integer"
+                                    },
+                                    "numPoints": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "teamId",
+                                    "won",
+                                    "roundsPlayed",
+                                    "roundsWon",
+                                    "numPoints"
+                                ]
+                            }
+                        },
+                        "roundResults": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "roundNum": {
+                                        "type": "integer"
+                                    },
+                                    "roundResult": {
+                                        "type": "string"
+                                    },
+                                    "roundCeremony": {
+                                        "type": "string"
+                                    },
+                                    "winningTeam": {
+                                        "type": "string"
+                                    },
+                                    "bombPlanter": {
+                                        "type": "string"
+                                    },
+                                    "bombDefuser": {
+                                        "type": "string"
+                                    },
+                                    "plantRoundTime": {
+                                        "type": "integer"
+                                    },
+                                    "plantPlayerLocations": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "puuid": {
+                                                    "type": "string"
+                                                },
+                                                "viewRadians": {
+                                                    "type": "number"
+                                                },
+                                                "location": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "x": {
+                                                            "type": "integer"
+                                                        },
+                                                        "y": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "x",
+                                                        "y"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "puuid",
+                                                "viewRadians",
+                                                "location"
+                                            ]
+                                        }
+                                    },
+                                    "plantLocation": {
+                                        "type": "object",
+                                        "properties": {
+                                            "x": {
+                                                "type": "integer"
+                                            },
+                                            "y": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "x",
+                                            "y"
+                                        ]
+                                    },
+                                    "plantSite": {
+                                        "type": "string"
+                                    },
+                                    "defuseRoundTime": {
+                                        "type": "integer"
+                                    },
+                                    "defusePlayerLocations": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "puuid": {
+                                                    "type": "string"
+                                                },
+                                                "viewRadians": {
+                                                    "type": "number"
+                                                },
+                                                "location": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "x": {
+                                                            "type": "integer"
+                                                        },
+                                                        "y": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "x",
+                                                        "y"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "puuid",
+                                                "viewRadians",
+                                                "location"
+                                            ]
+                                        }
+                                    },
+                                    "defuseLocation": {
+                                        "type": "object",
+                                        "properties": {
+                                            "x": {
+                                                "type": "integer"
+                                            },
+                                            "y": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "x",
+                                            "y"
+                                        ]
+                                    },
+                                    "playerStats": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "puuid": {
+                                                    "type": "string"
+                                                },
+                                                "kills": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "gameTime": {
+                                                                "type": "integer"
+                                                            },
+                                                            "roundTime": {
+                                                                "type": "integer"
+                                                            },
+                                                            "killer": {
+                                                                "type": "string"
+                                                            },
+                                                            "victim": {
+                                                                "type": "string"
+                                                            },
+                                                            "victimLocation": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "x": {
+                                                                        "type": "integer"
+                                                                    },
+                                                                    "y": {
+                                                                        "type": "integer"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "x",
+                                                                    "y"
+                                                                ]
+                                                            },
+                                                            "assistants": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "playerLocations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "puuid": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "viewRadians": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "location": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "x": {
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "y": {
+                                                                                    "type": "integer"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "x",
+                                                                                "y"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "puuid",
+                                                                        "viewRadians",
+                                                                        "location"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "finishingDamage": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "damageType": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "damageItem": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "isSecondaryFireMode": {
+                                                                        "type": "boolean"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "damageType",
+                                                                    "damageItem",
+                                                                    "isSecondaryFireMode"
+                                                                ]
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "gameTime",
+                                                            "roundTime",
+                                                            "killer",
+                                                            "victim",
+                                                            "victimLocation",
+                                                            "assistants",
+                                                            "playerLocations",
+                                                            "finishingDamage"
+                                                        ]
+                                                    }
+                                                },
+                                                "damage": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "receiver": {
+                                                                "type": "string"
+                                                            },
+                                                            "damage": {
+                                                                "type": "integer"
+                                                            },
+                                                            "legshots": {
+                                                                "type": "integer"
+                                                            },
+                                                            "bodyshots": {
+                                                                "type": "integer"
+                                                            },
+                                                            "headshots": {
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "receiver",
+                                                            "damage",
+                                                            "legshots",
+                                                            "bodyshots",
+                                                            "headshots"
+                                                        ]
+                                                    }
+                                                },
+                                                "score": {
+                                                    "type": "integer"
+                                                },
+                                                "economy": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "loadoutValue": {
+                                                            "type": "integer"
+                                                        },
+                                                        "weapon": {
+                                                            "type": "string"
+                                                        },
+                                                        "armor": {
+                                                            "type": "string"
+                                                        },
+                                                        "remaining": {
+                                                            "type": "integer"
+                                                        },
+                                                        "spent": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "loadoutValue",
+                                                        "weapon",
+                                                        "armor",
+                                                        "remaining",
+                                                        "spent"
+                                                    ]
+                                                },
+                                                "ability": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "grenadeEffects": {
+                                                            "type": "string"
+                                                        },
+                                                        "ability1Effects": {
+                                                            "type": "string"
+                                                        },
+                                                        "ability2Effects": {
+                                                            "type": "string"
+                                                        },
+                                                        "ultimateEffects": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "grenadeEffects",
+                                                        "ability1Effects",
+                                                        "ability2Effects",
+                                                        "ultimateEffects"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "puuid",
+                                                "kills",
+                                                "damage",
+                                                "score",
+                                                "economy",
+                                                "ability"
+                                            ]
+                                        }
+                                    },
+                                    "roundResultCode": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "roundNum",
+                                    "roundResult",
+                                    "roundCeremony",
+                                    "winningTeam",
+                                    "bombPlanter",
+                                    "bombDefuser",
+                                    "plantRoundTime",
+                                    "plantPlayerLocations",
+                                    "plantLocation",
+                                    "plantSite",
+                                    "defuseRoundTime",
+                                    "defusePlayerLocations",
+                                    "defuseLocation",
+                                    "playerStats",
+                                    "roundResultCode"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "matchInfo",
+                        "players",
+                        "teams",
+                        "roundResults"
+                    ]
+                }
+            }
+        }
+    ],
+    "breakingDifferencesFound": true,
     "nonBreakingDifferences": [
         {
             "type": "non-breaking",
@@ -916,74 +2950,70 @@ Non breaking changes found between the two specifications:
                         "title": "MatchDto",
                         "properties": {
                             "matchInfo": {
-                                "type": "array",
-                                "items": {
-                                    "x-type": "MatchInfoDto",
-                                    "type": "object",
-                                    "title": "MatchInfoDto",
-                                    "properties": {
-                                        "matchId": {
-                                            "type": "string",
-                                            "x-type": "string"
-                                        },
-                                        "mapId": {
-                                            "type": "string",
-                                            "x-type": "string"
-                                        },
-                                        "gameLengthMillis": {
-                                            "type": "integer",
-                                            "format": "int32",
-                                            "x-type": "int"
-                                        },
-                                        "gameStartMillis": {
-                                            "type": "integer",
-                                            "format": "int64",
-                                            "x-type": "long"
-                                        },
-                                        "provisioningFlowId": {
-                                            "type": "string",
-                                            "x-type": "string"
-                                        },
-                                        "isCompleted": {
-                                            "type": "boolean",
-                                            "x-type": "boolean"
-                                        },
-                                        "customGameName": {
-                                            "type": "string",
-                                            "x-type": "string"
-                                        },
-                                        "queueId": {
-                                            "type": "string",
-                                            "x-type": "string"
-                                        },
-                                        "gameMode": {
-                                            "type": "string",
-                                            "x-type": "string"
-                                        },
-                                        "isRanked": {
-                                            "type": "boolean",
-                                            "x-type": "boolean"
-                                        },
-                                        "seasonId": {
-                                            "type": "string",
-                                            "x-type": "string"
-                                        }
+                                "x-type": "MatchInfoDto",
+                                "type": "object",
+                                "title": "MatchInfoDto",
+                                "properties": {
+                                    "matchId": {
+                                        "type": "string",
+                                        "x-type": "string"
                                     },
-                                    "required": [
-                                        "matchId",
-                                        "mapId",
-                                        "gameLengthMillis",
-                                        "gameStartMillis",
-                                        "provisioningFlowId",
-                                        "isCompleted",
-                                        "customGameName",
-                                        "queueId",
-                                        "gameMode",
-                                        "isRanked",
-                                        "seasonId"
-                                    ]
+                                    "mapId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "gameLengthMillis": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "x-type": "int"
+                                    },
+                                    "gameStartMillis": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "x-type": "long"
+                                    },
+                                    "provisioningFlowId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "isCompleted": {
+                                        "type": "boolean",
+                                        "x-type": "boolean"
+                                    },
+                                    "customGameName": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "queueId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "gameMode": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    },
+                                    "isRanked": {
+                                        "type": "boolean",
+                                        "x-type": "boolean"
+                                    },
+                                    "seasonId": {
+                                        "type": "string",
+                                        "x-type": "string"
+                                    }
                                 },
-                                "x-type": "List[MatchInfoDto]"
+                                "required": [
+                                    "matchId",
+                                    "mapId",
+                                    "gameLengthMillis",
+                                    "gameStartMillis",
+                                    "provisioningFlowId",
+                                    "isCompleted",
+                                    "customGameName",
+                                    "queueId",
+                                    "gameMode",
+                                    "isRanked",
+                                    "seasonId"
+                                ]
                             },
                             "players": {
                                 "type": "array",
@@ -2543,6 +4573,32 @@ Non breaking changes found between the two specifications:
                                 ]
                             }
                         },
+                        "teams": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "teamId": {
+                                        "type": "string"
+                                    },
+                                    "won": {
+                                        "type": "boolean"
+                                    },
+                                    "roundsPlayed": {
+                                        "type": "integer"
+                                    },
+                                    "roundsWon": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "teamId",
+                                    "won",
+                                    "roundsPlayed",
+                                    "roundsWon"
+                                ]
+                            }
+                        },
                         "roundResults": {
                             "type": "array",
                             "items": {
@@ -2901,69 +4957,13 @@ Non breaking changes found between the two specifications:
                                     "roundResultCode"
                                 ]
                             }
-                        },
-                        "teams": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "teamId": {
-                                        "type": "string"
-                                    },
-                                    "won": {
-                                        "type": "boolean"
-                                    },
-                                    "roundsPlayed": {
-                                        "type": "integer"
-                                    },
-                                    "roundsWon": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "required": [
-                                    "teamId",
-                                    "won",
-                                    "roundsPlayed",
-                                    "roundsWon"
-                                ]
-                            },
-                            "not": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "numPoints": {
-                                            "type": "integer"
-                                        },
-                                        "roundsPlayed": {
-                                            "type": "integer"
-                                        },
-                                        "roundsWon": {
-                                            "type": "integer"
-                                        },
-                                        "teamId": {
-                                            "type": "string"
-                                        },
-                                        "won": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "required": [
-                                        "numPoints",
-                                        "roundsPlayed",
-                                        "roundsWon",
-                                        "teamId",
-                                        "won"
-                                    ]
-                                }
-                            }
                         }
                     },
                     "required": [
                         "matchInfo",
                         "players",
-                        "roundResults",
-                        "teams"
+                        "teams",
+                        "roundResults"
                     ]
                 }
             }
